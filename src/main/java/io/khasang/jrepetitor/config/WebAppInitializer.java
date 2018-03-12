@@ -1,6 +1,5 @@
 package io.khasang.jrepetitor.config;
 
-
 import io.khasang.jrepetitor.config.application.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
