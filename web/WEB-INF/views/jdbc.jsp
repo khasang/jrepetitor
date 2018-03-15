@@ -4,7 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-<p>Hello World!</p>
-<p>Cats name: ${name}</p>
+<p>Jdbc operation Status:  ${status}</p>
 </body>
 </html>
