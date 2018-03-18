@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
     @Bean
     public Cat cat(){
-        return new Cat("Пушок");
+        return new Cat("Tishka");
     }
 }
