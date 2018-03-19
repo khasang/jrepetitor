@@ -5,6 +5,5 @@
 </head>
 <body>
 <p>Hello World!</p>
-<p>Cat name: ${name}</p>
 </body>
 </html>

@@ -14,13 +14,12 @@ public class AppController {
     @Autowired
     private CreateTable createTable;
 
-//    @RequestMapping("/")
-//    public String helloPage(Model model) {
-//        model.addAttribute("name", cat.getName());
-//        return "hello";
-//    }
-
     @RequestMapping("/")
+    public String helloPage() {
+        return "hello";
+    }
+
+    @RequestMapping("/create")
     public String createTableStatus(Model model) {
         model.addAttribute("status", createTable.createTableStatus());
 
