@@ -31,7 +31,7 @@ public class CreateTable {
         }
         catch (Exception x)
         {
-            return "table creation failed";
+            return x.getMessage();
         }
 
 
