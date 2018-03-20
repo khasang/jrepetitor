@@ -17,13 +17,12 @@ public class AppController {
     // Фабричный метод бинов.
     // Cat cat = new Cat();
 
-//    @RequestMapping("/")
-//    public String helloPage(){
-//        System.out.println(cat.getName());
-//        return "hello";
-//    }
-
     @RequestMapping("/")
+    public String helloPage(){
+        return "hello";
+    }
+
+    @RequestMapping("/create")
     public String createTableStatus(Model model) {
         model.addAttribute("status", createTable.createTableStatus());
         return "create";
