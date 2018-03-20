@@ -11,9 +11,11 @@
 
     <properties>
         <spring.version>4.3.11.RELEASE</spring.version>
+        <spring.security.version>4.2.3.RELEASE</spring.security.version>
     </properties>
 
     <dependencies>
+        <!--spring-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -34,7 +36,6 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -50,6 +51,22 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4.1212.jre7</version>
+        </dependency>
+        <!--spring security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
         </dependency>
     </dependencies>
 
