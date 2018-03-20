@@ -1,10 +1,15 @@
 package io.khasang.jrepetitor.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
@@ -15,15 +20,24 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/create").access("ADMIN")
-                .antMatchers("users/**").access("USER")
+                .antMatchers("/users/**").access("USER")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/",false);
     }
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Bean
+    public UserDetailsService userDetailsService() {
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        manager.createUser(User.withUsername("user").password("user").roles("user").build());
+        manager.createUser(User.withUsername("admin").password("admin").roles("user","admin").build());
+        return manager;
+    }
 
-        auth.inMemoryAuthentication().withUser("user").password("user").roles("user");
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("admin");
-            }
+//    @Override
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//        //не использовать инмемори в продакшене
+//        auth.inMemoryAuthentication().withUser("user").password("user").roles("user");
+//        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("admin");
+//            }
 
 }
