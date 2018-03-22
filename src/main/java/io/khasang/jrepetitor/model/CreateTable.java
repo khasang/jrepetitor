@@ -1,8 +1,12 @@
 package io.khasang.jrepetitor.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class CreateTable {
+    private static final Logger log = LoggerFactory.getLogger(CreateTable.class);
+
     private JdbcTemplate jdbcTemplate;
 
     public CreateTable() {
@@ -30,4 +34,6 @@ public class CreateTable {
             return "table creation failed " + e;
         }
     }
+
+
 }
