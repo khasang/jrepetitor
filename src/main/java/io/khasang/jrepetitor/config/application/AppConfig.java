@@ -11,9 +11,12 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
 @Configuration
 @PropertySource(value = "classpath:util.properties")
+@PropertySource(value = "classpath:auth.properties")
 public class AppConfig {
 
     @Bean
@@ -33,6 +36,15 @@ public class AppConfig {
         dataSource.setPassword(environment.getProperty("jdbc.postgresql.password"));
 
         return dataSource;
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(){
+        JdbcDaoImpl jdbcDao = new JdbcDaoImpl();
+        jdbcDao.setDataSource(dataSource());
+        jdbcDao.setUsersByUsernameQuery(environment.getProperty("usersByQuery"));
+        jdbcDao.setAuthoritiesByUsernameQuery(environment.getProperty("rolesByQuery"));
+        return jdbcDao;
     }
 
     @Bean

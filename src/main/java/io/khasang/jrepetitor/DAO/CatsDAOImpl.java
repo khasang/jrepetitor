@@ -1,6 +1,8 @@
 package io.khasang.jrepetitor.DAO;
 
 import io.khasang.jrepetitor.model.Cat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CatsDAOImpl implements CatsDAO {
+
+    private Logger logger = LoggerFactory.getLogger(CatsDAO.class);
 
     private JdbcTemplate jdbcTemplate;
 
@@ -23,6 +27,7 @@ public class CatsDAOImpl implements CatsDAO {
         String sql="INSERT INTO cats (name, color,description) VALUES (?, ?,?);";
         try {
             int i = jdbcTemplate.update(sql,cat.getName(),cat.getColor(),cat.getDescription());
+            logger.info(jdbcTemplate.toString());
             return i+"rows inserted";
         } catch (DataAccessException e) {
             return "insert fails "+e.getMessage();
