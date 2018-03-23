@@ -43,4 +43,8 @@ public class AppController {
         return "user";
     }
 
+    @RequestMapping("/superuser")
+    public String getSuperUserPage(){
+        return "superuser";
+    }
 }
