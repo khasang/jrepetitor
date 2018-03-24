@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/create").access("hasRole('ADMIN')or hasRole('SUPERADMIN') ")
                 .antMatchers("/users/**").access("hasRole('USER')or hasRole('SUPERADMIN')")
+                .antMatchers("/user").access("hasRole('USER')or hasRole('SUPERADMIN')")
                 .antMatchers("/superadmin/**").access("hasRole('SUPERADMIN')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/",false);
     }

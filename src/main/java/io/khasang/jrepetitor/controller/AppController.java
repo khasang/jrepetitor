@@ -33,6 +33,12 @@ public class AppController {
     {
         return "superadmin";
     }
+
+    @RequestMapping("/user")
+            public String userPage()
+    {
+        return "user";
+    }
     @RequestMapping(value = "/password/{password}",method = RequestMethod.GET)
     public  String getPasswordHelper(@PathVariable("password")String password, Model model )
     {
