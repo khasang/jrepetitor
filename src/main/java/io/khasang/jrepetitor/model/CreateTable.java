@@ -25,13 +25,13 @@ public class CreateTable {
 
     public  String createTableStatus()
     {
-            String query = "Select name from cats where name = ?;";
+            String query = "Select name from cats where name = ?";
             return jdbcTemplate.execute(query, new PreparedStatementCallback<String>()
             {
                 @Override
                 public String doInPreparedStatement(PreparedStatement preparedStatement) throws SQLException, DataAccessException {
                     preparedStatement.setString(1,"Barsik");
-                   // logger.info(preparedStatement.toString());
+                    logger.info(preparedStatement.toString());
                     return String.valueOf(preparedStatement.execute());
                 }
             });
