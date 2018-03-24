@@ -4,7 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-<p>Hello World!</p>
-<%--<P>Cat name ${name}</P>--%>
+<p>${password}</p>
 </body>
 </html>
