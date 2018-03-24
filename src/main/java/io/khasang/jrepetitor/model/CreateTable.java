@@ -5,18 +5,32 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+@Component
 public class CreateTable {
     private static final Logger log = LoggerFactory.getLogger(CreateTable.class);
-    private JdbcTemplate  jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     public CreateTable() {
     }
 
     public CreateTable(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public static Logger getLog() {
+        return log;
+    }
+
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
