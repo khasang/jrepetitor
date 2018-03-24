@@ -28,6 +28,11 @@ public class AppController {
         model.addAttribute("status",createTable.createTableStatus());
         return "create";
     }
+    @RequestMapping("/superadmin")
+    public String superadmin()
+    {
+        return "superadmin";
+    }
     @RequestMapping(value = "/password/{password}",method = RequestMethod.GET)
     public  String getPasswordHelper(@PathVariable("password")String password, Model model )
     {
