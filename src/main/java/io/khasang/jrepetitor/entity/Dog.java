@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.entity;
 
 import javax.persistence.*;
+import javax.persistence.Transient;
 
 @Entity
 public class Dog {
@@ -11,6 +12,7 @@ public class Dog {
     @Column(name = "dogs_name")
     private String name;
 
+    @Transient
     private String description;
 
     public long getId() {
