@@ -22,8 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/create").access("hasRole('ADMIN')")
-                .antMatchers("/user/**").access("hasRole('USER')")
+                .antMatchers("/create").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+                .antMatchers("/user/**").access("hasRole('USER') or hasRole('SUPERADMIN')")
                 .antMatchers("/superadmin/**").access("hasRole('SUPERADMIN')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
