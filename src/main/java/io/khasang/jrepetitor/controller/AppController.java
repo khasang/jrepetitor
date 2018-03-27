@@ -1,6 +1,5 @@
 package io.khasang.jrepetitor.controller;
 
-import io.khasang.jrepetitor.model.Cat;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AppController {
     private static final Logger log = LoggerFactory.getLogger(AppController.class);
-
-    @Autowired
-    private Cat cat;
     @Autowired
     private CreateTable createTable;
 
