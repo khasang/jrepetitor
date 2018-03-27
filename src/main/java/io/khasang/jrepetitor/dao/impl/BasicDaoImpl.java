@@ -28,6 +28,17 @@ public class BasicDaoImpl<T> implements BasicDao<T> {
     }
 
     @Override
+    public T getById(long id) {
+        return getSessionFactory().get(entityClass, id);
+    }
+
+    @Override
+    public T delete(T entity) {
+        getSessionFactory().delete(entity);
+        return entity;
+    }
+
+    @Override
     public T create(T entity) {
         getSessionFactory().save(entity);
         return entity;
