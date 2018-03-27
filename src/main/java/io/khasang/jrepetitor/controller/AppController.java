@@ -1,6 +1,5 @@
 package io.khasang.jrepetitor.controller;
 
-import io.khasang.jrepetitor.model.Cat;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class AppController {
-    @Autowired
-    private Cat cat;
     @Autowired
     private CreateTable createTable;
 
