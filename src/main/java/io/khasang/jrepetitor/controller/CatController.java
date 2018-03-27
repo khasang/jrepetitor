@@ -21,14 +21,14 @@ public class CatController {
 
     //add
     // REST: GET, PUT, POST, DELETE PATCH
-    @RequestMapping(value = "/add", method = RequestMethod.PUT, produces = "application/json,charset=utf-8")
+    @RequestMapping(value = "/add", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Cat addCat(@RequestBody Cat cat) {
         return catService.addCat(cat);
     }
 
     //get all
-    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json,charset=utf-8")
+    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<Cat> getAllCats() {
         return catService.getAllCats();
