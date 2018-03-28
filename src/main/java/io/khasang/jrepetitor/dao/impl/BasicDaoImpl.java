@@ -59,4 +59,10 @@ public class BasicDaoImpl<T> implements BasicDao<T> {
         return entity;
 
     }
+
+    @Override
+    public T update(T entity) {
+        getSessionFactory().update(entity);
+        return  entity;
+    }
 }
