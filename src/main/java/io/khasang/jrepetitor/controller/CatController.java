@@ -5,10 +5,7 @@ import io.khasang.jrepetitor.service.CatService;
 import io.khasang.jrepetitor.service.impl.CatServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +31,25 @@ public class CatController {
     public List<Cat> getCatAll()
     {
         return catService.getAllCats();
+    }
+
+    //get id
+
+    //cat/get/ id
+    @RequestMapping(value = "/get/{id}",method = RequestMethod.GET,produces = "application/json;charset=utf8")
+    @ResponseBody
+    public Cat getCatById(@PathVariable (value = "id")String id)
+    {
+        return catService.getCatById(Long.parseLong(id));
+    }
+
+    //cat/delete&id=id
+
+    @RequestMapping(value = "/delete",method = RequestMethod.DELETE,produces = "application/json;charset=utf8")
+    @ResponseBody
+    public Cat deleteCat(@RequestParam (value = "id") String id)
+    {
+        return catService.deleteCat(Long.parseLong(id));
     }
 
 }

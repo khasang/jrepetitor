@@ -19,4 +19,19 @@ public interface CatService {
      * @return created cat
      **/
    Cat addCat(Cat cat);
+
+    /**
+     * method for get cat by id
+     * @param id = id cat for get
+     * @return return cat by id
+     */
+
+    Cat getCatById(long id);
+
+    /**method for delete cat by id
+     *
+     * @param id = cat's id delete
+     * @return deleted cat
+     */
+    Cat deleteCat(long id);
 }
