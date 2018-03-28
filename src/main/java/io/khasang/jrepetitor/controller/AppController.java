@@ -1,6 +1,5 @@
 package io.khasang.jrepetitor.controller;
 
-import io.khasang.jrepetitor.model.Cat;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AppController {
     @Autowired
-    private Cat cat;
-    @Autowired
     private CreateTable createTable;
 
     // Фабричный метод бинов.
@@ -22,7 +19,6 @@ public class AppController {
 
     @RequestMapping("/")
     public String helloPage(){
-        System.out.println(cat.getName());
         return "hello";
     }
 
@@ -33,7 +29,7 @@ public class AppController {
     }
 
     @RequestMapping(value = "/password/{password}", method = RequestMethod.GET)
-    public String getPasswordHelp(@PathVariable("password") String password, Model model){
+    public String getPasswordHelp(@PathVariable("password") String password, Model model) {
         model.addAttribute("password", new BCryptPasswordEncoder().encode(password));
         return "pwd";
     }
@@ -43,8 +39,4 @@ public class AppController {
         return "user";
     }
 
-    @RequestMapping("/superuser")
-    public String getSuperUserPage(){
-        return "superuser";
-    }
 }

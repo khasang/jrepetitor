@@ -12,32 +12,32 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
-    public void configure(HttpSecurity http) throws Exception{
+    public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/create").access("hasRole('ADMIN')")
+                .antMatchers("/create").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
                 .antMatchers("/user/**").access("hasRole('USER')")
-                .antMatchers("/superuser").access("hasRole('SU')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
 
-   /* @Override
+    // мы никогда не используем инмемори в продакшн
+//    @Override
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
+//        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+//    }
+
+    @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-    }*/
-   @Override
-   public void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-   }
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
 
     private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
