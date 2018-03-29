@@ -45,4 +45,10 @@ public class CatController {
     public Cat deleteCat(@RequestParam(value = "id") String id) {
         return catService.deleteCat(Long.parseLong(id));
     }
+
+    @RequestMapping(value = "/upd", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public Cat updateCat(@RequestBody Cat cat){
+        return catService.updCat(cat);
+    }
 }
