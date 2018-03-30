@@ -20,8 +20,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/create").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+                .antMatchers("/create").access("hasRole('ADMIN') or hasRole('SU')")
                 .antMatchers("/user/**").access("hasRole('USER')")
+                .antMatchers("/luser").access("hasRole('USER')")
+                .antMatchers("/superuser").access("hasRole('SU')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
 

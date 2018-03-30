@@ -51,4 +51,9 @@ public class CatController {
     public Cat updateCat(@RequestBody Cat cat){
         return catService.updCat(cat);
     }
+
+    /*@RequestMapping("/superuser")
+    public String getSuperUserPage(){
+        return "superuser";
+    }*/
 }
