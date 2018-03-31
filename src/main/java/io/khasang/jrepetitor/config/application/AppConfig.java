@@ -2,6 +2,9 @@ package io.khasang.jrepetitor.config.application;
 
 import io.khasang.jrepetitor.DAO.CatsDAO;
 import io.khasang.jrepetitor.DAO.CatsDAOImpl;
+import io.khasang.jrepetitor.DAO.KotDao;
+import io.khasang.jrepetitor.DAO.impl.KotDaoImpl;
+import io.khasang.jrepetitor.entity.Kot;
 import io.khasang.jrepetitor.model.Cat;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,4 +66,7 @@ public class AppConfig {
     public CatsDAO catsDAO(){
         return new CatsDAOImpl(getJdbcTemplate());
     }
+
+    @Bean
+    public KotDao kotDao(){ return new KotDaoImpl(Kot.class); }
 }
