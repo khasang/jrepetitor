@@ -1,6 +1,5 @@
 package io.khasang.jrepetitor.config.application;
 
-import io.khasang.jrepetitor.model.Cat;
 import io.khasang.jrepetitor.model.CreateTable;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,6 @@ import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 public class AppConfig {
     @Autowired
     private Environment environment;
-
-    @Bean
-    public Cat cat(){
-        return new Cat("Barsik");
-    }
 
     @Bean
     public DriverManagerDataSource dataSource() {
