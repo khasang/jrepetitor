@@ -37,4 +37,9 @@ public class AppController {
         return "pwd";
     }
 
+    @RequestMapping("/user")
+    public String getUserPage() {
+
+    }
+
 }
