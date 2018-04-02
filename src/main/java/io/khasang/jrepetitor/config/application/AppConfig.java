@@ -1,6 +1,8 @@
 package io.khasang.jrepetitor.config.application;
 
-import io.khasang.jrepetitor.model.Cat;
+import io.khasang.jrepetitor.dao.CatDao;
+import io.khasang.jrepetitor.dao.impl.CatDaoImpl;
+import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +20,6 @@ import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 public class AppConfig {
     @Autowired
     private Environment environment;
-
-    @Bean
-    public Cat cat() {
-        return new Cat("Barsik");
-    }
 
     @Bean
     public DriverManagerDataSource dataSource() {
@@ -53,5 +50,10 @@ public class AppConfig {
         jdbcDao.setUsersByUsernameQuery(environment.getRequiredProperty("usersByQuery"));
         jdbcDao.setAuthoritiesByUsernameQuery(environment.getRequiredProperty("rolesByQuery"));
         return jdbcDao;
+    }
+
+    @Bean
+    public CatDao catDao() {
+        return new CatDaoImpl(Cat.class);
     }
 }

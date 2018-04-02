@@ -1,36 +1,36 @@
 package io.khasang.jrepetitor.controller;
 
-import io.khasang.jrepetitor.model.Cat;
+
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.jws.WebParam;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 @Controller
 public class AppController {
     @Autowired
-    private Cat cat;
-    @Autowired
     private CreateTable createTable;
 
 
-    // Фабричный метод бинов.
-    // Cat cat = new Cat();
-
     @RequestMapping("/")
-    public String helloPage(Model model) {
-        model.addAttribute("name", cat.getName());
-        System.out.println(cat.getName());
+    public String sayHello(Model model) {
+        Date serverDate = new Date();
+        serverDate.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String stringDate = sdf.format(serverDate.getTime());
+        model.addAttribute("date", stringDate);
         return "hello";
     }
+
 
     @RequestMapping("/create")
     public String createTableStatus(Model model) {
