@@ -18,10 +18,39 @@ private static final String ADD = "/add";
 private static final String ALL = "/all";
 private static final String GET_BY_ID = "/get";
 private static final String DELETE = "/delete";
+private static final String UPD = "/upd";
 
     @Test
     public void updateCat(){
+        Cat updatingCat = createCat();
 
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<Cat> responseEntity = restTemplate.exchange(
+                ROOT + GET_BY_ID + "/{id}",
+                HttpMethod.GET,
+                null,
+                Cat.class,
+                updatingCat.getId()
+        );
+        assertEquals("OK", responseEntity.getStatusCode().getReasonPhrase());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        String newNameCat = "Novichok";
+        Cat updaterCat = updatingCat;
+        updaterCat.setName(newNameCat);
+
+        HttpEntity entity = new HttpEntity(updaterCat, headers);
+
+        ResponseEntity<Cat> responseEntityUpd = restTemplate.exchange(
+                ROOT + UPD,
+                HttpMethod.PUT,
+                entity,
+                Cat.class
+        );
+        assertEquals(newNameCat, responseEntityUpd.getBody().getName());
     }
 
     @Test
