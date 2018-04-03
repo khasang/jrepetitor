@@ -19,4 +19,20 @@ public interface CatService {
      * @return all cats
      */
     List<Cat> getAllCats();
+
+    /**
+     * method for receive specify cat by id
+     *
+     * @param id = unique cat id
+     * @return received cat
+     */
+    Cat getCatById(long id);
+
+    /**
+     * method for deletion specify cat by id
+     *
+     * @param id = unique cat id
+     * @return deleted cat
+     */
+    Cat deleteCat(long id);
 }
