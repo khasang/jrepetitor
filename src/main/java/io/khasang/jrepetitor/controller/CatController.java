@@ -3,6 +3,7 @@ package io.khasang.jrepetitor.controller;
 import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.service.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class CatController {
 
     // REST GET PUT POST DELETE PATCH
     // JSON
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public Cat addCat(@RequestBody Cat cat){
         return catService.addCat(cat);
