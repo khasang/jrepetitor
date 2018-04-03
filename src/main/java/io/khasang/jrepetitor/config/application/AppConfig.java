@@ -7,6 +7,7 @@ import io.khasang.jrepetitor.model.CreateTable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 @Configuration
 @PropertySource(value = "classpath:util.properties")
 @PropertySource(value = "classpath:auth.properties")
+@ComponentScan({"io.khasang.jrepetitor"})
 public class AppConfig {
     @Autowired
     private Environment environment;
@@ -49,7 +51,7 @@ public class AppConfig {
     }
 
     @Bean
-    public CreateTable createTable(){
+    public CreateTable createTable() {
         return new CreateTable(jdbcTemplate());
     }
 

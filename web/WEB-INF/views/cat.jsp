@@ -21,11 +21,11 @@
             dataType: 'json',
             async: false,
             success: function (result) {
-                $('#responce').html(JSON.stringify(result))
+                $('#responce').html(JSON.stringify(result));
             },
             error: function (jqXHR, testStatus, errorThrown) {
-                $('#responce').html(JSON.stringify(jqXHR))
-            },
+                $('#responce').html(JSON.stringify(jqXHR));
+            }
         })
     };
 </script>
