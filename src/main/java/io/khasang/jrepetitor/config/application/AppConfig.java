@@ -1,5 +1,8 @@
 package io.khasang.jrepetitor.config.application;
 
+import io.khasang.jrepetitor.dao.CatDao;
+import io.khasang.jrepetitor.dao.impl.CatDaoImpl;
+import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.model.CreateTable;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,11 @@ public class AppConfig {
     @Bean
     public CreateTable createTable(){
         return new CreateTable(jdbcTemplate());
+    }
+
+    @Bean
+    public CatDao catDao() {
+        return new CatDaoImpl(Cat.class);
     }
 
 }
