@@ -1,8 +1,8 @@
 package io.khasang.jrepetitor.config.application;
 
-import io.khasang.jrepetitor.dao.CatDao;
-import io.khasang.jrepetitor.dao.impl.CatDaoImpl;
-import io.khasang.jrepetitor.entity.Cat;
+import io.khasang.jrepetitor.dao.*;
+import io.khasang.jrepetitor.dao.impl.*;
+import io.khasang.jrepetitor.entity.*;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -56,5 +56,23 @@ public class AppConfig {
     public CatDao catDao(){
         return new CatDaoImpl(Cat.class);
     }
+
+    @Bean
+    public GroupDao groupDao(){
+        return new GroupDaoImpl(Group.class);
+    }
+    @Bean
+    public QuizDao quizDao(){
+        return new QuizDaoImpl(Quiz.class);
+    }
+    @Bean
+    public QuestionDao questionDao(){
+        return new QuestionDaoImpl(Question.class);
+    }
+    @Bean
+    public ItemDao itemDao(){
+        return new ItemDaoImpl(Item.class);
+    }
+
 
 }
