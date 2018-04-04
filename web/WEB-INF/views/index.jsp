@@ -32,15 +32,18 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="about.html">О сервисе</a>
+                    <a href="http://localhost:8080/">Главная</a>
                 </li>
                 <li>
-                    <a href="services.html">Уроки</a>
+                    <a href="http://localhost:8080/user">Материалы</a>
                 </li>
                 <li>
-                    <a href="contact.html">Контакты</a>
+                    <a href="http://localhost:8080/user">Личный кабинет</a>
                 </li>
-                <li class="dropdown">
+                <li>
+                    <a href="http://localhost:8080/user">Help</a>
+                </li>
+                <%--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorial<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -59,8 +62,8 @@
                             <a href="portfolio-item.html">Lesson 5</a>
                         </li>
                     </ul>
-                </li>
-                <li class="dropdown">
+                </li>--%>
+                <%--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -73,8 +76,8 @@
                             <a href="blog-post.html">Blog Post</a>
                         </li>
                     </ul>
-                </li>
-                <li class="dropdown">
+                </li>--%>
+                <%--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Other Pages <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -91,7 +94,7 @@
                         </li>
                         <li>
                             <a href="pricing.html">Pricing Table</a>
-                        </li>
+                        </li>--%>
                     </ul>
                 </li>
             </ul>
@@ -142,45 +145,46 @@
 </header>--%>
 
 <!-- Page Content -->
+<br>
 <div class="container">
 
     <!-- Marketing Icons Section -->
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Welcome to Modern Business
+                Мы научим вас программировать на JAVA
             </h1>
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-check"></i> Bootstrap v3.2.0</h4>
+                    <h4><i class="fa fa-fw fa-check"></i> Java0</h4>
                 </div>
                 <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                    <a href="#" class="btn btn-default">Learn More</a>
+                    <p>Java для начинающих! Даже ребенок пройдет этот уровень!</p>
+                    <a href="http://localhost:8080/user" class="btn btn-default">Узнать больше</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-gift"></i> Free &amp; Open Source</h4>
+                    <h4><i class="fa fa-fw fa-gift"></i> Java1</h4>
                 </div>
                 <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                    <a href="#" class="btn btn-default">Learn More</a>
+                    <p>Если Вы прошли курс Java1, то сделали первый небольшой шаг для человека. Но это большой шаг для всего человечества!</p>
+                    <a href="http://localhost:8080/user" class="btn btn-default">Узнать больше</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-compass"></i> Easy to Use</h4>
+                    <h4><i class="fa fa-fw fa-compass"></i> Java2</h4>
                 </div>
                 <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                    <a href="#" class="btn btn-default">Learn More</a>
+                    <p>Закончил курс Java2, значит ты наполовину профессионал. Но умный наполовину значит наполовину глупец. Пройди курс Java WEB и выделись из толпы!</p>
+                    <a href="http://localhost:8080/user" class="btn btn-default">Узнать больше</a>
                 </div>
             </div>
         </div>
@@ -190,56 +194,56 @@
     <!-- Portfolio Section -->
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Portfolio Heading</h2>
+            <h2 class="page-header">Счастливые обладатели сертификата Java программиста</h2>
         </div>
         <div class="col-md-4 col-sm-6">
             <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                <img class="img-responsive img-portfolio img-hover" src="https://lentachel.ru/netcat_files/Image/foto/2018/01/26/0b19a7c23e1beff25542511f41389921/nunn.jpg" alt="">
             </a>
         </div>
         <div class="col-md-4 col-sm-6">
             <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                <img class="img-responsive img-portfolio img-hover" src="http://lingvo-pro.ru/wp-content/uploads/2015/10/lingvo-pro7.jpg" alt="">
             </a>
         </div>
         <div class="col-md-4 col-sm-6">
             <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
+                <img class="img-responsive img-portfolio img-hover" src="https://deti.mail.ru/pic/photolib/2014/08/31/Depositphotos_8705621_s.jpg" alt="">
             </a>
         </div>
-        <div class="col-md-4 col-sm-6">
+        <%--<div class="col-md-4 col-sm-6">
             <a href="portfolio-item.html">
                 <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
             </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
+        </div>--%>
+        <%--<div class="col-md-4 col-sm-6">
             <a href="portfolio-item.html">
                 <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
             </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
+        </div>--%>
+        <%--<div class="col-md-4 col-sm-6">
             <a href="portfolio-item.html">
                 <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
             </a>
-        </div>
+        </div>--%>
     </div>
     <!-- /.row -->
 
     <!-- Features Section -->
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Modern Business Features</h2>
+            <h2 class="page-header">График прохождения курса</h2>
         </div>
         <div class="col-md-6">
-            <p>The Modern Business template by Start Bootstrap includes:</p>
+            <p>Курс включает в себя:</p>
             <ul>
                 <li><strong>Bootstrap v3.2.0</strong>
                 </li>
-                <li>jQuery v1.11.0</li>
-                <li>Font Awesome v4.1.0</li>
-                <li>Working PHP contact form with validation</li>
-                <li>Unstyled page elements for easy customization</li>
-                <li>17 HTML pages</li>
+                <li>Переменные и функции</li>
+                <li>Интерфейсы и классы</li>
+                <li>Регулярные выражения</li>
+                <li>Дженерики</li>
+                <li>Лямбда выражения</li>
             </ul>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
         </div>
