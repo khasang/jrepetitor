@@ -21,19 +21,19 @@ public class ItemController {
 
     // REST GET PUT POST DELETE PATCH
     // JSON
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"appliitemion/json;charset=utf-8"})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public Item addItem(@RequestBody Item item){
         return itemService.addItem(item);
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "appliitemion/json;charset=utf-8")
+    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<Item> getAllItems(){
         return itemService.getAllItems();
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "appliitemion/json;charset=utf-8")
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Item getItemById(@PathVariable(value = "id") String id){
         // exception
@@ -41,7 +41,7 @@ public class ItemController {
     }
 
     // localhost:8080/item/delete?id=5&name=Jack
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "appliitemion/json;charset=utf-8")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Item deleteItem(@RequestParam(value = "id") String id) {
         return itemService.deleteItem(Long.parseLong(id));

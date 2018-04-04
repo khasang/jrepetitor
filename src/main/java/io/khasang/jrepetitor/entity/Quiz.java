@@ -13,7 +13,7 @@ import java.util.List;
 public class Quiz {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="quiz_id")
     private Long id;
 

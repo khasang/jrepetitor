@@ -21,19 +21,19 @@ public class QuestionController {
 
     // REST GET PUT POST DELETE PATCH
     // JSON
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"appliquestionion/json;charset=utf-8"})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public Question addQuestion(@RequestBody Question question){
         return questionService.addQuestion(question);
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "appliquestionion/json;charset=utf-8")
+    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<Question> getAllQuestions(){
         return questionService.getAllQuestions();
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "appliquestionion/json;charset=utf-8")
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Question getQuestionById(@PathVariable(value = "id") String id){
         // exception
@@ -41,7 +41,7 @@ public class QuestionController {
     }
 
     // localhost:8080/question/delete?id=5&name=Jack
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "appliquestionion/json;charset=utf-8")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Question deleteQuestion(@RequestParam(value = "id") String id) {
         return questionService.deleteQuestion(Long.parseLong(id));

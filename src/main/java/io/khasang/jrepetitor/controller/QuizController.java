@@ -21,19 +21,19 @@ public class QuizController {
 
     // REST GET PUT POST DELETE PATCH
     // JSON
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"appliquizion/json;charset=utf-8"})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public Quiz addQuiz(@RequestBody Quiz quiz){
         return quizService.addQuiz(quiz);
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "appliquizion/json;charset=utf-8")
+    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<Quiz> getAllQuizs(){
         return quizService.getAllQuizs();
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "appliquizion/json;charset=utf-8")
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Quiz getQuizById(@PathVariable(value = "id") String id){
         // exception
@@ -41,7 +41,7 @@ public class QuizController {
     }
 
     // localhost:8080/quiz/delete?id=5&name=Jack
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "appliquizion/json;charset=utf-8")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Quiz deleteQuiz(@RequestParam(value = "id") String id) {
         return quizService.deleteQuiz(Long.parseLong(id));
