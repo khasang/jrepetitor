@@ -18,10 +18,13 @@ public class AppController {
     // Cat cat = new Cat();
 
     @RequestMapping("/")
-    public String helloPage(){
-        return "cat";
-    }
 
+    public String helloPage(){
+        return "index";
+    }
+    /*public String helloPage(){
+            return "cat";
+        }*/
     @RequestMapping("/create")
     public String createTableStatus(Model model) {
         model.addAttribute("status", createTable.createTableStatus());
