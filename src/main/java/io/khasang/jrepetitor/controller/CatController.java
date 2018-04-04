@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping(value = "/cat")
+@Controller("/cat")
+//@RequestMapping(value = "/cat")
 public class CatController {
     @Autowired
     private CatService catService;
