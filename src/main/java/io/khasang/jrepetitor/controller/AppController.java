@@ -20,7 +20,8 @@ public class AppController {
 
     @RequestMapping("/")
     public String helloPage(Model model) {
-        return "hello";
+//        return "hello";
+        return "cat";
     }
 
     @RequestMapping("/create")

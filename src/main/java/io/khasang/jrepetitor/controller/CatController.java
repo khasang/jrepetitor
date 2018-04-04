@@ -4,6 +4,7 @@ import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.service.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +52,4 @@ public class CatController {
     public Cat deleteCat(@RequestParam(value = "id") String id) {
         return catService.deleteCat(Long.parseLong(id));
     }
-
-
 }
