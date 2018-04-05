@@ -35,7 +35,7 @@
                     <a href="http://localhost:8080/">Главная</a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/user">Материалы</a>
+                    <a href="http://localhost:8080/queans">Материалы</a>
                 </li>
                 <li>
                     <a href="http://localhost:8080/user">Личный кабинет</a>

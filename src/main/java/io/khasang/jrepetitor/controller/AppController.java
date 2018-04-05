@@ -18,7 +18,6 @@ public class AppController {
     // Cat cat = new Cat();
 
     @RequestMapping("/")
-
     public String helloPage(){
         return "index";
     }
@@ -40,6 +39,11 @@ public class AppController {
     @RequestMapping("/user")
     public String getUserPage(){
         return "user";
+    }
+
+    @RequestMapping("/queans")
+    public String getProba(){
+        return "queans";
     }
 
 }
