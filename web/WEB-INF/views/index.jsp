@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Javastudy.ru MVC_HTML5_Angular</title>
+    <title>JRepetitor</title>
     <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
     <spring:url value="/resources/css/modern-business.css" var="startertemplate"/>
     <%--<link href="${bootstrap}" rel="stylesheet" />--%>

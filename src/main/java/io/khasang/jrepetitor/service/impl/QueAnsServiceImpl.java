@@ -22,4 +22,9 @@ public class QueAnsServiceImpl implements QueAnsService{
     public List<QueAns> getAllQueAns() {
         return queAnsDao.getList();
     }
+
+    @Override
+    public QueAns getQueAnsById(long id) {
+        return queAnsDao.getById(id);
+    }
 }

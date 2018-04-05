@@ -18,4 +18,10 @@ public interface QueAnsService {
     *
     * */
     List<QueAns> getAllQueAns();
+
+    /*
+     * method for getting  question and answers by ID
+     *
+     * */
+    QueAns getQueAnsById(long l);
 }
