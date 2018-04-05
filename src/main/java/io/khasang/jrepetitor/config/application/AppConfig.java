@@ -1,8 +1,11 @@
 package io.khasang.jrepetitor.config.application;
 
 import io.khasang.jrepetitor.dao.CatDao;
+import io.khasang.jrepetitor.dao.QueAnsDao;
 import io.khasang.jrepetitor.dao.impl.CatDaoImpl;
+import io.khasang.jrepetitor.dao.impl.QueAnsDaoImpl;
 import io.khasang.jrepetitor.entity.Cat;
+import io.khasang.jrepetitor.entity.QueAns;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -56,5 +59,8 @@ public class AppConfig {
     public CatDao catDao(){
         return new CatDaoImpl(Cat.class);
     }
+
+    @Bean
+    public QueAnsDao queAnsDao(){return new QueAnsDaoImpl(QueAns.class);}
 
 }
