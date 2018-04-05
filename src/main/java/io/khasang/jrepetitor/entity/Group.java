@@ -17,10 +17,11 @@ import java.util.List;
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "group_id")
+//    @Column(name = "group_id")
     private Long id;
 
-//    List<Quiz> quizes;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    List<Quiz> quizes;
 
     private String name; //наименование темы
 
@@ -38,5 +39,13 @@ public class Group {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Quiz> getQuizes() {
+        return quizes;
+    }
+
+    public void setQuizes(List<Quiz> quizes) {
+        this.quizes = quizes;
     }
 }

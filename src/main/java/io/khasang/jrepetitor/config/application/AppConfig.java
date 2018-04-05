@@ -73,6 +73,14 @@ public class AppConfig {
     public ItemDao itemDao(){
         return new ItemDaoImpl(Item.class);
     }
+    @Bean
+    public UserTryDao userTryDao(){
+        return new UserTryDaoImpl(UserTry.class);
+    }
+    @Bean
+    public UserAnswerDao userAnswerDao(){
+        return new UserAnswerDaoImpl(UserAnswer.class);
+    }
 
 
 }

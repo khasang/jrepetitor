@@ -14,15 +14,13 @@ public class Quiz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="quiz_id")
+//    @Column(name="quiz_id")
     private Long id;
 
     private String name;
 
-//    private List<Question> questions;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "group_id")
-    private Group group;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Question> questions;
 
     public Long getId() {
         return id;
@@ -38,5 +36,13 @@ public class Quiz {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

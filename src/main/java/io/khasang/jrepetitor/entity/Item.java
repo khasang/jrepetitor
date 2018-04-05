@@ -15,10 +15,6 @@ public class Item {
     private String content; //текст варианта ответа
     private boolean correct; //правильно/не правильно
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "question_id")
-    private Question question;
-
     public Long getId() {
         return id;
     }
@@ -43,11 +39,4 @@ public class Item {
         this.correct = correct;
     }
 
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
 }

@@ -15,18 +15,14 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="question_id")
+//    @Column(name="question_id")
     private Long id;
 
     private String content; //текст вопроса
     private String type; //тип вопроса: "RadioGroup/CheckBoz"
 
-//    @Transient
-//    private List<Item> answer; //ответ
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "quiz_id")
-    private Quiz quiz;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Item> items; //ответ
 
     private String explanation; //объясенение правильного ответа
 
@@ -54,19 +50,19 @@ public class Question {
         this.type = type;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
-
     public String getExplanation() {
         return explanation;
     }
 
     public void setExplanation(String explanation) {
         this.explanation = explanation;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

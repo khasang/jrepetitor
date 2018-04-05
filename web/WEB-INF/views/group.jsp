@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     </head>
     <script>
-        var service = 'http://localhost:8080/cat';
+        var service = 'http://localhost:8080/group';
         var RestGet = function () {
         $.ajax({
         type: 'GET',
@@ -24,7 +24,7 @@
     </script>
 
     <body>
-        <h1>Cat Menu</h1>
+        <h1>Group Menu</h1>
 
         <table class="table">
             <tr>
@@ -33,8 +33,8 @@
                 <th>Value</th>
             </tr>
             <tr>
-                <td>GET (Get all cats)</td>
-                <td>/cat/all</td>
+                <td>GET (Get all groups)</td>
+                <td>/group/all</td>
                 <td>
                     <button type="button" onclick="RestGet()">Try</button>
                 </td>
