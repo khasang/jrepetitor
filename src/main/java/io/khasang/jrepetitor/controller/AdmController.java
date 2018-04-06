@@ -4,12 +4,7 @@ import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,11 +27,17 @@ public class AdmController {
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public User getUserById(@PathVariable(value = "id") String id){
+    public User getUserById(@PathVariable(value = "id") String id) {
         return userService.getUserById(Long.parseLong(id));
     }
 
-    @RequestMapping(value = "/all_users", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/get_n/{name}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public List<User> getUserByName(@PathVariable(value = "name") String name) {
+        return userService.getUserByName(name);
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<User> getListUsers() {
         return userService.getAllUsers();

@@ -1,6 +1,5 @@
 package io.khasang.jrepetitor.dao;
 
-import io.khasang.jrepetitor.entity.Cat;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -33,6 +32,14 @@ public interface BasicDao<T> {
      * @return specify entity by id
      */
     T getById(long id);
+
+    /**
+     * method for receive specify entity by name
+     *
+     * @param name = uniq entity name
+     * @return entities by name
+     */
+    List<T> getByName(String name);
 
     /**
      * method for entity delete
