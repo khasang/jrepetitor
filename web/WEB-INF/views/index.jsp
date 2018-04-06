@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Javastudy.ru MVC_HTML5_Angular</title>
+    <title>JRepetitor</title>
     <spring:url value="/resources/css/bootstrap.css" var="bootstrap"/>
     <spring:url value="/resources/css/modern-business.css" var="startertemplate"/>
     <%--<link href="${bootstrap}" rel="stylesheet" />--%>
@@ -35,7 +35,7 @@
                     <a href="http://localhost:8080/">Главная</a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/user">Материалы</a>
+                    <a href="http://localhost:8080/queans">Материалы</a>
                 </li>
                 <li>
                     <a href="http://localhost:8080/user">Личный кабинет</a>
@@ -95,8 +95,8 @@
                         <li>
                             <a href="pricing.html">Pricing Table</a>
                         </li>--%>
-                    </ul>
-                </li>
+            </ul>
+            </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -106,11 +106,14 @@
 
 <!-- Header Carousel -->
 <%--<header id="myCarousel" class="carousel slide">
+
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class=""></li>
     <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="2"></li>
   </ol>
+
+
   <div class="carousel-inner">
     <div class="item">
       <div class="fill" style="background-image:url('http://placehold.it/1900x1080&amp;text=Slide One');"></div>
@@ -131,6 +134,8 @@
       </div>
     </div>
   </div>
+
+
   <a class="left carousel-control" href="#myCarousel" data-slide="prev">
     <span class="icon-prev"></span>
   </a>
@@ -232,7 +237,7 @@
         <div class="col-md-6">
             <p>Курс включает в себя:</p>
             <ul>
-                <li><strong>Bootstrap v3.2.0</strong>
+                <li><strong>Java Core</strong>
                 </li>
                 <li>Переменные и функции</li>
                 <li>Интерфейсы и классы</li>
@@ -240,10 +245,10 @@
                 <li>Дженерики</li>
                 <li>Лямбда выражения</li>
             </ul>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+            <p>Прохождение курса идет по плану!</p>
         </div>
         <div class="col-md-6">
-            <img class="img-responsive" src="http://placehold.it/700x450" alt="">
+            <img class="img-responsive" src="https://static3.depositphotos.com/1007836/260/i/950/depositphotos_2608892-stock-photo-business-finance-chart-graph-diagram.jpg" alt="">
         </div>
     </div>
     <!-- /.row -->
@@ -251,7 +256,7 @@
     <hr>
 
     <!-- Call to Action Section -->
-    <div class="well">
+    <%--<div class="well">
         <div class="row">
             <div class="col-md-8">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
@@ -261,14 +266,14 @@
             </div>
         </div>
     </div>
-
+--%>
     <hr>
 
     <!-- Footer -->
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>Copyright © Your Website 2014</p>
+                <p>Java Web © JRepetitor 2018</p>
             </div>
         </div>
     </footer>
