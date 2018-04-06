@@ -25,6 +25,8 @@ public class Quiz {
     @ManyToOne
     private Group group;
 
+    private byte level; // question level
+
     public Long getId() {
         return id;
     }
@@ -56,4 +58,8 @@ public class Quiz {
     public void setGroup(Group group) {
         this.group = group;
     }
+
+    public byte getLevel() { return level;    }
+
+    public void setLevel(byte level) { this.level = level; }
 }
