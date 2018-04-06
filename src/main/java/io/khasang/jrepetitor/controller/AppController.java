@@ -21,8 +21,8 @@ public class AppController {
     public String helloPage(){
 //        return "index";
 //        return "cat";
-        return "group";
-//        return "hello";
+//        return "group";
+        return "quiz";
     }
 
     @RequestMapping("/create")

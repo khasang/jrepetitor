@@ -12,8 +12,13 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(length = 1000)
     private String content; //текст варианта ответа
     private boolean correct; //правильно/не правильно
+
+    @ManyToOne
+    private Question question;
 
     public Long getId() {
         return id;
@@ -39,4 +44,11 @@ public class Item {
         this.correct = correct;
     }
 
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 }

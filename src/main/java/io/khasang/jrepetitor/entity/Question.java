@@ -18,12 +18,17 @@ public class Question {
 //    @Column(name="question_id")
     private Long id;
 
+    @Column(length = 1000)
     private String content; //текст вопроса
     private String type; //тип вопроса: "RadioGroup/CheckBoz"
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Item> items; //ответ
 
+    @ManyToOne
+    private Quiz quiz;
+
+    @Column(length = 1000)
     private String explanation; //объясенение правильного ответа
 
     public Long getId() {
@@ -64,5 +69,13 @@ public class Question {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 }

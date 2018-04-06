@@ -20,7 +20,7 @@ public class Group {
 //    @Column(name = "group_id")
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     List<Quiz> quizes;
 
     private String name; //наименование темы
