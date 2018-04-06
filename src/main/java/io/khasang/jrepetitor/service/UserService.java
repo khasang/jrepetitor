@@ -20,5 +20,19 @@ public interface UserService {
      */
     List<User> getAllUsers();
 
+    /**
+     * method for receive specify user by id
+     *
+     * @param id = unique user id
+     * @return specify user by id
+     */
+    User getUserById(long id);
 
+    /**
+     * method for user delete
+     *
+     * @param id = user's id for delete
+     * @return removed user
+     */
+    User deleteUser(long id);
 }
