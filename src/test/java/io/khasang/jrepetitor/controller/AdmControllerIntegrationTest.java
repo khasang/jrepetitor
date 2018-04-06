@@ -1,7 +1,9 @@
 package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.User;
+
 import org.junit.Test;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -9,15 +11,19 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class AdmControllerIntegrationTest {
     private static final String ROOT = "http://localhost:8080/adm";
     private static final String ADD = "/add";
-    private static final String ALL_USERS = "/all_users";
+    private static final String ALL_USERS = "/all";
     private static final String GET_BY_ID = "/get";
     private static final String DELETE = "/delete";
+    private static final int LIST_OF_USERS_SIZE = 2;
 
     @Test
     public void addUserAndCheck() {
@@ -38,6 +44,35 @@ public class AdmControllerIntegrationTest {
         assertNotNull(receivedUser);
 
         deleteUser(user);
+    }
+
+    @Test
+    public void getAllUsers() {
+        List<Long> listNewId = new ArrayList<>();
+
+        for (int i = 0; i < LIST_OF_USERS_SIZE; i++) {
+            User user = createUser();
+            listNewId.add(user.getId());
+        }
+
+        RestTemplate template = new RestTemplate();
+
+        ResponseEntity<List<User>> responseEntity = template.exchange(
+                ROOT + ALL_USERS,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<User>>() {
+                }
+        );
+
+        List<User> list = responseEntity.getBody();
+
+        list.forEach(user -> {
+            assertNotNull(user);
+            if (user != null && listNewId.contains(user.getId())) {
+                deleteUser(user);
+            }
+        });
     }
 
     private User createUser() {
