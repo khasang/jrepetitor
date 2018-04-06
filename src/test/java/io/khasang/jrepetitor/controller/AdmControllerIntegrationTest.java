@@ -15,7 +15,7 @@ import static org.junit.Assert.assertNotNull;
 public class AdmControllerIntegrationTest {
     private static final String ROOT = "http://localhost:8080/adm";
     private static final String ADD = "/add";
-    private static final String ALL_USERS = "/all_users";
+    private static final String ALL_USERS = "/all";
     private static final String GET_BY_ID = "/get";
     private static final String DELETE = "/delete";
 

@@ -14,11 +14,33 @@ public interface UserService {
     User addUser(User user);
 
     /**
+     * method for receive specify user by id
+     *
+     * @param id = uniq user id
+     * @return specify user by id
+     */
+    User getUserById(long id);
+
+    /**
+     * method for get user
+     *
+     * @param userName = unic user name
+     * @return specify user by naem
+     */
+    List<User> getUserByName(String userName);
+
+    /**
      * method for receiving all users
      *
      * @return all users
      */
     List<User> getAllUsers();
 
-
+    /**
+     * method for user delete
+     *
+     * @param id = user's id for delete
+     * @return removed user
+     */
+    User deleteUser(long id);
 }
