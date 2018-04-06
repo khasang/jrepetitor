@@ -100,7 +100,9 @@ public class AdmControllerIntegrationTest {
 
     private User prefillUser() {
         User user = new User();
-        user.setName("User");
+        user.setName("UserDEL");
+        user.setPassword("123456");
+        user.setRole_name("ROLE_USER");
         return user;
     }
 
