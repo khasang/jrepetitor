@@ -18,7 +18,7 @@ public class UserTry {
 
     private int score;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "UserTry", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<UserAnswer> userAnswers;
 
     public Long getId() {

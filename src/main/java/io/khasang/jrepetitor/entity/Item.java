@@ -22,7 +22,7 @@ public class Item implements Serializable{
 
     @Column(length = 1000)
     private String content; //текст варианта ответа
-    private boolean correct; //правильно/не правильно
+    private byte correct; //правильно/не правильно
 
 //    @JsonManagedReference
     @ManyToOne
@@ -44,16 +44,17 @@ public class Item implements Serializable{
         this.content = content;
     }
 
-    public boolean isCorrect() {
-        return correct;
-    }
-
-    public void setCorrect(boolean correct) {
-        this.correct = correct;
-    }
 
     public Question getQuestion() {
         return question;
+    }
+
+    public byte getCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(byte correct) {
+        this.correct = correct;
     }
 
     public void setQuestion(Question question) {

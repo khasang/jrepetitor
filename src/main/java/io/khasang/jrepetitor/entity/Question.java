@@ -24,7 +24,7 @@ public class Question implements Serializable{
 
     @Column(length = 1000)
     private String content; //текст вопроса
-    private String type; //тип вопроса: "RadioGroup/CheckBoz"
+    private String type; //тип вопроса: "radio/CheckBoz"
 
 //    @JsonBackReference
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
