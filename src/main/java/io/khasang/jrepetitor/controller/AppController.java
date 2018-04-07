@@ -19,10 +19,10 @@ public class AppController {
 
     @RequestMapping("/")
     public String helloPage(){
-        return "index";
+//        return "index";
 //        return "cat";
 //        return "group";
-//        return "quiz";
+        return "quiz";
     }
 
     @RequestMapping("/create")

@@ -1,6 +1,9 @@
 package io.khasang.jrepetitor.entity;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +13,8 @@ import java.util.List;
 
 @Entity
 @Table(name="JR_QUIZ")
-public class Quiz {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Quiz implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,9 +23,12 @@ public class Quiz {
 
     private String name;
 
+//    @JsonBackReference
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Question> questions;
 
+//    @JsonManagedReference
+//    @JsonIgnore
     @ManyToOne
     private Group group;
 

@@ -1,13 +1,20 @@
 package io.khasang.jrepetitor.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *  One of Answer variants
  */
 @Entity
 @Table(name = "JR_ITEM")
-public class Item {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Item implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +24,7 @@ public class Item {
     private String content; //текст варианта ответа
     private boolean correct; //правильно/не правильно
 
+//    @JsonManagedReference
     @ManyToOne
     private Question question;
 
