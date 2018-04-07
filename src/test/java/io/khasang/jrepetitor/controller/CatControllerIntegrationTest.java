@@ -1,11 +1,14 @@
 package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.Cat;
+import io.khasang.jrepetitor.entity.CatWoman;
+import io.khasang.jrepetitor.entity.Dish;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -36,7 +39,12 @@ public class CatControllerIntegrationTest {
         Cat receivedCat = entity.getBody();
         assertNotNull(receivedCat);
 
-        deleteFromDB(cat);
+        List<Dish> dishes = prefillDish(new Cat());
+
+        assertEquals("Fish", dishes.get(0).getName());
+        dishes.forEach(dish -> assertEquals(cat.getName(), dish.getCat().getName()));
+
+//        deleteFromDB(cat);
     }
 
     @Test
@@ -144,6 +152,7 @@ public class CatControllerIntegrationTest {
 
         Cat cat = prefillCat();
 
+
         HttpEntity<Cat> entity = new HttpEntity<>(cat, headers);
 
         RestTemplate template = new RestTemplate();
@@ -165,6 +174,34 @@ public class CatControllerIntegrationTest {
         Cat cat = new Cat();
         cat.setName("Barsik");
 
+        CatWoman catWoman1 = new CatWoman();
+        catWoman1.setName("Maruska");
+
+        CatWoman catWoman2 = new CatWoman();
+        catWoman2.setName("Murka");
+
+        List<CatWoman> catWomanList = new ArrayList<>();
+        catWomanList.add(catWoman1);
+        catWomanList.add(catWoman2);
+
+        cat.setCatWomanList(catWomanList);
+
         return cat;
+    }
+
+    private List<Dish> prefillDish(Cat cat) {
+        Dish dish1 = new Dish();
+        dish1.setName("Fish");
+        dish1.setCat(cat);
+
+        Dish dish2 = new Dish();
+        dish2.setName("Whiskas");
+        dish2.setCat(cat);
+
+        List<Dish> dishes = new ArrayList<>();
+        dishes.add(dish1);
+        dishes.add(dish2);
+
+        return dishes;
     }
 }

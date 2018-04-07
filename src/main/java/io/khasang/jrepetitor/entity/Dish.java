@@ -1,11 +1,10 @@
 package io.khasang.jrepetitor.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class Cat {
+@Table(name = "dishes")
+public class Dish {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,8 +12,9 @@ public class Cat {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<CatWoman> catWomanList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "cat_id", foreignKey = @ForeignKey(name = "CAT_ID_FK"))
+    private Cat cat;
 
     public long getId() {
         return id;
@@ -32,11 +32,11 @@ public class Cat {
         this.name = name;
     }
 
-    public List<CatWoman> getCatWomanList() {
-        return catWomanList;
+    public Cat getCat() {
+        return cat;
     }
 
-    public void setCatWomanList(List<CatWoman> catWomanList) {
-        this.catWomanList = catWomanList;
+    public void setCat(Cat cat) {
+        this.cat = cat;
     }
 }
