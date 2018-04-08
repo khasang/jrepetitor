@@ -39,6 +39,12 @@ public class BasicDaoImpl<T> implements BasicDao<T> {
     }
 
     @Override
+    public T update(T entity) {
+        getSessionFactory().update(entity);
+        return entity;
+    }
+
+    @Override
     public T create(T entity) {
         getSessionFactory().save(entity);
         return entity;
@@ -55,4 +61,5 @@ public class BasicDaoImpl<T> implements BasicDao<T> {
         List<T> list = getSessionFactory().createQuery(criteriaQuery).list();
         return list;
     }
+
 }

@@ -35,4 +35,11 @@ public interface CatService {
      * @return removed cat
      */
     Cat deleteCat(long id);
+    /**
+     * method for update
+     *
+     * @param cat = cat for update
+     * @return updated cat
+     */
+    Cat updateCat(Cat cat);
 }

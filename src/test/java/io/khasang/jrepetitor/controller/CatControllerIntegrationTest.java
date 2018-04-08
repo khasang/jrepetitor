@@ -4,7 +4,11 @@ import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.entity.CatWoman;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -37,7 +41,7 @@ public class CatControllerIntegrationTest {
         Cat receivedCat = responseEntity.getBody();
         assertNotNull(receivedCat);
 
-        deleteFromDB(cat);
+     //   deleteFromDB(cat);
     }
 
     @Test

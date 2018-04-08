@@ -21,16 +21,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/create").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
-                .antMatchers("/user/**").access("hasRole('USER')")
+                .antMatchers("/createusers").access("hasRole('USER') or hasRole('SUPERADMIN')")
+                .antMatchers("/user/**").access("hasRole('USER') or hasRole('SUPERADMIN')")
+                .antMatchers("/users/**").access("hasRole('USER') or hasRole('SUPERADMIN')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
     }
-
-    // мы никогда не используем инмемори в продакшн
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-//        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-//    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

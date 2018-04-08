@@ -7,17 +7,85 @@
 </head>
 <script>
     var service = 'http://localhost:8080/cat';
-    var RestGet = function () {
+
+    var RestPut = function (name, description) {
+        var JSONObject = {
+            'name': name,
+            'description': description
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: service + '/add',
+            contentType: 'application/json;utf-8',
+            data: JSON.stringify(JSONObject),
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                $('#response').html(JSON.stringify(result));
+            },
+            error: function (jqXHR, testStatus, errorThrown) {
+                $('#response').html(JSON.stringify(jqXHR));
+            }
+        });
+    };
+
+    var RestGet = function (id) {
+        $.ajax({
+            type: 'GET',
+            url: service + '/get/' + id,
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                $('#response').html(JSON.stringify(result));
+            },
+            error: function (jqXHR, testStatus, errorThrown) {
+                $('#response').html(JSON.stringify(jqXHR));
+            }
+        });
+    };
+
+    var RestGetAll = function () {
         $.ajax({
             type: 'GET',
             url: service + '/all',
             dataType: 'json',
             async: false,
             success: function (result) {
-                $('#response').html(JSON.stringify(result))
+                $('#response').html(JSON.stringify(result));
             },
             error: function (jqXHR, testStatus, errorThrown) {
-                $('#response').html(JSON.stringify(jqXHR))
+                $('#response').html(JSON.stringify(jqXHR));
+            }
+        });
+    };
+
+    var RestDelete = function (id) {
+        $.ajax({
+            type: 'DELETE',
+            url: service + '/delete?' + $.param({"id": id}),
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                $('#response').html(JSON.stringify(result));
+            },
+            error: function (jqXHR, testStatus, errorThrown) {
+                $('#response').html(JSON.stringify(jqXHR));
+            }
+        });
+    };
+
+    var RestUpdate = function (id) {
+        $.ajax({
+            type: 'PUT',
+            url: service + '/update?' + $.param({"id": id}),
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                $('#response').html(JSON.stringify(result));
+            },
+            error: function (jqXHR, testStatus, errorThrown) {
+                $('#response').html(JSON.stringify(jqXHR));
             }
         });
     };
@@ -28,15 +96,43 @@
 
 <table class="table">
     <tr>
-        <th>Requst type</th>
+        <th>Request's type</th>
         <th>URL</th>
         <th>Value</th>
     </tr>
     <tr>
-        <td>GET (Get all cats)</td>
-        <td>/cat/all</td>
+        <td>Add cat</td>
+        <td><code><strong>PUT </strong>/cat/add}</code></td>
         <td>
-            <button type="button" onclick="RestGet()">Try</button>
+            <form class="form-inline">
+                name: <input type="text" id="putName" value="catName">
+                description: <input type="text" id="putDescription" value="catDescription">
+                <button type="button" onclick="RestPut($('#putName').val(), $('#putDescription').val())">Try</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>GET Cat by ID</td>
+        <td><code><strong>GET</strong>/cat/get/{id}</code></td>
+        <td>
+            Id: <input id="getCatById" value=""/>
+            <button type="button" onclick="RestGet($('#getCatById').val())">Try</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td>Get all cats</td>
+        <td><code><strong>GET ALL</strong>/cat/all</code></td>
+        <td>
+            <button type="button" onclick="RestGetAll()">Try</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Delete Cat by Id</td>
+        <td><code><strong>Delete</strong>/cat/delete/{id}</code></td>
+        <td>
+            Id: <input id="CatIdForDelete" value=""/>
+            <button type="button" onclick="RestDelete($('#CatIdForDelete').val())">Try</button>
         </td>
     </tr>
 </table>

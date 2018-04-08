@@ -37,19 +37,5 @@ public class CreateTable {
         } catch (Exception e) {
             return "Table creation failed " + e;
         }
-
-//        String query="SELECT name from cats WHERE  name = ?;";
-//
-//        return jdbcTemplate.execute(query, new PreparedStatementCallback<String>(){
-//            @Override
-//            public String doInPreparedStatement(PreparedStatement ps)
-//                    throws SQLException, DataAccessException {
-//
-//                ps.setString(1,"Barsik");
-//                log.error(ps.toString());
-//                return String.valueOf(ps.execute());
-//
-//            }
-//        });
     }
 }
