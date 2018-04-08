@@ -12,10 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class AdmControllerIntegrationTest {
     private static final String ROOT = "http://localhost:8080/adm";
@@ -43,7 +45,7 @@ public class AdmControllerIntegrationTest {
         User receivedUser = responseEntity.getBody();
         assertNotNull(receivedUser);
 
-        deleteUser(user);
+        deleteUserFromDB(user);
     }
 
     @Test
@@ -70,9 +72,40 @@ public class AdmControllerIntegrationTest {
         list.forEach(user -> {
             assertNotNull(user);
             if (user != null && listNewId.contains(user.getId())) {
-                deleteUser(user);
+                deleteUserFromDB(user);
             }
         });
+    }
+
+    @Test
+    public void deleteUser() {
+        User user = createUser();
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<User> responseEntity = restTemplate.exchange(
+                ROOT + DELETE + "?id=" + "{id}",
+                HttpMethod.DELETE,
+                null,
+                User.class,
+                user.getId()
+        );
+
+        assertEquals(200, responseEntity.getStatusCodeValue());
+
+        User deletedUser = responseEntity.getBody();
+        assertNotNull(deletedUser);
+
+        ResponseEntity<User> responseForDeleteUser = restTemplate.exchange(
+                ROOT + GET_BY_ID + "/{id}",
+                HttpMethod.GET,
+                null,
+                User.class,
+                deletedUser.getId()
+        );
+
+        assertEquals(200, responseForDeleteUser.getStatusCodeValue());
+
+        assertNull(responseForDeleteUser.getBody());
     }
 
     private User createUser() {
@@ -106,7 +139,7 @@ public class AdmControllerIntegrationTest {
         return user;
     }
 
-    private User deleteUser(User user) {
+    private User deleteUserFromDB(User user) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<User> responseEntity = restTemplate.exchange(
                 ROOT + DELETE + "?id=" + "{id}",
