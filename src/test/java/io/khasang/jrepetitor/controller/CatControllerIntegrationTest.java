@@ -9,6 +9,7 @@ import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -39,12 +40,7 @@ public class CatControllerIntegrationTest {
         Cat receivedCat = entity.getBody();
         assertNotNull(receivedCat);
 
-        List<Dish> dishes = prefillDish(new Cat());
-
-        assertEquals("Fish", dishes.get(0).getName());
-        dishes.forEach(dish -> assertEquals(cat.getName(), dish.getCat().getName()));
-
-//        deleteFromDB(cat);
+        deleteFromDB(cat);
     }
 
     @Test
@@ -133,6 +129,40 @@ public class CatControllerIntegrationTest {
         deleteFromDB(postCat);
     }
 
+    @Test
+    public void checkDishRelations() {
+        Dish dish = new Dish();
+        dish.setName("Fish");
+        Cat cat1 = createCat("Murzik", dish);
+        Cat cat2 = createCat("Rizik", dish);
+
+        assertNotNull(cat1.getDish());
+        assertNotNull(cat2.getDish());
+
+        assertEquals(cat1.getDish().getName(), cat2.getDish().getName());
+
+        deleteFromDB(cat1);
+        deleteFromDB(cat2);
+    }
+
+//    @Test
+//    public void checkColorsRelations() {
+//        List<Cat> cats = createCats();
+//
+//        cats.forEach(cat -> {
+//            assertNotNull(cat);
+//            List<Color> colors = cat.getColors();
+//
+//            colors.forEach(color -> {
+//                assertNotNull(color);
+////                List<Cat> catss = color.getCats();
+//
+//                assertTrue(cat.getColors().contains(color));
+//                assertTrue(color.getCats().contains(cat));
+//            });
+//        });
+//    }
+
     private Cat deleteFromDB(Cat cat) {
         RestTemplate template = new RestTemplate();
         ResponseEntity<Cat> responseEntity = template.exchange(
@@ -189,19 +219,83 @@ public class CatControllerIntegrationTest {
         return cat;
     }
 
-    private List<Dish> prefillDish(Cat cat) {
-        Dish dish1 = new Dish();
-        dish1.setName("Fish");
-        dish1.setCat(cat);
+    private Cat createCat(String catName, Dish dish) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
-        Dish dish2 = new Dish();
-        dish2.setName("Whiskas");
-        dish2.setCat(cat);
+        Cat cat = prefillCat(catName, dish);
 
-        List<Dish> dishes = new ArrayList<>();
-        dishes.add(dish1);
-        dishes.add(dish2);
 
-        return dishes;
+        HttpEntity<Cat> entity = new HttpEntity<>(cat, headers);
+
+        RestTemplate template = new RestTemplate();
+
+        Cat receivedCat = template.exchange(
+                ROOT + ADD,
+                HttpMethod.POST,
+                entity,
+                Cat.class
+        ).getBody();
+
+        assertNotNull(receivedCat.getName());
+        assertEquals(cat.getName(), receivedCat.getName());
+
+        return receivedCat;
     }
+
+    private Cat prefillCat(String catName, Dish dish) {
+        Cat cat = new Cat();
+        cat.setName(catName);
+        cat.setDish(dish);
+
+        return cat;
+    }
+
+//    private List<Cat> createCats() {
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+//
+//        List<Cat> cats = prefillCats();
+//        List<Cat> receivedCats = new ArrayList<>();
+//
+//        cats.forEach(cat -> {
+//            HttpEntity<Cat> entity = new HttpEntity<>(cat, headers);
+//
+//            RestTemplate template = new RestTemplate();
+//
+//            Cat receivedCat = template.exchange(
+//                    ROOT + ADD,
+//                    HttpMethod.POST,
+//                    entity,
+//                    Cat.class
+//            ).getBody();
+//
+//            receivedCats.add(receivedCat);
+//        });
+//
+//        return receivedCats;
+//    }
+//
+//    private List<Cat> prefillCats() {
+//        Cat cat1 = new Cat();
+//        cat1.setName("Chernish");
+//
+//        Cat cat2 = new Cat();
+//        cat2.setName("Basik");
+//
+//        Color color1 = new Color();
+//        color1.setName("Black");
+//
+//        Color color2 = new Color();
+//        color2.setName("Red");
+//
+//
+//        List<Cat> cats = Arrays.asList(cat1, cat2);
+//        List<Color> colors = Arrays.asList(color1, color2);
+//
+//        cats.forEach(cat -> cat.setColors(colors));
+//        colors.forEach(color -> color.setCats(cats));
+//
+//        return cats;
+//    }
 }

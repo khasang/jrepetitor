@@ -12,10 +12,6 @@ public class Dish {
 
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "cat_id", foreignKey = @ForeignKey(name = "CAT_ID_FK"))
-    private Cat cat;
-
     public long getId() {
         return id;
     }
@@ -30,13 +26,5 @@ public class Dish {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Cat getCat() {
-        return cat;
-    }
-
-    public void setCat(Cat cat) {
-        this.cat = cat;
     }
 }
