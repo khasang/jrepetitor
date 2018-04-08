@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "JR_QUESTION")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Question implements Serializable{
 
     @Id
@@ -28,9 +28,9 @@ public class Question implements Serializable{
 
 //    @JsonBackReference
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Item> items; //ответ
+    private List<Item> items = new ArrayList<Item>(); //ответ
 
-//    @JsonManagedReference
+    @JsonIgnore
     @ManyToOne
     private Quiz quiz;
 

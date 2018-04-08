@@ -13,7 +13,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "JR_ITEM")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Item implements Serializable{
 
     @Id
@@ -24,7 +23,7 @@ public class Item implements Serializable{
     private String content; //текст варианта ответа
     private byte correct; //правильно/не правильно
 
-//    @JsonManagedReference
+    @JsonIgnore
     @ManyToOne
     private Question question;
 

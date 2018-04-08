@@ -1,10 +1,16 @@
 package io.khasang.jrepetitor.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "JR_USER_TRY")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class UserTry {
 
     @Id
@@ -18,8 +24,8 @@ public class UserTry {
 
     private int score;
 
-    @OneToMany(mappedBy = "UserTry", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<UserAnswer> userAnswers;
+    @OneToMany(mappedBy = "userTry", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<UserAnswer> userAnswers = new ArrayList<UserAnswer>();
 
     public Long getId() {
         return id;

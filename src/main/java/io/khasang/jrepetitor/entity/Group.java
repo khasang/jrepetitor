@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,6 @@ import java.util.List;
  */
 @Entity
 @Table(name = "JR_GROUP")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Group implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,7 +28,7 @@ public class Group implements Serializable{
 
 //    @JsonBackReference
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    List<Quiz> quizes;
+    List<Quiz> quizes = new ArrayList<Quiz>();
 
     private String name; //наименование темы
 
