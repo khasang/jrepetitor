@@ -20,10 +20,6 @@ public class Cat {
     @JoinColumn(name = "dish_id", foreignKey = @ForeignKey(name = "DISH_ID_FK"))
     private Dish dish;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name = "colors", foreignKey = @ForeignKey(name = "COLOR_ID_FK"))
-//    private List<Color> colors = new ArrayList<>();
-
     public long getId() {
         return id;
     }
@@ -55,12 +51,4 @@ public class Cat {
     public void setDish(Dish dish) {
         this.dish = dish;
     }
-
-//    public List<Color> getColors() {
-//        return colors;
-//    }
-//
-//    public void setColors(List<Color> colors) {
-//        this.colors = colors;
-//    }
 }

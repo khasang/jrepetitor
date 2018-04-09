@@ -145,24 +145,6 @@ public class CatControllerIntegrationTest {
         deleteFromDB(cat2);
     }
 
-//    @Test
-//    public void checkColorsRelations() {
-//        List<Cat> cats = createCats();
-//
-//        cats.forEach(cat -> {
-//            assertNotNull(cat);
-//            List<Color> colors = cat.getColors();
-//
-//            colors.forEach(color -> {
-//                assertNotNull(color);
-////                List<Cat> catss = color.getCats();
-//
-//                assertTrue(cat.getColors().contains(color));
-//                assertTrue(color.getCats().contains(cat));
-//            });
-//        });
-//    }
-
     private Cat deleteFromDB(Cat cat) {
         RestTemplate template = new RestTemplate();
         ResponseEntity<Cat> responseEntity = template.exchange(
@@ -250,52 +232,4 @@ public class CatControllerIntegrationTest {
 
         return cat;
     }
-
-//    private List<Cat> createCats() {
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-//
-//        List<Cat> cats = prefillCats();
-//        List<Cat> receivedCats = new ArrayList<>();
-//
-//        cats.forEach(cat -> {
-//            HttpEntity<Cat> entity = new HttpEntity<>(cat, headers);
-//
-//            RestTemplate template = new RestTemplate();
-//
-//            Cat receivedCat = template.exchange(
-//                    ROOT + ADD,
-//                    HttpMethod.POST,
-//                    entity,
-//                    Cat.class
-//            ).getBody();
-//
-//            receivedCats.add(receivedCat);
-//        });
-//
-//        return receivedCats;
-//    }
-//
-//    private List<Cat> prefillCats() {
-//        Cat cat1 = new Cat();
-//        cat1.setName("Chernish");
-//
-//        Cat cat2 = new Cat();
-//        cat2.setName("Basik");
-//
-//        Color color1 = new Color();
-//        color1.setName("Black");
-//
-//        Color color2 = new Color();
-//        color2.setName("Red");
-//
-//
-//        List<Cat> cats = Arrays.asList(cat1, cat2);
-//        List<Color> colors = Arrays.asList(color1, color2);
-//
-//        cats.forEach(cat -> cat.setColors(colors));
-//        colors.forEach(color -> color.setCats(cats));
-//
-//        return cats;
-//    }
 }
