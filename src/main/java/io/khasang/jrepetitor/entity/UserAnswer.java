@@ -1,8 +1,13 @@
 package io.khasang.jrepetitor.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
+@Table(name = "JR_USER_ANSWER")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class UserAnswer {
 
     @Id
@@ -14,6 +19,9 @@ public class UserAnswer {
 
     @ManyToOne
     private Item item;
+
+    @ManyToOne
+    private UserTry userTry;
 
     public Long getId() {
         return id;

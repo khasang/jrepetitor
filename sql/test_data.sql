@@ -1,4 +1,4 @@
-INSERT INTO public.jr_group (id, name) VALUES (1, 'Java Core');
+INSERT INTO jrepetitor.jr_group (id, name) VALUES (1, 'Java Core');
 INSERT INTO public.jr_quiz (id, name, group_id, level) VALUES (1, 'Java Basics', 1, 1);
 INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (1, 'Which of the following are features of Java?', 'It is not required for a class to have a main method. The main method is required only if you want to execute that class directly from a command line.
 Further, running from command line is not the only way to test a class.', 'radio', 1);

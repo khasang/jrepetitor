@@ -22,7 +22,8 @@ public class AppController {
 //        return "index";
 //        return "cat";
 //        return "group";
-        return "quiz";
+//        return "quiz";
+        return "index2";
     }
 
     @RequestMapping("/create")
@@ -40,6 +41,11 @@ public class AppController {
     @RequestMapping("/user")
     public String getUserPage(){
         return "user";
+    }
+
+    @RequestMapping("/queans")
+    public String getQueAnsPage(){
+        return "queans";
     }
 
 }
