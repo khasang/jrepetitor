@@ -47,6 +47,7 @@ public class Quiz implements Serializable{
         this.name = name;
     }
 
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     public List<Question> getQuestions() {
         return questions;
     }

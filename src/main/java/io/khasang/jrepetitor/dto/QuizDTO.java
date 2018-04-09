@@ -98,7 +98,15 @@ public class QuizDTO {
         quizDTO.setName(quiz.getName());
         quizDTO.setLevel(quiz.getLevel());
 
-        for (Question question : quiz.getQuestions()) {
+        nextQuest: for (Question question : quiz.getQuestions()) {
+            //if questionDTOList contains quiestion with quiz_id=question.getQuiz().getId() - continue
+
+            for (QuestionDTO questionDTO : questionDTOList) {
+                if (questionDTO.getId()==question.getId()) {
+                    continue nextQuest;
+                }
+            }
+
             QuestionDTO questionDTO = new QuestionDTO();
             questionDTO.setId(question.getId());
             questionDTO.setContent(question.getContent());
@@ -106,7 +114,14 @@ public class QuizDTO {
             questionDTO.setExplanation(question.getExplanation());
 
             List<ItemDTO> itemDTOList = new ArrayList<>();
-            for (Item item : question.getItems()) {
+
+            nextItem: for (Item item : question.getItems()) {
+
+                for (ItemDTO itemDTO : itemDTOList) {
+                    if (itemDTO.getId()==item.getId())
+                        continue nextItem;
+                }
+
                 ItemDTO itemDTO = new ItemDTO();
                 itemDTO.setId(item.getId());
                 itemDTO.setContent(item.getContent());

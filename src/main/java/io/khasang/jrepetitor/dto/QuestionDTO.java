@@ -81,7 +81,11 @@ public class QuestionDTO {
             questionDTO.setType(question.getType());
             questionDTO.setExplanation(question.getExplanation());
 
-            for (Item item : question.getItems()) {
+            nextItem: for (Item item : question.getItems()) {
+                for (ItemDTO itemDTO : itemDTOList) {
+                    if (itemDTO.getId()==item.getId())
+                        continue nextItem;
+                }
                 ItemDTO itemDTO = new ItemDTO();
                 itemDTO.setId(item.getId());
                 itemDTO.setContent(item.getContent());
