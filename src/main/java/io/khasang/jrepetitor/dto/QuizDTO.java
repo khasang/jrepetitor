@@ -64,28 +64,58 @@ public class QuizDTO {
     public List<QuizDTO> getQuizDTOList(List<Quiz> list) {
         List<QuizDTO> quizDTOList = new ArrayList<>();
 
-        for (Quiz quiz : list) {
-            List<QuestionDTO> questionDTOList = new ArrayList<>();
+        try {
+            for (Quiz quiz : list) {
+                List<QuestionDTO> questionDTOList = new ArrayList<>();
 
-            QuizDTO quizDTO = new QuizDTO();
-            quizDTO.setId(quiz.getId());
-            quizDTO.setName(quiz.getName());
-            quizDTO.setLevel(quiz.getLevel());
+                QuizDTO quizDTO = new QuizDTO();
+                quizDTO.setId(quiz.getId());
+                quizDTO.setName(quiz.getName());
+                quizDTO.setLevel(quiz.getLevel());
 
-            for (Question question : quiz.getQuestions()) {
-                QuestionDTO questionDTO = new QuestionDTO();
-                questionDTO.setId(question.getId());
-                questionDTO.setContent(question.getContent());
-                questionDTO.setType(question.getType());
-                questionDTO.setExplanation(question.getExplanation());
+                nextQuest:
+                for (Question question : quiz.getQuestions()) {
+                    for (QuestionDTO questionDTO : questionDTOList) {
+                        if (questionDTO.getId() == question.getId()) {
+                            continue nextQuest;
+                        }
+                    }
 
-                questionDTOList.add(questionDTO);
+                    QuestionDTO questionDTO = new QuestionDTO();
+                    questionDTO.setId(question.getId());
+                    questionDTO.setContent(question.getContent());
+                    questionDTO.setType(question.getType());
+                    questionDTO.setExplanation(question.getExplanation());
+
+                    List<ItemDTO> itemDTOList = new ArrayList<>();
+
+                    nextItem:
+                    for (Item item : question.getItems()) {
+
+                        for (ItemDTO itemDTO : itemDTOList) {
+                            if (itemDTO.getId() == item.getId())
+                                continue nextItem;
+                        }
+
+                        ItemDTO itemDTO = new ItemDTO();
+                        itemDTO.setId(item.getId());
+                        itemDTO.setContent(item.getContent());
+                        itemDTO.setCorrect(item.getCorrect());
+
+                        itemDTOList.add(itemDTO);
+                    }
+
+                    questionDTO.setItems(itemDTOList);
+
+                    questionDTOList.add(questionDTO);
+                }
+
+                quizDTO.setQuestions(questionDTOList);
+                quizDTOList.add(quizDTO);
+
             }
-
-            quizDTO.setQuestions(questionDTOList);
-            quizDTOList.add(quizDTO);
-
         }
+        catch (Exception e){}
         return quizDTOList;
 
     }
@@ -94,49 +124,53 @@ public class QuizDTO {
         QuizDTO quizDTO = new QuizDTO();
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
-        quizDTO.setId(quiz.getId());
-        quizDTO.setName(quiz.getName());
-        quizDTO.setLevel(quiz.getLevel());
+        try {
+            quizDTO.setId(quiz.getId());
+            quizDTO.setName(quiz.getName());
+            quizDTO.setLevel(quiz.getLevel());
 
-        nextQuest: for (Question question : quiz.getQuestions()) {
-            //if questionDTOList contains quiestion with quiz_id=question.getQuiz().getId() - continue
+            nextQuest:
+            for (Question question : quiz.getQuestions()) {
+                //if questionDTOList contains quiestion with quiz_id=question.getQuiz().getId() - continue
 
-            for (QuestionDTO questionDTO : questionDTOList) {
-                if (questionDTO.getId()==question.getId()) {
-                    continue nextQuest;
-                }
-            }
-
-            QuestionDTO questionDTO = new QuestionDTO();
-            questionDTO.setId(question.getId());
-            questionDTO.setContent(question.getContent());
-            questionDTO.setType(question.getType());
-            questionDTO.setExplanation(question.getExplanation());
-
-            List<ItemDTO> itemDTOList = new ArrayList<>();
-
-            nextItem: for (Item item : question.getItems()) {
-
-                for (ItemDTO itemDTO : itemDTOList) {
-                    if (itemDTO.getId()==item.getId())
-                        continue nextItem;
+                for (QuestionDTO questionDTO : questionDTOList) {
+                    if (questionDTO.getId() == question.getId()) {
+                        continue nextQuest;
+                    }
                 }
 
-                ItemDTO itemDTO = new ItemDTO();
-                itemDTO.setId(item.getId());
-                itemDTO.setContent(item.getContent());
-                itemDTO.setCorrect(item.getCorrect());
+                QuestionDTO questionDTO = new QuestionDTO();
+                questionDTO.setId(question.getId());
+                questionDTO.setContent(question.getContent());
+                questionDTO.setType(question.getType());
+                questionDTO.setExplanation(question.getExplanation());
 
-                itemDTOList.add(itemDTO);
+                List<ItemDTO> itemDTOList = new ArrayList<>();
+
+                nextItem:
+                for (Item item : question.getItems()) {
+
+                    for (ItemDTO itemDTO : itemDTOList) {
+                        if (itemDTO.getId() == item.getId())
+                            continue nextItem;
+                    }
+
+                    ItemDTO itemDTO = new ItemDTO();
+                    itemDTO.setId(item.getId());
+                    itemDTO.setContent(item.getContent());
+                    itemDTO.setCorrect(item.getCorrect());
+
+                    itemDTOList.add(itemDTO);
+                }
+
+                questionDTO.setItems(itemDTOList);
+
+                questionDTOList.add(questionDTO);
             }
 
-            questionDTO.setItems(itemDTOList);
-
-            questionDTOList.add(questionDTO);
+            quizDTO.setQuestions(questionDTOList);
         }
-
-        quizDTO.setQuestions(questionDTOList);
-
+         catch (Exception e){}
 
         return quizDTO;
     }

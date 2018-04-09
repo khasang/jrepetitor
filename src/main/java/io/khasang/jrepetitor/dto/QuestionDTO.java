@@ -71,33 +71,35 @@ public class QuestionDTO {
 
     public List<QuestionDTO> getQuestionDTOList(List<Question> list) {
         List<QuestionDTO> questionDTOList = new ArrayList<>();
+        try {
+            for (Question question : list) {
+                List<ItemDTO> itemDTOList = new ArrayList<>();
 
-        for (Question question : list) {
-            List<ItemDTO> itemDTOList = new ArrayList<>();
+                QuestionDTO questionDTO = new QuestionDTO();
+                questionDTO.setId(question.getId());
+                questionDTO.setContent(question.getContent());
+                questionDTO.setType(question.getType());
+                questionDTO.setExplanation(question.getExplanation());
 
-            QuestionDTO questionDTO = new QuestionDTO();
-            questionDTO.setId(question.getId());
-            questionDTO.setContent(question.getContent());
-            questionDTO.setType(question.getType());
-            questionDTO.setExplanation(question.getExplanation());
+                nextItem:
+                for (Item item : question.getItems()) {
+                    for (ItemDTO itemDTO : itemDTOList) {
+                        if (itemDTO.getId() == item.getId())
+                            continue nextItem;
+                    }
+                    ItemDTO itemDTO = new ItemDTO();
+                    itemDTO.setId(item.getId());
+                    itemDTO.setContent(item.getContent());
+                    itemDTO.setCorrect(item.getCorrect());
 
-            nextItem: for (Item item : question.getItems()) {
-                for (ItemDTO itemDTO : itemDTOList) {
-                    if (itemDTO.getId()==item.getId())
-                        continue nextItem;
+                    itemDTOList.add(itemDTO);
                 }
-                ItemDTO itemDTO = new ItemDTO();
-                itemDTO.setId(item.getId());
-                itemDTO.setContent(item.getContent());
-                itemDTO.setCorrect(item.getCorrect());
 
-                itemDTOList.add(itemDTO);
+                questionDTO.setItems(itemDTOList);
+                questionDTOList.add(questionDTO);
             }
-
-            questionDTO.setItems(itemDTOList);
-            questionDTOList.add(questionDTO);
         }
-
+        catch (Exception e){}
         return questionDTOList;
     }
 }
