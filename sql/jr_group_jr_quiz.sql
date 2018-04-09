@@ -1,0 +1,12 @@
+INSERT INTO public.jr_group_jr_quiz (group_id, quizes_id) VALUES (1, 1);
+INSERT INTO public.jr_group_jr_quiz (group_id, quizes_id) VALUES (1, 2);
+INSERT INTO public.jr_quiz_jr_question (quiz_id, questions_id) VALUES (1, 1);
+INSERT INTO public.jr_quiz_jr_question (quiz_id, questions_id) VALUES (1, 2);
+INSERT INTO public.jr_question_jr_item (question_id, items_id) VALUES (1, 1);
+INSERT INTO public.jr_question_jr_item (question_id, items_id) VALUES (1, 2);
+INSERT INTO public.jr_question_jr_item (question_id, items_id) VALUES (1, 3);
+INSERT INTO public.jr_question_jr_item (question_id, items_id) VALUES (1, 4);
+INSERT INTO public.jr_question_jr_item (question_id, items_id) VALUES (2, 6);
+INSERT INTO public.jr_question_jr_item (question_id, items_id) VALUES (2, 7);
+INSERT INTO public.jr_question_jr_item (question_id, items_id) VALUES (2, 8);
+INSERT INTO public.jr_question_jr_item (question_id, items_id) VALUES (2, 9);
