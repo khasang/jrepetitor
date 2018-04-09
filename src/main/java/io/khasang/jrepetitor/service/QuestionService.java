@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.service;
 
+import io.khasang.jrepetitor.dto.QuestionDTO;
 import io.khasang.jrepetitor.entity.Question;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface QuestionService {
      *
      * @return all Questions
      */
-    List<Question> getAllQuestions();
+    List<QuestionDTO> getAllQuestions();
 
     /**
      * method for receive specify Question by id

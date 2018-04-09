@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.controller;
 
+import io.khasang.jrepetitor.dto.QuizDTO;
 import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,13 @@ public class QuizController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<Quiz> getAllQuizs(){
+    public List<QuizDTO> getAllQuizs(){
         return quizService.getAllQuizs();
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Quiz getQuizById(@PathVariable(value = "id") String id){
+    public QuizDTO getQuizById(@PathVariable(value = "id") String id){
         // exception
         return quizService.getQuizById(Long.parseLong(id));
     }

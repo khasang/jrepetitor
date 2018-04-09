@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.service;
 
+import io.khasang.jrepetitor.dto.QuizDTO;
 import io.khasang.jrepetitor.entity.Quiz;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface QuizService {
      *
      * @return all quizs
      */
-    List<Quiz> getAllQuizs();
+    List<QuizDTO> getAllQuizs();
 
     /**
      * method for receive specify quiz by id
@@ -26,7 +27,7 @@ public interface QuizService {
      * @param id = uniq quiz id
      * @return specify quiz by id
      */
-    Quiz getQuizById(long id);
+    QuizDTO getQuizById(long id);
 
     /**
      * method for quiz delete

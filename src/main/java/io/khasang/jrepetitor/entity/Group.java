@@ -23,10 +23,8 @@ import java.util.List;
 public class Group implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "group_id")
     private Long id;
 
-//    @JsonBackReference
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     List<Quiz> quizes = new ArrayList<Quiz>();
 

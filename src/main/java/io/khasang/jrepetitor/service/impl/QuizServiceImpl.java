@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.QuizDao;
+import io.khasang.jrepetitor.dto.QuizDTO;
 import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import java.util.List;
 public class QuizServiceImpl implements QuizService{
     @Autowired
     private QuizDao quizDao;
+    @Autowired
+    private QuizDTO quizDTO;
 
     @Override
     public Quiz addQuiz(Quiz quiz) {
@@ -19,17 +22,17 @@ public class QuizServiceImpl implements QuizService{
     }
 
     @Override
-    public List<Quiz> getAllQuizs() {
-        return quizDao.getList();
+    public List<QuizDTO> getAllQuizs() {
+        return quizDTO.getQuizDTOList(quizDao.getList());
     }
 
     @Override
-    public Quiz getQuizById(long id) {
-        return quizDao.getById(id);
+    public QuizDTO getQuizById(long id) {
+        return quizDTO.getQuiz(quizDao.getById(id));
     }
 
     @Override
     public Quiz deleteQuiz(long id) {
-        return quizDao.delete(getQuizById(id));
+        return quizDao.delete(quizDao.getById(id));
     }
 }

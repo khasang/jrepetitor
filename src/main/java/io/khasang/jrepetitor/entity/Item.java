@@ -23,7 +23,6 @@ public class Item implements Serializable{
     private String content; //текст варианта ответа
     private byte correct; //правильно/не правильно
 
-    @JsonIgnore
     @ManyToOne
     private Question question;
 

@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.controller;
 
+import io.khasang.jrepetitor.dto.ItemDTO;
 import io.khasang.jrepetitor.entity.Item;
 import io.khasang.jrepetitor.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class ItemController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<Item> getAllItems(){
+    public List<ItemDTO> getAllItems(){
         return itemService.getAllItems();
     }
 

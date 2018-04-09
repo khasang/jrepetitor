@@ -18,17 +18,14 @@ public class Quiz implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name="quiz_id")
     private Long id;
 
     private String name;
 
-//    @JsonBackReference
+
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Question> questions = new ArrayList<Question>();
 
-//    @JsonManagedReference
-    @JsonIgnore
     @ManyToOne
     private Group group;
 

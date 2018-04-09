@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.service;
 
+import io.khasang.jrepetitor.dto.ItemDTO;
 import io.khasang.jrepetitor.entity.Item;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface ItemService {
      *
      * @return all Items
      */
-    List<Item> getAllItems();
+    List<ItemDTO> getAllItems();
 
     /**
      * method for receive specify Item by id

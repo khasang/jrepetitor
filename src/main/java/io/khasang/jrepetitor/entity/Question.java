@@ -19,18 +19,15 @@ public class Question implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name="question_id")
     private Long id;
 
     @Column(length = 1000)
     private String content; //текст вопроса
     private String type; //тип вопроса: "radio/CheckBoz"
 
-//    @JsonBackReference
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Item> items = new ArrayList<Item>(); //ответ
 
-    @JsonIgnore
     @ManyToOne
     private Quiz quiz;
 

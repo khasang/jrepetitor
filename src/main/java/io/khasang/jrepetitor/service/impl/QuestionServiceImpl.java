@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.QuestionDao;
+import io.khasang.jrepetitor.dto.QuestionDTO;
 import io.khasang.jrepetitor.entity.Question;
 import io.khasang.jrepetitor.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +14,17 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionDao questionDao;
 
+    @Autowired
+    private QuestionDTO questionDTO;
+
     @Override
     public Question addQuestion(Question question) {
         return questionDao.create(question);
     }
 
     @Override
-    public List<Question> getAllQuestions() {
-        return questionDao.getList();
+    public List<QuestionDTO> getAllQuestions() {
+        return questionDTO.getQuestionDTOList(questionDao.getList());
     }
 
     @Override
