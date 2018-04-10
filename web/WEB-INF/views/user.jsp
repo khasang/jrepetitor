@@ -4,6 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-<p>I'm happy user</p>
+<p>${pageContext.request.contextPath}</p>
 </body>
 </html>
