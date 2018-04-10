@@ -32,4 +32,9 @@ public class CatServiceImpl implements CatService {
     public Cat deleteCat(long id) {
         return catDao.delete(getCatById(id));
     }
+
+    @Override
+    public List<Cat> getCatByName(String name) {
+        return catDao.getCatsByName(name);
+    }
 }
