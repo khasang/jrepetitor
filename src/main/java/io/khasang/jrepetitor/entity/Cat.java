@@ -12,8 +12,8 @@ public class Cat
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
-    private List<CatWoman> catWomanalist = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
+//    private List<CatWoman> catWomanalist = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -31,11 +31,11 @@ public class Cat
         this.id = id;
     }
 
-    public void setCatWomanalist(List<CatWoman> catWomanalist) {
-        this.catWomanalist = catWomanalist;
-    }
-
-    public List<CatWoman> getCatWomanalist() {
-        return catWomanalist;
-    }
+//    public void setCatWomanalist(List<CatWoman> catWomanalist) {
+//        this.catWomanalist = catWomanalist;
+//    }
+//
+//    public List<CatWoman> getCatWomanalist() {
+//        return catWomanalist;
+//    }
 }

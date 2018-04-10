@@ -10,6 +10,13 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    public List<Apprentice> getApprenticeList() {
+        return apprenticeList;
+    }
+
+    public void setApprenticeList(List<Apprentice> apprenticeList) {
+        this.apprenticeList = apprenticeList;
+    }
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "teacherList")
     private List<Apprentice> apprenticeList = new ArrayList<Apprentice>();

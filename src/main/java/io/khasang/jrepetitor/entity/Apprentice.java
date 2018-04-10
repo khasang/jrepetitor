@@ -14,11 +14,13 @@ public class Apprentice {
 
     @ManyToMany(fetch = javax.persistence.FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Teacher> teacherList = new ArrayList<Teacher>();
-    public List<Teacher> getCarList() {
+
+
+    public List<Teacher> getTeacherList() {
         return teacherList;
     }
 
-    public void setCarList(List<Teacher> carList) {
+    public void setTeacherList(List<Teacher> teacherList) {
         this.teacherList = teacherList;
     }
 

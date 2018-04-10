@@ -131,7 +131,7 @@ public class CatControllerIntegrationTest {
         List<CatWoman> catWoman = new ArrayList<>();
         catWoman.add(catWoman1);
         catWoman.add(catWoman2);
-        cat.setCatWomanalist(catWoman);
+      //  cat.setCatWomanalist(catWoman);
 
         return cat;
 
