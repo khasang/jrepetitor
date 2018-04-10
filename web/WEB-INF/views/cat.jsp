@@ -61,9 +61,15 @@
     
     /*удаление кота по ID*/
     var RestDelete = function (id) {
+        /*var data = {};
+        data["id"] = $("#id").val();*/
         $.ajax({
             type: 'DELETE',
+            contentType: 'application/json;charset=utf-8',
             url: service + '/delete?id=' + id,
+            /*url: service + '/delete',
+            data: JSON.stringify(data),*/
+            /*data: {id: id},*/
             dataType: 'json',
             async: false,
             success: function (result) {

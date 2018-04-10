@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.Cat;
+import io.khasang.jrepetitor.entity.CatWoman;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
@@ -8,6 +9,7 @@ import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -70,7 +72,7 @@ private static final String UPD = "/upd";
         assertEquals("OK", responseEntity.getStatusCode().getReasonPhrase());
         Cat receivedCat = responseEntity.getBody();
         assertNotNull(receivedCat);
-    deleteFromDB(cat);
+//    deleteFromDB(cat);
     }
 
     @Test
@@ -119,8 +121,8 @@ private static final String UPD = "/upd";
         List<Cat> list = responseEntity.getBody();
         assertNotNull(list.get(0));
         assertNotNull(list.get(1));
-        deleteFromDB(firstCat);
-        deleteFromDB(secondCat);
+        //deleteFromDB(firstCat);
+        //deleteFromDB(secondCat);
     }
 
     public Cat deleteFromDB(Cat cat){
@@ -158,8 +160,32 @@ private static final String UPD = "/upd";
     }
 
     private Cat prefillCat() {
-        Cat cat = new Cat();
-        cat.setName("Barsik");
-        return cat;
+        Cat cat1 = new Cat();
+        cat1.setName("Barsik");
+
+        Cat cat2 = new Cat();
+        cat2.setName("Tishka");
+
+        CatWoman catWoman1 = new CatWoman();
+        catWoman1.setName("Riska");
+
+        CatWoman catWoman2 = new CatWoman();
+        catWoman2.setName("Murka");
+
+
+
+        /*List<Cat> catList = new ArrayList<>();
+        catList.add(cat1);
+        catList.add(cat2);
+
+        catWoman1.setCatList(catList);*/
+
+//        cat1.setCatList(catList);
+        /*List<CatWoman> catWomanList = new ArrayList<>();
+        catWomanList.add(catWoman1);
+        catWomanList.add(catWoman2);
+
+        cat*/
+        return cat1;
     }
 }

@@ -19,7 +19,7 @@ public class AppController {
 
     @RequestMapping("/")
     public String helloPage(){
-        return "cat";
+        return "index";
     }
 
     @RequestMapping("/create")
