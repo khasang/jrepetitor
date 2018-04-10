@@ -13,12 +13,13 @@
 
 <body>
 
-<%--user's table section--%>
+<!--user's table section-->
 
 <h1>User's list</h1>
 
 <h3>
-    <button type="button" onclick="<%--TODO: add user (method)--%>">Add new user</button>
+    <!--TODO: add user (method)-->
+    <button type="button" onclick="">Add new user</button>
 </h3>
 
 <table class="table">
@@ -30,22 +31,25 @@
         <th>Delete</th>
     </tr>
     <tr>
-        <td><%--TODO: login--%></td>
-        <td><%--TODO: email--%></td>
-        <td><%--TODO: last activity--%></td>
+        <td><!--TODO: login--></td>
+        <td><!--TODO: email--></td>
+        <td><!--TODO: last activity--></td>
         <td>
-            <button type="button" onclick="<%--TODO: edit (method)--%>">Edit</button>
+            <!--TODO: edit (method)-->
+            <button type="button" onclick="">Edit</button>
         </td>
         <td>
-            <button type="button" onclick="<%--TODO: delete (method)--%>">Delete</button>
+            <!--TODO: delete (method)-->
+            <button type="button" onclick="">Delete</button>
         </td>
     </tr>
 </table>
 
-<%--news' table section--%>
+<!--news' table section-->
 
 <h3>
-    <button type="button" onclick="<%--TODO: add news (method)--%>">Add news</button>
+    <!--TODO: add news (method)-->
+    <button type="button" onclick="">Add news</button>
 </h3>
 
 <h1>News' list</h1>
@@ -60,10 +64,12 @@
         <td></td>
         <td></td>
         <td>
-            <button type="button" onclick="<%--TODO: edit (method)--%>">Edit</button>
+            <!--TODO: edit (method)-->
+            <button type="button" onclick="">Edit</button>
         </td>
         <td>
-            <button type="button" onclick="<%--TODO: delete (method)--%>">Delete</button>
+            <!--TODO: delete (method)-->
+            <button type="button" onclick="">Delete</button>
         </td>
     </tr>
 </table></body>
