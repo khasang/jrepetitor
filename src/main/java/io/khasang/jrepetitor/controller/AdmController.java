@@ -31,7 +31,7 @@ public class AdmController {
         return userService.getUserById(Long.parseLong(id));
     }
 
-    @RequestMapping(value = "/get_n/{name}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/get/name/{name}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<User> getUserByName(@PathVariable(value = "name") String name) {
         return userService.getUserByName(name);

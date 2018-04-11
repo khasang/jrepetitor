@@ -9,6 +9,7 @@
 
 <head>
     <title>Title</title>
+    <script src="js/admrest.js" type="text/javascript"></script>
 </head>
 
 <body>

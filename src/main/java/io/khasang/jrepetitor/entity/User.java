@@ -1,22 +1,27 @@
 package io.khasang.jrepetitor.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
+    @Transient
+    private static final String ROLE = "ROLE_USER";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String name;
+    @Column(nullable = false)
     private String login;
+    @Column(nullable = false)
     private String password;
     private String role_name;
+
+    public User() {
+        role_name = ROLE;
+    }
 
     public long getId() {
         return id;

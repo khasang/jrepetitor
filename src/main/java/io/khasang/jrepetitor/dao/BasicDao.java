@@ -34,14 +34,6 @@ public interface BasicDao<T> {
     T getById(long id);
 
     /**
-     * method for receive specify entity by name
-     *
-     * @param name = uniq entity name
-     * @return entities by name
-     */
-    List<T> getByName(String name);
-
-    /**
      * method for entity delete
      *
      * @param entity = entity for delete

@@ -33,11 +33,6 @@ public class BasicDaoImpl<T> implements BasicDao<T> {
     }
 
     @Override
-    public List<T> getByName(String name) {
-        return null;
-    }
-
-    @Override
     public T delete(T entity) {
         getSessionFactory().delete(entity);
         return entity;

@@ -24,6 +24,7 @@ public class AdmControllerIntegrationTest {
     private static final String ADD = "/add";
     private static final String ALL_USERS = "/all";
     private static final String GET_BY_ID = "/get";
+    private static final String GET_BY_NAME = "/get/name";
     private static final String DELETE = "/delete";
     private static final int LIST_OF_USERS_SIZE = 2;
 
@@ -108,6 +109,35 @@ public class AdmControllerIntegrationTest {
         assertNull(responseForDeleteUser.getBody());
     }
 
+    @Test
+    public void getUsersByName() {
+        final String defineName = "Anatoly";
+
+        List<User> users = Arrays.asList(
+                createUser(defineName, "an", "tr1234"),
+                createUser("Irina", "ir", "gd54it"),
+                createUser(defineName, "tws", "tt234"),
+                createUser("Ivan", "iv", "4r32")
+        );
+
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<List<User>> responseEntity = template.exchange(
+                ROOT + GET_BY_NAME + "/{user}",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<User>>() {},
+                defineName
+        );
+
+        List<User> receivedUsers = responseEntity.getBody();
+
+        assertNotNull(receivedUsers);
+        assertEquals(2, receivedUsers.size());
+        receivedUsers.forEach(user -> assertEquals(defineName, user.getName()));
+
+        users.forEach(this::deleteUserFromDB);
+    }
+
     private User createUser() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
@@ -131,11 +161,42 @@ public class AdmControllerIntegrationTest {
         return receivedUser;
     }
 
+    private User createUser(String name, String login, String password) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        User user = prefillUser(name, login, password);
+
+        HttpEntity entity = new HttpEntity(user, headers);
+
+        RestTemplate template = new RestTemplate();
+
+        User receivedUser = template.exchange(
+                ROOT + ADD,
+                HttpMethod.POST,
+                entity,
+                User.class
+        ).getBody();
+
+        assertNotNull(receivedUser.getName());
+        assertEquals(user.getName(), receivedUser.getName());
+
+        return receivedUser;
+    }
+
     private User prefillUser() {
         User user = new User();
         user.setName("UserDEL");
+        user.setLogin("cool_man");
         user.setPassword("123456");
-        user.setRole_name("ROLE_USER");
+        return user;
+    }
+
+    private User prefillUser(String name, String login, String password) {
+        User user = new User();
+        user.setName(name);
+        user.setLogin(login);
+        user.setPassword(password);
         return user;
     }
 

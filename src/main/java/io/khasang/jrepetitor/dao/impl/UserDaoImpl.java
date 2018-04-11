@@ -13,10 +13,10 @@ public class UserDaoImpl extends BasicDaoImpl<User> implements UserDao {
     }
 
     @Override
-    public List<User> getByName(String userName) {
+    public List<User> getUserByName(String name) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT id FROM User WHERE name = :userName");
-        query.setParameter("userName", userName);
+        query.setParameter("userName", name);
 
         List<Long> ids = query.list();
         List<User> usersList = new ArrayList<>(ids.size());
