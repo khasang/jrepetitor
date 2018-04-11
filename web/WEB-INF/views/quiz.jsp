@@ -7,126 +7,59 @@
     </head>
 
     <script>
-        const postData =
-        {
-            "id":1,
-            "name":"Java Basics",
-            "questions":[
-                {
-                    "id":1,
-                    "content":"Which of the following are features of Java?",
-                    "type":"radio",
-                    "items":[
-                        {
-                            "id":1,
-                            "content":"Every class must have a main method so that it can be tested individually from command line.",
-                            "correct":0,
-                            "question":1
-                        },
-                        {
-                            "id":2,
-                            "content":"Every class belongs to a package.",
-                            "correct":0,
-                            "question":1
-                        },
-                        {
-                            "id":3,
-                            "content":"A package must have more than one class.",
-                            "correct":0,
-                            "question":1
-                        },
-                        {
-                            "id":4,
-                            "content":"A class may inherit from another class.",
-                            "correct":1,
-                            "question":1
+        var service = 'http://localhost:8080/quiz';
+        var RestGetOne = function () {
+
+            var output;
+
+            $.ajax({
+                type: 'GET',
+                url: service + '/get/1',
+                dataType: 'json',
+                async: false,
+                success: function (result) {
+                    var stringData=JSON.stringify(result);
+                    var getData=JSON.parse(stringData);
+                    var questions=getData.questions;
+                    questionsCount=questions.length;
+
+                    for (i=0;i<questionsCount;i++){
+                        output+='<br>';
+
+                        output='<form class="question">';
+                        output+='<p><b>'+questions[i].content+'</b></p>';
+
+                        var items = questions[i].items;
+                        var itemsCount = items.length;
+
+                        for (j=0;j<itemsCount;j++){
+                            output+='<p><input name='+items[j].id+' type=' + items[i].type+'>'+items[j].content+'</p>';
                         }
-                    ],
-                    "quiz":1,
-                    "explanation":"It is not required for a class to have a main method. The main method is required only if you want to execute that class directly from a command line.\nFurther, running from command line is not the only way to test a class."
+
+                        output+='<br>';
+                    }
+
+                    $('#response').html(output)
                 },
-                {
-                    "id":2,
-                    "content":"Given the following contents of two java source files:  package util.log4j; public class Logger  {   public void log(String msg){       System.out.println(msg);   } }  and  package util; public class TestClass {     public static void main(String[] args) throws Exception {         Logger logger = new Logger();         logger.log(\"hello\");     } }  What changes, when made independently, will enable the code to compile and run?",
-                    "type":"checkbox",
-                    "items":[
-                        {
-                            "id":5,
-                            "content":"Replace Logger logger = new Logger(); with: log4j.Logger logger = new log4j.Logger();",
-                            "correct":0,
-                            "question":2
-                        },
-                        {
-                            "id":6,
-                            "content":"Replace package util.log4j; with package util;",
-                            "correct":1,
-                            "question":2
-                        },
-                        {
-                            "id":7,
-                            "content":"Replace Logger logger = new Logger(); with: util.log4j.Logger logger = new util.log4j.Logger();",
-                            "correct":1,
-                            "question":2
-                        },
-                        {
-                            "id":8,
-                            "content":"Remove package util.log4j; from Logger.",
-                            "correct":0,
-                            "question":2
-                        },
-                        {
-                            "id":9,
-                            "content":"Add import log4j; to TestClass.",
-                            "correct":0,
-                            "question":2
-                        }
-                    ],
-                    "quiz":1,
-                    "explanation":"If you are not importing a class or the package of the class, you need to use the class's fully qualified name while using it. Here, you need to use util.log4j.Logger instead of just log4j.Logger: util.log4j.Logger logger = new util.log4j.Logger();"
+                error: function (jqXHR, testStatus, errorThrown) {
+                    $('#response').html(JSON.stringify(jqXHR))
                 }
-            ],
-            "group":{
-                "id":1,
-                "quizes":[
-                    1
-                ],
-                "name":"Java Core"
-            },
-            "level":1
+            });
         };
 
-        function myFunction(){
-            alert("Done");
-        }
-
-        function questionList(que){
-            var divQuest=`
-      <form class="question">
-         <p><b>${que.content}</b></p>
-
-   `
-            var itemsHtml;
-            var itemsCount=que.items.length;
-
-            for (i=0;i<itemsCount;i++){
-                itemsHtml+=`<p><input name=${que.id} type=${que.type}>${que.items[i].content}</p>`
-            }
-            itemsHtml+=`<input type="button" id="myBtn" onclick="myFunction()" value="Try it">`
-            itemsHtml+=`</form>`;
-
-            return divQuest+`<br>`+itemsHtml;
-        }
-
-        document.getElementById('app').innerHTML =
-                `
-<h1>${
-         postData.questions.
-            map(questionList).join('')}</h1>
-`
-    </script>
+     </script>
 
 <body>
-    <div id="app"></div>
+
+    <table class="table">
+     <tr>
+        <td>
+            <button type="button" onclick="RestGetOne()">Try</button>
+        </td>
+    </tr>
+    </table>
+
+    <div class="panel-body" id="response"></div>
 </body>
 
 </html>
