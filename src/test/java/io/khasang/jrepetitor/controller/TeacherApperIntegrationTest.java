@@ -25,7 +25,7 @@ public class TeacherApperIntegrationTest {
 
 
     @Test
-    public void getAllCatFromDB()
+    public void getAllTeacherFromDB()
     {
         Teacher t1 = createTeacher();
 
@@ -56,7 +56,7 @@ public class TeacherApperIntegrationTest {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
-        Teacher teacher = prefillTeacher("Bill");
+        Teacher teacher = prefillTeacher("Harry");
 
         HttpEntity entity = new HttpEntity(teacher, headers);
 
@@ -80,10 +80,10 @@ public class TeacherApperIntegrationTest {
         teacher.setName(name);
 
         Apprentice a1 = new Apprentice();
-        a1.setName("Vovka1");
+        a1.setName("Tom");
 
         Apprentice a2 = new Apprentice();
-       a2.setName("Vovka2");
+       a2.setName("Gin");
 
         List<Apprentice> apprentices = new ArrayList<>();
         apprentices.add(a1);

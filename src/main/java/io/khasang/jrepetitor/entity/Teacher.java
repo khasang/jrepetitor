@@ -18,7 +18,8 @@ public class Teacher {
         this.apprenticeList = apprenticeList;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "teacherList")
+    @ManyToMany(fetch = javax.persistence.FetchType.EAGER, cascade = CascadeType.ALL)
+
     private List<Apprentice> apprenticeList = new ArrayList<Apprentice>();
 
     public String getName() {

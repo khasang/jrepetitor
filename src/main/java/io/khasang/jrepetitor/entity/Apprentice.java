@@ -12,7 +12,7 @@ public class Apprentice {
 
     private String name;
 
-    @ManyToMany(fetch = javax.persistence.FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "apprenticeList")
     private List<Teacher> teacherList = new ArrayList<Teacher>();
 
 
