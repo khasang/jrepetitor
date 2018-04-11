@@ -6,6 +6,7 @@ import io.khasang.jrepetitor.dao.TeacherDao;
 import io.khasang.jrepetitor.dao.impl.ApprenticeDaoImpl;
 import io.khasang.jrepetitor.dao.impl.CatDaoImpl;
 import io.khasang.jrepetitor.dao.impl.TeacherDaoImpl;
+import io.khasang.jrepetitor.dto.TeacherDto;
 import io.khasang.jrepetitor.entity.Apprentice;
 import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.entity.Teacher;
@@ -77,6 +78,8 @@ public class AppConfig  {
     {
         return new ApprenticeDaoImpl(Apprentice.class);
     }
+
+
 
 
 

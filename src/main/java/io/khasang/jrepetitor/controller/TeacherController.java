@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.controller;
 
+import io.khasang.jrepetitor.dto.TeacherDto;
 import io.khasang.jrepetitor.entity.Cat;
 
 import io.khasang.jrepetitor.entity.Teacher;
@@ -23,7 +24,7 @@ public class TeacherController {
 
     @RequestMapping(value = "/all",method = RequestMethod.GET,produces = "application/json;charset=utf8")
     @ResponseBody
-    public List<Teacher> getTeacherAll()
+    public List<TeacherDto> getTeacherAll()
     {
         return teacherService.getAllTeacher();
     }

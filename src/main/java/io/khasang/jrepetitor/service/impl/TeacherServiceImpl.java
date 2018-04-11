@@ -11,9 +11,9 @@ import java.util.List;
 @Service("teacherService")
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
-    TeacherDao teacherDao;
+   private TeacherDao teacherDao;
     @Autowired
-    TeacherDto teacherDto;
+   private TeacherDto teacherDto;
 
     @Override
     public List<TeacherDto> getAllTeacher() {
