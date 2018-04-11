@@ -1,65 +1,67 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-    <head>
-        <title>Title</title>
-        <script src="js/jquery.min.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    </head>
+<%@ include file = "header.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script>
+    var service = 'http://localhost:8080/';
 
-    <script>
-        var service = 'http://localhost:8080/quiz';
-        var RestGetOne = function () {
+    var RestGetAllQuestions = function () {
+        $.ajax({
+            type: 'GET',
+            url: service + 'quiz/all',
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                var output = '';
+                var stringData = JSON.stringify(result);
+               var arrData = JSON.parse(stringData)[1];
+                var questions=arrData.questions;
 
-            var output;
+                var questionCount = questions.length;
+                for (n=0;n<questionCount;n++) {
+                    var que = questions[n];
+                    var arrItems = que.items;
 
-            $.ajax({
-                type: 'GET',
-                url: service + '/get/1',
-                dataType: 'json',
-                async: false,
-                success: function (result) {
-                    var stringData=JSON.stringify(result);
-                    var getData=JSON.parse(stringData);
-                    var questions=getData.questions;
-                    questionsCount=questions.length;
+                    output +=
+                            '<br><br>' +
+                            '<div class="panel panel-default">' +
+                            '	<div class="panel panel-heading">' +
+                            '	<h4><p>' + que.content + '</p></h4>'+
+                            '	</div>'
 
-                    for (i=0;i<questionsCount;i++){
-                        output+='<br>';
-
-                        output='<form class="question">';
-                        output+='<p><b>'+questions[i].content+'</b></p>';
-
-                        var items = questions[i].items;
-                        var itemsCount = items.length;
-
-                        for (j=0;j<itemsCount;j++){
-                            output+='<p><input name='+items[j].id+' type=' + items[i].type+'>'+items[j].content+'</p>';
-                        }
-
-                        output+='<br>';
+                    for (i in arrItems) {
+                        output +=
+                                '<p>' + '<input type='+ que.type +' name="customRadio" class="custom-control-input">' +
+                                '<label class="form-check-label">' +
+                                '  '+arrItems[i].content +
+                                '</label>' +
+                                '</p>'
                     }
-
-                    $('#response').html(output)
-                },
-                error: function (jqXHR, testStatus, errorThrown) {
-                    $('#response').html(JSON.stringify(jqXHR))
+                    output += '<p>' + 'Explanation: ' + que.explanation + '</p>'
+                    output +='</div>'
                 }
-            });
-        };
 
-     </script>
 
+                output += '<a href="http://localhost:8080/user" class="btn btn-default">Завершить тест</a>'
+
+                $('#response').html(
+                    output
+                );
+            },
+            error: function (jqXHR, testStatus, errorThrown) {
+                $('#response').html(JSON.stringify(jqXHR))
+            }
+        });
+    };
+</script>
 <body>
-
-    <table class="table">
-     <tr>
-        <td>
-            <button type="button" onclick="RestGetOne()">Try</button>
-        </td>
-    </tr>
-    </table>
-
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Прохождение теста</strong>
+    </div>
     <div class="panel-body" id="response"></div>
+    <div class="panel-body ">
+        <button type="button" onclick="RestGetAllQuestions()">Try</button>
+    </div>
+</div>
 </body>
+<%@ include file = "footer.jsp" %>
 
-</html>
