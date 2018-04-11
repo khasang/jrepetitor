@@ -28,13 +28,7 @@ public class ApprenticeDto {
         this.name = name;
     }
 
-    public List<Teacher> getTeacherList() {
-        return teacherList;
-    }
 
-    public void setTeacherList(List<Teacher> teacherList) {
-        this.teacherList = teacherList;
-    }
 
     private List<Teacher> teacherList = new ArrayList<Teacher>();
 

@@ -45,16 +45,14 @@ public class TeacherDto {
             TeacherDto teacherDto = new TeacherDto();
             teacherDto.setId(teacher.getId());
             teacherDto.setName(teacher.getName());
-            
 
             for (Apprentice apprentice : teacher.getApprenticeList()) {
                 ApprenticeDto apprenticeDto = new ApprenticeDto();
                 apprenticeDto.setId(apprentice.getId());
                 apprenticeDto.setName(apprentice.getName());
-
                 apprenticeDtoList.add(apprenticeDto);
-            }
 
+            }
             teacherDto.setApprenticeDtoList(apprenticeDtoList);
             teacherDtoList.add(teacherDto);
         }
