@@ -2,10 +2,11 @@ package io.khasang.jrepetitor.dto;
 
 import io.khasang.jrepetitor.entity.Apprentice;
 import io.khasang.jrepetitor.entity.Teacher;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class TeacherDto {
    private String name;
    private long id;
@@ -49,6 +50,7 @@ public class TeacherDto {
             for (Apprentice apprentice : teacher.getApprenticeList()) {
                 ApprenticeDto apprenticeDto = new ApprenticeDto();
                 apprenticeDto.setId(apprentice.getId());
+                apprenticeDto.setName(apprentice.getName());
 
                 apprenticeDtoList.add(apprenticeDto);
             }
