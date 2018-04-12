@@ -24,4 +24,19 @@ public class UserDaoImpl extends BasicDaoImpl<User> implements UserDao {
 
         return usersList;
     }
+
+    @Override
+    public User getUserByLogin(String login) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT id FROM User WHERE login = :login");
+        query.setParameter("login", login);
+
+        if (query.list().size() == 0) {
+            return null;
+        } else {
+            long id = (long) query.list().get(0);
+            return getById(id);
+        }
+
+    }
 }

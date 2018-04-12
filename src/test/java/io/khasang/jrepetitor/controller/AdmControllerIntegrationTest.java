@@ -2,6 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.User;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -134,6 +135,19 @@ public class AdmControllerIntegrationTest {
         assertNotNull(receivedUsers);
         assertEquals(2, receivedUsers.size());
         receivedUsers.forEach(user -> assertEquals(defineName, user.getName()));
+
+        users.forEach(this::deleteUserFromDB);
+    }
+
+    @Ignore
+    @Test(expected = org.springframework.web.client.HttpServerErrorException.class)
+    public void checkUserAdditionForRepeatingLogin() {
+        final String defineLogin = "superUser";
+
+        List<User> users = Arrays.asList(
+                createUser("Ilia", defineLogin, "tr1234"),
+                createUser("Pete", defineLogin, "tt234")
+        );
 
         users.forEach(this::deleteUserFromDB);
     }

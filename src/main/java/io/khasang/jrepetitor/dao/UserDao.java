@@ -13,4 +13,12 @@ public interface UserDao extends BasicDao<User> {
      * @return list of users according this name
      */
     List<User> getUserByName(String name);
+
+    /**
+     * for finding user by login
+     *
+     * @param login user's unic login for search
+     * @return unic user according this login
+     */
+    User getUserByLogin(String login);
 }

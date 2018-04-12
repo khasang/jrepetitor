@@ -14,8 +14,12 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User addUser(User user) {
-        return userDao.create(user);
+    public User addUser(User user) throws IllegalArgumentException {
+        if (userDao.getUserByLogin(user.getLogin())== null) {
+            return userDao.create(user);
+        } else {
+            throw new IllegalArgumentException("This login is already engaged, login must be unic");
+        }
     }
 
     @Override
