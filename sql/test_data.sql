@@ -5,15 +5,15 @@ INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES 
 Further, running from command line is not the only way to test a class.', 'radio', 1);
 INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (2, 'Given the following contents of two java source files:  package util.log4j; public class Logger  {   public void log(String msg){       System.out.println(msg);   } }  and  package util; public class TestClass {     public static void main(String[] args) throws Exception {         Logger logger = new Logger();         logger.log("hello");     } }  What changes, when made independently, will enable the code to compile and run?', 'If you are not importing a class or the package of the class, you need to use the class''s fully qualified name while using it. Here, you need to use util.log4j.Logger instead of just log4j.Logger: util.log4j.Logger logger = new util.log4j.Logger();', 'CheckBox', 1);
 INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (3, 'Какое преобразование безопасно?', '', 'radio', 2);
-INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (4, 'Можно ли из статического метода вызвать нестатический метод этого же класса?', null, null, 2);
-INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (5, 'Какие исключения необходимо пробрасывать или обрабатывать?', null, null, 2);
-INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (6, 'Можно ли в интерфейсе иметь статические переменные?', null, null, 2);
-INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (7, 'Какой размер имеет переменная типа int в Java?', null, null, 2);
-INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (8, 'Как в сигнатуре метода указать, что метод может выбросить исключение?', null, null, 2);
+INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (4, 'Можно ли из статического метода вызвать нестатический метод этого же класса?', null, 'radio', 2);
+INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (5, 'Какие исключения необходимо пробрасывать или обрабатывать?', null, 'radio', 2);
+INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (6, 'Можно ли в интерфейсе иметь статические переменные?', null, 'CheckBox', 2);
+INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (7, 'Какой размер имеет переменная типа int в Java?', null, 'radio', 2);
+INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (8, 'Как в сигнатуре метода указать, что метод может выбросить исключение?', null, 'radio', 2);
 INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (9, 'Когда модификатор доступа не указан, какой подразумевается?
-default ', null, null, 2);
-INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (10, 'Как правильно написать цикл, который отработает 10 раз?', null, null, 2);
-INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (11, 'Как создать массив целых чисел размерности k * m?', null, null, 2);
+default ', null, 'radio', 2);
+INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (10, 'Как правильно написать цикл, который отработает 10 раз?', null, 'CheckBox', 2);
+INSERT INTO public.jr_question (id, content, explanation, type, quiz_id) VALUES (11, 'Как создать массив целых чисел размерности k * m?', null, 'CheckBox', 2);
 INSERT INTO public.jr_item (id, content, correct, question_id) VALUES (1, 'Every class must have a main method so that it can be tested individually from command line.', 0, 1);
 INSERT INTO public.jr_item (id, content, correct, question_id) VALUES (2, 'Every class belongs to a package.', 0, 1);
 INSERT INTO public.jr_item (id, content, correct, question_id) VALUES (3, 'A package must have more than one class.', 0, 1);
