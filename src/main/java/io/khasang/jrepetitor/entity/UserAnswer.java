@@ -1,9 +1,13 @@
 package io.khasang.jrepetitor.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
+
+/**
+ * Try
+ *  When user takes a test he choose a group and a quiz
+ *  Each Try is saved in UserTry
+ *  User answers are saved in UserAnswer object
+ */
 
 @Entity
 @Table(name = "JR_USER_ANSWER")
@@ -15,9 +19,13 @@ public class UserAnswer {
     private Long id;
 
     @ManyToOne
-    private Quiz quiz;
+    @JoinColumn(name = "question_id",
+            foreignKey = @ForeignKey(name = "QUESTION_ID_FK"))
+    private Question question;
 
     @ManyToOne
+    @JoinColumn(name = "item_id",
+            foreignKey = @ForeignKey(name = "ITEN_ID_FK"))
     private Item item;
 
     @ManyToOne
@@ -31,19 +39,28 @@ public class UserAnswer {
         this.id = id;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
-
     public Item getItem() {
         return item;
     }
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    @ManyToOne
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public UserTry getUserTry() {
+        return userTry;
+    }
+
+    public void setUserTry(UserTry userTry) {
+        this.userTry = userTry;
     }
 }

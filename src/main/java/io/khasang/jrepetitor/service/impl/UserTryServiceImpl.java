@@ -32,4 +32,5 @@ public class UserTryServiceImpl implements UserTryService {
     public UserTry deleteUserTry(long id) {
         return userTryDao.delete(getUserTryById(id));
     }
+
 }

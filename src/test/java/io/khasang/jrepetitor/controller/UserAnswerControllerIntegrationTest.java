@@ -125,8 +125,8 @@ public class UserAnswerControllerIntegrationTest {
                 UserAnswer.class
         ).getBody();
 
-        assertNotNull(receivedUserAnswer.getQuiz());
-        assertEquals(userAnswer.getQuiz(), receivedUserAnswer.getQuiz());
+        assertNotNull(receivedUserAnswer.getQuestion());
+        assertEquals(userAnswer.getQuestion(), receivedUserAnswer.getQuestion());
 
         return receivedUserAnswer;
     }
@@ -135,7 +135,7 @@ public class UserAnswerControllerIntegrationTest {
         UserAnswer userAnswer = new UserAnswer();
         Quiz quiz = new Quiz();
         quiz.setName("Java1");
-        userAnswer.setQuiz(quiz);
+        userAnswer.getQuestion();
         return userAnswer;
     }
 }

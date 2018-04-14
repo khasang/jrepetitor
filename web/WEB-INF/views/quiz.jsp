@@ -40,7 +40,7 @@
                 }
 
 
-                output += '<a href="http://localhost:8080/user" class="btn btn-default">Завершить тест</a>'
+                output += '<a href="http://localhost:8080/results" class="btn btn-default">Завершить тест</a>'
 
                 $('#response').html(
                     output
@@ -51,6 +51,7 @@
             }
         });
     };
+    window.onload = RestGetAllQuestions;
 </script>
 <body>
 <div class="panel panel-default">
@@ -58,9 +59,11 @@
         <strong>Прохождение теста</strong>
     </div>
     <div class="panel-body" id="response"></div>
+<%--
     <div class="panel-body ">
         <button type="button" onclick="RestGetAllQuestions()">Try</button>
     </div>
+--%>
 </div>
 </body>
 <%@ include file = "footer.jsp" %>
