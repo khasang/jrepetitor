@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -27,11 +28,10 @@ public class AdmControllerIntegrationTest {
     private static final String GET_BY_ID = "/get";
     private static final String GET_BY_NAME = "/get/name";
     private static final String DELETE = "/delete";
-    private static final int LIST_OF_USERS_SIZE = 2;
 
     @Test
     public void addUserAndCheck() {
-        User user = createUser();
+        User user = createUser("Nastia", "nast", "15684d");
 
         RestTemplate template = new RestTemplate();
         ResponseEntity<User> responseEntity = template.exchange(
@@ -54,10 +54,10 @@ public class AdmControllerIntegrationTest {
     public void getAllUsers() {
         List<Long> listNewId = new ArrayList<>();
 
-        for (int i = 0; i < LIST_OF_USERS_SIZE; i++) {
-            User user = createUser();
-            listNewId.add(user.getId());
-        }
+        User user1 = createUser("Vadim", "vad", "df258");
+        User user2 = createUser("Alexey", "alex", "ddfen268");
+        listNewId.add(user1.getId());
+        listNewId.add(user2.getId());
 
         RestTemplate template = new RestTemplate();
 
@@ -81,7 +81,7 @@ public class AdmControllerIntegrationTest {
 
     @Test
     public void deleteUser() {
-        User user = createUser();
+        User user = createUser("Anton", "an", "9809342");
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<User> responseEntity = restTemplate.exchange(
@@ -126,7 +126,8 @@ public class AdmControllerIntegrationTest {
                 ROOT + GET_BY_NAME + "/{user}",
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<User>>() {},
+                new ParameterizedTypeReference<List<User>>() {
+                },
                 defineName
         );
 
@@ -139,40 +140,21 @@ public class AdmControllerIntegrationTest {
         users.forEach(this::deleteUserFromDB);
     }
 
-    @Ignore
-    @Test(expected = org.springframework.web.client.HttpServerErrorException.class)
+    @Test
     public void checkUserAdditionForRepeatingLogin() {
         final String defineLogin = "superUser";
+        Exception expectedException;
 
-        List<User> users = Arrays.asList(
-                createUser("Ilia", defineLogin, "tr1234"),
-                createUser("Pete", defineLogin, "tt234")
-        );
+        List<User> users = new ArrayList<>();
 
-        users.forEach(this::deleteUserFromDB);
-    }
-
-    private User createUser() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-
-        User user = prefillUser();
-
-        HttpEntity entity = new HttpEntity(user, headers);
-
-        RestTemplate template = new RestTemplate();
-
-        User receivedUser = template.exchange(
-                ROOT + ADD,
-                HttpMethod.POST,
-                entity,
-                User.class
-        ).getBody();
-
-        assertNotNull(receivedUser.getName());
-        assertEquals(user.getName(), receivedUser.getName());
-
-        return receivedUser;
+        try {
+            users.add(createUser("Ilia", defineLogin, "tr1234"));
+            users.add(createUser("Pete", defineLogin, "tt234"));
+        } catch (HttpServerErrorException e) {
+            expectedException = e;
+            assertNotNull(expectedException);
+            users.forEach(this::deleteUserFromDB);
+        }
     }
 
     private User createUser(String name, String login, String password) {
@@ -196,14 +178,6 @@ public class AdmControllerIntegrationTest {
         assertEquals(user.getName(), receivedUser.getName());
 
         return receivedUser;
-    }
-
-    private User prefillUser() {
-        User user = new User();
-        user.setName("UserDEL");
-        user.setLogin("cool_man");
-        user.setPassword("123456");
-        return user;
     }
 
     private User prefillUser(String name, String login, String password) {
