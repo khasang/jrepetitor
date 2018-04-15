@@ -4,7 +4,7 @@ import io.khasang.jrepetitor.dao.UserDao;
 import io.khasang.jrepetitor.entity.Users;
 import io.khasang.jrepetitor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
+
 import org.springframework.stereotype.Service;
 
 @Service("userService")

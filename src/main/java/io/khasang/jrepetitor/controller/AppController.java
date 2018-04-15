@@ -14,8 +14,7 @@ public class AppController {
     @Autowired
     private CreateTable createTable;
 
-    // Фабричный метод бинов.
-    // Cat cat = new Cat();
+
 
     @RequestMapping("/")
     public String helloPage(){
@@ -37,6 +36,11 @@ public class AppController {
     @RequestMapping("/user")
     public String getUserPage(){
         return "user";
+    }
+
+    @RequestMapping("/user/get/auth")
+    public String getUserCabinet(){
+        return "private";
     }
 
 }

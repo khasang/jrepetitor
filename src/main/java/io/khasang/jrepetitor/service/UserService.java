@@ -1,8 +1,8 @@
 package io.khasang.jrepetitor.service;
 
-import io.khasang.jrepetitor.entity.Cat;
+
 import io.khasang.jrepetitor.entity.Users;
-import org.springframework.security.core.userdetails.User;
+
 
 public interface UserService {
 
