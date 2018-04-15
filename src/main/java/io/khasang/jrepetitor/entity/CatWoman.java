@@ -10,15 +10,15 @@ public class CatWoman {
 
     private String name;
 
-  //  private Cat cat;
+    private Cat cat;
 
-//    public Cat getCat() {
-//        return cat;
-//    }
-//
-//    public void setCat(Cat cat) {
-//        this.cat = cat;
-//    }
+    public Cat getCat() {
+        return cat;
+    }
+
+    public void setCat(Cat cat) {
+        this.cat = cat;
+    }
 
 
 
