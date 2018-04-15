@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     UserDetailsService userDetailsService;
 
-    private  String  userGetId(){
+    private  String loginUser(){
     User userImpl = (User) SecurityContextHolder
             .getContext().getAuthentication().getPrincipal();
     String username = userImpl.getUsername();
@@ -30,7 +30,7 @@ public class UserController {
     @RequestMapping(value = "/get/auth", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Users getUserById(){
-        return userService.getUserByName(userGetId());
+        return userService.getUserByName(loginUser());
     }
 
 
