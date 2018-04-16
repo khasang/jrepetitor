@@ -1,7 +1,10 @@
 package io.khasang.jrepetitor.config.application;
 
+import io.khasang.jrepetitor.dao.NewsDao;
 import io.khasang.jrepetitor.dao.UserDao;
+import io.khasang.jrepetitor.dao.impl.NewsDaoImpl;
 import io.khasang.jrepetitor.dao.impl.UserDaoImpl;
+import io.khasang.jrepetitor.entity.News;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +58,11 @@ public class AppConfig {
     @Bean
     public UserDao userDao() {
         return new UserDaoImpl(User.class);
+    }
+
+    @Bean
+    public NewsDao newsDao() {
+        return new NewsDaoImpl(News.class);
     }
 
 }
