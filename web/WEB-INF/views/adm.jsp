@@ -33,11 +33,13 @@
         <th>Delete</th>
     </tr>
 
-    <c:forEach items="${userList}" var="user">
+    <jsp:useBean id="userList" scope="request" type="io.khasang.jrepetitor.controller.AdmController"/>
+    <%= userList.getListUsers() %>
+    <c:forEach var="user" items="${userList}">
     <tr>
-        <td><!--TODO: login--></td>
-        <td><!--TODO: email--></td>
-        <td><!--TODO: last activity--></td>
+        <td>${user.login}</td>
+        <td>${user.email}</td>
+        <td>${user.lastActivity}</td>
         <td>
             <!--TODO: edit (method)-->
             <button type="button" onclick="">Edit</button>
