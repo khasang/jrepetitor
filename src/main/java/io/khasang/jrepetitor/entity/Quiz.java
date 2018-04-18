@@ -1,20 +1,21 @@
 package io.khasang.jrepetitor.entity;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
- *  Test
- *  list of questions on one specified topic
+ * Test
+ * list of questions on one specified topic
  */
 
 @Entity
-@Table(name="JR_QUIZ")
-public class Quiz implements Serializable{
+@Table(name = "JR_QUIZ")
+public class Quiz implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,9 +23,8 @@ public class Quiz implements Serializable{
 
     private String name;
 
-
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Question> questions = new ArrayList<Question>();
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.PERSIST)
+    private Collection<Question> questions = new ArrayList<Question>();
 
     @ManyToOne
     private Group group;
@@ -47,8 +47,7 @@ public class Quiz implements Serializable{
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    public List<Question> getQuestions() {
+    public Collection<Question> getQuestions() {
         return questions;
     }
 
@@ -64,7 +63,11 @@ public class Quiz implements Serializable{
         this.group = group;
     }
 
-    public byte getLevel() { return level;    }
+    public byte getLevel() {
+        return level;
+    }
 
-    public void setLevel(byte level) { this.level = level; }
+    public void setLevel(byte level) {
+        this.level = level;
+    }
 }

@@ -1,8 +1,10 @@
 package io.khasang.jrepetitor.dto;
 
+import io.khasang.jrepetitor.dao.impl.BasicDaoImpl;
 import io.khasang.jrepetitor.entity.Item;
 import io.khasang.jrepetitor.entity.Question;
 import io.khasang.jrepetitor.entity.Quiz;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -91,12 +93,12 @@ public class QuizDTO {
 
                     nextItem:
                     for (Item item : question.getItems()) {
-
-                        for (ItemDTO itemDTO : itemDTOList) {
-                            if (itemDTO.getId() == item.getId())
-                                continue nextItem;
-                        }
-
+//
+//                        for (ItemDTO itemDTO : itemDTOList) {
+//                            if (itemDTO.getId() == item.getId())
+//                                continue nextItem;
+//                        }
+//
                         ItemDTO itemDTO = new ItemDTO();
                         itemDTO.setId(item.getId());
                         itemDTO.setContent(item.getContent());
@@ -121,6 +123,7 @@ public class QuizDTO {
     }
 
     public QuizDTO getQuiz(Quiz quiz) {
+//        quiz= BasicDaoImpl.<Quiz>initializeAndUnproxy(quiz);
         QuizDTO quizDTO = new QuizDTO();
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
@@ -129,15 +132,16 @@ public class QuizDTO {
             quizDTO.setName(quiz.getName());
             quizDTO.setLevel(quiz.getLevel());
 
-            nextQuest:
+//            nextQuest:
+
             for (Question question : quiz.getQuestions()) {
                 //if questionDTOList contains quiestion with quiz_id=question.getQuiz().getId() - continue
 
-                for (QuestionDTO questionDTO : questionDTOList) {
-                    if (questionDTO.getId() == question.getId()) {
-                        continue nextQuest;
-                    }
-                }
+//                for (QuestionDTO questionDTO : questionDTOList) {
+//                    if (questionDTO.getId() == question.getId()) {
+//                        continue nextQuest;
+//                    }
+//                }
 
                 QuestionDTO questionDTO = new QuestionDTO();
                 questionDTO.setId(question.getId());
@@ -147,14 +151,15 @@ public class QuizDTO {
 
                 List<ItemDTO> itemDTOList = new ArrayList<>();
 
-                nextItem:
+//                nextItem:
+                Hibernate.initialize(question.getItems());
                 for (Item item : question.getItems()) {
 
-                    for (ItemDTO itemDTO : itemDTOList) {
-                        if (itemDTO.getId() == item.getId())
-                            continue nextItem;
-                    }
-
+//                    for (ItemDTO itemDTO : itemDTOList) {
+//                        if (itemDTO.getId() == item.getId())
+//                            continue nextItem;
+//                    }
+//
                     ItemDTO itemDTO = new ItemDTO();
                     itemDTO.setId(item.getId());
                     itemDTO.setContent(item.getContent());
@@ -170,7 +175,9 @@ public class QuizDTO {
 
             quizDTO.setQuestions(questionDTOList);
         }
-         catch (Exception e){}
+         catch (Exception e){
+             e.printStackTrace();
+         }
 
         return quizDTO;
     }

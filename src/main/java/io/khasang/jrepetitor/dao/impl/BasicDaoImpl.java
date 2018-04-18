@@ -1,8 +1,10 @@
 package io.khasang.jrepetitor.dao.impl;
 
 import io.khasang.jrepetitor.dao.BasicDao;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -29,7 +31,7 @@ public class BasicDaoImpl<T> implements BasicDao<T> {
 
     @Override
     public T getById(long id) {
-        return getSessionFactory().get(entityClass, id);
+        return getSessionFactory().get(initializeAndUnproxy(entityClass), id);
     }
 
     @Override
@@ -47,12 +49,25 @@ public class BasicDaoImpl<T> implements BasicDao<T> {
     @Override
     public List<T> getList() {
         CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = builder.createQuery(entityClass);
-        Root<T> root = criteriaQuery.from(entityClass);
+        CriteriaQuery<T> criteriaQuery = builder.createQuery(initializeAndUnproxy(entityClass));
+        Root<T> root = criteriaQuery.from(initializeAndUnproxy(entityClass));
 
         criteriaQuery.select(root);
 
-        List<T> list = getSessionFactory().createQuery(criteriaQuery).list();
+        List<T> list = initializeAndUnproxy(getSessionFactory().createQuery(criteriaQuery).list());
+
         return list;
+    }
+
+    public static <T> T initializeAndUnproxy(T entity) {
+        if (entity == null) {
+            throw new NullPointerException("Entity passed for initialization is null");
+        }
+
+        Hibernate.initialize(entity);
+        if (entity instanceof HibernateProxy) {
+            entity = (T) ((HibernateProxy) entity).getHibernateLazyInitializer().getImplementation();
+        }
+        return entity;
     }
 }

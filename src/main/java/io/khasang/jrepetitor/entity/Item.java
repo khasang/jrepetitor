@@ -42,9 +42,18 @@ public class Item implements Serializable{
         this.content = content;
     }
 
-
     public Question getQuestion() {
         return question;
+    }
+
+    public void setQuestion(Question question) {
+        // update association on Author entity
+        if (question != null) {
+            question.getItems().add(this);
+        } else if (this.question != null) {
+            this.question.getItems().remove(this);
+        }
+        this.question = question;
     }
 
     public byte getCorrect() {
@@ -55,7 +64,4 @@ public class Item implements Serializable{
         this.correct = correct;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
 }

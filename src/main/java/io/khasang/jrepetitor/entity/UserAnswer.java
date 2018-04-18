@@ -23,10 +23,10 @@ public class UserAnswer {
             foreignKey = @ForeignKey(name = "QUESTION_ID_FK"))
     private Question question;
 
-    @ManyToOne
-    @JoinColumn(name = "item_id",
-            foreignKey = @ForeignKey(name = "ITEN_ID_FK"))
-    private Item item;
+//    @ManyToOne
+//    @JoinColumn(name = "item_id",
+//            foreignKey = @ForeignKey(name = "ITEN_ID_FK"))
+//    private Item item;
 
     @ManyToOne
     private UserTry userTry;
@@ -39,13 +39,13 @@ public class UserAnswer {
         this.id = id;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
+//    public Item getItem() {
+//        return item;
+//    }
+//
+//    public void setItem(Item item) {
+//        this.item = item;
+//    }
 
     @ManyToOne
     public Question getQuestion() {

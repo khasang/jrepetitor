@@ -1,21 +1,21 @@
 package io.khasang.jrepetitor.entity;
 
 
-import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
- *  Question
- *  question has a type: RadioGroup (only one correct answer) or Checkbox (a set of correct answers)
+ * Question
+ * question has a type: RadioGroup (only one correct answer) or Checkbox (a set of correct answers)
  */
 
 @Entity
 @Table(name = "JR_QUESTION")
-public class Question implements Serializable{
+public class Question implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,8 +25,8 @@ public class Question implements Serializable{
     private String content; //текст вопроса
     private String type; //тип вопроса: "radio/CheckBoz"
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Item> items = new ArrayList<Item>(); //ответ
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
+    private Collection<Item> items = new ArrayList<Item>(); //ответ
 
     @ManyToOne
     private Quiz quiz;
@@ -66,11 +66,12 @@ public class Question implements Serializable{
         this.explanation = explanation;
     }
 
-    public List<Item> getItems() {
+    @org.hibernate.annotations.LazyCollection(LazyCollectionOption.EXTRA)
+    public Collection<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(Collection<Item> items) {
         this.items = items;
     }
 
@@ -79,6 +80,12 @@ public class Question implements Serializable{
     }
 
     public void setQuiz(Quiz quiz) {
+        // update association on Author entity
+        if (quiz != null) {
+            quiz.getQuestions().add(this);
+        } else if (this.quiz != null) {
+            this.quiz.getQuestions().remove(this);
+        }
         this.quiz = quiz;
     }
 }

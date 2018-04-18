@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.dto;
 
+import io.khasang.jrepetitor.dao.impl.BasicDaoImpl;
 import io.khasang.jrepetitor.entity.Item;
 import io.khasang.jrepetitor.entity.Question;
 import org.springframework.stereotype.Component;
@@ -74,6 +75,7 @@ public class QuestionDTO {
         try {
             for (Question question : list) {
                 List<ItemDTO> itemDTOList = new ArrayList<>();
+                question= BasicDaoImpl.initializeAndUnproxy(question);
 
                 QuestionDTO questionDTO = new QuestionDTO();
                 questionDTO.setId(question.getId());
@@ -81,12 +83,12 @@ public class QuestionDTO {
                 questionDTO.setType(question.getType());
                 questionDTO.setExplanation(question.getExplanation());
 
-                nextItem:
+//                nextItem:
                 for (Item item : question.getItems()) {
-                    for (ItemDTO itemDTO : itemDTOList) {
-                        if (itemDTO.getId() == item.getId())
-                            continue nextItem;
-                    }
+//                    for (ItemDTO itemDTO : itemDTOList) {
+//                        if (itemDTO.getId() == item.getId())
+//                            continue nextItem;
+//                    }
                     ItemDTO itemDTO = new ItemDTO();
                     itemDTO.setId(item.getId());
                     itemDTO.setContent(item.getContent());
@@ -99,7 +101,9 @@ public class QuestionDTO {
                 questionDTOList.add(questionDTO);
             }
         }
-        catch (Exception e){}
+        catch (Exception e){
+            e.printStackTrace();
+        }
         return questionDTOList;
     }
 }

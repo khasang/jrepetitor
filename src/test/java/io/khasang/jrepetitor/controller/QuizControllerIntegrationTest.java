@@ -1,11 +1,14 @@
 package io.khasang.jrepetitor.controller;
 
+import io.khasang.jrepetitor.entity.Item;
+import io.khasang.jrepetitor.entity.Question;
 import io.khasang.jrepetitor.entity.Quiz;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -35,7 +38,7 @@ public class QuizControllerIntegrationTest {
         Quiz receivedQuiz = responseEntity.getBody();
         assertNotNull(receivedQuiz);
 
-        deleteFromDB(quiz);
+//        deleteFromDB(quiz);
     }
 
     @Test
@@ -133,6 +136,36 @@ public class QuizControllerIntegrationTest {
     private Quiz prefillQuiz() {
         Quiz quiz = new Quiz();
         quiz.setName("Generics and Collections");
+        List<Question> questionList = new ArrayList<>();
+        Question question1 = new Question();
+        question1.setContent("Question 1");
+        Question question2 = new Question();
+
+        Item item1 = new Item();
+        item1.setContent("Variant 1");
+        Item item2 = new Item();
+        item2.setContent("Variant 2");
+        List<Item> itemList = new ArrayList<>();
+        itemList.add(item1);
+        itemList.add(item2);
+        question1.setItems(itemList);
+
+
+        question2.setContent("Question 2");
+
+        Item item3 = new Item();
+        item3.setContent("Variant 3");
+        Item item4 = new Item();
+        item4.setContent("Variant 4");
+        List<Item> itemList2 = new ArrayList<>();
+        itemList2.add(item3);
+        itemList2.add(item4);
+        question2.setItems(itemList2);
+
+        questionList.add(question1);
+        questionList.add(question2);
+        quiz.setQuestions(questionList);
+
         return quiz;
     }
 }

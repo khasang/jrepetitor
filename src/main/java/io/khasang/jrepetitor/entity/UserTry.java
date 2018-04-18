@@ -41,7 +41,7 @@ public class UserTry {
 
     private int score;
 
-    @OneToMany(mappedBy = "userTry", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "userTry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserAnswer> userAnswers = new ArrayList<UserAnswer>();
 
     public Long getId() {
