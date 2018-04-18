@@ -75,25 +75,17 @@ public class QuestionDTO {
         try {
             for (Question question : list) {
                 List<ItemDTO> itemDTOList = new ArrayList<>();
-                question= BasicDaoImpl.initializeAndUnproxy(question);
-
                 QuestionDTO questionDTO = new QuestionDTO();
                 questionDTO.setId(question.getId());
                 questionDTO.setContent(question.getContent());
                 questionDTO.setType(question.getType());
                 questionDTO.setExplanation(question.getExplanation());
 
-//                nextItem:
                 for (Item item : question.getItems()) {
-//                    for (ItemDTO itemDTO : itemDTOList) {
-//                        if (itemDTO.getId() == item.getId())
-//                            continue nextItem;
-//                    }
                     ItemDTO itemDTO = new ItemDTO();
                     itemDTO.setId(item.getId());
                     itemDTO.setContent(item.getContent());
                     itemDTO.setCorrect(item.getCorrect());
-
                     itemDTOList.add(itemDTO);
                 }
 

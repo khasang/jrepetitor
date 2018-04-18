@@ -23,9 +23,6 @@ public class Item implements Serializable{
     private String content; //текст варианта ответа
     private byte correct; //правильно/не правильно
 
-    @ManyToOne
-    private Question question;
-
     public Long getId() {
         return id;
     }
@@ -40,20 +37,6 @@ public class Item implements Serializable{
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        // update association on Author entity
-        if (question != null) {
-            question.getItems().add(this);
-        } else if (this.question != null) {
-            this.question.getItems().remove(this);
-        }
-        this.question = question;
     }
 
     public byte getCorrect() {

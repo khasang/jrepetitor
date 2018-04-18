@@ -23,7 +23,7 @@ public class Quiz implements Serializable {
 
     private String name;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.EAGER)
     private Collection<Question> questions = new ArrayList<Question>();
 
     @ManyToOne

@@ -25,11 +25,8 @@ public class Question implements Serializable {
     private String content; //текст вопроса
     private String type; //тип вопроса: "radio/CheckBoz"
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Item> items = new ArrayList<Item>(); //ответ
-
-    @ManyToOne
-    private Quiz quiz;
 
     @Column(length = 1000)
     private String explanation; //объясенение правильного ответа
@@ -75,17 +72,4 @@ public class Question implements Serializable {
         this.items = items;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        // update association on Author entity
-        if (quiz != null) {
-            quiz.getQuestions().add(this);
-        } else if (this.quiz != null) {
-            this.quiz.getQuestions().remove(this);
-        }
-        this.quiz = quiz;
-    }
 }

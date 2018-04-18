@@ -91,19 +91,11 @@ public class QuizDTO {
 
                     List<ItemDTO> itemDTOList = new ArrayList<>();
 
-                    nextItem:
                     for (Item item : question.getItems()) {
-//
-//                        for (ItemDTO itemDTO : itemDTOList) {
-//                            if (itemDTO.getId() == item.getId())
-//                                continue nextItem;
-//                        }
-//
                         ItemDTO itemDTO = new ItemDTO();
                         itemDTO.setId(item.getId());
                         itemDTO.setContent(item.getContent());
                         itemDTO.setCorrect(item.getCorrect());
-
                         itemDTOList.add(itemDTO);
                     }
 
@@ -123,7 +115,6 @@ public class QuizDTO {
     }
 
     public QuizDTO getQuiz(Quiz quiz) {
-//        quiz= BasicDaoImpl.<Quiz>initializeAndUnproxy(quiz);
         QuizDTO quizDTO = new QuizDTO();
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
@@ -132,17 +123,7 @@ public class QuizDTO {
             quizDTO.setName(quiz.getName());
             quizDTO.setLevel(quiz.getLevel());
 
-//            nextQuest:
-
             for (Question question : quiz.getQuestions()) {
-                //if questionDTOList contains quiestion with quiz_id=question.getQuiz().getId() - continue
-
-//                for (QuestionDTO questionDTO : questionDTOList) {
-//                    if (questionDTO.getId() == question.getId()) {
-//                        continue nextQuest;
-//                    }
-//                }
-
                 QuestionDTO questionDTO = new QuestionDTO();
                 questionDTO.setId(question.getId());
                 questionDTO.setContent(question.getContent());
@@ -151,15 +132,8 @@ public class QuizDTO {
 
                 List<ItemDTO> itemDTOList = new ArrayList<>();
 
-//                nextItem:
                 Hibernate.initialize(question.getItems());
                 for (Item item : question.getItems()) {
-
-//                    for (ItemDTO itemDTO : itemDTOList) {
-//                        if (itemDTO.getId() == item.getId())
-//                            continue nextItem;
-//                    }
-//
                     ItemDTO itemDTO = new ItemDTO();
                     itemDTO.setId(item.getId());
                     itemDTO.setContent(item.getContent());

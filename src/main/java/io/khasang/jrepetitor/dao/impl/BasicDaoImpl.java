@@ -31,7 +31,7 @@ public class BasicDaoImpl<T> implements BasicDao<T> {
 
     @Override
     public T getById(long id) {
-        return getSessionFactory().get(initializeAndUnproxy(entityClass), id);
+        return getSessionFactory().get(entityClass, id);
     }
 
     @Override
@@ -49,12 +49,12 @@ public class BasicDaoImpl<T> implements BasicDao<T> {
     @Override
     public List<T> getList() {
         CriteriaBuilder builder = sessionFactory.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = builder.createQuery(initializeAndUnproxy(entityClass));
-        Root<T> root = criteriaQuery.from(initializeAndUnproxy(entityClass));
+        CriteriaQuery<T> criteriaQuery = builder.createQuery(entityClass);
+        Root<T> root = criteriaQuery.from(entityClass);
 
         criteriaQuery.select(root);
 
-        List<T> list = initializeAndUnproxy(getSessionFactory().createQuery(criteriaQuery).list());
+        List<T> list = getSessionFactory().createQuery(criteriaQuery).list();
 
         return list;
     }
@@ -70,4 +70,5 @@ public class BasicDaoImpl<T> implements BasicDao<T> {
         }
         return entity;
     }
+
 }
