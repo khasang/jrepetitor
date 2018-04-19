@@ -1,8 +1,5 @@
 package io.khasang.jrepetitor.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -17,7 +14,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "JR_USER_TRY")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class UserTry {
 
     @Id
@@ -79,10 +75,6 @@ public class UserTry {
     public List<UserAnswer> getUserAnswers() {
         return userAnswers;
     }
-
-//    public void setUserAnswers(List<UserAnswer> userAnswers) {
-//        this.userAnswers = userAnswers;
-//    }
 
     public Group getGroup() {
         return group;

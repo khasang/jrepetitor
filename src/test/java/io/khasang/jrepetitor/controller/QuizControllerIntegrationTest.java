@@ -65,7 +65,6 @@ public class QuizControllerIntegrationTest {
         );
 
         assertEquals(200, responseForDeleteQuiz.getStatusCodeValue());
-
         assertNull(responseForDeleteQuiz.getBody());
     }
 
@@ -86,7 +85,6 @@ public class QuizControllerIntegrationTest {
 
         List<Quiz> list = responseEntity.getBody();
 
-        // логика хромает
         assertNotNull(list.get(0));
         assertNotNull(list.get(1));
 

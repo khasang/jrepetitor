@@ -11,7 +11,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "JR_USER_ANSWER")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class UserAnswer {
 
     @Id

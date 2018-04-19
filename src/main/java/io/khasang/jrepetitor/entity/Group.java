@@ -1,9 +1,5 @@
 package io.khasang.jrepetitor.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +24,8 @@ public class Group implements Serializable{
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     List<Quiz> quizes = new ArrayList<Quiz>();
 
-    private String name; //наименование темы
+    //topic name
+    private String name;
 
     public Long getId() {
         return id;

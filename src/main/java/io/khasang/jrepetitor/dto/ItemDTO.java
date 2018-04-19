@@ -12,8 +12,10 @@ import java.util.List;
 public class ItemDTO {
     private Long id;
 
-    private String content; //текст варианта ответа
-    private byte correct; //правильно/не правильно
+    //Answer content
+    private String content;
+    // 0 or 1: 0 -incorrect answer, 1 - correct answer
+    private byte correct;
 
     private Question question;
 

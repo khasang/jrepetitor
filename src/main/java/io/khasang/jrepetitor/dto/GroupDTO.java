@@ -12,7 +12,8 @@ public class GroupDTO {
 
     List<QuizDTO> quizes = new ArrayList<QuizDTO>();
 
-    private String name; //наименование темы
+    //topic name
+    private String name;
 
     public Long getId() {
         return id;

@@ -19,7 +19,8 @@ public class QuizDTO {
 
     private GroupDTO group;
 
-    private byte level; // question level
+    // question level
+    private byte level;
 
     public Long getId() {
         return id;

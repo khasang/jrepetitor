@@ -65,7 +65,6 @@ public class UserTryControllerIntegrationTest {
         );
 
         assertEquals(200, responseForDeleteUserTry.getStatusCodeValue());
-
         assertNull(responseForDeleteUserTry.getBody());
     }
 
@@ -86,7 +85,6 @@ public class UserTryControllerIntegrationTest {
 
         List<UserTry> list = responseEntity.getBody();
 
-        // логика хромает
         assertNotNull(list.get(0));
         assertNotNull(list.get(1));
 

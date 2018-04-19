@@ -1,8 +1,5 @@
 package io.khasang.jrepetitor.entity;
 
-
-import com.fasterxml.jackson.annotation.*;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,14 +13,16 @@ import java.util.List;
 @Entity
 @Table(name = "JR_QUESTION")
 public class Question implements Serializable{
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(length = 1000)
-    private String content; //текст вопроса
-    private String type; //тип вопроса: "radio/CheckBoz"
+    //question content
+    private String content;
+
+    //question type: radio/CheckBox
+    private String type;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Item> items = new ArrayList<Item>(); //ответ
@@ -32,7 +31,9 @@ public class Question implements Serializable{
     private Quiz quiz;
 
     @Column(length = 1000)
-    private String explanation; //объясенение правильного ответа
+
+    //Explanation
+    private String explanation;
 
     public Long getId() {
         return id;

@@ -65,7 +65,6 @@ public class GroupControllerIntegrationTest {
         );
 
         assertEquals(200, responseForDeleteGroup.getStatusCodeValue());
-
         assertNull(responseForDeleteGroup.getBody());
     }
 
@@ -86,7 +85,6 @@ public class GroupControllerIntegrationTest {
 
         List<Group> list = responseEntity.getBody();
 
-        // логика хромает
         assertNotNull(list.get(0));
         assertNotNull(list.get(1));
 

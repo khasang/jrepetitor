@@ -12,14 +12,18 @@ public class QuestionDTO {
 
     private Long id;
 
-    private String content; //текст вопроса
-    private String type; //тип вопроса: "radio/CheckBoz"
+    //question content
+    private String content;
+    //question type: radio/CheckBox
+    private String type;
 
-    private List<ItemDTO> items = new ArrayList<ItemDTO>(); //ответ
+    // Answer variants
+    private List<ItemDTO> items = new ArrayList<ItemDTO>();
 
     private QuizDTO quiz;
 
-    private String explanation; //объясенение правильного ответа
+    //Explanation of correct answer
+    private String explanation;
 
     public Long getId() {
         return id;

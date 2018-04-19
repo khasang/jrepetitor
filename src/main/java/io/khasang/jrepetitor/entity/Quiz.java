@@ -1,7 +1,5 @@
 package io.khasang.jrepetitor.entity;
 
-import com.fasterxml.jackson.annotation.*;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
