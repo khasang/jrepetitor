@@ -1,6 +1,8 @@
 package io.khasang.jrepetitor.controller;
 
+import io.khasang.jrepetitor.entity.News;
 import io.khasang.jrepetitor.entity.User;
+import io.khasang.jrepetitor.service.NewsService;
 import io.khasang.jrepetitor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +15,16 @@ import java.util.List;
 public class AdmController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private NewsService newsService;
 
+    // root
     @RequestMapping()
     public String createMain() {
         return "adm";
     }
 
+    // for users
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public User addUser(@RequestBody User user) {
@@ -47,5 +53,31 @@ public class AdmController {
     @ResponseBody
     public User deleteUser(@RequestParam(value = "id") String id) {
         return userService.deleteUser(Long.parseLong(id));
+    }
+
+    //for news
+    @RequestMapping(value = "add/news", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public News addNews(@RequestBody News news) {
+        return newsService.addNews(news);
+    }
+
+    @RequestMapping(value = "/get/news/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public News getNewsById(@PathVariable(value = "id") String id) {
+        return newsService.getNewsById(Long.parseLong(id));
+    }
+
+    @RequestMapping(value = "/get/news/title/{title}",
+            method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public News getNewsByTitle(@PathVariable(value = "title") String title) {
+        return newsService.getNewsByTitle(title);
+    }
+
+    @RequestMapping(value = "/delete/news", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public News deleteNews(@RequestParam(value = "id") String id) {
+        return newsService.deleteNews(Long.parseLong(id));
     }
 }

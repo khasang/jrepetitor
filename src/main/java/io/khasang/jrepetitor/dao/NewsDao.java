@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.dao;
 
 import io.khasang.jrepetitor.entity.News;
 
-public interface NewsDao {
+public interface NewsDao extends BasicDao<News> {
 
     /**
      * for finding news by title
