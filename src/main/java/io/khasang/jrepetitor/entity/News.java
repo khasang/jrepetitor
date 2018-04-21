@@ -1,9 +1,6 @@
 package io.khasang.jrepetitor.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class News {
@@ -11,7 +8,16 @@ public class News {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
+    @Column(length = 1000000, columnDefinition = "text")
     private String content;
+
+    public News(){
+    }
+
+    public News(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 
     public long getId() {
         return id;

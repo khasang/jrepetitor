@@ -6,6 +6,8 @@ import io.khasang.jrepetitor.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("newsService")
 public class NewsServiceImpl implements NewsService {
     @Autowired
@@ -22,7 +24,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public News getNewsByTitle(String newsTitle) {
+    public List<News> getNewsByTitle(String newsTitle) {
         return newsDao.getNewsByTitle(newsTitle);
     }
 

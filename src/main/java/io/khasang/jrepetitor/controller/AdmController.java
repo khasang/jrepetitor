@@ -71,7 +71,7 @@ public class AdmController {
     @RequestMapping(value = "/get/news/title/{title}",
             method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public News getNewsByTitle(@PathVariable(value = "title") String title) {
+    public List<News> getNewsByTitle(@PathVariable(value = "title") String title) {
         return newsService.getNewsByTitle(title);
     }
 

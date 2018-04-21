@@ -4,22 +4,24 @@ import io.khasang.jrepetitor.dao.NewsDao;
 import io.khasang.jrepetitor.entity.News;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NewsDaoImpl extends BasicDaoImpl<News> implements NewsDao {
     public NewsDaoImpl(Class<News> entityClass) {
         super(entityClass);
     }
 
     @Override
-    public News getNewsByTitle(String title) {
+    public List<News> getNewsByTitle(String title) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT id FROM News WHERE title = :title");
         query.setParameter("title", title);
 
-        if (query.list().isEmpty()) {
-            return null;
-        } else {
-            long id = (long) query.list().get(0);
-            return getById(id);
-        }
+        List<Long> ids = query.list();
+        List<News> newsList = new ArrayList<>(ids.size());
+        ids.forEach(id -> newsList.add(getById(id)));
+
+        return newsList;
     }
 }

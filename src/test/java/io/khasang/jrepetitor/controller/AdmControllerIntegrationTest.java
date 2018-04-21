@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.controller;
 
+import io.khasang.jrepetitor.entity.News;
 import io.khasang.jrepetitor.entity.User;
 
 import org.junit.Ignore;
@@ -23,12 +24,19 @@ import static org.junit.Assert.assertNull;
 
 public class AdmControllerIntegrationTest {
     private static final String ROOT = "http://localhost:8080/adm";
+    // User const
     private static final String ADD = "/add";
     private static final String ALL_USERS = "/all";
     private static final String GET_BY_ID = "/get";
     private static final String GET_BY_NAME = "/get/name";
     private static final String DELETE = "/delete";
+    // News const
+    private static final String ADD_NEWS = "/add/news";
+    private static final String GET_NEWS_BY_ID = "/get/news";
+    private static final String GET_NEWS_BY_TITLE = "/get/news/title";
+    private static final String DELETE_NEWS = "/delete/news";
 
+    // User test
     @Test
     public void addUserAndCheck() {
         User user = createUser("Nastia", "nast", "15684d");
@@ -200,4 +208,118 @@ public class AdmControllerIntegrationTest {
         return responseEntity.getBody();
     }
 
+    // News test
+    @Test
+    public void addNewsAndCheck() {
+        News news = createNews("Fresh news",
+                "The very very new news :-) lkadfjlkajdlkajdlkfjaljdfjladjlfjakdj lakdjflkadjflkdjflkajfd" +
+                        "alkdfjlakdjflkajdflkajdflkjadlfkjlakjflkajdlkfjalkjdlgkjlkgjljakljalkjdflkajdlfjlakjfljdlka" +
+                        "akdfjkajflkjaldjfajkfdjlajfkjdalkfjdlkjfalkjdlkfajldkfjalkjdflakjflkadjflkadjflakjdflakjdfl" +
+                        "alkdfjlkadjflajdlfkjaldjfkjadlfkjadlfkjaldkjflakdjflkajdflkajdflkajdflkjgkltjlkdajfjalkfjlj" +
+                        "aldfkjladkfjlakdjflkadjflakdjflkadjlkjgkljklgjkjkladjflkdjfkjalkjfdkljalkjekjifldkjfakjldkf" +
+                        "aldkfjladkfjleijfealkjdlkjdaflkdajflkdajflkadjflkdasjflkdjaflkjdaflkjaflkdjafldkjfldakjfl");
+
+        RestTemplate template = new RestTemplate();
+
+        ResponseEntity<News> responseEntity = template.exchange(
+                ROOT + GET_NEWS_BY_ID + "/{id}",
+                HttpMethod.GET,
+                null,
+                News.class,
+                news.getId()
+        );
+
+        assertEquals("OK", responseEntity.getStatusCode().getReasonPhrase());
+
+        News receivedNews = responseEntity.getBody();
+        assertNotNull(receivedNews);
+
+        deleteNewsFromDB(receivedNews);
+    }
+
+    @Test
+    public void getNewsByTitle() {
+        final String defineTitle = "Weather news";
+
+        List<News> news = Arrays.asList(
+                createNews(defineTitle, "Moscow +15C"),
+                createNews("Crime news", "Shooting in Chicago"),
+                createNews(defineTitle, "San Francisco +78F")
+        );
+
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<List<News>> responseEntity = template.exchange(
+                ROOT + GET_NEWS_BY_TITLE + "/{news}",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<News>>() {
+                },
+                defineTitle
+        );
+
+        List<News> receivedNews = responseEntity.getBody();
+
+        assertNotNull(receivedNews);
+        assertEquals(2, receivedNews.size());
+        receivedNews.forEach(value -> assertEquals(defineTitle, value.getTitle()));
+
+        news.forEach(this::deleteNewsFromDB);
+    }
+
+    @Test
+    public void deleteNews() {
+        News news = createNews("Weather", "Ryzan +17");
+
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<News> responseEntity = template.exchange(
+                ROOT + DELETE_NEWS + "?id=" + "{id}",
+                HttpMethod.DELETE,
+                null,
+                News.class,
+                news.getId()
+        );
+
+        assertEquals(200, responseEntity.getStatusCodeValue());
+
+        News deletedNews = responseEntity.getBody();
+        assertNotNull(deletedNews);
+        assertEquals(news.getId(), deletedNews.getId());
+    }
+
+    private News createNews(String title, String content) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        News news = prefillNews(title, content);
+
+        HttpEntity<News> entity = new HttpEntity<>(news, headers);
+
+        RestTemplate template = new RestTemplate();
+
+        News receivedNews = template.exchange(
+                ROOT + ADD_NEWS,
+                HttpMethod.POST,
+                entity,
+                News.class
+        ).getBody();
+
+        return receivedNews;
+    }
+
+    private News prefillNews(String title, String content) {
+        return new News(title, content);
+    }
+
+    private News deleteNewsFromDB(News news) {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<News> responseEntity = restTemplate.exchange(
+                ROOT + DELETE_NEWS + "?id=" + "{id}",
+                HttpMethod.DELETE,
+                null,
+                News.class,
+                news.getId()
+        );
+
+        return responseEntity.getBody();
+    }
 }

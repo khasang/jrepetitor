@@ -27,7 +27,7 @@ public interface NewsService {
      * @param newsTitle = unic news title
      * @return specify news by title
      */
-    News getNewsByTitle(String newsTitle);
+    List<News> getNewsByTitle(String newsTitle);
 
     /**
      * method for news delete
