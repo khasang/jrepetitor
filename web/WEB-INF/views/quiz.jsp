@@ -47,9 +47,6 @@
                     output +='</div>'
                 }
 
-
-                /*output += '<a href="http://localhost:8080/user" class="btn btn-default">Завершить тест</a>'*/
-
                 output+='<div class="panel-body ">\n' +
                     '        <button type="button" onclick="ChekAnswer()">Проверить результат</button>\n' +
                     '    </div>'
@@ -65,45 +62,36 @@
     };
 
     var ChekAnswer = function () {
-        var jsonRightAns = ''; //формируем JSON правильных ответов
+        var arrJsonRightAns = [];
         var cntAllRightAns = arrCorrect.length;
         var cntRightAns = 0;
         var procentRight = 0;
-        jsonRightAns+='{"arrid":[';
         // проходим по массиву правильных ответов
         for (i in arrCorrect){
-            // если правильный ответ выбран, увеличиваем количество правильных ответов и формируем JSON правильных ответов
+            // если правильный ответ выбран, увеличиваем количество правильных ответов
             if($('#'+arrCorrect[i]).is(':checked')){
                 cntRightAns+=1;
-                jsonRightAns+='{"id":' +arrCorrect[i]+'}';
-                if (i < (arrCorrect.length - 1)) {
-                    jsonRightAns+=',';
-                }
+                arrJsonRightAns.push({"attemptId":1,"rightAnsId":arrCorrect[i]});
             }
         }
         procentRight = (cntRightAns/cntAllRightAns)*100;
         alert('Процент правильных ответов: '+procentRight);
-        //формируем JSON правильных ответов
-        jsonRightAns+=']}'
-        alert(jsonRightAns);
         //вызываем функцию отправки JSON POST запросом на сервер
-        RestPutRightAns(jsonRightAns);
+        RestPutRightAns(arrJsonRightAns);
     }
 
-    var RestPutRightAns = function (jsonRightAns) {
+    var RestPutRightAns = function (arrJsonRightAns) {
     $.ajax({
         type: 'POST',
-        url: service + "/answer",
+        url: service + "rightans/add",
         contentType: 'application/json;charset=utf-8',
-        data: JSON.stringify(jsonRightAns),
+        data: JSON.stringify({rightAnsList:arrJsonRightAns}),
         dataType: 'json',
         async: false,
         success: function (result) {
-            // $('#response').html(JSON.stringify(result));
             alert('Тест сохранен');
         },
         error: function (jqXHR, testStatus, errorThrown) {
-            //$('#response').html(JSON.stringify(jqXHR));
             alert('Ошибка сохранения теста');
         }
     });
@@ -116,9 +104,6 @@
         <strong>Прохождение теста</strong>
     </div>
     <div class="panel-body" id="response"></div>
-    <%--<div class="panel-body ">
-        <button type="button" onclick="RestGetAllQuestions()">Try</button>
-    </div>--%>
 </div>
 </body>
 <%@ include file = "footer.jsp" %>
