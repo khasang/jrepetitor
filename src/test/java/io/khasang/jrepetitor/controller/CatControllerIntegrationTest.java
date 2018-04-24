@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.Cat;
+import io.khasang.jrepetitor.entity.CatWoman;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -52,7 +54,7 @@ public class CatControllerIntegrationTest {
         Cat receivedCat = responseEntity.getBody();
         assertNotNull(receivedCat);
 
-        deleteFromDB(cat);
+     //   deleteFromDB(cat);
     }
 
     @Test
@@ -173,6 +175,17 @@ public class CatControllerIntegrationTest {
     private Cat prefillCat() {
         Cat cat = new Cat();
         cat.setName("Barsik");
+
+        CatWoman catWoman1 = new CatWoman();
+        catWoman1.setName("Riska");
+        CatWoman catWoman2 = new CatWoman();
+        catWoman2.setName("Murka");
+
+        List<CatWoman> catWomanList = new ArrayList<>();
+        catWomanList.add(catWoman1);
+        catWomanList.add(catWoman2);
+
+        cat.setCatWomanList(catWomanList);
         return cat;
     }
 }
