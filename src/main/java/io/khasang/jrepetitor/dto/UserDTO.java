@@ -32,6 +32,7 @@ public class UserDTO {
             profile.setMiddlename(inputUser.getProfile().getMiddlename());
             profile.setSurname(inputUser.getProfile().getSurname());
             profile.setEmail(inputUser.getProfile().getEmail());
+            profile.setPhoneNumber(inputUser.getProfile().getPhoneNumber());
             userDTO.setProfile(profile);
             userDTOList.add(userDTO);
         }
@@ -39,6 +40,9 @@ public class UserDTO {
     }
 
     public UserDTO getUserDTO(User user) {
+        if (user == null) {
+            return new UserDTO();
+        }
         UserDTO userDTO = new UserDTO();
         userDTO.setName(user.getName());
         userDTO.setLogin(user.getLogin());
@@ -47,11 +51,14 @@ public class UserDTO {
         userDTO.setRoleName(user.getRoleName());
 
         ProfileDTO profile = new ProfileDTO();
+
         profile.setId(user.getProfile().getId());
         profile.setName(user.getProfile().getName());
         profile.setMiddlename(user.getProfile().getMiddlename());
         profile.setSurname(user.getProfile().getSurname());
         profile.setEmail(user.getProfile().getEmail());
+        profile.setPhoneNumber(user.getProfile().getPhoneNumber());
+
         userDTO.setProfile(profile);
         return userDTO;
     }
@@ -67,8 +74,8 @@ public class UserDTO {
         profile.setEmail(profileDTO.getEmail());
         profile.setPhoneNumber(profileDTO.getPhoneNumber());
 
-
         user.setId(userDTO.getId());
+        user.setLogin(userDTO.getLogin());
         user.setName(userDTO.getName());
         user.setPassword(userDTO.getPassword());
         user.setRoleName(userDTO.getRoleName());

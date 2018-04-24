@@ -1,14 +1,11 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.UserDao;
-import io.khasang.jrepetitor.dto.ProfileDTO;
 import io.khasang.jrepetitor.dto.UserDTO;
-import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 
@@ -37,7 +34,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User deleteUser(long id) {
-        return userDao.delete(userDTO.getUser(getUserById(id)));
+        UserDTO userDTO = getUserById(id);
+        User user = userDTO.getUser(userDTO);
+        return userDao.delete(user);
     }
 
     @Override
