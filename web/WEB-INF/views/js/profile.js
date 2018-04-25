@@ -27,6 +27,8 @@ var clearField = function () {
     $(".email").empty()
     $(".first-button").empty()
     $(".second-button").empty()
+    $('#success-block').remove();
+    $('#error-block').remove();
 }
 
 var RestGet = function () {
@@ -41,7 +43,8 @@ var RestGet = function () {
             showProfile(profile)
         },
         error: function (jqXHR, testStatus, errorThrown) {
-            $('#response').html(JSON.stringify(jqXHR))
+            prepareErorBlock()
+            $('#error-body').html(JSON.stringify(jqXHR))
         }
     });
 };
@@ -67,9 +70,12 @@ var RestPost = function (name, middlename, surname, email, phoneNumber) {
         success: function (result) {
             var profile = JSON.parse(JSON.stringify(result))
             showProfile(profile)
+            prepareSuccessBlock()
+            $('#success-body').append("profile updated")
         },
         error: function (jqXHR, testStatus, errorThrown) {
-            $('#response').html(JSON.stringify(jqXHR))
+            prepareErrorBlock();
+            $('#error-body').html(JSON.stringify(jqXHR))
         }
     });
 
@@ -87,10 +93,37 @@ var sendProfile = function () {
     }
 };
 
+var prepareErrorBlock = function () {
+    if ($(document).find('#error-block').length == 0) {
+        var allertDiv = "<div class='alert alert-danger' role='alert' id ='error-block'></div>";
+        var allertHeader = "<div class='d-inline p-2 ' id='error-header'><strong>Error</strong></div>";
+        var allertBody = "<div class='d-inline p-2 error-content'  id='error-body'></div>";
+        $('#content').append(allertDiv);
+        $('#error-block').append(allertHeader);
+        $('#error-header').append(allertBody);
+    } else {
+        $('#error-body').empty();
+    }
+}
+
+var prepareSuccessBlock = function () {
+    if ($(document).find('#success-block').length == 0) {
+        var successDiv = "<div class='alert alert-success' role='alert' id ='success-block'>"
+        var successHeader = "<div class='d-inline p-2' id='success-header'><strong>Success</strong></div>";
+        var successBody = "<div class='d-inline p-2'  id='success-body'></div>";
+        $('#content').append(successDiv);
+        $('#success-block').append(successHeader);
+        $('#success-header').append(successBody);
+    } else {
+        $('#success-body').empty();
+    }
+}
+
 function validateProfile(name, surname, middlename, phone, email) {
     //need more validate rules
     if (name == "" || surname == "" || middlename == "" || phone == "" || email == "") {
-        alert("Fields must be filled out");
+        prepareErrorBlock()
+        $('#error-body').append("Fields must be filled out")
         return false;
     } else {
         return true;

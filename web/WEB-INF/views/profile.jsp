@@ -43,7 +43,7 @@
     </nav>
 </header>
 <main role="main" class="container-fluid ">
-    <div class=".col-12 col-md-12 col-xs-12">
+    <div class=".col-12 col-md-5 col-xs-5" id="content" style="float: none; margin: 0 auto;">
         <li class="list-group">
         <li class="list-group-item active">
             <div class="b">User Profile</div>
@@ -73,7 +73,6 @@
             <div class="d-inline p-2 button btn-md second-button"></div>
         </li>
         </ul>
-    </div>
     </div>
 </main>
 
