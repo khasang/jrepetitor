@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class AppController {
@@ -18,8 +19,13 @@ public class AppController {
     // Cat cat = new Cat();
 
     @RequestMapping("/")
-    public String helloPage(){
+    public String helloPage() {
         return "cat";
+    }
+
+    @RequestMapping("/profile")
+    public String profile() {
+        return "profile";
     }
 
     @RequestMapping("/create")
@@ -35,7 +41,7 @@ public class AppController {
     }
 
     @RequestMapping("/user")
-    public String getUserPage(){
+    public String getUserPage() {
         return "user";
     }
 

@@ -2,10 +2,13 @@ package io.khasang.jrepetitor.config.application;
 
 import io.khasang.jrepetitor.dao.CatDao;
 import io.khasang.jrepetitor.dao.EmployeeDao;
+import io.khasang.jrepetitor.dao.UserDao;
 import io.khasang.jrepetitor.dao.impl.CatDaoImpl;
 import io.khasang.jrepetitor.dao.impl.EmployeeDaoImpl;
+import io.khasang.jrepetitor.dao.impl.UserDaoImpl;
 import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.entity.Employee;
+import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +38,7 @@ public class AppConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         JdbcDaoImpl jdbcDao = new JdbcDaoImpl();
         jdbcDao.setDataSource(dataSource());
         jdbcDao.setUsersByUsernameQuery(environment.getRequiredProperty("usersByQuery"));
@@ -44,19 +47,19 @@ public class AppConfig {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(){
-       JdbcTemplate jdbcTemplate = new JdbcTemplate();
-       jdbcTemplate.setDataSource(dataSource());
-       return jdbcTemplate;
+    public JdbcTemplate jdbcTemplate() {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(dataSource());
+        return jdbcTemplate;
     }
 
     @Bean
-    public CreateTable createTable(){
+    public CreateTable createTable() {
         return new CreateTable(jdbcTemplate());
     }
 
     @Bean
-    public CatDao catDao(){
+    public CatDao catDao() {
         return new CatDaoImpl(Cat.class);
     }
 
@@ -65,4 +68,8 @@ public class AppConfig {
         return new EmployeeDaoImpl(Employee.class);
     }
 
+    @Bean
+    public UserDao userDao() {
+        return new UserDaoImpl(User.class);
+    }
 }
