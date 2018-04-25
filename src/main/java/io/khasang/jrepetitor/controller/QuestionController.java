@@ -16,12 +16,6 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-    // crud - create read update delete
-
-    // add
-
-    // REST GET PUT POST DELETE PATCH
-    // JSON
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public Question addQuestion(@RequestBody Question question){
@@ -37,11 +31,9 @@ public class QuestionController {
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Question getQuestionById(@PathVariable(value = "id") String id){
-        // exception
         return questionService.getQuestionById(Long.parseLong(id));
     }
 
-    // localhost:8080/question/delete?id=5&name=Jack
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Question deleteQuestion(@RequestParam(value = "id") String id) {

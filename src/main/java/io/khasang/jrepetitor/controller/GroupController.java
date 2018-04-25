@@ -15,12 +15,6 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
-    // crud - create read update delete
-
-    // add
-
-    // REST GET PUT POST DELETE PATCH
-    // JSON
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public Group addGroup(@RequestBody Group group){
@@ -36,11 +30,9 @@ public class GroupController {
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Group getGroupById(@PathVariable(value = "id") String id){
-        // exception
         return groupService.getGroupById(Long.parseLong(id));
     }
 
-    // localhost:8080/group/delete?id=5&name=Jack
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Group deleteGroup(@RequestParam(value = "id") String id) {

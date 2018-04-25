@@ -38,7 +38,6 @@ public class Item implements Serializable{
         this.content = content;
     }
 
-
     public Question getQuestion() {
         return question;
     }

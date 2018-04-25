@@ -15,12 +15,6 @@ public class UserAnswerController {
     @Autowired
     private UserAnswerService userAnswerService;
 
-    // crud - create read update delete
-
-    // add
-
-    // REST GET PUT POST DELETE PATCH
-    // JSON
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public UserAnswer addUserAnswer(@RequestBody UserAnswer userAnswer){
@@ -40,7 +34,6 @@ public class UserAnswerController {
         return userAnswerService.getUserAnswerById(Long.parseLong(id));
     }
 
-    // localhost:8080/userAnswer/delete?id=5&name=Jack
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
     public UserAnswer deleteUserAnswer(@RequestParam(value = "id") String id) {

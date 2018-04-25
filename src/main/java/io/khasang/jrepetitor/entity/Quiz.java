@@ -13,13 +13,11 @@ import java.util.List;
 @Entity
 @Table(name="JR_QUIZ")
 public class Quiz implements Serializable{
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
-
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Question> questions = new ArrayList<Question>();

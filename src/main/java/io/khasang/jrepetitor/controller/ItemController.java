@@ -16,12 +16,6 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    // crud - create read update delete
-
-    // add
-
-    // REST GET PUT POST DELETE PATCH
-    // JSON
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public Item addItem(@RequestBody Item item){
@@ -41,7 +35,6 @@ public class ItemController {
         return itemService.getItemById(Long.parseLong(id));
     }
 
-    // localhost:8080/item/delete?id=5&name=Jack
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Item deleteItem(@RequestParam(value = "id") String id) {

@@ -18,10 +18,14 @@ public class Question implements Serializable{
     private Long id;
 
     @Column(length = 1000)
-    //question content
+    /**
+     * question content
+     */
     private String content;
 
-    //question type: radio/CheckBox
+    /**
+     * question type: radio/CheckBox
+     */
     private String type;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -32,7 +36,9 @@ public class Question implements Serializable{
 
     @Column(length = 1000)
 
-    //Explanation
+    /**
+     * Explanation
+     */
     private String explanation;
 
     public Long getId() {

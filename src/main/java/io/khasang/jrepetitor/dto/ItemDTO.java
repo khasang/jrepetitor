@@ -12,9 +12,14 @@ import java.util.List;
 public class ItemDTO {
     private Long id;
 
-    //Answer content
+    /**
+     * Answer content
+     */
     private String content;
-    // 0 or 1: 0 -incorrect answer, 1 - correct answer
+
+    /**
+     * 0 or 1: 0 -incorrect answer, 1 - correct answer
+     */
     private byte correct;
 
     private Question question;
@@ -51,8 +56,7 @@ public class ItemDTO {
         this.question = question;
     }
 
-    public List<ItemDTO> getItemDTOList(List<Item> list)
-    {
+    public List<ItemDTO> getItemDTOList(List<Item> list) {
         List<ItemDTO> itemDTOList = new ArrayList<>();
 
         for (Item item : list)

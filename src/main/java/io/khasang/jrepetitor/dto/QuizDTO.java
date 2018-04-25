@@ -3,6 +3,8 @@ package io.khasang.jrepetitor.dto;
 import io.khasang.jrepetitor.entity.Item;
 import io.khasang.jrepetitor.entity.Question;
 import io.khasang.jrepetitor.entity.Quiz;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Component
 public class QuizDTO {
+
+    private static final Logger log = LoggerFactory.getLogger(QuizDTO.class);
 
     private Long id;
 
@@ -19,7 +23,9 @@ public class QuizDTO {
 
     private GroupDTO group;
 
-    // question level
+    /**
+     * question level
+     */
     private byte level;
 
     public Long getId() {
@@ -116,7 +122,9 @@ public class QuizDTO {
 
             }
         }
-        catch (Exception e){}
+        catch (Exception e){
+            log.info("Quiz list is empty");
+        }
         return quizDTOList;
 
     }
@@ -171,7 +179,9 @@ public class QuizDTO {
 
             quizDTO.setQuestions(questionDTOList);
         }
-         catch (Exception e){}
+         catch (Exception e){
+             log.info("Quiz is empty");
+         }
 
         return quizDTO;
     }

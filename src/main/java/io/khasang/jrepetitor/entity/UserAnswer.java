@@ -12,19 +12,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "JR_USER_ANSWER")
 public class UserAnswer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "question_id",
-            foreignKey = @ForeignKey(name = "QUESTION_ID_FK"))
+    @JoinColumn(name = "question_id", foreignKey = @ForeignKey(name = "QUESTION_ID_FK"))
     private Question question;
 
     @ManyToOne
-    @JoinColumn(name = "item_id",
-            foreignKey = @ForeignKey(name = "ITEN_ID_FK"))
+    @JoinColumn(name = "item_id", foreignKey = @ForeignKey(name = "ITEN_ID_FK"))
     private Item item;
 
     @ManyToOne

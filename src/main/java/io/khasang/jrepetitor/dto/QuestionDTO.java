@@ -2,6 +2,9 @@ package io.khasang.jrepetitor.dto;
 
 import io.khasang.jrepetitor.entity.Item;
 import io.khasang.jrepetitor.entity.Question;
+import io.khasang.jrepetitor.model.CreateTable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,19 +13,29 @@ import java.util.List;
 @Component
 public class QuestionDTO {
 
+    private static final Logger log = LoggerFactory.getLogger(QuestionDTO.class);
+
     private Long id;
 
-    //question content
+    /**
+     * question content
+     */
     private String content;
-    //question type: radio/CheckBox
+    /**
+     *question type: radio/CheckBox
+     */
     private String type;
 
-    // Answer variants
+    /**
+     * Answer variants
+     */
     private List<ItemDTO> items = new ArrayList<ItemDTO>();
 
     private QuizDTO quiz;
 
-    //Explanation of correct answer
+    /**
+     *
+     */
     private String explanation;
 
     public Long getId() {
@@ -103,7 +116,9 @@ public class QuestionDTO {
                 questionDTOList.add(questionDTO);
             }
         }
-        catch (Exception e){}
+        catch (Exception e){
+            log.info("QuestionDTO is Empty ");
+        }
         return questionDTOList;
     }
 }

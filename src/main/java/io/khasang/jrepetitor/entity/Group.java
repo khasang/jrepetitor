@@ -22,7 +22,7 @@ public class Group implements Serializable{
     private Long id;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    List<Quiz> quizes = new ArrayList<Quiz>();
+    private List<Quiz> quizes = new ArrayList<Quiz>();
 
     //topic name
     private String name;

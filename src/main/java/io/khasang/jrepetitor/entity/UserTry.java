@@ -15,7 +15,6 @@ import java.util.List;
 @Entity
 @Table(name = "JR_USER_TRY")
 public class UserTry {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -29,8 +28,7 @@ public class UserTry {
     private Group group;
 
     @ManyToOne
-    @JoinColumn(name = "quiz_id",
-            foreignKey = @ForeignKey(name = "QUIZ_ID_FK"))
+    @JoinColumn(name = "quiz_id", foreignKey = @ForeignKey(name = "QUIZ_ID_FK"))
     private Quiz quiz;
 
     private Timestamp timestamp;

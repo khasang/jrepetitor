@@ -35,5 +35,4 @@ public interface UserTryService {
      * @return removed userTry
      */
     UserTry deleteUserTry(long id);
-
 }
