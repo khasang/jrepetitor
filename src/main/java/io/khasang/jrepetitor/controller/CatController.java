@@ -46,6 +46,12 @@ public class CatController {
         return catService.getCatById(Long.parseLong(id));
     }
 
+    @RequestMapping(value = "/get/name/{name}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public List<Cat> getCatByName(@PathVariable(value = "name") String name) {
+        return catService.getCatByName(name);
+    }
+
     // localhost:8080/cat/delete?id=5&name=Jack
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody

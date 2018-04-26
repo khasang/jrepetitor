@@ -44,4 +44,13 @@ public interface CatService {
      * @return updated cat
      */
     Cat updateCat(Cat cat);
+
+    /**
+     * method for finding cat by name
+     *
+     * @param name = cat's name for search
+     * @return cats list with name name
+     **/
+
+    List<Cat> getCatByName(String name);
 }

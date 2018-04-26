@@ -110,8 +110,8 @@ public class CatControllerIntegrationTest {
         assertNotNull(list.get(0));
         assertNotNull(list.get(1));
 
-        deleteFromDB(firstCat);
-        deleteFromDB(secondCat);
+//        deleteFromDB(firstCat);
+//        deleteFromDB(secondCat);
     }
 
     @Test
@@ -174,7 +174,7 @@ public class CatControllerIntegrationTest {
 
     private Cat prefillCat() {
         Cat cat = new Cat();
-        cat.setName("Barsik");
+        cat.setName("Murzik");
 
         CatWoman catWoman1 = new CatWoman();
         catWoman1.setName("Riska");
