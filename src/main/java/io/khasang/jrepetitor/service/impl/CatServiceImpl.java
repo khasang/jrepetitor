@@ -12,6 +12,7 @@ import java.util.List;
 public class CatServiceImpl implements CatService {
     @Autowired
     private CatDao catDao;
+
     @Override
     public Cat addCat(Cat cat) {
         return catDao.create(cat);
@@ -34,6 +35,6 @@ public class CatServiceImpl implements CatService {
 
     @Override
     public Cat updateCat(Cat cat) {
-        return catDao.updateCat(cat);
+        return catDao.update(cat);
     }
 }

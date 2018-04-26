@@ -1,8 +1,14 @@
 package io.khasang.jrepetitor.config.application;
 
 import io.khasang.jrepetitor.dao.CatDao;
+import io.khasang.jrepetitor.dao.EmployeeDao;
+import io.khasang.jrepetitor.dao.TutorDao;
 import io.khasang.jrepetitor.dao.impl.CatDaoImpl;
+import io.khasang.jrepetitor.dao.impl.EmployeeDaoImpl;
+import io.khasang.jrepetitor.dao.impl.TutorDaoImpl;
 import io.khasang.jrepetitor.entity.Cat;
+import io.khasang.jrepetitor.entity.Employee;
+import io.khasang.jrepetitor.entity.Tutor;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -55,5 +61,15 @@ public class AppConfig {
     @Bean
     public CatDao catDao() {
         return new CatDaoImpl(Cat.class);
+    }
+
+    @Bean
+    public EmployeeDao employeeDao() {
+        return new EmployeeDaoImpl(Employee.class);
+    }
+
+    @Bean
+    public TutorDao tutorDao() {
+        return new TutorDaoImpl(Tutor.class);
     }
 }

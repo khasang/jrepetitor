@@ -7,4 +7,5 @@ public class CatDaoImpl extends BasicDaoImpl<Cat> implements CatDao {
     public CatDaoImpl(Class<Cat> entityClass) {
         super(entityClass);
     }
+
 }
