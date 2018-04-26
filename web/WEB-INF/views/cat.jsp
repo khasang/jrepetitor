@@ -21,6 +21,28 @@
             }
         });
     };
+
+    var RestPost = function (name, description) {
+        var JSONObject = {
+            'name' : name,
+            'description' : description
+        };
+        $.ajax({
+            type: 'POST',
+            url: service + '/add',
+            contentType: 'application/json;utf-8',
+            data: JSON.stringify(JSONObject),
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                $('#response').html(JSON.stringify(result))
+            },
+            error: function (jqXHR, testStatus, errorThrown) {
+                $('#response').html(JSON.stringify(jqXHR))
+            }
+        });
+    };
+
 </script>
 <body>
 <h1>Cat Menu</h1>
@@ -36,6 +58,17 @@
         <td>/cat/all</td>
         <td>
             <button type="button" onclick="RestGet()">Try</button>
+        </td>
+    </tr>
+    <tr>
+        <td>POST (Add cat)</td>
+        <td>/cat/add</td>
+        <td>
+            <form class="form-inline">
+                name: <input type="text" id="postName" value="catName">
+                description: <input type="text" id="postDescription" value="catDescription">
+                <button type="button" onclick="RestPost($('#postName').val(), $('#postDescription').val())">Try</button>
+            </form>
         </td>
     </tr>
 </table>

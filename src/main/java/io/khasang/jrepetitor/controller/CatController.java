@@ -3,6 +3,8 @@ package io.khasang.jrepetitor.controller;
 import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.service.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import java.util.List;
 
 @Controller
@@ -20,11 +23,23 @@ public class CatController {
     @Autowired
     private CatService catService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
-    public Cat addCat(@RequestBody Cat cat) {
+    public Cat addCat(@RequestBody Cat cat){
         return catService.addCat(cat);
     }
+
+//    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+//    @ResponseBody
+//    public ResponseEntity<Cat> addCat(@RequestBody Cat cat) {
+//        try {
+//            ResponseEntity responseEntity = new ResponseEntity(catService.addCat(cat), HttpStatus.OK);
+//            return responseEntity;
+//        } catch (IllegalArgumentException e) {
+//            HttpStatus status = HttpStatus.EXPECTATION_FAILED;
+//            return new ResponseEntity(status);
+//        }
+//    }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = "application/json;charset=utf-8")
     @ResponseBody

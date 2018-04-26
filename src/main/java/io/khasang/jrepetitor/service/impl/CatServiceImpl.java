@@ -15,7 +15,11 @@ public class CatServiceImpl implements CatService {
 
     @Override
     public Cat addCat(Cat cat) {
-        return catDao.create(cat);
+        if (catDao.getCatsByName(cat.getName()).get(0) == null) {
+            return catDao.create(cat);
+        } else {
+            throw new IllegalArgumentException("Name should be uniq - duplicate name: " + cat.getName());
+        }
     }
 
     @Override

@@ -1,5 +1,7 @@
 package io.khasang.jrepetitor.entity;
 
+import org.springframework.http.ResponseEntity;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,11 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Cat {
+public class Cat{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+    private String description;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<CatWoman> catWomanList = new ArrayList<>();
 
@@ -41,5 +44,13 @@ public class Cat {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -175,6 +175,7 @@ public class CatControllerIntegrationTest {
     private Cat prefillCat() {
         Cat cat = new Cat();
         cat.setName("Murzik");
+        cat.setDescription("Beautiful");
 
         CatWoman catWoman1 = new CatWoman();
         catWoman1.setName("Riska");
