@@ -50,27 +50,27 @@
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Name:</div>
-            <div class="d-inline p-2 name"></div>
+            <div class="d-inline p-2 " id="name-field"></div>
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Surname:</div>
-            <div class="d-inline p-2 surname"></div>
+            <div class="d-inline p-2 surname" id="surname-field"></div>
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Middlename:</div>
-            <div class="d-inline p-2 middlename"></div>
+            <div class="d-inline p-2 " id="middlename-field"></div>
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Phone:</div>
-            <div class="d-inline p-2 phone"></div>
+            <div class="d-inline p-2 phone" id="phone-field"></div>
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Email:</div>
-            <div class="d-inline p-2 email"></div>
+            <div class="d-inline p-2 email" id="email-field"></div>
         </li>
         <li class="list-group-item button button-place">
-            <div class="d-inline p-2 button btn-md first-button"></div>
-            <div class="d-inline p-2 button btn-md second-button"></div>
+            <div class="d-inline p-2 button btn-md " id="first-button-field"></div>
+            <div class="d-inline p-2 button btn-md " id="second-button-field"></div>
         </li>
         </ul>
     </div>

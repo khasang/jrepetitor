@@ -1,32 +1,32 @@
 var showForm = function () {
     clearField()
-    $(".name").append("<input type='text' class='form-control' id='nameinput'>")
-    $(".surname").append("<input type='text' class='form-control' id='surnameinput'>")
-    $(".middlename").append("<input type='text' class='form-control' id='middlenameinput'>")
-    $(".phone").append("<input type='text' class='form-control' id='phoneinput'>")
-    $(".email").append("<input type='text' class='form-control' id='emailinput'>")
-    $(".first-button").append("<button onclick=\"sendProfile()\" type=\"button\" class=\"btn btn-primary \">Save</button>")
-    $(".second-button").append("<button onclick=\"RestGet()\" type=\"button\" class=\"btn btn-primary \">Cancel</button>")
+    $('#name-field').append("<input type='text' class='form-control' id='nameinput'>")
+    $('#surname-field').append("<input type='text' class='form-control' id='surnameinput'>")
+    $('#middlename-field').append("<input type='text' class='form-control' id='middlenameinput'>")
+    $('#phone-field').append("<input type='text' class='form-control' id='phoneinput'>")
+    $('#email-field').append("<input type='text' class='form-control' id='emailinput'>")
+    $('#first-button-field').append("<button onclick='sendProfile()' type='button' class='btn btn-primary'>Save</button>")
+    $('#second-button-field').append("<button onclick='RestGet()' type='button' class='btn btn-primary'>Cancel</button>")
 }
 
 var showProfile = function (profile) {
     clearField()
-    $('.name').append(" " + profile.name)
-    $('.surname').append(" " + profile.surname)
-    $('.middlename').append(" " + profile.middlename)
-    $('.phone').append(" " + profile.phoneNumber)
-    $('.email').append(" " + profile.email);
-    $(".first-button").append("<button onclick= \"showForm()\" type=\"button\" class=\"btn btn-primary showFormButton\">Edit</button>")
+    $('#name-field').append(profile.name)
+    $('#surname-field').append(profile.surname)
+    $('#middlename-field').append(profile.middlename)
+    $('#phone-field').append(profile.phoneNumber)
+    $('#email-field').append(profile.email);
+    $('#first-button-field').append("<button onclick= 'showForm()' type='button' class='btn btn-primary showFormButton'>Edit</button>")
 }
 
 var clearField = function () {
-    $(".name").empty()
-    $(".surname").empty()
-    $(".middlename").empty()
-    $(".phone").empty()
-    $(".email").empty()
-    $(".first-button").empty()
-    $(".second-button").empty()
+    $('#name-field').empty()
+    $('#surname-field').empty()
+    $('#middlename-field').empty()
+    $('#phone-field').empty()
+    $('#email-field').empty()
+    $('#first-button-field').empty()
+    $('#second-button-field').empty()
     $('#success-block').remove();
     $('#error-block').remove();
 }
@@ -83,11 +83,11 @@ var RestPost = function (name, middlename, surname, email, phoneNumber) {
 
 var sendProfile = function () {
     validateProfile()
-    var name = document.getElementById("nameinput").value;
-    var surname = document.getElementById("surnameinput").value;
-    var middlename = document.getElementById("middlenameinput").value;
-    var phone = document.getElementById("phoneinput").value;
-    var email = document.getElementById("emailinput").value;
+    var name = document.getElementById('nameinput').value;
+    var surname = document.getElementById('surnameinput').value;
+    var middlename = document.getElementById('middlenameinput').value;
+    var phone = document.getElementById('phoneinput').value;
+    var email = document.getElementById('emailinput').value;
     if (validateProfile(name, surname, middlename, phone, email)) {
         RestPost(name, middlename, surname, email, phone)
     }
