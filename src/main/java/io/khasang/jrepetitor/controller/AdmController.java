@@ -6,7 +6,12 @@ import io.khasang.jrepetitor.service.NewsService;
 import io.khasang.jrepetitor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -18,13 +23,11 @@ public class AdmController {
     @Autowired
     private NewsService newsService;
 
-    // root
     @RequestMapping()
     public String createMain() {
         return "adm";
     }
 
-    // for users
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public User addUser(@RequestBody User user) {
@@ -55,7 +58,6 @@ public class AdmController {
         return userService.deleteUser(Long.parseLong(id));
     }
 
-    //for news
     @RequestMapping(value = "add/news", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public News addNews(@RequestBody News news) {
