@@ -17,6 +17,7 @@ public class CatController {
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Cat addCat(@RequestBody Cat cat){
+        /*asf*/
         return catService.addCat(cat);
     }
 
