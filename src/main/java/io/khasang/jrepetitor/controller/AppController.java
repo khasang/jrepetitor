@@ -14,6 +14,8 @@ public class AppController {
     @Autowired
     private CreateTable createTable;
 
+
+
     @RequestMapping("/")
     public String helloPage(){
         return "cat";
@@ -34,6 +36,11 @@ public class AppController {
     @RequestMapping("/user")
     public String getUserPage(){
         return "user";
+    }
+
+    @RequestMapping("/user/get/auth")
+    public String getUserCabinet(){
+        return "private";
     }
 
 }
