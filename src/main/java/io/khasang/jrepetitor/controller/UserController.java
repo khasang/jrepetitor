@@ -4,7 +4,12 @@ import io.khasang.jrepetitor.dto.UserDTO;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.service.UserService;
+import io.khasang.jrepetitor.utils.CreationProfileStatus;
+import io.khasang.jrepetitor.utils.CreationUserStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,6 +30,15 @@ public class UserController {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userService.addUser(user);
     }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<CreationUserStatus> createUser(@RequestBody User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        CreationUserStatus creationUserStatus = userService.createUser(user);
+        return ResponseEntity.ok(creationUserStatus);
+    }
+
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
@@ -57,17 +71,10 @@ public class UserController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Profile setProfile(@RequestBody Profile profile) {
+    public CreationProfileStatus setProfile(@RequestBody Profile profile) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         User user = userService.getUserByLogin(currentPrincipalName);
-        Profile currentProfile = user.getProfile();
-        currentProfile.setName(profile.getName());
-        currentProfile.setMiddlename(profile.getMiddlename());
-        currentProfile.setSurname(profile.getSurname());
-        currentProfile.setEmail(profile.getEmail());
-        currentProfile.setPhoneNumber(profile.getPhoneNumber());
-        userService.updateUser(user);
-        return currentProfile;
+        return userService.updateProfile(user, profile);
     }
 }

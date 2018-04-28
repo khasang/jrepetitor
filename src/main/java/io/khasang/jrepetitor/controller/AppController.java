@@ -28,6 +28,11 @@ public class AppController {
         return "profile";
     }
 
+    @RequestMapping("/register")
+    public String register() {
+        return "register";
+    }
+
     @RequestMapping("/create")
     public String createTableStatus(Model model) {
         model.addAttribute("status", createTable.createTableStatus());

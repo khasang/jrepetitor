@@ -1,6 +1,9 @@
 div.b {
-    font-size: normal;
     font-weight: bold;
+}
+
+div.error-text {
+    color: red;
 }
 
 .activelist a {

@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.dao.impl;
 
 import io.khasang.jrepetitor.dao.UserDao;
+import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import org.hibernate.Session;
 

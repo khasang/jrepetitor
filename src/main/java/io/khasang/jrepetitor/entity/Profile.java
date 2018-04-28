@@ -15,17 +15,17 @@ public class Profile {
     @Column(unique = true)
     private String phoneNumber;
     //todo next commit
-    //@OneToOne(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    //private User user;
+    // @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    // private User user;
 
-    /*public User getUser() {
+  /*  public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-    */
+    }*/
+
     public long getId() {
         return id;
     }
