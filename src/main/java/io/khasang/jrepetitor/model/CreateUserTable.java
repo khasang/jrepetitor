@@ -30,8 +30,8 @@ public class CreateUserTable {
                     "  CONSTRAINT \"new_users_pkey\" PRIMARY KEY (id)\n" +
                     ")");
 
-            jdbcTemplate.execute("INSERT INTO new_users (id, login, name, password, role) VALUES (1, 'Oleg', 'Oleg', 'Oleg', 2);\n" +
-                    "INSERT INTO new_users (id, login, name, password, role) VALUES (2, 'Dima', 'Dima', 'Dima', 1);");
+            jdbcTemplate.execute("INSERT INTO new_users (id, login, name, password, role) VALUES (100, 'Oleg', 'Oleg', 'Oleg', 2);\n" +
+                    "INSERT INTO new_users (id, login, name, password, role) VALUES (200, 'Dima', 'Dima', 'Dima', 1);");
             return "userTable created";
         } catch (Exception e) {
             return "UserTable creation failed " + e;

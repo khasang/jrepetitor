@@ -17,9 +17,6 @@ public class AppController {
     @Autowired
     private CreateUserTable createUserTable;
 
-    // Фабричный метод бинов.
-    // Cat cat = new Cat();
-
     @RequestMapping("/")
     public String helloPage(){
         return "cat";
