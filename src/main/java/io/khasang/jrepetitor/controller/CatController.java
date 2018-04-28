@@ -14,12 +14,6 @@ public class CatController {
     @Autowired
     private CatService catService;
 
-    // crud - create read update delete
-
-    // add
-
-    // REST GET PUT POST DELETE PATCH
-    // JSON
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Cat addCat(@RequestBody Cat cat){
@@ -35,18 +29,9 @@ public class CatController {
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Cat getCatById(@PathVariable(value = "id") String id){
-        // exception
         return catService.getCatById(Long.parseLong(id));
     }
 
-    @RequestMapping(value = "/get/name/{name}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    @ResponseBody
-    public List<Cat> getCatByName(@PathVariable(value = "name") String name){
-        // exception
-        return catService.getCatByName(name);
-    }
-
-    // localhost:8080/cat/delete?id=5&name=Jack
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Cat deleteCat(@RequestParam(value = "id") String id) {

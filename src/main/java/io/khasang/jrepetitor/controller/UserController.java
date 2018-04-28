@@ -39,7 +39,6 @@ public class UserController {
         return ResponseEntity.ok(creationUserStatus);
     }
 
-
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<UserDTO> getAllUsers() {

@@ -18,6 +18,4 @@ public interface UserDao extends BasicDao<User> {
      * @return user updated user
      */
     User updateUser(User user);
-
-
 }
