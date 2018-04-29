@@ -18,12 +18,14 @@ public class EmployeeController {
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Employee addEmployee(@RequestBody Employee employee) {
+
         return employeeService.addEmployee(employee);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<EmployeeDTO> getAllEmployees() {
+
         return employeeService.getAllEmployees();
     }
 
