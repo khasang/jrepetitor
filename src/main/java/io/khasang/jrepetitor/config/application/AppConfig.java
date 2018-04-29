@@ -1,8 +1,14 @@
 package io.khasang.jrepetitor.config.application;
 
-import io.khasang.jrepetitor.dao.*;
-import io.khasang.jrepetitor.dao.impl.*;
-import io.khasang.jrepetitor.entity.*;
+import io.khasang.jrepetitor.dao.CatDao;
+import io.khasang.jrepetitor.dao.EmployeeDao;
+import io.khasang.jrepetitor.dao.UserDao;
+import io.khasang.jrepetitor.dao.impl.CatDaoImpl;
+import io.khasang.jrepetitor.dao.impl.EmployeeDaoImpl;
+import io.khasang.jrepetitor.dao.impl.UserDaoImpl;
+import io.khasang.jrepetitor.entity.Cat;
+import io.khasang.jrepetitor.entity.Employee;
+import io.khasang.jrepetitor.entity.Users;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +17,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
@@ -58,36 +65,13 @@ public class AppConfig {
     }
 
     @Bean
-    public GroupDao groupDao(){
-        return new GroupDaoImpl(Group.class);
+    public EmployeeDao employeeDao() {
+        return new EmployeeDaoImpl(Employee.class);
     }
+
     @Bean
-    public QuizDao quizDao(){
-        return new QuizDaoImpl(Quiz.class);
+    public UserDao userDao(){return new UserDaoImpl(Users.class);
     }
-    @Bean
-    public QuestionDao questionDao(){
-        return new QuestionDaoImpl(Question.class);
-    }
-    @Bean
-    public ItemDao itemDao(){
-        return new ItemDaoImpl(Item.class);
-    }
-    @Bean
-    public UserTryDao userTryDao(){
-        return new UserTryDaoImpl(UserTry.class);
-    }
-    @Bean
-    public UserAnswerDao userAnswerDao(){
-        return new UserAnswerDaoImpl(UserAnswer.class);
-    }
-    @Bean
-    public ItemRightAnsDao itemRightAnsDao(){
-        return new ItemRightAnsDaoImpl(ItemRightAns.class);
-    }
-    @Bean
-    public RightAnsDao rightAnsDao(){
-        return new RightAnsDaoImpl(RightAns.class);
-    }
+
 
 }
