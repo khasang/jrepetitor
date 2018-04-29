@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,12 +14,11 @@ public class AppController {
     @Autowired
     private CreateTable createTable;
 
-    // Фабричный метод бинов.
-    // Cat cat = new Cat();
+
 
     @RequestMapping("/")
-    public String helloPage() {
-        return "index";
+    public String helloPage(){
+        return "cat";
     }
 
     @RequestMapping("/create")
@@ -36,13 +34,13 @@ public class AppController {
     }
 
     @RequestMapping("/user")
-    public String getUserPage() {
+    public String getUserPage(){
         return "user";
     }
 
-    @GetMapping("/quiz")
-    public String getQuizPage() {
-        return "quiz";
+    @RequestMapping("/user/get/auth")
+    public String getUserCabinet(){
+        return "private";
     }
 
 }
