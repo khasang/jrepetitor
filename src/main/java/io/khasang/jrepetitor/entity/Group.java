@@ -24,7 +24,9 @@ public class Group implements Serializable{
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Quiz> quizes = new ArrayList<Quiz>();
 
-    //topic name
+    /**
+     *topic name
+     */
     private String name;
 
     public Long getId() {

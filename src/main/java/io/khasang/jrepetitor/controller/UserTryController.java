@@ -3,7 +3,6 @@ package io.khasang.jrepetitor.controller;
 import io.khasang.jrepetitor.entity.UserTry;
 import io.khasang.jrepetitor.service.UserTryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,19 +16,19 @@ public class UserTryController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
-    public UserTry addUserTry(@RequestBody UserTry userTry){
+    public UserTry addUserTry(@RequestBody UserTry userTry) {
         return userTryService.addUserTry(userTry);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<UserTry> getAllUserTrys(){
+    public List<UserTry> getAllUserTrys() {
         return userTryService.getAllUserTrys();
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public UserTry getUserTryById(@PathVariable(value = "id") String id){
+    public UserTry getUserTryById(@PathVariable(value = "id") String id) {
         // exception
         return userTryService.getUserTryById(Long.parseLong(id));
     }

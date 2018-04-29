@@ -14,9 +14,14 @@ public class Item implements Serializable{
     private Long id;
 
     @Column(length = 1000)
-    //Answer content
+    /**
+     *      Answer content
+     */
     private String content;
-    //1 - Correct, 0 - incorrect
+
+    /**
+     * 1 - Correct, 0 - incorrect
+     */
     private byte correct;
 
     @ManyToOne

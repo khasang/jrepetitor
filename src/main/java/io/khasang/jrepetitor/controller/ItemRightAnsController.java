@@ -16,19 +16,20 @@ public class ItemRightAnsController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
-    public ItemRightAns addItemRightAns(@RequestBody ItemRightAns itemRightAns){
+    public ItemRightAns addItemRightAns(@RequestBody ItemRightAns itemRightAns) {
         return itemRightAnsService.addItemRightAns(itemRightAns);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<ItemRightAns> getAllItemRightAns(){
+    public List<ItemRightAns> getAllItemRightAns() {
+
         return itemRightAnsService.getAllItemRightAns();
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ItemRightAns getItemRightAnsById(@PathVariable(value = "id") String id){
+    public ItemRightAns getItemRightAnsById(@PathVariable(value = "id") String id) {
         // exception
         return itemRightAnsService.getItemRightAnsById(Long.parseLong(id));
     }
