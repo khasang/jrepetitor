@@ -71,5 +71,5 @@ public interface UserService {
      * @param profile = new profile state
      * @return operations state class
      */
-    CreationProfileStatus updateProfile(User user, Profile profile)
+    CreationProfileStatus updateProfile(User user, Profile profile);
 }
