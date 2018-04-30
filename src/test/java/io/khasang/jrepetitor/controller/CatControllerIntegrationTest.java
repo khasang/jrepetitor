@@ -2,6 +2,7 @@
 
 import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.entity.CatWoman;
+import jdk.Exported;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -72,6 +73,8 @@ public class CatControllerIntegrationTest {
     }
 
     @Test
+
+
     public void getAllCats() {
         Cat firstCat = createCat();
         Cat secondCat = createCat();
