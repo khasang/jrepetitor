@@ -50,43 +50,43 @@
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Name:</div>
-            <div class="d-inline p-2 error-text" id="name-error-place">name-error-place</div>
+            <div class="d-inline p-2 error-text" id="name-error-place"></div>
             <input type="text" class="form-control" id="name-input">
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Surname:</div>
-            <div class="d-inline p-2 error-text" id="surname-error-place">surname-error-place</div>
+            <div class="d-inline p-2 error-text" id="surname-error-place"></div>
             <input type="text" class="form-control" id="surname-input">
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Middlename:</div>
-            <div class="d-inline p-2 error-text" id="middlename-error-place">middlename-error-place</div>
+            <div class="d-inline p-2 error-text" id="middlename-error-place"></div>
             <input type="text" class="form-control" id="middlename-input">
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Phone:</div>
-            <div class="d-inline p-2 error-text" id="phone-error-place">phone-error-place</div>
+            <div class="d-inline p-2 error-text" id="phone-error-place"></div>
             <input type="text" class="form-control" id="phone-input">
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Email:</div>
-            <div class="d-inline p-2 error-text" id="email-error-place">email-error-place</div>
+            <div class="d-inline p-2 error-text" id="email-error-place"></div>
             <input type="text" class="form-control" id="email-input">
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Login:</div>
-            <div class="d-inline p-2 error-text" id="login-error-place">login-error-place</div>
+            <div class="d-inline p-2 error-text" id="login-error-place"></div>
             <input type="text" class="form-control" id="login-input">
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Password:</div>
-            <div class="d-inline p-2 error-text" id="password-input-place">password-error-place</div>
-            <input type="text" class="form-control" id="password-input">
+            <div class="d-inline p-2 error-text" id="password-input-place"></div>
+            <input type="password" class="form-control" id="password-input">
         </li>
         <li class="list-group-item">
             <div class="d-inline p-2 b">Confirm password:</div>
-            <div class="d-inline p-2 error-text" id="сonfirm-password-error-place">password-error-place</div>
-            <input type="text" class="form-control" id="сonfirm-password-input">
+            <div class="d-inline p-2 error-text" id="confirm-password-error-place"></div>
+            <input type="password" class="form-control" id="confirm-password-input">
         </li>
 
         <li class="list-group-item button button-place">
