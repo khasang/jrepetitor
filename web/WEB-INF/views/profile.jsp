@@ -43,7 +43,7 @@
     </nav>
 </header>
 <main role="main" class="container-fluid ">
-    <div class=".col-12 col-md-5 col-xs-5" id="content" style="float: none; margin: 0 auto;">
+    <div class=".col-12 col-sm-8 col-md-5 .col-lg-5 col-xs-5" id="content" style="float: none; margin: 0 auto;">
         <li class="list-group">
         <li class="list-group-item active">
             <div class="b">User Profile</div>

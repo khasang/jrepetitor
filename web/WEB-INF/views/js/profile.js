@@ -1,12 +1,12 @@
 var showForm = function () {
-    clearField()
-    $('#name-field').append("<input type='text' class='form-control' id='nameinput'>")
-    $('#surname-field').append("<input type='text' class='form-control' id='surnameinput'>")
-    $('#middlename-field').append("<input type='text' class='form-control' id='middlenameinput'>")
-    $('#phone-field').append("<input type='text' class='form-control' id='phoneinput'>")
-    $('#email-field').append("<input type='text' class='form-control' id='emailinput'>")
-    $('#first-button-field').append("<button onclick='sendProfile()' type='button' class='btn btn-primary'>Save</button>")
-    $('#second-button-field').append("<button onclick='RestGet()' type='button' class='btn btn-primary'>Cancel</button>")
+    clearField();
+    $('#name-field').append("<input type='text' class='form-control' id='nameinput'>");
+    $('#surname-field').append("<input type='text' class='form-control' id='surnameinput'>");
+    $('#middlename-field').append("<input type='text' class='form-control' id='middlenameinput'>");
+    $('#phone-field').append("<input type='text' class='form-control' id='phoneinput'>");
+    $('#email-field').append("<input type='text' class='form-control' id='emailinput'>");
+    $('#first-button-field').append("<button onclick='sendProfile()' type='button' class='btn btn-primary'>Save</button>");
+    $('#second-button-field').append("<button onclick='RestGet()' type='button' class='btn btn-primary'>Cancel</button>");
 }
 
 var showProfile = function (profile) {
@@ -39,12 +39,12 @@ var RestGet = function () {
         dataType: 'json',
         async: false,
         success: function (result) {
-            var profile = JSON.parse(JSON.stringify(result))
-            showProfile(profile)
+            var profile = JSON.parse(JSON.stringify(result));
+            showProfile(profile);
         },
         error: function (jqXHR, testStatus, errorThrown) {
-            prepareErorBlock()
-            $('#error-body').html(JSON.stringify(jqXHR))
+            prepareErorBlock();
+            $('#error-body').html(JSON.stringify(jqXHR));
         }
     });
 };
@@ -68,10 +68,8 @@ var RestPost = function (name, middlename, surname, email, phoneNumber) {
         dataType: 'json',
         async: false,
         success: function (result) {
-            var profile = JSON.parse(JSON.stringify(result))
-            showProfile(profile)
-            prepareSuccessBlock()
-            $('#success-body').append("profile updated")
+            var response = JSON.parse(JSON.stringify(result))
+            checkResponse(response);
         },
         error: function (jqXHR, testStatus, errorThrown) {
             prepareErrorBlock();
@@ -80,6 +78,24 @@ var RestPost = function (name, middlename, surname, email, phoneNumber) {
     });
 
 };
+
+var checkResponse = function (response) {
+    if (response.ok == true) {
+        RestGet();
+        prepareSuccessBlock();
+        $('#success-body').append("Profile update");
+    } else {
+        prepareErrorBlock();
+        if (response.emailExist == true) {
+
+            $('#error-body').append("Email already in use");
+        }
+        if (response.phoneExist == true) {
+
+            $('#error-body').append(" Phone already in use");
+        }
+    }
+}
 
 var sendProfile = function () {
     validateProfile()
@@ -120,7 +136,6 @@ var prepareSuccessBlock = function () {
 }
 
 function validateProfile(name, surname, middlename, phone, email) {
-    //need more validate rules
     if (name == "" || surname == "" || middlename == "" || phone == "" || email == "") {
         prepareErrorBlock()
         $('#error-body').append("Fields must be filled out")
