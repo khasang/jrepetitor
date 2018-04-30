@@ -7,8 +7,6 @@ import io.khasang.jrepetitor.service.UserService;
 import io.khasang.jrepetitor.utils.CreationProfileStatus;
 import io.khasang.jrepetitor.utils.CreationUserStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,14 +29,6 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    @ResponseBody
-    public ResponseEntity<CreationUserStatus> createUser(@RequestBody User user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        CreationUserStatus creationUserStatus = userService.createUser(user);
-        return ResponseEntity.ok(creationUserStatus);
-    }
-
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<UserDTO> getAllUsers() {
@@ -51,7 +41,6 @@ public class UserController {
         // exception
         return userService.getUserById(Long.parseLong(id));
     }
-
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
@@ -76,4 +65,13 @@ public class UserController {
         User user = userService.getUserByLogin(currentPrincipalName);
         return userService.updateProfile(user, profile);
     }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<CreationUserStatus> createUser(@RequestBody User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        CreationUserStatus creationUserStatus = userService.createUser(user);
+        return ResponseEntity.ok(creationUserStatus);
+    }
+
 }
