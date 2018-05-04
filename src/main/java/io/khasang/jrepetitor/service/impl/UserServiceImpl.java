@@ -43,9 +43,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User deleteUser(long id) {
-        UserDTO userDTO = getUserById(id);
-        User user = userDTO.getUser(userDTO);
-        return userDao.delete(user);
+        UserDTO CurrentUserDTO = getUserById(id);
+        User user = userDTO.getUser(CurrentUserDTO);
+        if (user == null) {
+            return null;
+        } else {
+            return userDao.delete(user);
+        }
     }
 
     @Override
