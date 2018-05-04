@@ -7,6 +7,7 @@ import io.khasang.jrepetitor.service.UserService;
 import io.khasang.jrepetitor.utils.CreationProfileStatus;
 import io.khasang.jrepetitor.utils.CreationUserStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,33 +38,53 @@ public class UserController {
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public UserDTO getUserById(@PathVariable(value = "id") String id) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable(value = "id") String id) {
         // exception
-        return userService.getUserById(Long.parseLong(id));
+        UserDTO userDTO = userService.getUserById(Long.parseLong(id));
+        if (userDTO == null) {
+            return new ResponseEntity<>(userDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(userDTO, HttpStatus.ACCEPTED);
+        }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public User deleteUser(@RequestParam(value = "id") String id) {
-        return userService.deleteUser(Long.parseLong(id));
+    public ResponseEntity<User> deleteUser(@RequestParam(value = "id") String id) {
+        User deletedUser = userService.deleteUser(Long.parseLong(id));
+        if (deletedUser == null) {
+            return new ResponseEntity<>(deletedUser, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(deletedUser, HttpStatus.ACCEPTED);
+        }
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Profile getProfile() {
+    public ResponseEntity<Profile> getProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
+        if (currentPrincipalName.equals("anonymousUser")) {
+            Profile profile = null;
+            return new ResponseEntity<>(profile, HttpStatus.UNAUTHORIZED);
+        }
         User user = userService.getUserByLogin(currentPrincipalName);
-        return user.getProfile();
+        return new ResponseEntity<>(user.getProfile(), HttpStatus.ACCEPTED);
+
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public CreationProfileStatus setProfile(@RequestBody Profile profile) {
+    public ResponseEntity<CreationProfileStatus> setProfile(@RequestBody Profile profile) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
+        if (currentPrincipalName.equals("anonymousUser")) {
+            CreationProfileStatus creationProfileStatus = null;
+            return new ResponseEntity<>(creationProfileStatus, HttpStatus.UNAUTHORIZED);
+        }
         User user = userService.getUserByLogin(currentPrincipalName);
-        return userService.updateProfile(user, profile);
+        CreationProfileStatus creationProfileStatus = userService.updateProfile(user, profile);
+        return new ResponseEntity<>(creationProfileStatus, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
@@ -74,4 +95,9 @@ public class UserController {
         return ResponseEntity.ok(creationUserStatus);
     }
 
+    @RequestMapping(value = "/authorized", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public String getCurrentUserLogin() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
 }
