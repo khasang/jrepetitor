@@ -41,7 +41,7 @@ public class UserDTO {
 
     public UserDTO getUserDTO(User user) {
         if (user == null) {
-            return new UserDTO();
+            return null;
         }
         UserDTO userDTO = new UserDTO();
         userDTO.setName(user.getName());
@@ -64,6 +64,9 @@ public class UserDTO {
     }
 
     public User getUser(UserDTO userDTO) {
+        if (userDTO == null) {
+            return null;
+        }
         User user = new User();
         Profile profile = new Profile();
         ProfileDTO profileDTO = getProfile();
