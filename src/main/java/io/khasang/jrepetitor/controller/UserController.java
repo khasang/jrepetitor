@@ -44,7 +44,7 @@ public class UserController {
         if (userDTO == null) {
             return new ResponseEntity<>(userDTO, HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(userDTO, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(userDTO, HttpStatus.OK);
         }
     }
 
@@ -55,7 +55,7 @@ public class UserController {
         if (deletedUser == null) {
             return new ResponseEntity<>(deletedUser, HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(deletedUser, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(deletedUser, HttpStatus.OK);
         }
     }
 
@@ -69,7 +69,7 @@ public class UserController {
             return new ResponseEntity<>(profile, HttpStatus.UNAUTHORIZED);
         }
         User user = userService.getUserByLogin(currentPrincipalName);
-        return new ResponseEntity<>(user.getProfile(), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(user.getProfile(), HttpStatus.OK);
 
     }
 
@@ -84,7 +84,7 @@ public class UserController {
         }
         User user = userService.getUserByLogin(currentPrincipalName);
         CreationProfileStatus creationProfileStatus = userService.updateProfile(user, profile);
-        return new ResponseEntity<>(creationProfileStatus, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(creationProfileStatus, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
