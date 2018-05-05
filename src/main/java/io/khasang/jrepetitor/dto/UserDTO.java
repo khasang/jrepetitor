@@ -69,7 +69,7 @@ public class UserDTO {
         }
         User user = new User();
         Profile profile = new Profile();
-        ProfileDTO profileDTO = getProfile();
+        ProfileDTO profileDTO = userDTO.getProfile();
         profile.setId(profileDTO.getId());
         profile.setName(profileDTO.getName());
         profile.setMiddlename(profileDTO.getMiddlename());
