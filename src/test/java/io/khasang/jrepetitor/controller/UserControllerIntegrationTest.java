@@ -6,6 +6,7 @@ import io.khasang.jrepetitor.utils.CreationUserStatus;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -20,8 +21,14 @@ public class UserControllerIntegrationTest {
     private static final String ALL = "/all";
     private static final String GET_BY_ID = "/get";
     private static final String DELETE = "/delete";
+    private static final String AUTHORIZED = "/authorized";
+    private static final String PROFILE = "/profile";
 
-    //run only clear base (unique db fields used)
+    /*
+     Run only on clear base (unique db fields used)
+     This test can damage data in the database.
+     Test must be incorrect if u have record with id = LongInteger.MaxValue
+     */
 
     @Test
     public void addUserAndCheck() {
@@ -46,7 +53,7 @@ public class UserControllerIntegrationTest {
         }
     }
 
-    @Test
+    @Test()
     public void deleteUser() {
         User user = createUser("test", "test", "test", "test", "test", "test@domain.zone", "1234567890");
 
@@ -63,36 +70,48 @@ public class UserControllerIntegrationTest {
 
         User deletedUser = responseEntity.getBody();
         assertNotNull(deletedUser);
-
-        ResponseEntity<User> responseForDeleteEmployee = restTemplate.exchange(
-                ROOT + GET_BY_ID + "/{id}",
-                HttpMethod.GET,
-                null,
-                User.class,
-                deletedUser.getId()
-        );
-
-        assertEquals(200, responseForDeleteEmployee.getStatusCodeValue());
-
-        //assertNull(responseForDeleteEmployee.getBody());
     }
+
+
+    @Test()
+    public void deleteNotExistingUser() {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<User> responseEntity = restTemplate.exchange(
+                    ROOT + DELETE + "?id=" + "{id}",
+                    HttpMethod.DELETE,
+                    null,
+                    User.class,
+                    Long.MAX_VALUE
+            );
+        } catch (HttpClientErrorException e) {
+            assertEquals(e.getMessage(), "404 null");
+        }
+    }
+
+    @Test()
+    public void getByIdNotExistingUser() {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<User> responseForGetUser = restTemplate.exchange(
+                    ROOT + GET_BY_ID + "/{id}",
+                    HttpMethod.GET,
+                    null,
+                    User.class,
+                    Long.MAX_VALUE
+            );
+        } catch (HttpClientErrorException e) {
+            assertEquals(e.getMessage(), "404 null");
+        }
+    }
+
 
     @Test
     public void getAllUsers() {
         User firstUser = createUser("test1", "test", "test", "test", "test", "test1@domain.zone", "12345678901");
         User secondUser = createUser("test2", "test", "test", "test", "test", "test2@domain.zone", "12345678902");
 
-        RestTemplate template = new RestTemplate();
-
-        ResponseEntity<List<User>> responseEntity = template.exchange(
-                ROOT + ALL,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<User>>() {
-                }
-        );
-
-        List<User> list = responseEntity.getBody();
+        List<User> list = returnAllUsers();
 
         assertNotNull(list.get(0));
         assertNotNull(list.get(1));
@@ -125,6 +144,7 @@ public class UserControllerIntegrationTest {
         assertFalse(creationUserStatus.getLoginExist());
         assertFalse(creationUserStatus.getPhoneExist());
 
+        //try to create a user with already existing login, phone and email
         creationUserStatus = template.exchange(
                 ROOT + CREATE,
                 HttpMethod.POST,
@@ -136,8 +156,78 @@ public class UserControllerIntegrationTest {
         assertTrue(creationUserStatus.getEmailExist());
         assertTrue(creationUserStatus.getLoginExist());
         assertTrue(creationUserStatus.getPhoneExist());
+
+        List<User> users = returnAllUsers();
+
+        //remove test user from db
+        User searchedUser = null;
+        for (User currentUser : users) {
+            if (currentUser.getLogin().equals(user.getLogin()) &&
+                    currentUser.getProfile().getPhoneNumber().equals(user.getProfile().getPhoneNumber()) &&
+                    currentUser.getProfile().getEmail().equals(user.getProfile().getEmail())) {
+                searchedUser = currentUser;
+            }
+        }
+        if (searchedUser != null) {
+            deleteFromDB(searchedUser);
+        } else {
+            throw new IllegalStateException("something wrong added user not exist in base");
+        }
+
     }
 
+
+    //correct only if user not authorized
+    @Test
+    public void authorized() {
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<String> responseEntity = template.exchange(
+                ROOT + AUTHORIZED,
+                HttpMethod.GET,
+                null,
+                String.class
+        );
+        assertEquals(responseEntity.getStatusCodeValue(), 200);
+        assertEquals(responseEntity.getBody(), "anonymousUser");
+    }
+
+    //correct only if user not authorized
+    @Test
+    public void getProfile() {
+        try {
+            RestTemplate template = new RestTemplate();
+            ResponseEntity<Profile> responseForGetUser = template.exchange(
+                    ROOT + PROFILE,
+                    HttpMethod.GET,
+                    null,
+                    Profile.class
+            );
+        } catch (HttpClientErrorException e) {
+            assertEquals(e.getMessage(), "401 null");
+        }
+    }
+
+    //correct only if user not authorized
+    @Test
+    public void setProfile() {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+            Profile profile = new Profile();
+
+            HttpEntity entity = new HttpEntity(profile, headers);
+
+            RestTemplate template = new RestTemplate();
+            ResponseEntity<CreationUserStatus> responseEntity = template.exchange(
+                    ROOT + PROFILE,
+                    HttpMethod.POST,
+                    entity,
+                    CreationUserStatus.class
+            );
+        } catch (HttpClientErrorException e) {
+            assertEquals(e.getMessage(), "401 null");
+        }
+    }
 
     private User deleteFromDB(User user) {
         RestTemplate restTemplate = new RestTemplate();
@@ -193,6 +283,21 @@ public class UserControllerIntegrationTest {
 
         user.setProfile(profile);
         return user;
+    }
+
+    private List<User> returnAllUsers() {
+        RestTemplate template = new RestTemplate();
+
+        ResponseEntity<List<User>> responseEntity = template.exchange(
+                ROOT + ALL,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<User>>() {
+                }
+        );
+
+        List<User> list = responseEntity.getBody();
+        return list;
     }
 
 }
