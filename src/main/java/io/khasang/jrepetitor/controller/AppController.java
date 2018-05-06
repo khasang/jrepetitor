@@ -15,10 +15,19 @@ public class AppController {
     private CreateTable createTable;
 
 
-
     @RequestMapping("/")
-    public String helloPage(){
+    public String helloPage() {
         return "cat";
+    }
+
+    @RequestMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
+
+    @RequestMapping("/register")
+    public String register() {
+        return "register";
     }
 
     @RequestMapping("/create")
@@ -34,12 +43,12 @@ public class AppController {
     }
 
     @RequestMapping("/user")
-    public String getUserPage(){
+    public String getUserPage() {
         return "user";
     }
 
     @RequestMapping("/user/get/auth")
-    public String getUserCabinet(){
+    public String getUserCabinet() {
         return "private";
     }
 

@@ -1,35 +1,45 @@
 package io.khasang.jrepetitor.dao.impl;
 
 import io.khasang.jrepetitor.dao.UserDao;
-import io.khasang.jrepetitor.entity.Users;
+import io.khasang.jrepetitor.entity.Profile;
+import io.khasang.jrepetitor.entity.User;
 import org.hibernate.Session;
 
-;import javax.persistence.TypedQuery;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
-
-public class UserDaoImpl extends BasicDaoImpl<Users> implements UserDao {
-    public UserDaoImpl(Class<Users> entityClass) {
+public class UserDaoImpl extends BasicDaoImpl<User> implements UserDao {
+    public UserDaoImpl(Class<User> entityClass) {
         super(entityClass);
     }
 
-
-    public Users getUserByName(String name) {
-
-
+    @Override
+    public User getUserByLogin(String login) {
         Session session = sessionFactory.getCurrentSession();
 
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<Users> criteriaQuery = criteriaBuilder.createQuery(Users.class);
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
 
-        Root<Users> root = criteriaQuery.from(Users.class);
+        Root<User> root = criteriaQuery.from(User.class);
 
         criteriaQuery.select(root);
-        criteriaQuery.where(criteriaBuilder.equal(root.get("name"), name));
+        criteriaQuery.where(criteriaBuilder.equal(root.get("login"), login));
 
-        TypedQuery<Users> typedQuery = session.createQuery(criteriaQuery);
-        return typedQuery.getSingleResult();
+        TypedQuery<User> typedQuery = session.createQuery(criteriaQuery);
+        List<User> resultList = typedQuery.getResultList();
+        if (resultList.isEmpty()) {
+            return null;
+        } else {
+            return resultList.get(0);
+        }
+    }
+
+    @Override
+    public User updateUser(User user) {
+        super.getSessionFactory().update(user);
+        return user;
     }
 }
