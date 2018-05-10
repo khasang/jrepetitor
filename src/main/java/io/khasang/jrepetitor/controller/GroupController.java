@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.controller;
 
+import io.khasang.jrepetitor.dto.GroupDTO;
 import io.khasang.jrepetitor.entity.Group;
 import io.khasang.jrepetitor.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class GroupController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<Group> getAllGroups() {
+    public List<GroupDTO> getAllGroups() {
 
         return groupService.getAllGroups();
     }

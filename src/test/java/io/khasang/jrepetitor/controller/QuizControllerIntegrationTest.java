@@ -38,35 +38,6 @@ public class QuizControllerIntegrationTest {
         deleteFromDB(quiz);
     }
 
-    @Test
-    public void deleteQuiz() {
-        Quiz quiz = createQuiz();
-
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Quiz> responseEntity = restTemplate.exchange(
-                ROOT + DELETE + "?id=" + "{id}",
-                HttpMethod.DELETE,
-                null,
-                Quiz.class,
-                quiz.getId()
-        );
-
-        assertEquals(200, responseEntity.getStatusCodeValue());
-
-        Quiz deletedQuiz = responseEntity.getBody();
-        assertNotNull(deletedQuiz);
-
-        ResponseEntity<Quiz> responseForDeleteQuiz = restTemplate.exchange(
-                ROOT + GET_BY_ID + "/{id}",
-                HttpMethod.GET,
-                null,
-                Quiz.class,
-                deletedQuiz.getId()
-        );
-
-        assertEquals(200, responseForDeleteQuiz.getStatusCodeValue());
-        assertNull(responseForDeleteQuiz.getBody());
-    }
 
     @Test
     public void getAllQuizs() {

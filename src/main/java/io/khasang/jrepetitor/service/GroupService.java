@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.service;
 
+import io.khasang.jrepetitor.dto.GroupDTO;
 import io.khasang.jrepetitor.entity.Group;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface GroupService {
      *
      * @return all Groups
      */
-    List<Group> getAllGroups();
+    List<GroupDTO> getAllGroups();
 
     /**
      * method for receive specify Group by id

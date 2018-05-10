@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.dto;
 
+import io.khasang.jrepetitor.entity.Group;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -38,4 +39,19 @@ public class GroupDTO {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<GroupDTO> getGroupDTOList(List<Group> list) {
+        List<GroupDTO> groupDTOList = new ArrayList<>();
+
+        for (Group group : list)
+        {
+            GroupDTO groupDTO = new GroupDTO();
+            groupDTO.setId(group.getId());
+            groupDTO.setName(group.getName());
+
+            groupDTOList.add(groupDTO);
+        }
+        return groupDTOList;
+    }
+    
 }

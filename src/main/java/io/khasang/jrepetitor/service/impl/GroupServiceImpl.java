@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.GroupDao;
+import io.khasang.jrepetitor.dto.GroupDTO;
 import io.khasang.jrepetitor.entity.Group;
 import io.khasang.jrepetitor.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import java.util.List;
 public class GroupServiceImpl implements GroupService {
     @Autowired
     private GroupDao groupDao;
+    @Autowired
+    private GroupDTO groupDTO;
 
     @Override
     public Group addGroup(Group group) {
@@ -19,8 +22,8 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Group> getAllGroups() {
-        return groupDao.getList();
+    public List<GroupDTO> getAllGroups() {
+        return groupDTO.getGroupDTOList(groupDao.getList());
     }
 
     @Override
