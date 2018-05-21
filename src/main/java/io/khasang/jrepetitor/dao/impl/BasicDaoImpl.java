@@ -3,6 +3,7 @@ package io.khasang.jrepetitor.dao.impl;
 import io.khasang.jrepetitor.dao.BasicDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.criteria.CriteriaBuilder;

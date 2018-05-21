@@ -1,33 +1,24 @@
 package io.khasang.jrepetitor.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table(name = "users")
+import javax.persistence.*;
+
+
+@Entity(name = "JrepUser")
 public class User {
-    @Transient
-    private static final String ROLE = "ROLE_USER";
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String name;
-    @Column(nullable = false)
+    @Column(unique = true)
     private String login;
-    @Column(nullable = false)
     private String password;
-    private String role_name;
-
-    public User() {
-        role_name = ROLE;
-    }
+    @Column(name = "role_name")
+    private String roleName;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
     public long getId() {
         return id;
@@ -45,18 +36,6 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole_name() {
-        return role_name;
-    }
-
     public String getLogin() {
         return login;
     }
@@ -65,7 +44,27 @@ public class User {
         this.login = login;
     }
 
-    public void setRole_name(String role_name) {
-        this.role_name = role_name;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

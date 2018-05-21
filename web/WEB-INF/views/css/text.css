@@ -1,0 +1,11 @@
+div.b {
+    font-weight: bold;
+}
+
+div.error-text {
+    color: red;
+}
+
+.activelist a {
+    background: #fc0;
+}

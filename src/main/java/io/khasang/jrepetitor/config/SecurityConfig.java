@@ -22,7 +22,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/create").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
                 .antMatchers("/user/**").access("hasRole('USER')")
+                //static profile page
+                .antMatchers("/profile").access("hasRole('USER')")
+                //enable after create test users
+                //user api root url
+                //.antMatchers("/users/**").access("hasRole('USER')")
                 .and().csrf().disable().formLogin().defaultSuccessUrl("/", false);
+
     }
 
     // мы никогда не используем инмемори в продакшн
