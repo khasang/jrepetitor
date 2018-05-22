@@ -1,11 +1,9 @@
 package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.News;
-import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 
 import io.khasang.jrepetitor.util.UserUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -220,9 +218,9 @@ public class AdmControllerIntegrationTest {
         assertNotNull(receivedUsers);
         assertEquals(2, receivedUsers.size());
         receivedUsers.forEach(user -> assertEquals(defineName, user.getName()));
-        receivedUsers.forEach(user -> UserUtils.deleteUserFromDB(user, ROOT, DELETE));
+        users.forEach(user -> UserUtils.deleteUserFromDB(user, ROOT, DELETE));
     }
-    /*
+
 
     @Test
     public void checkUserAdditionForRepeatingLogin() {
@@ -232,39 +230,36 @@ public class AdmControllerIntegrationTest {
         List<User> users = new ArrayList<>();
 
         try {
-            users.add(createUser("Ilia", defineLogin, "tr1234"));
-            users.add(createUser("Pete", defineLogin, "tt234"));
+            users.add(UserUtils.createUser(
+                    defineLogin,
+                    "user_name_1",
+                    "user_pass_1",
+                    "user_middlename_1",
+                    "user_surname_1",
+                    "user_email1_",
+                    "user_phone_1",
+                    ROOT,
+                    ADD
+                    )
+            );
+            users.add(UserUtils.createUser(
+                    defineLogin,
+                    "user_name_1",
+                    "user_pass_1",
+                    "user_middlename_1",
+                    "user_surname_1",
+                    "user_email1_",
+                    "user_phone_1",
+                    ROOT,
+                    ADD
+                    )
+            );
         } catch (HttpServerErrorException e) {
             expectedException = e;
             assertNotNull(expectedException);
-            users.forEach(this::deleteUserFromDB);
+            users.forEach(user -> UserUtils.deleteUserFromDB(user, ROOT, DELETE));
         }
     }
-
-    private User createUser(String login, String name, String pass, String middlename, String surname, String email,
-                            String phoneNumber) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-
-        User user = prefillUser(login, name, pass, middlename, surname, email, phoneNumber);
-
-        HttpEntity entity = new HttpEntity(user, headers);
-
-        RestTemplate template = new RestTemplate();
-
-        User receivedUser = template.exchange(
-                ROOT + ADD,
-                HttpMethod.POST,
-                entity,
-                User.class
-        ).getBody();
-
-        assertNotNull(receivedUser.getName());
-        assertEquals(user.getName(), receivedUser.getName());
-
-        return receivedUser;
-    }*/
-
 
     // News test
     @Test
