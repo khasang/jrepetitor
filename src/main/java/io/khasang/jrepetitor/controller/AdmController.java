@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.controller;
 
+import io.khasang.jrepetitor.dto.UserDTO;
 import io.khasang.jrepetitor.entity.News;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.service.NewsService;
@@ -36,7 +37,7 @@ public class AdmController {
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public User getUserById(@PathVariable(value = "id") String id) {
+    public UserDTO getUserById(@PathVariable(value = "id") String id) {
         return userService.getUserById(Long.parseLong(id));
     }
 
@@ -48,7 +49,7 @@ public class AdmController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<User> getListUsers() {
+    public List<UserDTO> getListUsers() {
         return userService.getAllUsers();
     }
 

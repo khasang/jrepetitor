@@ -1,8 +1,10 @@
 package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.News;
+import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 
+import io.khasang.jrepetitor.util.UserUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
@@ -39,7 +41,16 @@ public class AdmControllerIntegrationTest {
     // User test
     @Test
     public void addUserAndCheck() {
-        User user = createUser("Nastia", "nast", "15684d");
+        User user = UserUtils.createUser("user",
+                "user_name",
+                "user_pass",
+                "user_middlename",
+                "user_surname",
+                "user_email",
+                "user_phone",
+                ROOT,
+                ADD
+        );
 
         RestTemplate template = new RestTemplate();
         ResponseEntity<User> responseEntity = template.exchange(
@@ -55,15 +66,36 @@ public class AdmControllerIntegrationTest {
         User receivedUser = responseEntity.getBody();
         assertNotNull(receivedUser);
 
-        deleteUserFromDB(user);
+        UserUtils.deleteUserFromDB(user, ROOT, DELETE);
     }
+
 
     @Test
     public void getAllUsers() {
         List<Long> listNewId = new ArrayList<>();
+        User user1 = UserUtils.createUser("user_1",
+                "user_name_1",
+                "user_pass_1",
+                "user_middlename_1",
+                "user_surname_1",
+                "user_email1_",
+                "user_phone_1",
+                ROOT,
+                ADD
+        );
 
-        User user1 = createUser("Vadim", "vad", "df258");
-        User user2 = createUser("Alexey", "alex", "ddfen268");
+        User user2 = UserUtils.createUser("user_2",
+                "user_name_2",
+                "user_pass_2",
+                "user_middlename_2",
+                "user_surname_2",
+                "user_email_2",
+                "user_phone_2",
+                ROOT,
+                ADD
+        );
+
+
         listNewId.add(user1.getId());
         listNewId.add(user2.getId());
 
@@ -82,14 +114,23 @@ public class AdmControllerIntegrationTest {
         list.forEach(user -> {
             assertNotNull(user);
             if (user != null && listNewId.contains(user.getId())) {
-                deleteUserFromDB(user);
+                UserUtils.deleteUserFromDB(user, ROOT, DELETE);
             }
         });
     }
 
     @Test
     public void deleteUser() {
-        User user = createUser("Anton", "an", "9809342");
+        User user = UserUtils.createUser("user",
+                "user_name",
+                "user_pass",
+                "user_middlename",
+                "user_surname",
+                "user_email",
+                "user_phone",
+                ROOT,
+                ADD
+        );
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<User> responseEntity = restTemplate.exchange(
@@ -120,13 +161,48 @@ public class AdmControllerIntegrationTest {
 
     @Test
     public void getUsersByName() {
-        final String defineName = "Anatoly";
-
+        final String defineName = "Searched_User";
         List<User> users = Arrays.asList(
-                createUser(defineName, "an", "tr1234"),
-                createUser("Irina", "ir", "gd54it"),
-                createUser(defineName, "tws", "tt234"),
-                createUser("Ivan", "iv", "4r32")
+                UserUtils.createUser("user_1",
+                        defineName,
+                        "user_pass_1",
+                        "user_middlename_1",
+                        "user_surname_1",
+                        "user_email_1",
+                        "user_phone_1",
+                        ROOT,
+                        ADD
+                ),
+                UserUtils.createUser("user_2",
+                        defineName,
+                        "user_pass_2",
+                        "user_middlename_2",
+                        "user_surname_2",
+                        "user_email_2",
+                        "user_phone_2",
+                        ROOT,
+                        ADD
+                ),
+                UserUtils.createUser("user_3",
+                        "user_name_3",
+                        "user_pass_3",
+                        "user_middlename_3",
+                        "user_surname_3",
+                        "user_email_3",
+                        "user_phone_3",
+                        ROOT,
+                        ADD
+                ),
+                UserUtils.createUser("user_4",
+                        "user_name_4",
+                        "user_pass_4",
+                        "user_middlename_4",
+                        "user_surname_4",
+                        "user_email_4",
+                        "user_phone_4",
+                        ROOT,
+                        ADD
+                )
         );
 
         RestTemplate template = new RestTemplate();
@@ -144,9 +220,9 @@ public class AdmControllerIntegrationTest {
         assertNotNull(receivedUsers);
         assertEquals(2, receivedUsers.size());
         receivedUsers.forEach(user -> assertEquals(defineName, user.getName()));
-
-        users.forEach(this::deleteUserFromDB);
+        receivedUsers.forEach(user -> UserUtils.deleteUserFromDB(user, ROOT, DELETE));
     }
+    /*
 
     @Test
     public void checkUserAdditionForRepeatingLogin() {
@@ -165,11 +241,12 @@ public class AdmControllerIntegrationTest {
         }
     }
 
-    private User createUser(String name, String login, String password) {
+    private User createUser(String login, String name, String pass, String middlename, String surname, String email,
+                            String phoneNumber) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
-        User user = prefillUser(name, login, password);
+        User user = prefillUser(login, name, pass, middlename, surname, email, phoneNumber);
 
         HttpEntity entity = new HttpEntity(user, headers);
 
@@ -186,27 +263,8 @@ public class AdmControllerIntegrationTest {
         assertEquals(user.getName(), receivedUser.getName());
 
         return receivedUser;
-    }
+    }*/
 
-    private User prefillUser(String name, String login, String password) {
-        User user = new User();
-        user.setName(name);
-        user.setLogin(login);
-        user.setPassword(password);
-        return user;
-    }
-
-    private User deleteUserFromDB(User user) {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<User> responseEntity = restTemplate.exchange(
-                ROOT + DELETE + "?id=" + "{id}",
-                HttpMethod.DELETE,
-                null,
-                User.class,
-                user.getId()
-        );
-        return responseEntity.getBody();
-    }
 
     // News test
     @Test

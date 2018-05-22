@@ -2,6 +2,8 @@ package io.khasang.jrepetitor.dao;
 
 import io.khasang.jrepetitor.entity.User;
 
+import java.util.List;
+
 public interface UserDao extends BasicDao<User> {
     /**
      * method for finding user by name

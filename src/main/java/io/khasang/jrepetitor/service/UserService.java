@@ -1,11 +1,8 @@
 package io.khasang.jrepetitor.service;
 
-<<<<<<<HEAD
 import io.khasang.jrepetitor.entity.User;
-=======
 import io.khasang.jrepetitor.dto.UserDTO;
 import io.khasang.jrepetitor.entity.Profile;
-import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.utils.CreationProfileStatus;
 import io.khasang.jrepetitor.utils.CreationUserStatus;
 

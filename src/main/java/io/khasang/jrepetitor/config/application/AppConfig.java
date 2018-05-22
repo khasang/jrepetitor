@@ -1,9 +1,7 @@
 package io.khasang.jrepetitor.config.application;
 
-import io.khasang.jrepetitor.dao.CatDao;
-import io.khasang.jrepetitor.dao.impl.CatDaoImpl;
-import io.khasang.jrepetitor.dao.impl.NewsDaoImpl;
-import io.khasang.jrepetitor.dao.impl.UserDaoImpl;
+import io.khasang.jrepetitor.dao.*;
+import io.khasang.jrepetitor.dao.impl.*;
 import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.entity.News;
 import io.khasang.jrepetitor.entity.User;
@@ -39,7 +37,7 @@ public class AppConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         JdbcDaoImpl jdbcDao = new JdbcDaoImpl();
         jdbcDao.setDataSource(dataSource());
         jdbcDao.setUsersByUsernameQuery(environment.getRequiredProperty("usersByQuery"));
@@ -48,19 +46,19 @@ public class AppConfig {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(){
-       JdbcTemplate jdbcTemplate = new JdbcTemplate();
-       jdbcTemplate.setDataSource(dataSource());
-       return jdbcTemplate;
+    public JdbcTemplate jdbcTemplate() {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(dataSource());
+        return jdbcTemplate;
     }
 
     @Bean
-    public CreateTable createTable(){
+    public CreateTable createTable() {
         return new CreateTable(jdbcTemplate());
     }
 
     @Bean
-    public CatDao catDao(){
+    public CatDao catDao() {
         return new CatDaoImpl(Cat.class);
     }
 
