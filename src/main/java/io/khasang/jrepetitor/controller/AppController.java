@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,9 +16,10 @@ public class AppController {
     private CreateTable createTable;
 
 
+
     @RequestMapping("/")
-    public String helloPage() {
-        return "cat";
+    public String helloPage(){
+        return "index";
     }
 
     @RequestMapping("/profile")
@@ -43,13 +45,18 @@ public class AppController {
     }
 
     @RequestMapping("/user")
-    public String getUserPage() {
+    public String getUserPage(){
         return "user";
     }
 
     @RequestMapping("/user/get/auth")
-    public String getUserCabinet() {
+    public String getUserCabinet(){
         return "private";
+    }
+
+    @GetMapping("/quiz")
+    public String getQuizPage(){
+        return "quiz";
     }
 
 }

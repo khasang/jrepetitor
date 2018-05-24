@@ -12,6 +12,9 @@ import io.khasang.jrepetitor.entity.Cat;
 import io.khasang.jrepetitor.entity.Employee;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
+import io.khasang.jrepetitor.dao.*;
+import io.khasang.jrepetitor.dao.impl.*;
+import io.khasang.jrepetitor.entity.*;
 import io.khasang.jrepetitor.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +23,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
@@ -41,7 +45,7 @@ public class AppConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
+    public UserDetailsService userDetailsService(){
         JdbcDaoImpl jdbcDao = new JdbcDaoImpl();
         jdbcDao.setDataSource(dataSource());
         jdbcDao.setUsersByUsernameQuery(environment.getRequiredProperty("usersByQuery"));
@@ -50,19 +54,19 @@ public class AppConfig {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate() {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        jdbcTemplate.setDataSource(dataSource());
-        return jdbcTemplate;
+    public JdbcTemplate jdbcTemplate(){
+       JdbcTemplate jdbcTemplate = new JdbcTemplate();
+       jdbcTemplate.setDataSource(dataSource());
+       return jdbcTemplate;
     }
 
     @Bean
-    public CreateTable createTable() {
+    public CreateTable createTable(){
         return new CreateTable(jdbcTemplate());
     }
 
     @Bean
-    public CatDao catDao() {
+    public CatDao catDao(){
         return new CatDaoImpl(Cat.class);
     }
 
@@ -72,12 +76,37 @@ public class AppConfig {
     }
 
     @Bean
-    public UserDao userDao() {
-        return new UserDaoImpl(User.class);
+    public UserDao userDao(){return new UserDaoImpl(Users.class);
     }
 
     @Bean
     public ProfileDao profileDao() {
         return new ProfileDaoImpl(Profile.class);
     }
+    @Bean
+    public GroupDao groupDao(){
+        return new GroupDaoImpl(Group.class);
+    }
+    @Bean
+    public QuizDao quizDao(){
+        return new QuizDaoImpl(Quiz.class);
+    }
+    @Bean
+    public QuestionDao questionDao(){
+        return new QuestionDaoImpl(Question.class);
+    }
+    @Bean
+    public ItemDao itemDao(){
+        return new ItemDaoImpl(Item.class);
+    }
+    @Bean
+    public ItemRightAnsDao itemRightAnsDao(){
+        return new ItemRightAnsDaoImpl(ItemRightAns.class);
+    }
+    @Bean
+    public RightAnsDao rightAnsDao(){
+        return new RightAnsDaoImpl(RightAns.class);
+    }
+
+
 }
