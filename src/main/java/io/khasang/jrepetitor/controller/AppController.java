@@ -15,8 +15,6 @@ public class AppController {
     @Autowired
     private CreateTable createTable;
 
-
-
     @RequestMapping("/")
     public String helloPage(){
         return "index";
@@ -58,5 +56,4 @@ public class AppController {
     public String getQuizPage(){
         return "quiz";
     }
-
 }

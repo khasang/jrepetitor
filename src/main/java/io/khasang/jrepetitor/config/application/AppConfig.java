@@ -23,7 +23,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
@@ -76,7 +75,7 @@ public class AppConfig {
     }
 
     @Bean
-    public UserDao userDao(){return new UserDaoImpl(Users.class);
+    public UserDao userDao(){return new UserDaoImpl(User.class);
     }
 
     @Bean
