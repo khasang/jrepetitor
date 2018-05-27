@@ -1,10 +1,13 @@
 package io.khasang.jrepetitor.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity(name = "JR_USER")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -17,6 +20,9 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id")
     private Profile profile;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    public List<UserTry> userTries = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -64,5 +70,13 @@ public class User {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public List<UserTry> getUserTries() {
+        return userTries;
+    }
+
+    public void setUserTries(List<UserTry> userTries) {
+        this.userTries = userTries;
     }
 }
