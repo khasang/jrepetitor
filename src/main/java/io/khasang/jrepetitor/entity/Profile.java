@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.entity;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "JR_PROFILE")
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

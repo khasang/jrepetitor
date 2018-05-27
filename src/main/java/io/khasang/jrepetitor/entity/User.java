@@ -1,11 +1,9 @@
 package io.khasang.jrepetitor.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 
-@Entity(name = "JrepUser")
+@Entity(name = "JR_USER")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
