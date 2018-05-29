@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.QuizDao;
+import io.khasang.jrepetitor.dto.QuizPreviewDTO;
 import io.khasang.jrepetitor.dto.QuizDTO;
 import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.service.QuizService;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("quizService")
-public class QuizServiceImpl implements QuizService{
+public class QuizServiceImpl implements QuizService {
     @Autowired
     private QuizDao quizDao;
     @Autowired
@@ -34,5 +35,17 @@ public class QuizServiceImpl implements QuizService{
     @Override
     public Quiz deleteQuiz(long id) {
         return quizDao.delete(quizDao.getById(id));
+    }
+
+    @Override
+    public List<QuizPreviewDTO> getAllQuizzesPreview() {
+        List<Quiz> quizzes = quizDao.getList();
+        return QuizPreviewDTO.getListQuizPreviewTO(quizzes);
+    }
+
+    @Override
+    public QuizPreviewDTO getQuizPreviewById(long id) {
+        Quiz currentQuiz = quizDao.getById(id);
+        return QuizPreviewDTO.getPreviewDTO(currentQuiz);
     }
 }
