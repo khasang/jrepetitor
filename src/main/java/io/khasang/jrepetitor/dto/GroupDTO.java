@@ -11,7 +11,7 @@ public class GroupDTO {
 
     private Long id;
 
-    List<QuizDTO> quizes = new ArrayList<QuizDTO>();
+    private List<QuizDTO> quizes = new ArrayList<QuizDTO>();
 
     //topic name
     private String name;
@@ -40,11 +40,20 @@ public class GroupDTO {
         this.name = name;
     }
 
-    public List<GroupDTO> getGroupDTOList(List<Group> list) {
+    public static GroupDTO getGroupDTO(Group group) {
+        if (group == null) {
+            return null;
+        }
+        GroupDTO groupDTO = new GroupDTO();
+        groupDTO.setId(group.getId());
+        groupDTO.setName(group.getName());
+        return groupDTO;
+    }
+
+    public static List<GroupDTO> getGroupDTOList(List<Group> list) {
         List<GroupDTO> groupDTOList = new ArrayList<>();
 
-        for (Group group : list)
-        {
+        for (Group group : list) {
             GroupDTO groupDTO = new GroupDTO();
             groupDTO.setId(group.getId());
             groupDTO.setName(group.getName());
@@ -53,5 +62,5 @@ public class GroupDTO {
         }
         return groupDTOList;
     }
-    
+
 }
