@@ -27,7 +27,7 @@ public interface GroupService {
      * @param id = uniq Group id
      * @return specify Group by id
      */
-    Group getGroupById(long id);
+    GroupDTO getGroupById(long id);
 
     /**
      * method for Group delete
@@ -35,5 +35,6 @@ public interface GroupService {
      * @param id = Group's id for delete
      * @return removed Group
      */
-    Group deleteGroup(long id);
+    GroupDTO deleteGroup(long id);
+
 }

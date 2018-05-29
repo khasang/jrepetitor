@@ -27,12 +27,23 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group getGroupById(long id) {
-        return groupDao.getById(id);
+    public GroupDTO getGroupById(long id) {
+        Group group = groupDao.getById(id);
+        GroupDTO groupDTO = new GroupDTO().getGroupDTO(group);
+        return groupDTO;
     }
 
     @Override
-    public Group deleteGroup(long id) {
-        return groupDao.delete(getGroupById(id));
+    public GroupDTO deleteGroup(long id) {
+        Group group = groupDao.getById(id);
+        if (group == null) {
+            return null;
+        }
+        Group deletedGroup = groupDao.delete(group);
+        GroupDTO groupDTO = new GroupDTO();
+        groupDTO.setId(deletedGroup.getId());
+        groupDTO.setName(deletedGroup.getName());
+        return groupDTO;
     }
+
 }
