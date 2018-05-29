@@ -30,7 +30,7 @@ public class QuizPreviewDTO {
         return level;
     }
 
-    public static List<QuizPreviewDTO> getListQuizPreviewTO(List<Quiz> quizzes) {
+    public static List<QuizPreviewDTO> getListQuizPreviewDTO(List<Quiz> quizzes) {
         List<QuizPreviewDTO> listQuizPreviewDto = new ArrayList<>();
         if (quizzes.isEmpty()) {
             return listQuizPreviewDto;

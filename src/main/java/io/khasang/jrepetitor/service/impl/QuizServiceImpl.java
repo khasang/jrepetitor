@@ -40,7 +40,7 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public List<QuizPreviewDTO> getAllQuizzesPreview() {
         List<Quiz> quizzes = quizDao.getList();
-        return QuizPreviewDTO.getListQuizPreviewTO(quizzes);
+        return QuizPreviewDTO.getListQuizPreviewDTO(quizzes);
     }
 
     @Override
