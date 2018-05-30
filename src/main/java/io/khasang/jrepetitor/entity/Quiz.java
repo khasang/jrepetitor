@@ -6,20 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  Test
- *  list of questions on one specified topic
+ * Test
+ * list of questions on one specified topic
  */
 
 @Entity
-@Table(name="JR_QUIZ")
-public class Quiz implements Serializable{
+@Table(name = "JR_QUIZ")
+public class Quiz implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Question> questions = new ArrayList<Question>();
 
     @ManyToOne
@@ -43,7 +43,7 @@ public class Quiz implements Serializable{
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     public List<Question> getQuestions() {
         return questions;
     }
@@ -60,7 +60,11 @@ public class Quiz implements Serializable{
         this.group = group;
     }
 
-    public byte getLevel() { return level;    }
+    public byte getLevel() {
+        return level;
+    }
 
-    public void setLevel(byte level) { this.level = level; }
+    public void setLevel(byte level) {
+        this.level = level;
+    }
 }
