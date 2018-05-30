@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class QuizDTO {
+public class QuizDTO implements QuizDTOInterface {
 
     private static final Logger log = LoggerFactory.getLogger(QuizDTO.class);
 
@@ -28,48 +28,59 @@ public class QuizDTO {
      */
     private byte level;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public List<QuestionDTO> getQuestions() {
         return questions;
     }
 
+    @Override
     public void setQuestions(List<QuestionDTO> questions) {
         this.questions = questions;
     }
 
+    @Override
     public GroupDTO getGroup() {
         return group;
     }
 
+    @Override
     public void setGroup(GroupDTO group) {
         this.group = group;
     }
 
+    @Override
     public byte getLevel() {
         return level;
     }
 
+    @Override
     public void setLevel(byte level) {
         this.level = level;
     }
 
-    public List<QuizDTO> getQuizDTOList(List<Quiz> list) {
-        List<QuizDTO> quizDTOList = new ArrayList<>();
+    @Override
+    public List<QuizDTOInterface> getQuizDTOList(List<Quiz> list) {
+        List<QuizDTOInterface> quizDTOList = new ArrayList<>();
 
         try {
             for (Quiz quiz : list) {
@@ -129,7 +140,8 @@ public class QuizDTO {
 
     }
 
-    public QuizDTO getQuiz(Quiz quiz) {
+    @Override
+    public QuizDTOInterface getQuiz(Quiz quiz) {
         QuizDTO quizDTO = new QuizDTO();
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
@@ -184,4 +196,6 @@ public class QuizDTO {
 
         return quizDTO;
     }
+
+
 }

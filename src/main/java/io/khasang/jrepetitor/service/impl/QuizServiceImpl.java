@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.QuizDao;
+import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.dto.QuizPreviewDTO;
 import io.khasang.jrepetitor.dto.QuizDTO;
 import io.khasang.jrepetitor.entity.Quiz;
@@ -23,12 +24,12 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public List<QuizDTO> getAllQuizs() {
+    public List<QuizDTOInterface> getAllQuizs() {
         return quizDTO.getQuizDTOList(quizDao.getList());
     }
 
     @Override
-    public QuizDTO getQuizById(long id) {
+    public QuizDTOInterface getQuizById(long id) {
         return quizDTO.getQuiz(quizDao.getById(id));
     }
 
