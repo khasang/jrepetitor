@@ -121,9 +121,9 @@ public class QuizDTO {
                 quizDTOList.add(quizDTO);
 
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             log.info("Quiz list is empty");
+            log.info(e.getMessage());
         }
         return quizDTOList;
 
@@ -178,10 +178,9 @@ public class QuizDTO {
             }
 
             quizDTO.setQuestions(questionDTOList);
+        } catch (Exception e) {
+            log.info("Quiz is empty");
         }
-         catch (Exception e){
-             log.info("Quiz is empty");
-         }
 
         return quizDTO;
     }
