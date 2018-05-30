@@ -2,8 +2,8 @@ package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.QuizDao;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
+import io.khasang.jrepetitor.dto.QuizDTOImpl;
 import io.khasang.jrepetitor.dto.QuizPreviewDTO;
-import io.khasang.jrepetitor.dto.QuizDTO;
 import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class QuizServiceImpl implements QuizService {
     @Autowired
     private QuizDao quizDao;
     @Autowired
-    private QuizDTO quizDTO;
+    private QuizDTOImpl quizDTO;
 
     @Override
     public Quiz addQuiz(Quiz quiz) {
