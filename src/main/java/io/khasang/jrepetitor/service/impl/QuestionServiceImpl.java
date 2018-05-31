@@ -29,12 +29,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question getQuestionById(long id) {
-        return questionDao.getById(id);
+    public QuestionDTOInterface getQuestionById(long id) {
+        return new QuestionDTOImpl().getQuestionDTO(questionDao.getById(id));
     }
 
     @Override
-    public Question deleteQuestion(long id) {
-        return questionDao.delete(getQuestionById(id));
+    public QuestionDTOInterface deleteQuestion(long id) {
+        Question deletedQuestion = questionDao.delete(questionDao.getById(id));
+        return new QuestionDTOImpl().getQuestionDTO(deletedQuestion);
     }
 }

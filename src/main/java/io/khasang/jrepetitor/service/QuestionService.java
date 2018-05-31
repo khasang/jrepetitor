@@ -27,7 +27,7 @@ public interface QuestionService {
      * @param id = uniq Question id
      * @return specify Question by id
      */
-    Question getQuestionById(long id);
+    QuestionDTOInterface getQuestionById(long id);
 
     /**
      * method for Question delete
@@ -35,5 +35,5 @@ public interface QuestionService {
      * @param id = Question's id for delete
      * @return removed Question
      */
-    Question deleteQuestion(long id);
+    QuestionDTOInterface deleteQuestion(long id);
 }
