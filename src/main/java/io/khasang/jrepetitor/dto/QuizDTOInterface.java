@@ -13,9 +13,9 @@ public interface QuizDTOInterface {
 
     void setName(String name);
 
-    List<QuestionDTO> getQuestions();
+    List<QuestionDTOInterface> getQuestions();
 
-    void setQuestions(List<QuestionDTO> questions);
+    void setQuestions(List<QuestionDTOInterface> questions);
 
     GroupDTO getGroup();
 
