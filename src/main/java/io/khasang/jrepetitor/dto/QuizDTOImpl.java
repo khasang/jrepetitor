@@ -12,7 +12,7 @@ public class QuizDTOImpl implements QuizDTOInterface {
 
     private String name;
 
-    private List<QuestionDTO> questions;
+    private List<QuestionDTOInterface> questions;
 
     private GroupDTO group;
 
@@ -46,12 +46,12 @@ public class QuizDTOImpl implements QuizDTOInterface {
     }
 
     @Override
-    public List<QuestionDTO> getQuestions() {
+    public List<QuestionDTOInterface> getQuestions() {
         return questions;
     }
 
     @Override
-    public void setQuestions(List<QuestionDTO> questions) {
+    public void setQuestions(List<QuestionDTOInterface> questions) {
         this.questions = questions;
     }
 

@@ -19,7 +19,7 @@ public class QuizDTO implements QuizDTOInterface {
 
     private String name;
 
-    private List<QuestionDTO> questions = new ArrayList<QuestionDTO>();
+    private List<QuestionDTOInterface> questions = new ArrayList<>();
 
     private GroupDTO group;
 
@@ -49,12 +49,12 @@ public class QuizDTO implements QuizDTOInterface {
     }
 
     @Override
-    public List<QuestionDTO> getQuestions() {
+    public List<QuestionDTOInterface> getQuestions() {
         return questions;
     }
 
     @Override
-    public void setQuestions(List<QuestionDTO> questions) {
+    public void setQuestions(List<QuestionDTOInterface> questions) {
         this.questions = questions;
     }
 
@@ -84,7 +84,7 @@ public class QuizDTO implements QuizDTOInterface {
 
         try {
             for (Quiz quiz : list) {
-                List<QuestionDTO> questionDTOList = new ArrayList<>();
+                List<QuestionDTOInterface> questionDTOList = new ArrayList<>();
 
                 QuizDTO quizDTO = new QuizDTO();
                 quizDTO.setId(quiz.getId());
@@ -93,7 +93,7 @@ public class QuizDTO implements QuizDTOInterface {
 
                 nextQuest:
                 for (Question question : quiz.getQuestions()) {
-                    for (QuestionDTO questionDTO : questionDTOList) {
+                    for (QuestionDTOInterface questionDTO : questionDTOList) {
                         if (questionDTO.getId() == question.getId()) {
                             continue nextQuest;
                         }
@@ -143,7 +143,7 @@ public class QuizDTO implements QuizDTOInterface {
     @Override
     public QuizDTOInterface getQuiz(Quiz quiz) {
         QuizDTO quizDTO = new QuizDTO();
-        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        List<QuestionDTOInterface> questionDTOList = new ArrayList<>();
 
         try {
             quizDTO.setId(quiz.getId());
@@ -154,7 +154,7 @@ public class QuizDTO implements QuizDTOInterface {
             for (Question question : quiz.getQuestions()) {
                 //if questionDTOList contains quiestion with quiz_id=question.getQuiz().getId() - continue
 
-                for (QuestionDTO questionDTO : questionDTOList) {
+                for (QuestionDTOInterface questionDTO : questionDTOList) {
                     if (questionDTO.getId() == question.getId()) {
                         continue nextQuest;
                     }
