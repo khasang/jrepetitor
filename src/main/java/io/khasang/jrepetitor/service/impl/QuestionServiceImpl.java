@@ -1,7 +1,7 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.QuestionDao;
-import io.khasang.jrepetitor.dto.QuestionDTO;
+import io.khasang.jrepetitor.dto.impl.QuestionDTO;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.entity.Question;
 import io.khasang.jrepetitor.service.QuestionService;

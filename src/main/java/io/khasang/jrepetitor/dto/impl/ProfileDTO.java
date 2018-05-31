@@ -1,4 +1,4 @@
-package io.khasang.jrepetitor.dto;
+package io.khasang.jrepetitor.dto.impl;
 
 public class ProfileDTO {
     private long id;

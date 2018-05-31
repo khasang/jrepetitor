@@ -1,8 +1,9 @@
-package io.khasang.jrepetitor.dto;
+package io.khasang.jrepetitor.dto.impl;
 
+import io.khasang.jrepetitor.dto.QuestionDTOInterface;
+import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.entity.Item;
 import io.khasang.jrepetitor.entity.Question;
-import io.khasang.jrepetitor.model.CreateTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -132,5 +133,10 @@ public class QuestionDTO implements QuestionDTOInterface {
             log.info("QuestionDTO is Empty ");
         }
         return questionDTOList;
+    }
+
+    @Override
+    public QuestionDTOInterface getQuestionDTO(Question question) {
+        return null;
     }
 }

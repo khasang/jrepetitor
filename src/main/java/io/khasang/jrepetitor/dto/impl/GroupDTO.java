@@ -1,4 +1,4 @@
-package io.khasang.jrepetitor.dto;
+package io.khasang.jrepetitor.dto.impl;
 
 import io.khasang.jrepetitor.entity.Group;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package io.khasang.jrepetitor.controller;
 
-import io.khasang.jrepetitor.dto.ItemDTO;
+import io.khasang.jrepetitor.dto.impl.ItemDTO;
 import io.khasang.jrepetitor.entity.Item;
 import io.khasang.jrepetitor.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;

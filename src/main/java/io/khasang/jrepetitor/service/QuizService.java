@@ -1,8 +1,7 @@
 package io.khasang.jrepetitor.service;
 
-import io.khasang.jrepetitor.dto.QuizDTO;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
-import io.khasang.jrepetitor.dto.QuizPreviewDTO;
+import io.khasang.jrepetitor.dto.impl.QuizPreviewDTO;
 import io.khasang.jrepetitor.entity.Quiz;
 
 import java.util.List;

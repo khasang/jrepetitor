@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.dto;
 
+import io.khasang.jrepetitor.dto.impl.GroupDTO;
 import io.khasang.jrepetitor.entity.Quiz;
 
 import java.util.List;

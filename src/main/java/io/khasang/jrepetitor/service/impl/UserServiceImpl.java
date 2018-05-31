@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.ProfileDao;
 import io.khasang.jrepetitor.dao.UserDao;
-import io.khasang.jrepetitor.dto.UserDTO;
+import io.khasang.jrepetitor.dto.impl.UserDTO;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.service.UserService;

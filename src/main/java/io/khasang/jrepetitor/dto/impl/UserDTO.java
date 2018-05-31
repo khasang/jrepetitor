@@ -1,4 +1,4 @@
-package io.khasang.jrepetitor.dto;
+package io.khasang.jrepetitor.dto.impl;
 
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;

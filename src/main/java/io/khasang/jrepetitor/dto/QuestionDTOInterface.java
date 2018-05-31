@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.dto;
 
+import io.khasang.jrepetitor.dto.impl.ItemDTO;
 import io.khasang.jrepetitor.entity.Question;
 
 import java.util.List;
@@ -30,4 +31,6 @@ public interface QuestionDTOInterface {
     void setExplanation(String explanation);
 
     List<QuestionDTOInterface> getQuestionDTOList(List<Question> list);
+
+    QuestionDTOInterface getQuestionDTO(Question question);
 }

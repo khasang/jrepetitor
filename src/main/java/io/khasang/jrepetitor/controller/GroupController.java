@@ -1,6 +1,6 @@
 package io.khasang.jrepetitor.controller;
 
-import io.khasang.jrepetitor.dto.GroupDTO;
+import io.khasang.jrepetitor.dto.impl.GroupDTO;
 import io.khasang.jrepetitor.entity.Group;
 import io.khasang.jrepetitor.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;

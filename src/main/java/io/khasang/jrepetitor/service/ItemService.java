@@ -1,6 +1,6 @@
 package io.khasang.jrepetitor.service;
 
-import io.khasang.jrepetitor.dto.ItemDTO;
+import io.khasang.jrepetitor.dto.impl.ItemDTO;
 import io.khasang.jrepetitor.entity.Item;
 
 import java.util.List;
