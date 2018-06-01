@@ -2,7 +2,8 @@ package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.ProfileDao;
 import io.khasang.jrepetitor.dao.UserDao;
-import io.khasang.jrepetitor.dto.impl.UserDTO;
+import io.khasang.jrepetitor.dto.UserDTOInterface;
+import io.khasang.jrepetitor.dto.impl.UserDTOImpl;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.service.UserService;
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Autowired
-    private UserDTO userDTO;
+    private UserDTOImpl userDTO;
 
     @Autowired
     private ProfileDao profileDao;
@@ -32,34 +33,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAllUsers() {
+    public List<UserDTOInterface> getAllUsers() {
         return userDTO.getUserDTOList(userDao.getList());
     }
 
     @Override
-    public UserDTO getUserById(long id) {
+    public UserDTOInterface getUserById(long id) {
         return userDTO.getUserDTO(userDao.getById(id));
     }
 
     @Override
-    public User deleteUser(long id) {
-        UserDTO CurrentUserDTO = getUserById(id);
-        User user = userDTO.getUser(CurrentUserDTO);
+    public UserDTOInterface deleteUser(long id) {
+        User user = userDao.getById(id);
         if (user == null) {
             return null;
         } else {
-            return userDao.delete(user);
+            return userDTO.getUserDTO(userDao.delete(user));
         }
     }
 
     @Override
-    public User getUserByLogin(String login) {
-        return userDao.getUserByLogin(login);
+    public UserDTOInterface getUserByLogin(String login) {
+        return userDTO.getUserDTO(userDao.getUserByLogin(login));
     }
 
     @Override
-    public User updateUser(User user) {
-        return userDao.updateUser(user);
+    public UserDTOInterface updateUser(User user) {
+        return userDTO.getUserDTO(userDao.updateUser(user));
     }
 
     @Override
@@ -76,7 +76,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public CreationProfileStatus updateProfile(User user, Profile profile) {
+    public CreationProfileStatus updateProfile(String userName, Profile profile) {
+        User user = userDao.getUserByLogin(userName);
         CreationProfileStatus creationProfileStatus = new CreationProfileStatus();
         creationProfileStatus.setEmailExist(checkEmailExist(profile.getEmail()));
         creationProfileStatus.setPhoneExist(checkPhoneExist(profile.getPhoneNumber()));

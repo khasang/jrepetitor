@@ -1,6 +1,8 @@
 package io.khasang.jrepetitor.controller;
 
-import io.khasang.jrepetitor.dto.impl.UserDTO;
+import io.khasang.jrepetitor.dto.ProfileDTOInterface;
+import io.khasang.jrepetitor.dto.UserDTOInterface;
+import io.khasang.jrepetitor.dto.impl.ProfileDTOImpl;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.service.UserService;
@@ -32,15 +34,15 @@ public class UserController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<UserDTO> getAllUsers() {
+    public List<UserDTOInterface> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ResponseEntity<UserDTO> getUserById(@PathVariable(value = "id") String id) {
+    public ResponseEntity<UserDTOInterface> getUserById(@PathVariable(value = "id") String id) {
         // exception
-        UserDTO userDTO = userService.getUserById(Long.parseLong(id));
+        UserDTOInterface userDTO = userService.getUserById(Long.parseLong(id));
         if (userDTO == null) {
             return new ResponseEntity<>(userDTO, HttpStatus.NOT_FOUND);
         } else {
@@ -50,8 +52,8 @@ public class UserController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ResponseEntity<User> deleteUser(@RequestParam(value = "id") String id) {
-        User deletedUser = userService.deleteUser(Long.parseLong(id));
+    public ResponseEntity<UserDTOInterface> deleteUser(@RequestParam(value = "id") String id) {
+        UserDTOInterface deletedUser = userService.deleteUser(Long.parseLong(id));
         if (deletedUser == null) {
             return new ResponseEntity<>(deletedUser, HttpStatus.NOT_FOUND);
         } else {
@@ -61,14 +63,14 @@ public class UserController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ResponseEntity<Profile> getProfile() {
+    public ResponseEntity<ProfileDTOInterface> getProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         if (currentPrincipalName.equals("anonymousUser")) {
-            Profile profile = null;
+            ProfileDTOImpl profile = null;
             return new ResponseEntity<>(profile, HttpStatus.UNAUTHORIZED);
         }
-        User user = userService.getUserByLogin(currentPrincipalName);
+        UserDTOInterface user = userService.getUserByLogin(currentPrincipalName);
         return new ResponseEntity<>(user.getProfile(), HttpStatus.OK);
 
     }
@@ -82,8 +84,7 @@ public class UserController {
             CreationProfileStatus creationProfileStatus = null;
             return new ResponseEntity<>(creationProfileStatus, HttpStatus.UNAUTHORIZED);
         }
-        User user = userService.getUserByLogin(currentPrincipalName);
-        CreationProfileStatus creationProfileStatus = userService.updateProfile(user, profile);
+        CreationProfileStatus creationProfileStatus = userService.updateProfile(currentPrincipalName, profile);
         return new ResponseEntity<>(creationProfileStatus, HttpStatus.OK);
     }
 

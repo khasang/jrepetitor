@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.dto.impl;
 
-import io.khasang.jrepetitor.entity.Profile;
+import io.khasang.jrepetitor.dto.ProfileDTOInterface;
+import io.khasang.jrepetitor.dto.UserDTOInterface;
 import io.khasang.jrepetitor.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -8,23 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class UserDTO {
+public class UserDTOImpl implements UserDTOInterface {
     private long id;
     private String name;
     private String login;
     private String password;
     private String roleName;
-    private ProfileDTOImpl profile;
+    private ProfileDTOInterface profile;
 
-    public List<UserDTO> getUserDTOList(List<User> user) {
-        List<UserDTO> userDTOList = new ArrayList<>();
+
+    @Override
+    public List<UserDTOInterface> getUserDTOList(List<User> user) {
+        List<UserDTOInterface> userDTOList = new ArrayList<>();
         for (User inputUser : user) {
-            UserDTO userDTO = new UserDTO();
-            userDTO.setName(inputUser.getName());
-            userDTO.setLogin(inputUser.getLogin());
-            userDTO.setId(inputUser.getId());
-            userDTO.setPassword(inputUser.getPassword());
-            userDTO.setRoleName(inputUser.getRoleName());
+            UserDTOImpl userDTOImpl = new UserDTOImpl();
+            userDTOImpl.setName(inputUser.getName());
+            userDTOImpl.setLogin(inputUser.getLogin());
+            userDTOImpl.setId(inputUser.getId());
+            userDTOImpl.setPassword(inputUser.getPassword());
+            userDTOImpl.setRoleName(inputUser.getRoleName());
 
             ProfileDTOImpl profile = new ProfileDTOImpl();
             profile.setId(inputUser.getProfile().getId());
@@ -33,22 +36,23 @@ public class UserDTO {
             profile.setSurname(inputUser.getProfile().getSurname());
             profile.setEmail(inputUser.getProfile().getEmail());
             profile.setPhoneNumber(inputUser.getProfile().getPhoneNumber());
-            userDTO.setProfile(profile);
-            userDTOList.add(userDTO);
+            userDTOImpl.setProfile(profile);
+            userDTOList.add(userDTOImpl);
         }
         return userDTOList;
     }
 
-    public UserDTO getUserDTO(User user) {
+    @Override
+    public UserDTOInterface getUserDTO(User user) {
         if (user == null) {
             return null;
         }
-        UserDTO userDTO = new UserDTO();
-        userDTO.setName(user.getName());
-        userDTO.setLogin(user.getLogin());
-        userDTO.setId(user.getId());
-        userDTO.setPassword(user.getPassword());
-        userDTO.setRoleName(user.getRoleName());
+        UserDTOImpl userDTOImpl = new UserDTOImpl();
+        userDTOImpl.setName(user.getName());
+        userDTOImpl.setLogin(user.getLogin());
+        userDTOImpl.setId(user.getId());
+        userDTOImpl.setPassword(user.getPassword());
+        userDTOImpl.setRoleName(user.getRoleName());
 
         ProfileDTOImpl profile = new ProfileDTOImpl();
 
@@ -59,78 +63,67 @@ public class UserDTO {
         profile.setEmail(user.getProfile().getEmail());
         profile.setPhoneNumber(user.getProfile().getPhoneNumber());
 
-        userDTO.setProfile(profile);
-        return userDTO;
+        userDTOImpl.setProfile(profile);
+        return userDTOImpl;
     }
 
-    public User getUser(UserDTO userDTO) {
-        if (userDTO == null) {
-            return null;
-        }
-        User user = new User();
-        Profile profile = new Profile();
-        ProfileDTOImpl profileDTO = userDTO.getProfile();
-        profile.setId(profileDTO.getId());
-        profile.setName(profileDTO.getName());
-        profile.setMiddlename(profileDTO.getMiddlename());
-        profile.setSurname(profileDTO.getSurname());
-        profile.setEmail(profileDTO.getEmail());
-        profile.setPhoneNumber(profileDTO.getPhoneNumber());
-
-        user.setId(userDTO.getId());
-        user.setLogin(userDTO.getLogin());
-        user.setName(userDTO.getName());
-        user.setPassword(userDTO.getPassword());
-        user.setRoleName(userDTO.getRoleName());
-        user.setProfile(profile);
-        return user;
-    }
-
+    @Override
     public long getId() {
         return id;
     }
 
+    @Override
     public void setId(long id) {
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public String getLogin() {
         return login;
     }
 
+    @Override
     public void setLogin(String login) {
         this.login = login;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @Override
     public String getRoleName() {
         return roleName;
     }
 
+    @Override
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
-    public ProfileDTOImpl getProfile() {
+    @Override
+    public ProfileDTOInterface getProfile() {
         return profile;
     }
 
-    public void setProfile(ProfileDTOImpl profile) {
+    @Override
+    public void setProfile(ProfileDTOInterface profile) {
         this.profile = profile;
     }
 }

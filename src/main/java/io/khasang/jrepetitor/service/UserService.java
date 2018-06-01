@@ -1,6 +1,7 @@
 package io.khasang.jrepetitor.service;
 
-import io.khasang.jrepetitor.dto.impl.UserDTO;
+import io.khasang.jrepetitor.dto.UserDTOInterface;
+//import io.khasang.jrepetitor.dto.impl.UserDTO;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.utils.CreationProfileStatus;
@@ -22,7 +23,7 @@ public interface UserService {
      *
      * @return all users
      */
-    List<UserDTO> getAllUsers();
+    List<UserDTOInterface> getAllUsers();
 
     /**
      * method for receive specify user by id
@@ -30,7 +31,7 @@ public interface UserService {
      * @param id = uniq user id
      * @return specify user by id
      */
-    UserDTO getUserById(long id);
+    UserDTOInterface getUserById(long id);
 
     /**
      * method for user delete
@@ -38,7 +39,7 @@ public interface UserService {
      * @param id = users's id for delete
      * @return removed user
      */
-    User deleteUser(long id);
+    UserDTOInterface deleteUser(long id);
 
     /**
      * method for finding user by name
@@ -46,7 +47,7 @@ public interface UserService {
      * @param login = User's name for search
      * @return user list with name - name
      */
-    User getUserByLogin(String login);
+    UserDTOInterface getUserByLogin(String login);
 
     /**
      * method for update user
@@ -54,7 +55,7 @@ public interface UserService {
      * @param user = User  for update
      * @return updated user
      */
-    User updateUser(User user);
+    UserDTOInterface updateUser(User user);
 
     /**
      * method for create user
@@ -67,11 +68,11 @@ public interface UserService {
     /**
      * method for update user
      *
-     * @param user    = user  for update profile
-     * @param profile = new profile state
+     * @param userName = user  for update profile
+     * @param profile  = new profile state
      * @return operations state class
      */
-    CreationProfileStatus updateProfile(User user, Profile profile);
+    CreationProfileStatus updateProfile(String userName, Profile profile);
 
     /**
      * method for check phone existing
@@ -96,5 +97,4 @@ public interface UserService {
      * @return True if exist
      */
     Boolean checkLogin(String login);
-
 }
