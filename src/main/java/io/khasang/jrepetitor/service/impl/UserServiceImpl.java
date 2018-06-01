@@ -62,6 +62,7 @@ public class UserServiceImpl implements UserService {
         return userDao.updateUser(user);
     }
 
+    @Override
     public CreationUserStatus createUser(User user) {
         CreationUserStatus creationUserStatus = new CreationUserStatus();
         creationUserStatus.setEmailExist(checkEmailExist(user.getProfile().getEmail()));
@@ -74,6 +75,7 @@ public class UserServiceImpl implements UserService {
         return creationUserStatus;
     }
 
+    @Override
     public CreationProfileStatus updateProfile(User user, Profile profile) {
         CreationProfileStatus creationProfileStatus = new CreationProfileStatus();
         creationProfileStatus.setEmailExist(checkEmailExist(profile.getEmail()));
@@ -92,16 +94,19 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
     public Boolean checkPhoneExist(String phone) {
         Profile profile = profileDao.getProfileByPhone(phone);
         return !(profile == null);
     }
 
+    @Override
     public Boolean checkEmailExist(String email) {
         Profile profile = profileDao.getProfileByEmail(email);
         return !(profile == null);
     }
 
+    @Override
     public Boolean checkLogin(String login) {
         User user = userDao.getUserByLogin(login);
         return !(user == null);

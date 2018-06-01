@@ -72,4 +72,29 @@ public interface UserService {
      * @return operations state class
      */
     CreationProfileStatus updateProfile(User user, Profile profile);
+
+    /**
+     * method for check phone existing
+     *
+     * @param phone
+     * @return True if exist
+     */
+    Boolean checkPhoneExist(String phone);
+
+    /**
+     * method for check phone existing
+     *
+     * @param email
+     * @return True if exist
+     */
+    Boolean checkEmailExist(String email);
+
+    /**
+     * method for check phone existing
+     *
+     * @param login
+     * @return True if exist
+     */
+    Boolean checkLogin(String login);
+
 }
