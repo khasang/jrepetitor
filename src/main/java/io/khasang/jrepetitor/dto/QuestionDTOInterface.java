@@ -1,6 +1,6 @@
 package io.khasang.jrepetitor.dto;
 
-import io.khasang.jrepetitor.dto.impl.ItemDTO;
+import io.khasang.jrepetitor.dto.impl.ItemDTOImpl;
 import io.khasang.jrepetitor.entity.Question;
 
 import java.util.List;
@@ -18,9 +18,9 @@ public interface QuestionDTOInterface {
 
     void setType(String type);
 
-    List<ItemDTO> getItems();
+    List<ItemDTOInterface> getItems();
 
-    void setItems(List<ItemDTO> items);
+    void setItems(List<ItemDTOInterface> items);
 
     QuizDTOInterface getQuiz();
 

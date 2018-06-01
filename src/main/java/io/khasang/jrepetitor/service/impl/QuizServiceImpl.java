@@ -2,8 +2,9 @@ package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.QuizDao;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
+import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
 import io.khasang.jrepetitor.dto.impl.QuizDTOImpl;
-import io.khasang.jrepetitor.dto.impl.QuizPreviewDTO;
+import io.khasang.jrepetitor.dto.impl.QuizPreviewDTOImpl;
 import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class QuizServiceImpl implements QuizService {
     private QuizDao quizDao;
     @Autowired
     private QuizDTOImpl quizDTO;
+    @Autowired
+    private QuizPreviewDTOImpl quizPreviewDTO;
 
     @Override
     public Quiz addQuiz(Quiz quiz) {
@@ -39,14 +42,14 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public List<QuizPreviewDTO> getAllQuizzesPreview() {
+    public List<QuizPreviewDTOInterface> getAllQuizzesPreview() {
         List<Quiz> quizzes = quizDao.getList();
-        return QuizPreviewDTO.getListQuizPreviewDTO(quizzes);
+        return quizPreviewDTO.getListQuizPreviewDTO(quizzes);
     }
 
     @Override
-    public QuizPreviewDTO getQuizPreviewById(long id) {
+    public QuizPreviewDTOInterface getQuizPreviewById(long id) {
         Quiz currentQuiz = quizDao.getById(id);
-        return QuizPreviewDTO.getPreviewDTO(currentQuiz);
+        return quizPreviewDTO.getPreviewDTO(currentQuiz);
     }
 }

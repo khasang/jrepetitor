@@ -1,5 +1,7 @@
 package io.khasang.jrepetitor.dto.impl;
 
+import io.khasang.jrepetitor.dto.GroupDTOInterface;
+import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.entity.Group;
 import org.springframework.stereotype.Component;
 
@@ -7,28 +9,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class GroupDTO {
+public class GroupDTOImpl implements GroupDTOInterface {
 
     private Long id;
 
-    private List<QuizDTO> quizes = new ArrayList<QuizDTO>();
+    private List<QuizDTOInterface> quizes = new ArrayList<>();
 
     //topic name
     private String name;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
-    public List<QuizDTO> getQuizes() {
+    public List<QuizDTOInterface> getQuizes() {
         return quizes;
     }
 
-    public void setQuizes(List<QuizDTO> quizes) {
+    public void setQuizes(List<QuizDTOInterface> quizes) {
         this.quizes = quizes;
     }
 
@@ -40,25 +44,25 @@ public class GroupDTO {
         this.name = name;
     }
 
-    public static GroupDTO getGroupDTO(Group group) {
+    public GroupDTOInterface getGroupDTO(Group group) {
         if (group == null) {
             return null;
         }
-        GroupDTO groupDTO = new GroupDTO();
+        GroupDTOInterface groupDTO = new GroupDTOImpl();
         groupDTO.setId(group.getId());
         groupDTO.setName(group.getName());
         return groupDTO;
     }
 
-    public static List<GroupDTO> getGroupDTOList(List<Group> list) {
-        List<GroupDTO> groupDTOList = new ArrayList<>();
+    public List<GroupDTOInterface> getGroupDTOList(List<Group> list) {
+        List<GroupDTOInterface> groupDTOList = new ArrayList<>();
 
         for (Group group : list) {
-            GroupDTO groupDTO = new GroupDTO();
-            groupDTO.setId(group.getId());
-            groupDTO.setName(group.getName());
+            GroupDTOImpl groupDTOImpl = new GroupDTOImpl();
+            groupDTOImpl.setId(group.getId());
+            groupDTOImpl.setName(group.getName());
 
-            groupDTOList.add(groupDTO);
+            groupDTOList.add(groupDTOImpl);
         }
         return groupDTOList;
     }

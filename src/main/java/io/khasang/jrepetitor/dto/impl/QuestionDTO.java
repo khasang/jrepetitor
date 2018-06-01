@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.dto.impl;
 
+import io.khasang.jrepetitor.dto.ItemDTOInterface;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.entity.Item;
@@ -30,7 +31,7 @@ public class QuestionDTO implements QuestionDTOInterface {
     /**
      * Answer variants
      */
-    private List<ItemDTO> items = new ArrayList<ItemDTO>();
+    private List<ItemDTOInterface> items = new ArrayList<>();
 
     private QuizDTOInterface quiz;
 
@@ -70,12 +71,12 @@ public class QuestionDTO implements QuestionDTOInterface {
     }
 
     @Override
-    public List<ItemDTO> getItems() {
+    public List<ItemDTOInterface> getItems() {
         return items;
     }
 
     @Override
-    public void setItems(List<ItemDTO> items) {
+    public void setItems(List<ItemDTOInterface> items) {
         this.items = items;
     }
 
@@ -104,9 +105,9 @@ public class QuestionDTO implements QuestionDTOInterface {
         List<QuestionDTOInterface> questionDTOList = new ArrayList<>();
         try {
             for (Question question : list) {
-                List<ItemDTO> itemDTOList = new ArrayList<>();
+                List<ItemDTOInterface> itemDTOList = new ArrayList<>();
 
-                QuestionDTO questionDTO = new QuestionDTO();
+                QuestionDTOInterface questionDTO = new QuestionDTO();
                 questionDTO.setId(question.getId());
                 questionDTO.setContent(question.getContent());
                 questionDTO.setType(question.getType());
@@ -114,11 +115,11 @@ public class QuestionDTO implements QuestionDTOInterface {
 
                 nextItem:
                 for (Item item : question.getItems()) {
-                    for (ItemDTO itemDTO : itemDTOList) {
+                    for (ItemDTOInterface itemDTO : itemDTOList) {
                         if (itemDTO.getId() == item.getId())
                             continue nextItem;
                     }
-                    ItemDTO itemDTO = new ItemDTO();
+                    ItemDTOImpl itemDTO = new ItemDTOImpl();
                     itemDTO.setId(item.getId());
                     itemDTO.setContent(item.getContent());
                     itemDTO.setCorrect(item.getCorrect());

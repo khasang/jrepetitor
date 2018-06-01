@@ -1,6 +1,6 @@
 package io.khasang.jrepetitor.service;
 
-import io.khasang.jrepetitor.dto.impl.GroupDTO;
+import io.khasang.jrepetitor.dto.GroupDTOInterface;
 import io.khasang.jrepetitor.entity.Group;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface GroupService {
      *
      * @return all Groups
      */
-    List<GroupDTO> getAllGroups();
+    List<GroupDTOInterface> getAllGroups();
 
     /**
      * method for receive specify Group by id
@@ -27,7 +27,7 @@ public interface GroupService {
      * @param id = uniq Group id
      * @return specify Group by id
      */
-    GroupDTO getGroupById(long id);
+    GroupDTOInterface getGroupById(long id);
 
     /**
      * method for Group delete
@@ -35,6 +35,6 @@ public interface GroupService {
      * @param id = Group's id for delete
      * @return removed Group
      */
-    GroupDTO deleteGroup(long id);
+    GroupDTOInterface deleteGroup(long id);
 
 }

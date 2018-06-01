@@ -1,7 +1,8 @@
 package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
-import io.khasang.jrepetitor.dto.impl.QuizPreviewDTO;
+import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
+import io.khasang.jrepetitor.dto.impl.QuizPreviewDTOImpl;
 import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +46,14 @@ public class QuizController {
 
     @RequestMapping(value = "/preview/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<QuizPreviewDTO> getAllQuizzesPreview() {
+    public List<QuizPreviewDTOInterface> getAllQuizzesPreview() {
 
         return quizService.getAllQuizzesPreview();
     }
 
     @RequestMapping(value = "/preview/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public QuizPreviewDTO getQuizPreviewById(@PathVariable(value = "id") String id) {
+    public QuizPreviewDTOInterface getQuizPreviewById(@PathVariable(value = "id") String id) {
         return quizService.getQuizPreviewById(Long.parseLong(id));
     }
 

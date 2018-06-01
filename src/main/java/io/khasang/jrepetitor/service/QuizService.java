@@ -1,7 +1,8 @@
 package io.khasang.jrepetitor.service;
 
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
-import io.khasang.jrepetitor.dto.impl.QuizPreviewDTO;
+import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
+import io.khasang.jrepetitor.dto.impl.QuizPreviewDTOImpl;
 import io.khasang.jrepetitor.entity.Quiz;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public interface QuizService {
      *
      * @return all quizzes preview
      */
-    List<QuizPreviewDTO> getAllQuizzesPreview();
+    List<QuizPreviewDTOInterface> getAllQuizzesPreview();
 
     /**
      * method for reciving preview quiz by id
@@ -51,5 +52,5 @@ public interface QuizService {
      * @param id = uniq quiz id
      * @return specify prew quiz by id
      */
-    QuizPreviewDTO getQuizPreviewById(long id);
+    QuizPreviewDTOInterface getQuizPreviewById(long id);
 }

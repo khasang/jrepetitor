@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.dto.impl;
 
+import io.khasang.jrepetitor.dto.GroupDTOInterface;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.entity.Quiz;
@@ -16,7 +17,7 @@ public class QuizDTOImpl implements QuizDTOInterface {
 
     private List<QuestionDTOInterface> questions;
 
-    private GroupDTO group;
+    private GroupDTOInterface group;
 
     /**
      * question level
@@ -58,12 +59,12 @@ public class QuizDTOImpl implements QuizDTOInterface {
     }
 
     @Override
-    public GroupDTO getGroup() {
+    public GroupDTOInterface getGroup() {
         return group;
     }
 
     @Override
-    public void setGroup(GroupDTO group) {
+    public void setGroup(GroupDTOInterface group) {
         this.group = group;
     }
 
@@ -98,7 +99,7 @@ public class QuizDTOImpl implements QuizDTOInterface {
         quizDTOImpl.setId(quiz.getId());
         quizDTOImpl.setName(quiz.getName());
         quizDTOImpl.setLevel(quiz.getLevel());
-        quizDTOImpl.setGroup(GroupDTO.getGroupDTO(quiz.getGroup()));
+        quizDTOImpl.setGroup(new GroupDTOImpl().getGroupDTO(quiz.getGroup()));
         quizDTOImpl.setQuestions(new QuestionDTO().getQuestionDTOList(quiz.getQuestions()));
         return quizDTOImpl;
     }

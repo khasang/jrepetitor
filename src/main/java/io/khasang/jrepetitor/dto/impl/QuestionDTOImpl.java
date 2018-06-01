@@ -1,5 +1,6 @@
 package io.khasang.jrepetitor.dto.impl;
 
+import io.khasang.jrepetitor.dto.ItemDTOInterface;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.entity.Question;
@@ -25,7 +26,7 @@ public class QuestionDTOImpl implements QuestionDTOInterface {
     /**
      * Answer variants
      */
-    private List<ItemDTO> items = new ArrayList<>();
+    private List<ItemDTOInterface> items = new ArrayList<>();
 
     private QuizDTOInterface quiz;
 
@@ -65,12 +66,12 @@ public class QuestionDTOImpl implements QuestionDTOInterface {
     }
 
     @Override
-    public List<ItemDTO> getItems() {
+    public List<ItemDTOInterface> getItems() {
         return items;
     }
 
     @Override
-    public void setItems(List<ItemDTO> items) {
+    public void setItems(List<ItemDTOInterface> items) {
         this.items = items;
     }
 
@@ -115,7 +116,7 @@ public class QuestionDTOImpl implements QuestionDTOInterface {
         questionDTO.setId(question.getId());
         questionDTO.setContent(question.getContent());
         questionDTO.setType(question.getType());
-        questionDTO.setItems(new ItemDTO().getItemDTOList(question.getItems()));
+        questionDTO.setItems(new ItemDTOImpl().getItemDTOList(question.getItems()));
         questionDTO.setExplanation(question.getExplanation());
         return questionDTO;
     }

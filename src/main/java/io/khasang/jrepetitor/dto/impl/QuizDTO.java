@@ -1,5 +1,7 @@
 package io.khasang.jrepetitor.dto.impl;
 
+import io.khasang.jrepetitor.dto.GroupDTOInterface;
+import io.khasang.jrepetitor.dto.ItemDTOInterface;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.entity.Item;
@@ -23,7 +25,7 @@ public class QuizDTO implements QuizDTOInterface {
 
     private List<QuestionDTOInterface> questions = new ArrayList<>();
 
-    private GroupDTO group;
+    private GroupDTOInterface group;
 
     /**
      * question level
@@ -61,12 +63,12 @@ public class QuizDTO implements QuizDTOInterface {
     }
 
     @Override
-    public GroupDTO getGroup() {
+    public GroupDTOInterface getGroup() {
         return group;
     }
 
     @Override
-    public void setGroup(GroupDTO group) {
+    public void setGroup(GroupDTOInterface group) {
         this.group = group;
     }
 
@@ -107,17 +109,17 @@ public class QuizDTO implements QuizDTOInterface {
                     questionDTO.setType(question.getType());
                     questionDTO.setExplanation(question.getExplanation());
 
-                    List<ItemDTO> itemDTOList = new ArrayList<>();
+                    List<ItemDTOInterface> itemDTOList = new ArrayList<>();
 
                     nextItem:
                     for (Item item : question.getItems()) {
 
-                        for (ItemDTO itemDTO : itemDTOList) {
+                        for (ItemDTOInterface itemDTO : itemDTOList) {
                             if (itemDTO.getId() == item.getId())
                                 continue nextItem;
                         }
 
-                        ItemDTO itemDTO = new ItemDTO();
+                        ItemDTOImpl itemDTO = new ItemDTOImpl();
                         itemDTO.setId(item.getId());
                         itemDTO.setContent(item.getContent());
                         itemDTO.setCorrect(item.getCorrect());
@@ -168,17 +170,17 @@ public class QuizDTO implements QuizDTOInterface {
                 questionDTO.setType(question.getType());
                 questionDTO.setExplanation(question.getExplanation());
 
-                List<ItemDTO> itemDTOList = new ArrayList<>();
+                List<ItemDTOInterface> itemDTOList = new ArrayList<>();
 
                 nextItem:
                 for (Item item : question.getItems()) {
 
-                    for (ItemDTO itemDTO : itemDTOList) {
+                    for (ItemDTOInterface itemDTO : itemDTOList) {
                         if (itemDTO.getId() == item.getId())
                             continue nextItem;
                     }
 
-                    ItemDTO itemDTO = new ItemDTO();
+                    ItemDTOImpl itemDTO = new ItemDTOImpl();
                     itemDTO.setId(item.getId());
                     itemDTO.setContent(item.getContent());
                     itemDTO.setCorrect(item.getCorrect());

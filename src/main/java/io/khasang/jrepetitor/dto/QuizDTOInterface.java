@@ -1,6 +1,5 @@
 package io.khasang.jrepetitor.dto;
 
-import io.khasang.jrepetitor.dto.impl.GroupDTO;
 import io.khasang.jrepetitor.entity.Quiz;
 
 import java.util.List;
@@ -18,9 +17,9 @@ public interface QuizDTOInterface {
 
     void setQuestions(List<QuestionDTOInterface> questions);
 
-    GroupDTO getGroup();
+    GroupDTOInterface getGroup();
 
-    void setGroup(GroupDTO group);
+    void setGroup(GroupDTOInterface group);
 
     byte getLevel();
 

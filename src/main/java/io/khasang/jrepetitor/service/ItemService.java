@@ -1,6 +1,6 @@
 package io.khasang.jrepetitor.service;
 
-import io.khasang.jrepetitor.dto.impl.ItemDTO;
+import io.khasang.jrepetitor.dto.ItemDTOInterface;
 import io.khasang.jrepetitor.entity.Item;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface ItemService {
      *
      * @return all Items
      */
-    List<ItemDTO> getAllItems();
+    List<ItemDTOInterface> getAllItems();
 
     /**
      * method for receive specify Item by id
@@ -27,7 +27,7 @@ public interface ItemService {
      * @param id = uniq Item id
      * @return specify Item by id
      */
-    Item getItemById(long id);
+    ItemDTOInterface getItemById(long id);
 
     /**
      * method for Item delete
@@ -35,5 +35,5 @@ public interface ItemService {
      * @param id = Item's id for delete
      * @return removed Item
      */
-    Item deleteItem(long id);
+    ItemDTOInterface deleteItem(long id);
 }

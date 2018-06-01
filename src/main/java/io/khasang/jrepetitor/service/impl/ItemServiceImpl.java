@@ -1,7 +1,8 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.ItemDao;
-import io.khasang.jrepetitor.dto.impl.ItemDTO;
+import io.khasang.jrepetitor.dto.ItemDTOInterface;
+import io.khasang.jrepetitor.dto.impl.ItemDTOImpl;
 import io.khasang.jrepetitor.entity.Item;
 import io.khasang.jrepetitor.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class ItemServiceImpl implements ItemService {
     private ItemDao itemDao;
 
     @Autowired
-    private ItemDTO itemDTO;
+    private ItemDTOImpl itemDTO;
 
     @Override
     public Item addItem(Item item) {
@@ -23,17 +24,21 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDTO> getAllItems() {
+    public List<ItemDTOInterface> getAllItems() {
         return itemDTO.getItemDTOList(itemDao.getList());
     }
 
     @Override
-    public Item getItemById(long id) {
-        return itemDao.getById(id);
+    public ItemDTOInterface getItemById(long id) {
+        return itemDTO.getItemDTO(itemDao.getById(id));
     }
 
     @Override
-    public Item deleteItem(long id) {
-        return itemDao.delete(getItemById(id));
+    public ItemDTOInterface deleteItem(long id) {
+        Item item = itemDao.getById(id);
+        if (item == null) {
+            return null;
+        }
+        return itemDTO.getItemDTO(itemDao.delete(item));
     }
 }
