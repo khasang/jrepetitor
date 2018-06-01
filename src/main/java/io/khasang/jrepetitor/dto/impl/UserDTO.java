@@ -14,7 +14,7 @@ public class UserDTO {
     private String login;
     private String password;
     private String roleName;
-    private ProfileDTO profile;
+    private ProfileDTOImpl profile;
 
     public List<UserDTO> getUserDTOList(List<User> user) {
         List<UserDTO> userDTOList = new ArrayList<>();
@@ -26,7 +26,7 @@ public class UserDTO {
             userDTO.setPassword(inputUser.getPassword());
             userDTO.setRoleName(inputUser.getRoleName());
 
-            ProfileDTO profile = new ProfileDTO();
+            ProfileDTOImpl profile = new ProfileDTOImpl();
             profile.setId(inputUser.getProfile().getId());
             profile.setName(inputUser.getProfile().getName());
             profile.setMiddlename(inputUser.getProfile().getMiddlename());
@@ -50,7 +50,7 @@ public class UserDTO {
         userDTO.setPassword(user.getPassword());
         userDTO.setRoleName(user.getRoleName());
 
-        ProfileDTO profile = new ProfileDTO();
+        ProfileDTOImpl profile = new ProfileDTOImpl();
 
         profile.setId(user.getProfile().getId());
         profile.setName(user.getProfile().getName());
@@ -69,7 +69,7 @@ public class UserDTO {
         }
         User user = new User();
         Profile profile = new Profile();
-        ProfileDTO profileDTO = userDTO.getProfile();
+        ProfileDTOImpl profileDTO = userDTO.getProfile();
         profile.setId(profileDTO.getId());
         profile.setName(profileDTO.getName());
         profile.setMiddlename(profileDTO.getMiddlename());
@@ -126,11 +126,11 @@ public class UserDTO {
         this.roleName = roleName;
     }
 
-    public ProfileDTO getProfile() {
+    public ProfileDTOImpl getProfile() {
         return profile;
     }
 
-    public void setProfile(ProfileDTO profile) {
+    public void setProfile(ProfileDTOImpl profile) {
         this.profile = profile;
     }
 }
