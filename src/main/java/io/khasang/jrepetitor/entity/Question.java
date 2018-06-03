@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  Question
- *  question has a type: RadioGroup (only one correct answer) or Checkbox (a set of correct answers)
+ * Question
+ * question has a type: RadioGroup (only one correct answer) or Checkbox (a set of correct answers)
  */
 
 @Entity
 @Table(name = "JR_QUESTION")
-public class Question implements Serializable{
+public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -87,5 +87,9 @@ public class Question implements Serializable{
 
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
     }
 }
