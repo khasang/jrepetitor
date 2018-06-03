@@ -67,4 +67,8 @@ public class Quiz implements Serializable {
     public void setLevel(byte level) {
         this.level = level;
     }
+
+    public void addQuestion(Question question) {
+        questions.add(question);
+    }
 }
