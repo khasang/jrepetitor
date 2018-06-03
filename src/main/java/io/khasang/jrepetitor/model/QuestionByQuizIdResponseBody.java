@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.model;
 
 import io.khasang.jrepetitor.entity.Question;
 
-public class AddQuestionByQuizIdResponseBody {
+public class QuestionByQuizIdResponseBody {
 
     private Long Id;
 

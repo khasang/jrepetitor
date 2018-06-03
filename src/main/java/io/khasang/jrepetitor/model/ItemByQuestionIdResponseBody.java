@@ -2,18 +2,10 @@ package io.khasang.jrepetitor.model;
 
 import io.khasang.jrepetitor.entity.Item;
 
-public class AddItemByQuestionIdResponseBody {
+public class ItemByQuestionIdResponseBody {
     private Long Id;
 
     private Item item;
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
 
     public Item getItem() {
         return item;
@@ -21,5 +13,13 @@ public class AddItemByQuestionIdResponseBody {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
     }
 }
