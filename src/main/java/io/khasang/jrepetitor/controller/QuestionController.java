@@ -2,6 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.entity.Question;
+import io.khasang.jrepetitor.model.AddQuestionByQuizIdResponseBody;
 import io.khasang.jrepetitor.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Question addQuestion(@RequestBody Question question) {
         return questionService.addQuestion(question);
@@ -38,4 +39,11 @@ public class QuestionController {
     public QuestionDTOInterface deleteQuestion(@RequestParam(value = "id") String id) {
         return questionService.deleteQuestion(Long.parseLong(id));
     }
+
+    @RequestMapping(value = "/addbyid", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public QuestionDTOInterface addQuestionByQuizID(@RequestBody AddQuestionByQuizIdResponseBody question) {
+        return questionService.addQuestionByQuizId(question);
+    }
+
 }
