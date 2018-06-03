@@ -7,4 +7,10 @@ public class QuestionDaoImpl extends BasicDaoImpl<Question> implements QuestionD
     public QuestionDaoImpl(Class<Question> entityClass) {
         super(entityClass);
     }
+
+    @Override
+    public Question updateQuestion(Question question) {
+        super.getSessionFactory().update(question);
+        return question;
+    }
 }
