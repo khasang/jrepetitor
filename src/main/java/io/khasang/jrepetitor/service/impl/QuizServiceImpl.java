@@ -1,11 +1,14 @@
 package io.khasang.jrepetitor.service.impl;
 
+import io.khasang.jrepetitor.dao.GroupDao;
 import io.khasang.jrepetitor.dao.QuizDao;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
 import io.khasang.jrepetitor.dto.impl.QuizDTOImpl;
 import io.khasang.jrepetitor.dto.impl.QuizPreviewDTOImpl;
+import io.khasang.jrepetitor.entity.Group;
 import io.khasang.jrepetitor.entity.Quiz;
+import io.khasang.jrepetitor.model.QuizByGroupIdResponseBody;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,8 @@ public class QuizServiceImpl implements QuizService {
     private QuizDTOImpl quizDTO;
     @Autowired
     private QuizPreviewDTOImpl quizPreviewDTO;
+    @Autowired
+    private GroupDao groupDao;
 
     @Override
     public Quiz addQuiz(Quiz quiz) {
@@ -52,4 +57,19 @@ public class QuizServiceImpl implements QuizService {
         Quiz currentQuiz = quizDao.getById(id);
         return quizPreviewDTO.getPreviewDTO(currentQuiz);
     }
+
+    @Override
+    public QuizDTOInterface createQuizByGroupID(QuizByGroupIdResponseBody quizByGroupIdResponseBody) {
+        Group group = groupDao.getById(quizByGroupIdResponseBody.getId());
+        if (group == null) {
+            return null;
+        }
+        Quiz quiz = quizDao.create(quizByGroupIdResponseBody.getQuiz());
+        group.addQuiz(quiz);
+        quiz.setGroup(group);
+        quizDao.update(quiz);
+        groupDao.update(group);
+        return quizDTO.getQuiz(quiz);
+    }
+
 }

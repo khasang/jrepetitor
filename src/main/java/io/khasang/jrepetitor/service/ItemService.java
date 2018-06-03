@@ -2,6 +2,7 @@ package io.khasang.jrepetitor.service;
 
 import io.khasang.jrepetitor.dto.ItemDTOInterface;
 import io.khasang.jrepetitor.entity.Item;
+import io.khasang.jrepetitor.model.ItemByQuestionIdResponseBody;
 
 import java.util.List;
 
@@ -36,4 +37,11 @@ public interface ItemService {
      * @return removed Item
      */
     ItemDTOInterface deleteItem(long id);
+
+    /**
+     * @param itemByQuestionIdResponseBody wrapper includes question id and item structure;
+     * @return created item
+     */
+
+    ItemDTOInterface addByQuestionId(ItemByQuestionIdResponseBody itemByQuestionIdResponseBody);
 }

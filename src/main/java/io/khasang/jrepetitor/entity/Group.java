@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *Topics^
- *  Java Code
- *  Srping
- *  Hibernate
- *  Rest Api
- *  Front end
- *  .....
+ * Topics^
+ * Java Code
+ * Srping
+ * Hibernate
+ * Rest Api
+ * Front end
+ * .....
  */
 @Entity
 @Table(name = "JR_GROUP")
-public class Group implements Serializable{
+public class Group implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,7 +25,7 @@ public class Group implements Serializable{
     private List<Quiz> quizes = new ArrayList<Quiz>();
 
     /**
-     *topic name
+     * topic name
      */
     private String name;
 
@@ -51,5 +51,9 @@ public class Group implements Serializable{
 
     public void setQuizes(List<Quiz> quizes) {
         this.quizes = quizes;
+    }
+
+    public void addQuiz(Quiz quiz) {
+        quizes.add(quiz);
     }
 }

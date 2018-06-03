@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.entity.Question;
-import io.khasang.jrepetitor.model.AddQuestionByQuizIdResponseBody;
+import io.khasang.jrepetitor.model.QuestionByQuizIdResponseBody;
 import io.khasang.jrepetitor.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,9 +40,9 @@ public class QuestionController {
         return questionService.deleteQuestion(Long.parseLong(id));
     }
 
-    @RequestMapping(value = "/addbyid", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/add_by_quiz_id", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public QuestionDTOInterface addQuestionByQuizID(@RequestBody AddQuestionByQuizIdResponseBody question) {
+    public QuestionDTOInterface addQuestionByQuizID(@RequestBody QuestionByQuizIdResponseBody question) {
         return questionService.addQuestionByQuizId(question);
     }
 

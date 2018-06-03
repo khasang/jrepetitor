@@ -2,8 +2,8 @@ package io.khasang.jrepetitor.service;
 
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
-import io.khasang.jrepetitor.dto.impl.QuizPreviewDTOImpl;
 import io.khasang.jrepetitor.entity.Quiz;
+import io.khasang.jrepetitor.model.QuizByGroupIdResponseBody;
 
 import java.util.List;
 
@@ -47,10 +47,18 @@ public interface QuizService {
     List<QuizPreviewDTOInterface> getAllQuizzesPreview();
 
     /**
-     * method for reciving preview quiz by id
+     * method for receiving preview quiz by id
      *
      * @param id = uniq quiz id
      * @return specify prew quiz by id
      */
     QuizPreviewDTOInterface getQuizPreviewById(long id);
+
+    /**
+     * method for add quiz in group
+     *
+     * @param quizByGroupIdResponseBody - wrapper includes group id and Quiz entity
+     * @return created quiz
+     */
+    QuizDTOInterface createQuizByGroupID(QuizByGroupIdResponseBody quizByGroupIdResponseBody);
 }

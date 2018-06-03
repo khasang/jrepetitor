@@ -2,8 +2,8 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
-import io.khasang.jrepetitor.dto.impl.QuizPreviewDTOImpl;
 import io.khasang.jrepetitor.entity.Quiz;
+import io.khasang.jrepetitor.model.QuizByGroupIdResponseBody;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,4 +57,9 @@ public class QuizController {
         return quizService.getQuizPreviewById(Long.parseLong(id));
     }
 
+    @RequestMapping(value = "/add_by_group_id", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public QuizDTOInterface addQuizByGroupId(@RequestBody QuizByGroupIdResponseBody quizByGroupIdResponseBody) {
+        return quizService.createQuizByGroupID(quizByGroupIdResponseBody);
+    }
 }

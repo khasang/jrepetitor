@@ -2,6 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.dto.ItemDTOInterface;
 import io.khasang.jrepetitor.entity.Item;
+import io.khasang.jrepetitor.model.ItemByQuestionIdResponseBody;
 import io.khasang.jrepetitor.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,5 +42,11 @@ public class ItemController {
     public ItemDTOInterface deleteItem(@RequestParam(value = "id") String id) {
 
         return itemService.deleteItem(Long.parseLong(id));
+    }
+
+    @RequestMapping(value = "/add_by_question_id", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public ItemDTOInterface addByQuestionId(@RequestBody ItemByQuestionIdResponseBody itemByQuestionIdResponseBody) {
+        return itemService.addByQuestionId(itemByQuestionIdResponseBody);
     }
 }

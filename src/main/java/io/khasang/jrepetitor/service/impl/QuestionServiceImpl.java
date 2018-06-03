@@ -3,12 +3,10 @@ package io.khasang.jrepetitor.service.impl;
 import io.khasang.jrepetitor.dao.QuestionDao;
 import io.khasang.jrepetitor.dao.QuizDao;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
-import io.khasang.jrepetitor.dto.impl.QuestionDTO;
 import io.khasang.jrepetitor.dto.impl.QuestionDTOImpl;
-import io.khasang.jrepetitor.dto.impl.QuizDTOImpl;
 import io.khasang.jrepetitor.entity.Question;
 import io.khasang.jrepetitor.entity.Quiz;
-import io.khasang.jrepetitor.model.AddQuestionByQuizIdResponseBody;
+import io.khasang.jrepetitor.model.QuestionByQuizIdResponseBody;
 import io.khasang.jrepetitor.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +20,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private QuestionDTOImpl questionDTO;
-
-    @Autowired
-    private QuizDTOImpl quizDTO;
 
     @Autowired
     private QuizDao quizDao;
@@ -51,17 +46,18 @@ public class QuestionServiceImpl implements QuestionService {
         return new QuestionDTOImpl().getQuestionDTO(deletedQuestion);
     }
 
-    //@Override
-    public QuestionDTOInterface addQuestionByQuizId(AddQuestionByQuizIdResponseBody addQuestionByQuizIdResponseBody) {
-        Quiz quiz = quizDao.getById(addQuestionByQuizIdResponseBody.getId());
-        //if (quiz == null) {
-        //    return null;
-        //}
+    @Override
+    public QuestionDTOInterface addQuestionByQuizId(QuestionByQuizIdResponseBody questionByQuizIdResponseBody) {
+        Quiz quiz = quizDao.getById(questionByQuizIdResponseBody.getId());
+        if (quiz == null) {
+            return null;
+        }
 
-        Question question = questionDao.create(addQuestionByQuizIdResponseBody.getQuestion());
-
-        quiz.getQuestions().add(addQuestionByQuizIdResponseBody.getQuestion());
-        return new QuestionDTOImpl();
-
+        Question question = questionDao.create(questionByQuizIdResponseBody.getQuestion());
+        quiz.addQuestion(question);
+        quizDao.update(quiz);
+        question.setQuiz(quiz);
+        questionDao.updateQuestion(question);
+        return questionDTO.getQuestionDTO(question);
     }
 }
