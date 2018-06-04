@@ -14,7 +14,9 @@ import java.util.List;
 @Table(name = "JR_QUIZ")
 public class Quiz implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quiz_generator")
+    @SequenceGenerator(name="quiz_generator", sequenceName = "quiz_seq", allocationSize=50)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
     private String name;
