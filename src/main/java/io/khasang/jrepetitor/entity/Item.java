@@ -4,13 +4,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- *  One of Answer variants
+ * One of Answer variants
  */
 @Entity
 @Table(name = "JR_ITEM")
-public class Item implements Serializable{
+public class Item implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_generator")
+    @SequenceGenerator(name = "item_generator", sequenceName = "item_seq", allocationSize = 50)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
     @Column(length = 1000)
