@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.model;
 
 import io.khasang.jrepetitor.entity.Item;
 
-public class ItemByQuestionIdResponseBody {
+public class ItemByQuestionIdRequestWrapper {
     private Long Id;
 
     private Item item;

@@ -8,7 +8,7 @@ import io.khasang.jrepetitor.dto.impl.QuizDTOImpl;
 import io.khasang.jrepetitor.dto.impl.QuizPreviewDTOImpl;
 import io.khasang.jrepetitor.entity.Group;
 import io.khasang.jrepetitor.entity.Quiz;
-import io.khasang.jrepetitor.model.QuizByGroupIdResponseBody;
+import io.khasang.jrepetitor.model.QuizByGroupIdRequestWrapper;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,12 +59,12 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public QuizDTOInterface createQuizByGroupID(QuizByGroupIdResponseBody quizByGroupIdResponseBody) {
-        Group group = groupDao.getById(quizByGroupIdResponseBody.getId());
+    public QuizDTOInterface createQuizByGroupID(QuizByGroupIdRequestWrapper quizByGroupIdRequestWrapper) {
+        Group group = groupDao.getById(quizByGroupIdRequestWrapper.getId());
         if (group == null) {
             return null;
         }
-        Quiz quiz = quizDao.create(quizByGroupIdResponseBody.getQuiz());
+        Quiz quiz = quizDao.create(quizByGroupIdRequestWrapper.getQuiz());
         group.addQuiz(quiz);
         quiz.setGroup(group);
         quizDao.update(quiz);

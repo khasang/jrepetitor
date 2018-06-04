@@ -3,7 +3,7 @@ package io.khasang.jrepetitor.service;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
 import io.khasang.jrepetitor.entity.Quiz;
-import io.khasang.jrepetitor.model.QuizByGroupIdResponseBody;
+import io.khasang.jrepetitor.model.QuizByGroupIdRequestWrapper;
 
 import java.util.List;
 
@@ -57,8 +57,8 @@ public interface QuizService {
     /**
      * method for add quiz in group
      *
-     * @param quizByGroupIdResponseBody - wrapper includes group id and Quiz entity
+     * @param quizByGroupIdRequestWrapper - wrapper includes group id and Quiz entity
      * @return created quiz
      */
-    QuizDTOInterface createQuizByGroupID(QuizByGroupIdResponseBody quizByGroupIdResponseBody);
+    QuizDTOInterface createQuizByGroupID(QuizByGroupIdRequestWrapper quizByGroupIdRequestWrapper);
 }

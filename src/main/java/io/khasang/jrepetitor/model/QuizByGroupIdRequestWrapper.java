@@ -2,12 +2,12 @@ package io.khasang.jrepetitor.model;
 
 import io.khasang.jrepetitor.entity.Quiz;
 
-public class QuizByGroupIdResponseBody {
+public class QuizByGroupIdRequestWrapper {
     private Long Id;
 
     private Quiz quiz;
 
-    public QuizByGroupIdResponseBody() {
+    public QuizByGroupIdRequestWrapper() {
     }
 
     public Long getId() {

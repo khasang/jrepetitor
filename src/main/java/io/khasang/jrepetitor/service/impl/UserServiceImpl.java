@@ -7,8 +7,8 @@ import io.khasang.jrepetitor.dto.impl.UserDTOImpl;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.service.UserService;
-import io.khasang.jrepetitor.utils.CreationProfileStatus;
-import io.khasang.jrepetitor.utils.CreationUserStatus;
+import io.khasang.jrepetitor.model.CreationProfileStatusResponseWrapper;
+import io.khasang.jrepetitor.model.CreationUserStatusResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,25 +63,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public CreationUserStatus createUser(User user) {
-        CreationUserStatus creationUserStatus = new CreationUserStatus();
-        creationUserStatus.setEmailExist(checkEmailExist(user.getProfile().getEmail()));
-        creationUserStatus.setLoginExist(checkLogin(user.getLogin()));
-        creationUserStatus.setPhoneExist(checkPhoneExist(user.getProfile().getPhoneNumber()));
-        if (creationUserStatus.isOk()) {
+    public CreationUserStatusResponseWrapper createUser(User user) {
+        CreationUserStatusResponseWrapper creationUserStatusResponseWrapper = new CreationUserStatusResponseWrapper();
+        creationUserStatusResponseWrapper.setEmailExist(checkEmailExist(user.getProfile().getEmail()));
+        creationUserStatusResponseWrapper.setLoginExist(checkLogin(user.getLogin()));
+        creationUserStatusResponseWrapper.setPhoneExist(checkPhoneExist(user.getProfile().getPhoneNumber()));
+        if (creationUserStatusResponseWrapper.isOk()) {
             addUser(user);
-            return creationUserStatus;
+            return creationUserStatusResponseWrapper;
         }
-        return creationUserStatus;
+        return creationUserStatusResponseWrapper;
     }
 
     @Override
-    public CreationProfileStatus updateProfile(String userName, Profile profile) {
+    public CreationProfileStatusResponseWrapper updateProfile(String userName, Profile profile) {
         User user = userDao.getUserByLogin(userName);
-        CreationProfileStatus creationProfileStatus = new CreationProfileStatus();
-        creationProfileStatus.setEmailExist(checkEmailExist(profile.getEmail()));
-        creationProfileStatus.setPhoneExist(checkPhoneExist(profile.getPhoneNumber()));
-        if (creationProfileStatus.isOk()) {
+        CreationProfileStatusResponseWrapper creationProfileStatusResponseWrapper = new CreationProfileStatusResponseWrapper();
+        creationProfileStatusResponseWrapper.setEmailExist(checkEmailExist(profile.getEmail()));
+        creationProfileStatusResponseWrapper.setPhoneExist(checkPhoneExist(profile.getPhoneNumber()));
+        if (creationProfileStatusResponseWrapper.isOk()) {
             Profile updatedProfile = user.getProfile();
             updatedProfile.setName(profile.getName());
             updatedProfile.setSurname(profile.getSurname());
@@ -89,9 +89,9 @@ public class UserServiceImpl implements UserService {
             updatedProfile.setPhoneNumber(profile.getPhoneNumber());
             updatedProfile.setEmail(profile.getEmail());
             userDao.updateUser(user);
-            return creationProfileStatus;
+            return creationProfileStatusResponseWrapper;
         } else {
-            return creationProfileStatus;
+            return creationProfileStatusResponseWrapper;
         }
     }
 

@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.service;
 
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.entity.Question;
-import io.khasang.jrepetitor.model.QuestionByQuizIdResponseBody;
+import io.khasang.jrepetitor.model.QuestionByQuizIdRequestWrapper;
 
 import java.util.List;
 
@@ -42,8 +42,8 @@ public interface QuestionService {
     /**
      * add question to quiz id
      *
-     * @param questionByQuizIdResponseBody
+     * @param questionByQuizIdRequestWrapper
      * @return created Question
      */
-    QuestionDTOInterface addQuestionByQuizId(QuestionByQuizIdResponseBody questionByQuizIdResponseBody);
+    QuestionDTOInterface addQuestionByQuizId(QuestionByQuizIdRequestWrapper questionByQuizIdRequestWrapper);
 }

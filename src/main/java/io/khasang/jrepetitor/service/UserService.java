@@ -4,8 +4,8 @@ import io.khasang.jrepetitor.dto.UserDTOInterface;
 //import io.khasang.jrepetitor.dto.impl.UserDTO;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
-import io.khasang.jrepetitor.utils.CreationProfileStatus;
-import io.khasang.jrepetitor.utils.CreationUserStatus;
+import io.khasang.jrepetitor.model.CreationProfileStatusResponseWrapper;
+import io.khasang.jrepetitor.model.CreationUserStatusResponseWrapper;
 
 import java.util.List;
 
@@ -63,7 +63,7 @@ public interface UserService {
      * @param user = User  for update
      * @return operation state class
      */
-    CreationUserStatus createUser(User user);
+    CreationUserStatusResponseWrapper createUser(User user);
 
     /**
      * method for update user
@@ -72,7 +72,7 @@ public interface UserService {
      * @param profile  = new profile state
      * @return operations state class
      */
-    CreationProfileStatus updateProfile(String userName, Profile profile);
+    CreationProfileStatusResponseWrapper updateProfile(String userName, Profile profile);
 
     /**
      * method for check phone existing

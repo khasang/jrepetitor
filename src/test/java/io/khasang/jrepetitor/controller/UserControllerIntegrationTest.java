@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
-import io.khasang.jrepetitor.utils.CreationUserStatus;
+import io.khasang.jrepetitor.model.CreationUserStatusResponseWrapper;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -132,30 +132,30 @@ public class UserControllerIntegrationTest {
 
         RestTemplate template = new RestTemplate();
 
-        CreationUserStatus creationUserStatus = template.exchange(
+        CreationUserStatusResponseWrapper creationUserStatusResponseWrapper = template.exchange(
                 ROOT + CREATE,
                 HttpMethod.POST,
                 entity,
-                CreationUserStatus.class
+                CreationUserStatusResponseWrapper.class
         ).getBody();
 
-        assertTrue(creationUserStatus.isOk());
-        assertFalse(creationUserStatus.getEmailExist());
-        assertFalse(creationUserStatus.getLoginExist());
-        assertFalse(creationUserStatus.getPhoneExist());
+        assertTrue(creationUserStatusResponseWrapper.isOk());
+        assertFalse(creationUserStatusResponseWrapper.getEmailExist());
+        assertFalse(creationUserStatusResponseWrapper.getLoginExist());
+        assertFalse(creationUserStatusResponseWrapper.getPhoneExist());
 
         //try to create a user with already existing login, phone and email
-        creationUserStatus = template.exchange(
+        creationUserStatusResponseWrapper = template.exchange(
                 ROOT + CREATE,
                 HttpMethod.POST,
                 entity,
-                CreationUserStatus.class
+                CreationUserStatusResponseWrapper.class
         ).getBody();
 
-        assertFalse(creationUserStatus.isOk());
-        assertTrue(creationUserStatus.getEmailExist());
-        assertTrue(creationUserStatus.getLoginExist());
-        assertTrue(creationUserStatus.getPhoneExist());
+        assertFalse(creationUserStatusResponseWrapper.isOk());
+        assertTrue(creationUserStatusResponseWrapper.getEmailExist());
+        assertTrue(creationUserStatusResponseWrapper.getLoginExist());
+        assertTrue(creationUserStatusResponseWrapper.getPhoneExist());
 
         List<User> users = returnAllUsers();
 
@@ -218,11 +218,11 @@ public class UserControllerIntegrationTest {
             HttpEntity entity = new HttpEntity(profile, headers);
 
             RestTemplate template = new RestTemplate();
-            ResponseEntity<CreationUserStatus> responseEntity = template.exchange(
+            ResponseEntity<CreationUserStatusResponseWrapper> responseEntity = template.exchange(
                     ROOT + PROFILE,
                     HttpMethod.POST,
                     entity,
-                    CreationUserStatus.class
+                    CreationUserStatusResponseWrapper.class
             );
         } catch (HttpClientErrorException e) {
             assertEquals(e.getMessage(), "401 null");

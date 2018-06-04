@@ -6,7 +6,7 @@ import io.khasang.jrepetitor.dto.ItemDTOInterface;
 import io.khasang.jrepetitor.dto.impl.ItemDTOImpl;
 import io.khasang.jrepetitor.entity.Item;
 import io.khasang.jrepetitor.entity.Question;
-import io.khasang.jrepetitor.model.ItemByQuestionIdResponseBody;
+import io.khasang.jrepetitor.model.ItemByQuestionIdRequestWrapper;
 import io.khasang.jrepetitor.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,12 +49,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDTOInterface addByQuestionId(ItemByQuestionIdResponseBody itemByQuestionIdResponseBody) {
-        Question question = questionDao.getById(itemByQuestionIdResponseBody.getId());
+    public ItemDTOInterface addByQuestionId(ItemByQuestionIdRequestWrapper itemByQuestionIdRequestWrapper) {
+        Question question = questionDao.getById(itemByQuestionIdRequestWrapper.getId());
         if (question == null) {
             return null;
         }
-        Item item = itemDao.create(itemByQuestionIdResponseBody.getItem());
+        Item item = itemDao.create(itemByQuestionIdRequestWrapper.getItem());
         item.setQuestion(question);
         question.addItem(item);
         itemDao.update(item);

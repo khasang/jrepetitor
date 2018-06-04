@@ -6,8 +6,8 @@ import io.khasang.jrepetitor.dto.impl.ProfileDTOImpl;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.service.UserService;
-import io.khasang.jrepetitor.utils.CreationProfileStatus;
-import io.khasang.jrepetitor.utils.CreationUserStatus;
+import io.khasang.jrepetitor.model.CreationProfileStatusResponseWrapper;
+import io.khasang.jrepetitor.model.CreationUserStatusResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,23 +77,23 @@ public class UserController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ResponseEntity<CreationProfileStatus> setProfile(@RequestBody Profile profile) {
+    public ResponseEntity<CreationProfileStatusResponseWrapper> setProfile(@RequestBody Profile profile) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         if (currentPrincipalName.equals("anonymousUser")) {
-            CreationProfileStatus creationProfileStatus = null;
-            return new ResponseEntity<>(creationProfileStatus, HttpStatus.UNAUTHORIZED);
+            CreationProfileStatusResponseWrapper creationProfileStatusResponseWrapper = null;
+            return new ResponseEntity<>(creationProfileStatusResponseWrapper, HttpStatus.UNAUTHORIZED);
         }
-        CreationProfileStatus creationProfileStatus = userService.updateProfile(currentPrincipalName, profile);
-        return new ResponseEntity<>(creationProfileStatus, HttpStatus.OK);
+        CreationProfileStatusResponseWrapper creationProfileStatusResponseWrapper = userService.updateProfile(currentPrincipalName, profile);
+        return new ResponseEntity<>(creationProfileStatusResponseWrapper, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ResponseEntity<CreationUserStatus> createUser(@RequestBody User user) {
+    public ResponseEntity<CreationUserStatusResponseWrapper> createUser(@RequestBody User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        CreationUserStatus creationUserStatus = userService.createUser(user);
-        return ResponseEntity.ok(creationUserStatus);
+        CreationUserStatusResponseWrapper creationUserStatusResponseWrapper = userService.createUser(user);
+        return ResponseEntity.ok(creationUserStatusResponseWrapper);
     }
 
     @RequestMapping(value = "/authorized", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
