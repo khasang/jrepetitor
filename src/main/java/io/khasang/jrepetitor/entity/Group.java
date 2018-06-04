@@ -18,11 +18,13 @@ import java.util.List;
 @Table(name = "JR_GROUP")
 public class Group implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "group_generator")
+    @SequenceGenerator(name = "group_generator", sequenceName = "group_seq", allocationSize = 50)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Quiz> quizes = new ArrayList<Quiz>();
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Quiz> quizes = new ArrayList<>();
 
     /**
      * topic name
