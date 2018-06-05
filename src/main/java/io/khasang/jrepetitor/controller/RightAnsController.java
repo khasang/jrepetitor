@@ -3,6 +3,8 @@ package io.khasang.jrepetitor.controller;
 import io.khasang.jrepetitor.entity.RightAns;
 import io.khasang.jrepetitor.service.RightAnsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +19,9 @@ public class RightAnsController {
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public RightAns addRightAns(@RequestBody RightAns rightAns) {
-        return rightAnsService.addRightAns(rightAns);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        return rightAnsService.addRightAns(currentPrincipalName, rightAns);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")

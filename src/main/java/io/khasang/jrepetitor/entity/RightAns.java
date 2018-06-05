@@ -10,6 +10,9 @@ public class RightAns {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    User user;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ItemRightAns> rightAnsList = new ArrayList<>();
 
@@ -27,5 +30,13 @@ public class RightAns {
 
     public void setRightAnsList(List<ItemRightAns> rightAnsList) {
         this.rightAnsList = rightAnsList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
