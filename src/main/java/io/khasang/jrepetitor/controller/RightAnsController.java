@@ -17,21 +17,18 @@ public class RightAnsController {
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public RightAns addRightAns(@RequestBody RightAns rightAns) {
-
         return rightAnsService.addRightAns(rightAns);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<RightAns> getAllItemRightAns() {
-
         return rightAnsService.getAllRightAns();
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public RightAns getItemRightAnsById(@PathVariable(value = "id") String id) {
-        // exception
         return rightAnsService.getRightAnsById(Long.parseLong(id));
     }
 }
