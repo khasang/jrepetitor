@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.entity;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Dog {
 
     @Id

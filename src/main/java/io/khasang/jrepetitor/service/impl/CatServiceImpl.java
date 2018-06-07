@@ -1,7 +1,9 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.CatDao;
+import io.khasang.jrepetitor.dao.QuizTryDao;
 import io.khasang.jrepetitor.entity.Cat;
+import io.khasang.jrepetitor.entity.QuizTry;
 import io.khasang.jrepetitor.service.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,9 @@ import java.util.List;
 public class CatServiceImpl implements CatService {
     @Autowired
     private CatDao catDao;
+
+    @Autowired
+    private QuizTryDao quizTryDao;
 
     @Override
     public Cat addCat(Cat cat) {
