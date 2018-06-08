@@ -17,13 +17,12 @@ public class QuizTryItem {
         selectedItems = new ArrayList<>();
     }
 
-    @JoinColumn(name = "question_id", foreignKey = @ForeignKey(name = "QUESTION_ID_FK"))
+    @JoinColumn(name = "question_id", foreignKey = @ForeignKey(name = "QUESTION_ID_FK"), nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Question question;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Item> selectedItems;
-
 
     public Long getId() {
         return id;
