@@ -13,10 +13,6 @@ public class QuizTryItem {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    public QuizTryItem() {
-        selectedItems = new ArrayList<>();
-    }
-
     @JoinColumn(name = "question_id", foreignKey = @ForeignKey(name = "QUESTION_ID_FK"), nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Question question;
@@ -25,9 +21,13 @@ public class QuizTryItem {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private QuizTry quizTry;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Item> selectedItems;
 
+
+    public QuizTryItem() {
+        selectedItems = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;

@@ -29,6 +29,7 @@ public class QuizTry {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
+
     public QuizTry() {
         tryItems = new ArrayList<>();
     }
