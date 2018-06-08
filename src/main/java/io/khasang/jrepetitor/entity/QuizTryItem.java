@@ -21,8 +21,13 @@ public class QuizTryItem {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Question question;
 
+    @JoinColumn(name = "quiz_try_id", foreignKey = @ForeignKey(name = "QUIZ_TRY_ID_ID_FK"))
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private QuizTry quizTry;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Item> selectedItems;
+
 
     public Long getId() {
         return id;
@@ -50,5 +55,13 @@ public class QuizTryItem {
 
     public void addSelectedItem(Item item) {
         selectedItems.add(item);
+    }
+
+    public QuizTry getQuizTry() {
+        return quizTry;
+    }
+
+    public void setQuizTry(QuizTry quizTry) {
+        this.quizTry = quizTry;
     }
 }
