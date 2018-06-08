@@ -13,7 +13,7 @@ public class QuizTryItem {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @JoinColumn(name = "question_id", foreignKey = @ForeignKey(name = "QUESTION_ID_FK"), nullable = false)
+    @JoinColumn(name = "question_id", foreignKey = @ForeignKey(name = "QUESTION_ID_FK"))
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Question question;
 

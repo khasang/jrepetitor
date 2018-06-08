@@ -14,11 +14,11 @@ public class QuizTry {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USER_ID_FK"), nullable = false)
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USER_ID_FK"))
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private User user;
 
-    @JoinColumn(name = "quiz_id", foreignKey = @ForeignKey(name = "QUIZ_ID_FK"), nullable = false)
+    @JoinColumn(name = "quiz_id", foreignKey = @ForeignKey(name = "QUIZ_ID_FK"))
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Quiz quiz;
 
