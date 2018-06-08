@@ -12,7 +12,7 @@ import java.util.List;
  * User answers are saved in UserAnswer object
  */
 
-@Entity
+//@Entity
 @Table(name = "JR_USER_TRY")
 public class UserTry {
     @Id

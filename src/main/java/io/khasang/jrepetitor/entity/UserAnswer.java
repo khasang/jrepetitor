@@ -9,7 +9,7 @@ import javax.persistence.*;
  *  User answers are saved in UserAnswer object
  */
 
-@Entity
+//@Entity
 @Table(name = "JR_USER_ANSWER")
 public class UserAnswer {
     @Id
