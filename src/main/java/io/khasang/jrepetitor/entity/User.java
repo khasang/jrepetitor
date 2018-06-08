@@ -22,7 +22,7 @@ public class User implements Serializable {
     private Profile profile;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    public List<UserTry> userTries = new ArrayList<>();
+    public List<QuizTry> userTries = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -72,11 +72,11 @@ public class User implements Serializable {
         this.profile = profile;
     }
 
-    public List<UserTry> getUserTries() {
+    public List<QuizTry> getUserTries() {
         return userTries;
     }
 
-    public void setUserTries(List<UserTry> userTries) {
+    public void setUserTries(List<QuizTry> userTries) {
         this.userTries = userTries;
     }
 }
