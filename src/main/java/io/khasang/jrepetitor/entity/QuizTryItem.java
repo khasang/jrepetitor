@@ -24,9 +24,18 @@ public class QuizTryItem {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Item> selectedItems;
 
+    private byte answerIsCorrect;
 
     public QuizTryItem() {
         selectedItems = new ArrayList<>();
+    }
+
+    public byte getAnswerIsCorrect() {
+        return answerIsCorrect;
+    }
+
+    public void setAnswerIsCorrect(byte answerIsCorrect) {
+        this.answerIsCorrect = answerIsCorrect;
     }
 
     public Long getId() {

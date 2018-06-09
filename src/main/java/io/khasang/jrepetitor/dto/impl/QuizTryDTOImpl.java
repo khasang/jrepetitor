@@ -4,7 +4,6 @@ import io.khasang.jrepetitor.dto.*;
 import io.khasang.jrepetitor.entity.QuizTry;
 import org.springframework.stereotype.Component;
 
-import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +19,13 @@ public class QuizTryDTOImpl implements QuizTryDTOInterface {
     private List<QuizTryItemDTOInterface> tryItemDTOList;
 
     private Date timestamp;
+
+    private int questionsCount;
+
+    private int rightAnswerCount;
+
+    private int incorrectAnswerCount;
+
 
     @Override
     public Long getId() {
@@ -71,6 +77,37 @@ public class QuizTryDTOImpl implements QuizTryDTOInterface {
         this.timestamp = timestamp;
     }
 
+    @Override
+    public int getQuestionsCount() {
+        return questionsCount;
+    }
+
+    @Override
+    public void setQuestionsCount(int questionsCount) {
+        this.questionsCount = questionsCount;
+    }
+
+    @Override
+    public int getRightAnswerCount() {
+        return rightAnswerCount;
+    }
+
+    @Override
+    public void setRightAnswerCount(int rightAnswerCount) {
+        this.rightAnswerCount = rightAnswerCount;
+    }
+
+    @Override
+    public int getIncorrectAnswerCount() {
+        return incorrectAnswerCount;
+    }
+
+    @Override
+    public void setIncorrectAnswerCount(int incorrectAnswerCount) {
+        this.incorrectAnswerCount = incorrectAnswerCount;
+    }
+
+    @Override
     public QuizTryDTOInterface getQuizTryDTO(QuizTry quizTry) {
         QuizTryDTOInterface quizTryDTO = new QuizTryDTOImpl();
         quizTryDTO.setId(quizTry.getId());
@@ -78,10 +115,14 @@ public class QuizTryDTOImpl implements QuizTryDTOInterface {
         quizTryDTO.setQuiz(new QuizDTOImpl().getQuiz(quizTry.getQuiz()));
         quizTryDTO.setUser(new UserPreviewDTOImpl().getUserDTO(quizTry.getUser()));
         quizTryDTO.setTimestamp(quizTry.getTimestamp());
+        quizTryDTO.setQuestionsCount(quizTry.getQuestionsCount());
+        quizTryDTO.setIncorrectAnswerCount(quizTry.getIncorrectAnswerCount());
+        quizTryDTO.setRightAnswerCount(quizTry.getRightAnswerCount());
         quizTryDTO.setTryItemDTOList(new QuizTryItemDTOImpl().getQuizTryItems(quizTry.getTryItems()));
         return quizTryDTO;
     }
 
+    @Override
     public List<QuizTryDTOInterface> getQuizTryDTOList(List<QuizTry> quizTries) {
         List<QuizTryDTOInterface> quizTryDTOS = new ArrayList<>();
         if (quizTries.isEmpty()) {
@@ -92,4 +133,6 @@ public class QuizTryDTOImpl implements QuizTryDTOInterface {
         }
         return quizTryDTOS;
     }
+
+
 }

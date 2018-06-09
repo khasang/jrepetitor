@@ -9,6 +9,10 @@ public interface QuizTryItemDTOInterface {
 
     void setId(Long id);
 
+    byte getAnswerIsCorrect();
+
+    void setAnswerIsCorrect(byte answerIsCorrect);
+
     QuestionDTOInterface getQuestion();
 
     void setQuestion(QuestionDTOInterface question);
@@ -19,5 +23,5 @@ public interface QuizTryItemDTOInterface {
 
     QuizTryItemDTOInterface getQuizTryItem(QuizTryItem quizTryItem);
 
-    public List<QuizTryItemDTOInterface> getQuizTryItems(List<QuizTryItem> quizTryItems);
+    List<QuizTryItemDTOInterface> getQuizTryItems(List<QuizTryItem> quizTryItems);
 }

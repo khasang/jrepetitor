@@ -29,6 +29,11 @@ public class QuizTry {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
+    private int questionsCount;
+
+    private int rightAnswerCount;
+
+    private int incorrectAnswerCount;
 
     public QuizTry() {
         tryItems = new ArrayList<>();
@@ -76,5 +81,29 @@ public class QuizTry {
 
     public void addQuizTryItem(QuizTryItem quizTryItem) {
         tryItems.add(quizTryItem);
+    }
+
+    public int getQuestionsCount() {
+        return questionsCount;
+    }
+
+    public void setQuestionsCount(int questionsCount) {
+        this.questionsCount = questionsCount;
+    }
+
+    public int getRightAnswerCount() {
+        return rightAnswerCount;
+    }
+
+    public void setRightAnswerCount(int righAnswerCount) {
+        this.rightAnswerCount = righAnswerCount;
+    }
+
+    public int getIncorrectAnswerCount() {
+        return incorrectAnswerCount;
+    }
+
+    public void setIncorrectAnswerCount(int incorrectAnswerCount) {
+        this.incorrectAnswerCount = incorrectAnswerCount;
     }
 }

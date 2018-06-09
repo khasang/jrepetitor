@@ -17,6 +17,8 @@ public class QuizTryItemDTOImpl implements QuizTryItemDTOInterface {
 
     private List<ItemDTOInterface> items;
 
+    private byte answerIsCorrect;
+
     @Override
     public Long getId() {
         return id;
@@ -48,11 +50,22 @@ public class QuizTryItemDTOImpl implements QuizTryItemDTOInterface {
     }
 
     @Override
+    public byte getAnswerIsCorrect() {
+        return answerIsCorrect;
+    }
+
+    @Override
+    public void setAnswerIsCorrect(byte answerIsCorrect) {
+        this.answerIsCorrect = answerIsCorrect;
+    }
+
+    @Override
     public QuizTryItemDTOInterface getQuizTryItem(QuizTryItem quizTryItem) {
         QuizTryItemDTOInterface quizTryItemDTO = new QuizTryItemDTOImpl();
         quizTryItemDTO.setId(quizTryItem.getId());
         quizTryItemDTO.setQuestion(new QuestionDTOImpl().getQuestionDTO(quizTryItem.getQuestion()));
         quizTryItemDTO.setItems(new ItemDTOImpl().getItemDTOList(quizTryItem.getSelectedItems()));
+        quizTryItemDTO.setAnswerIsCorrect(quizTryItem.getAnswerIsCorrect());
         return quizTryItemDTO;
     }
 
