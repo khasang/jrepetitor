@@ -54,12 +54,22 @@ public class QuizTryServiceImpl implements QuizTryService {
 
         QuizTry quizTry = new QuizTry();
         quizTry.setQuiz(quiz);
-
+        quizTry.setQuestionsCount(questions.size());
         User user = userDao.getUserByLogin(userLogin);
         quizTry.setUser(user);
 
+        int rightAnswerCount = 0;
+        int incorrectAnswerCount = 0;
+
         for (QuestionAnswerWrapper answer : answers) {
             QuizTryItem quizTryItem = new QuizTryItem();
+            if (!isAnswerCorrect(questionMap.get(answer.getQuestionId()), answer)) {
+                incorrectAnswerCount++;
+                quizTryItem.setAnswerIsCorrect((byte) 0);
+            } else {
+                rightAnswerCount++;
+                quizTryItem.setAnswerIsCorrect((byte) 1);
+            }
             quizTryItem.setQuestion(questionMap.get(answer.getQuestionId()));
             for (SelectedItemWrapper selectedItem : answer.getSelectedItemWrappers()) {
                 quizTryItem.addSelectedItem(itemsMap.get(selectedItem.getSelectedItemId()));
@@ -68,10 +78,12 @@ public class QuizTryServiceImpl implements QuizTryService {
         }
         Date date = new Date();
         quizTry.setTimestamp(date);
+
+        quizTry.setIncorrectAnswerCount(incorrectAnswerCount);
+        quizTry.setRightAnswerCount(rightAnswerCount);
+
         QuizTry quizTryUpdated = quizTryDao.create(quizTry);
-
         return quizTryUpdated;
-
     }
 
     @Override
@@ -138,6 +150,23 @@ public class QuizTryServiceImpl implements QuizTryService {
             selectedItemsId.add(selectedItem.getSelectedItemId());
         }
         return itemsId.containsAll(selectedItemsId);
+    }
+
+    private Boolean isAnswerCorrect(Question question, QuestionAnswerWrapper questionAnswerWrapper) {
+        HashMap<Long, Item> correctItems = new HashMap<>();
+        List<Item> allItems = question.getItems();
+        for (Item allItem : allItems) {
+            if (allItem.getCorrect() == (byte) 1) {
+                correctItems.put(allItem.getId(), allItem);
+            }
+        }
+
+        for (SelectedItemWrapper selectedItemWrapper : questionAnswerWrapper.getSelectedItemWrappers()) {
+            if (!correctItems.containsKey(selectedItemWrapper.getSelectedItemId())) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
