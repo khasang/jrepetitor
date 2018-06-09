@@ -67,62 +67,61 @@ public class UserDTOImpl implements UserDTOInterface {
         return userDTOImpl;
     }
 
-    @Override
     public long getId() {
         return id;
     }
 
-    @Override
+
     public void setId(long id) {
         this.id = id;
     }
 
-    @Override
+
     public String getName() {
         return name;
     }
 
-    @Override
+
     public void setName(String name) {
         this.name = name;
     }
 
-    @Override
+
     public String getLogin() {
         return login;
     }
 
-    @Override
+
     public void setLogin(String login) {
         this.login = login;
     }
 
-    @Override
+
     public String getPassword() {
         return password;
     }
 
-    @Override
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-    @Override
+
     public String getRoleName() {
         return roleName;
     }
 
-    @Override
+
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
-    @Override
+
     public ProfileDTOInterface getProfile() {
         return profile;
     }
 
-    @Override
+
     public void setProfile(ProfileDTOInterface profile) {
         this.profile = profile;
     }

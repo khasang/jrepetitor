@@ -3,6 +3,7 @@ package io.khasang.jrepetitor.controller;
 import io.khasang.jrepetitor.dto.ProfileDTOInterface;
 import io.khasang.jrepetitor.dto.UserDTOInterface;
 import io.khasang.jrepetitor.dto.impl.ProfileDTOImpl;
+import io.khasang.jrepetitor.dto.impl.UserDTOImpl;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.service.UserService;
@@ -70,7 +71,7 @@ public class UserController {
             ProfileDTOImpl profile = null;
             return new ResponseEntity<>(profile, HttpStatus.UNAUTHORIZED);
         }
-        UserDTOInterface user = userService.getUserByLogin(currentPrincipalName);
+        UserDTOImpl user = (UserDTOImpl) userService.getUserByLogin(currentPrincipalName);
         return new ResponseEntity<>(user.getProfile(), HttpStatus.OK);
 
     }
