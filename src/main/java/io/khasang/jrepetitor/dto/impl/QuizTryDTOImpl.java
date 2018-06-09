@@ -4,6 +4,7 @@ import io.khasang.jrepetitor.dto.*;
 import io.khasang.jrepetitor.entity.QuizTry;
 import org.springframework.stereotype.Component;
 
+import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,7 +76,7 @@ public class QuizTryDTOImpl implements QuizTryDTOInterface {
         quizTryDTO.setId(quizTry.getId());
         new QuizDTOImpl().getQuiz(quizTry.getQuiz());
         quizTryDTO.setQuiz(new QuizDTOImpl().getQuiz(quizTry.getQuiz()));
-        quizTryDTO.setUser(new UserDTOImpl().getUserDTO(quizTry.getUser()));
+        quizTryDTO.setUser(new UserPreviewDTOImpl().getUserDTO(quizTry.getUser()));
         quizTryDTO.setTimestamp(quizTry.getTimestamp());
         quizTryDTO.setTryItemDTOList(new QuizTryItemDTOImpl().getQuizTryItems(quizTry.getTryItems()));
         return quizTryDTO;
