@@ -66,8 +66,12 @@ public class QuizTryServiceImpl implements QuizTryService {
             }
             quizTry.addQuizTryItem(quizTryItem);
         }
+        Date date = new Date();
+        quizTry.setTimestamp(date);
         QuizTry quizTryUpdated = quizTryDao.create(quizTry);
+
         return quizTryUpdated;
+
     }
 
     @Override
