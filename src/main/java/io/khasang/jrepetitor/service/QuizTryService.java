@@ -1,14 +1,13 @@
 package io.khasang.jrepetitor.service;
 
 import io.khasang.jrepetitor.dto.QuizTryDTOInterface;
-import io.khasang.jrepetitor.entity.QuizTry;
 import io.khasang.jrepetitor.model.UserTryWrapper;
 
 import java.util.List;
 
 public interface QuizTryService {
 
-    QuizTry createTry(UserTryWrapper userTryWrapper, String userLogin);
+    QuizTryDTOInterface createTry(UserTryWrapper userTryWrapper, String userLogin);
 
     List<QuizTryDTOInterface> getAll();
 

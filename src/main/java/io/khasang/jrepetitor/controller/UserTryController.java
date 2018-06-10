@@ -20,10 +20,10 @@ public class UserTryController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public void addQuizTry(@RequestBody UserTryWrapper userTryWrapper) {
+    public QuizTryDTOInterface addQuizTry(@RequestBody UserTryWrapper userTryWrapper) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
-        quizTryService.createTry(userTryWrapper, currentPrincipalName);
+         return quizTryService.createTry(userTryWrapper, currentPrincipalName);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")

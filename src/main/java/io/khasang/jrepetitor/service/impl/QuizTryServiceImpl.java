@@ -34,7 +34,7 @@ public class QuizTryServiceImpl implements QuizTryService {
     QuizTryDTOImpl quizTryDTO;
 
     @Override
-    public QuizTry createTry(UserTryWrapper userTryWrapper, String userLogin) {
+    public QuizTryDTOInterface createTry(UserTryWrapper userTryWrapper, String userLogin) {
         Quiz quiz = quizDao.getById(userTryWrapper.getQuizId());
         List<Question> questions = quiz.getQuestions();
         List<QuestionAnswerWrapper> answers = userTryWrapper.getQuestionAnswerWrappers();
@@ -83,7 +83,7 @@ public class QuizTryServiceImpl implements QuizTryService {
         quizTry.setRightAnswerCount(rightAnswerCount);
 
         QuizTry quizTryUpdated = quizTryDao.create(quizTry);
-        return quizTryUpdated;
+        return quizTryDTO.getQuizTryDTO(quizTryUpdated);
     }
 
     @Override
