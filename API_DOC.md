@@ -3,15 +3,15 @@
 ## Содержание:
  
 * [/USERS](#users)
-* [User json Example](#USER json example)
-* [/Profile json example](#Profile json example)
-* [/Creation Profile Status Response JSON](#Creation Profile Status Response JSON)
-* [/Creation User Status Response JSON](#Creation User Status Response JSON)
+* [User json Example](#user_json)
+* [Profile json example](#profile_json)
+* [Creation Profile Status Response JSON](#profile_creation_json)
+* [Creation User Status Response JSON](#user_creationd_json)
 * [/add](#add)
 * [/all](#all)    
 ## /users <a name="/users"></a> ##
 
-### USER json example <a name="USER json example"></a> ###
+### USER json example <a name="user_json"></a> ###
 ```json
 {
     "name": "user_name",
@@ -28,7 +28,7 @@
 }
 ```
 
-### Profile json example <a name="Profile json example"></a> ###
+### Profile json example <a name="profile_json"></a> ###
 ```json
 {
     "name": "user_name",
@@ -39,7 +39,7 @@
 }
 ```
 
-### Creation Profile Status Response JSON <a name="Creation Profile Status Response JSON"></a> ###
+### Creation Profile Status Response JSON <a name="profile_creation_json"></a> ###
 ````json
 {
     "ok": true,
@@ -51,7 +51,7 @@
 **"emailExist":true** - если email уже используется,  
 **"phoneExist": false** - если телефоный номер уже используется.
 
-### Creation User Status Response JSON <a name="Creation User Status Response JSON"></a> ###
+### Creation User Status Response JSON <a name="user_creationd_json"></a> ###
 
 ```json
 {
@@ -78,7 +78,7 @@
 **Body:** USER json,  
 **Response:** User json  
 
-### /all <a name="/all"></a> ### 
+### /all <a name="all"></a> ### 
 #### Описание: ####
 Добавить пользвователя.  
 Возвращает все записи которые есть в базе    
