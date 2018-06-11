@@ -20,7 +20,7 @@ public class QuizController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
-    public Quiz addQuiz(@RequestBody Quiz quiz) {
+    public QuizDTOInterface addQuiz(@RequestBody Quiz quiz) {
         return quizService.addQuiz(quiz);
     }
 
