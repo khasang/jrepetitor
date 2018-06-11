@@ -2,16 +2,16 @@
 
 ## Содержание:
  
-* [/USERS](#/users)
-* [User json Example](#/USER json example)
+* [/USERS](#users)
+* [User json Example](#USER json example)
 * [/Profile json example](#Profile json example)
 * [/Creation Profile Status Response JSON](#Creation Profile Status Response JSON)
 * [/Creation User Status Response JSON](#Creation User Status Response JSON)
-* [/add](#/add)
-* [/all](#/all)    
-## /users <a name="/users">></a> ##
+* [/add](#add)
+* [/all](#all)    
+## /users <a name="/users"></a> ##
 
-### USER json example <a name="">/USER json example></a> ###
+### USER json example <a name="USER json example"></a> ###
 ```json
 {
     "name": "user_name",
@@ -66,7 +66,7 @@
 **"loginExist": true** - если пользователь с таким login существует  
 **"phoneExist": true** - если пользователь с таким телефоном существует  
 
-### /add <a name="/add"></a> ###
+### /add <a name="add"></a> ###
 #### Описание: ####
 Добавить пользвователя.    
 Возвращает добавленного пользователя.
