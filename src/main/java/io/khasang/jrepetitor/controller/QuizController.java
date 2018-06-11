@@ -26,7 +26,7 @@ public class QuizController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<QuizDTOInterface> getAllQuizs() {
+    public List<QuizDTOInterface> getAllQuizzes() {
 
         return quizService.getAllQuizs();
     }
