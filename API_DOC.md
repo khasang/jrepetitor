@@ -2,10 +2,16 @@
 
 ## Содержание:
  
-[Example](#authorized)
+* [/USERS](#authorized)
+* [User json Example](#USER json example)
+* [Profile json example](#Profile json example)
+* [Creation Profile Status Response JSON](#Creation Profile Status Response JSON)
+* [Creation User Status Response JSON](#Creation User Status Response JSON)
+* [/add](#/add)
+* [/all](#/all)    
 ## /users ##
 
-### USER json example
+### USER json example <a name="">USER json example></a> ###
 ```json
 {
     "name": "user_name",
@@ -22,7 +28,7 @@
 }
 ```
 
-### Profile json example
+### Profile json example <a name="Profile json example"></a> ###
 ```json
 {
     "name": "user_name",
@@ -33,7 +39,7 @@
 }
 ```
 
-### Creation Profile Status Response JSON
+### Creation Profile Status Response JSON <a name="Creation Profile Status Response JSON"></a> ###
 ````json
 {
     "ok": true,
@@ -45,7 +51,7 @@
 **"emailExist":true** - если email уже используется,  
 **"phoneExist": false** - если телефоный номер уже используется.
 
-### Creation User Status Response JSON
+### Creation User Status Response JSON <a name="Creation User Status Response JSON"></a> ###
 
 ```json
 {
@@ -60,7 +66,7 @@
 **"loginExist": true** - если пользователь с таким login существует  
 **"phoneExist": true** - если пользователь с таким телефоном существует  
 
-### /add
+### /add <a name="/add"></a> ###
 #### Описание:
 Добавить пользвователя.    
 Возвращает добавленного пользователя.
@@ -72,7 +78,7 @@
 **Body:** USER json,  
 **Response:** User json  
 
-### /all  
+### /all <a name="/all"></a> ### 
 #### Описание:
 Добавить пользвователя.  
 Возвращает все записи которые есть в базе    
