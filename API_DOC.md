@@ -129,7 +129,7 @@
 **Response:** Creation Profile Status Response JSON,  
 **Если пользователь не авторизован:** HTTP 401 UNAUTHORIZED  
 
-### /create <a name="#create"></a>###
+### /create <a name="#create"></a> ###
 #### Описание: ####
 Создает пользователя с полями из User JSON  
 Возвращает USER CREATION STATUS JSON
