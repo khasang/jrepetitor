@@ -3,12 +3,17 @@
 ## Содержание:
  
 * [/USERS](#users)
-* [User json Example](#user_json)
-* [Profile json example](#profile_json)
-* [Creation Profile Status Response JSON](#profile_creation_json)
-* [Creation User Status Response JSON](#user_creationd_json)
-* [/add](#add)
-* [/all](#all)    
+  * [User json Example](#user_json)
+  * [Profile json example](#profile_json)
+  * [Creation Profile Status Response JSON](#profile_creation_json)
+  * [Creation User Status Response JSON](#user_creationd_json)
+  * [/add](#add)
+  * [/all](#all)    
+  * [/get/{id}](#getbyid)
+  * [/delete](#delete)
+  * [/profile](#profile)
+  * [/create](#create) 
+  * [/authorized](#authorized) 
 ## /users <a name="/users"></a> ##
 
 ### USER json example <a name="user_json"></a> ###
@@ -87,7 +92,7 @@
 **Url:** /users/all,  
 **Response:** USER json array  
 
-### /get/{id} ###
+### /get/{id} <a name="#getbyid"></a> ###
 #### Описание: ####
 Возвращает пользователя c запрошенным id  
 #### Параметры: ####
@@ -97,7 +102,7 @@
 **Response:**  User json , HTTP 200 - OK,    
 **Если пользователь не найден:** - HTTP 404 - NOT_FOUND 
 
-### /delete ###
+### /delete <a name="#delete"></a> ###
 #### Описание: ####
 Удаление пользователя по заданному id,  
 #### Параметры: ####
@@ -107,7 +112,7 @@
 **Response:**  User json , HTTP 200 - OK,  
 **Если пользователь не найден:**  HTTP 404 - NOT_FOUND  
 
-### /profile  ###
+### /profile <a name="#profile"></a> ###
 #### Описание: ####
 Возвращает Profile JSON авторизованного пользователя.  
 #### Параметры: ####
@@ -124,7 +129,7 @@
 **Response:** Creation Profile Status Response JSON,  
 **Если пользователь не авторизован:** HTTP 401 UNAUTHORIZED  
 
-### /create ###
+### /create <a name="#create"></a>###
 #### Описание: ####
 Создает пользователя с полями из User JSON  
 Возвращает USER CREATION STATUS JSON
