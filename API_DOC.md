@@ -2,7 +2,7 @@
 
 ## Содержание:
  
-* [/USERS](#users)
+* [/users](#users)
   * [User json Example](#user_json)
   * [Profile json example](#profile_json)
   * [Creation Profile Status Response JSON](#profile_creation_json)
@@ -14,7 +14,17 @@
   * [/profile](#profile)
   * [/create](#create) 
   * [/authorized](#authorized) 
+* [/quiz](#quiz)  
+  * [/add](#add_quiz)    
+  * [/all](#quiz_all)  
+  * [/get/{id}](#quiz_get)  
+  * [/delete](#quiz_delete)  
+  * [/preview/all](#quiz_preview_all)  
+  * [/preview/get/{id}](#quiz_preview_by_id)  
+  * [/add_by_group_id](#quiz_add_by_group_id)       
+
 ## /users <a name="/users"></a> ##
+API для работы с пользователями JRepetitor
 
 ### USER json example <a name="user_json"></a> ###
 ```json
@@ -139,7 +149,6 @@
 **Url:** /users/create,  
 **Response:** USER CREATION STATUS JSON, HTTP 200 - OK
 
-
 ### /authorized <a name="authorized"></a> ### 
 #### Описание: ####
 Возвращает login авторизованного пользователя.  
@@ -149,7 +158,36 @@
 **Url:**/users/authorized,   
 **Response** authorized user login or "anonymousUser"
 
+## /quiz <a name="quiz"></a> ## 
+API для работы с тестами(quiz), добавление, вывод всех quiz в базе,  
+удаление, выборка по id, вывод превью теста (без вывыода вопросов),  
+вывод превью всех тестов в базе, добавление теста по id группы.
+### Quiz JSON example ###
+````json
+{
+   "id": 1,
+   "name": "name_1",
+   "questions": [ ],
+   "group": { },
+   "level": 1
+}
+````
+**"id"** - id теста  
+**"name"** - название теста  
+**"questions"** - список вопросов Question JSON  
+**"group"** - Group JSON  
+**"level"** - уровень теста 
+
+### /add <a name="add_quiz"></a> ###
+### /all <a name="quiz_all"></a> ###
+### /get/{id} <a name="quiz_get"></a> ###
+### /delete  <a name="quiz_delete"></a> ###
+### /preview/all <a name="quiz_preview_all"></a> ###
+### /preview/get/{id} <a name="quiz_preview_by_id"></a> ###
+### /add_by_group_id <a name="quiz_add_by_group_id"></a> ###
   
+ 
+
    
     
    
