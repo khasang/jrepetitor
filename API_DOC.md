@@ -14,7 +14,8 @@
   * [/profile](#profile)
   * [/create](#create) 
   * [/authorized](#authorized) 
-* [/quiz](#quiz)  
+* [/quiz](#quiz)    
+  * [Quiz JSON example](quiz_json_example)   
   * [/add](#add_quiz)    
   * [/all](#quiz_all)  
   * [/get/{id}](#quiz_get)  
@@ -162,7 +163,7 @@ API для работы с пользователями JRepetitor
 API для работы с тестами(quiz), добавление, вывод всех quiz в базе,  
 удаление, выборка по id, вывод превью теста (без вывыода вопросов),  
 вывод превью всех тестов в базе, добавление теста по id группы.
-### Quiz JSON example ###
+### Quiz JSON example <a name="quiz_json_example"></a> ###
 ````json
 {
    "id": 1,
@@ -179,13 +180,19 @@ API для работы с тестами(quiz), добавление, выво�
 **"level"** - уровень теста 
 
 ### /add <a name="add_quiz"></a> ###
+//to do
 ### /all <a name="quiz_all"></a> ###
+//to do
 ### /get/{id} <a name="quiz_get"></a> ###
+//to do
 ### /delete  <a name="quiz_delete"></a> ###
+//to do
 ### /preview/all <a name="quiz_preview_all"></a> ###
+//to do
 ### /preview/get/{id} <a name="quiz_preview_by_id"></a> ###
+//to do
 ### /add_by_group_id <a name="quiz_add_by_group_id"></a> ###
-  
+//to do  
  
 
    

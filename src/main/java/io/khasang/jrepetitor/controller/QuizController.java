@@ -20,14 +20,12 @@ public class QuizController {
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
     public Quiz addQuiz(@RequestBody Quiz quiz) {
-
         return quizService.addQuiz(quiz);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<QuizDTOInterface> getAllQuizzes() {
-
         return quizService.getAllQuizs();
     }
 
@@ -40,14 +38,12 @@ public class QuizController {
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
     public Quiz deleteQuiz(@RequestParam(value = "id") String id) {
-
         return quizService.deleteQuiz(Long.parseLong(id));
     }
 
     @RequestMapping(value = "/preview/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<QuizPreviewDTOInterface> getAllQuizzesPreview() {
-
         return quizService.getAllQuizzesPreview();
     }
 
