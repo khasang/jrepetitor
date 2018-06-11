@@ -1,6 +1,9 @@
 # Документация к API JRepetitor 
 
-## /users
+## Содержание:
+ 
+[Example](#authorized)
+## /users ##
 
 ### USER json example
 ```json
@@ -62,11 +65,11 @@
 Добавить пользвователя.    
 Возвращает добавленного пользователя.
 #### Параметры:  
-**Content-type:** application-json  
-**RequestMethod:** POST  
-**Url:** /users/add   
-**Content-type:** application-json  
-**Body:** USER json  
+**Content-type:** application-json,  
+**RequestMethod:** POST,  
+**Url:** /users/add,   
+**Content-type:** application-json,  
+**Body:** USER json,  
 **Response:** User json  
 
 ### /all  
@@ -74,19 +77,19 @@
 Добавить пользвователя.  
 Возвращает все записи которые есть в базе    
 #### Параметры: 
-**RequestMethod:** GET  
-**Url:** /users/all  
+**RequestMethod:** GET,  
+**Url:** /users/all,  
 **Response:** USER json array  
 
 ### /get/{id}
 #### Описание:
 Возвращает пользователя c запрошенным id  
 #### Параметры:
-**RequestMethod:**  GET  
+**RequestMethod:**  GET,  
 **Url:**  /users/get/{id},    
 **id:**  Request Param user id,  
 **Response:**  User json , HTTP 200 - OK,    
-**Если пользователь не найден:** - HTTP 404 - NOT_FOUND , 
+**Если пользователь не найден:** - HTTP 404 - NOT_FOUND 
 
 ### /delete
 #### Описание:
@@ -104,7 +107,7 @@
 #### Параметры:
 **RequestMethod:** GET,   
 **Url:** /users/profile,  
-**Response:** Profile JSON, HTTP 200 - OK  
+**Response:** Profile JSON, HTTP 200 - OK,  
 **Если пользователь не авторизован:** HTTP 401 UNAUTHORIZED
 ### Описание:
 Сохраняет Profile JSON в профиль авторизованного пользователя.  
@@ -123,14 +126,15 @@
 **RequestMethod:** POST,  
 **Headers:** Content-type - application-json,  
 **Url:** /users/create,  
-**Response:** USER CREATION STATUS JSON, HTTP 200 - OK,
+**Response:** USER CREATION STATUS JSON, HTTP 200 - OK
 
-### /authorized
+
+### /authorized <a name="authorized"></a> ### 
 #### Описание:
 Возвращает login авторизованного пользователя.  
 Если пользователь не авторизован возвращает anonymousUser
 #### Параметры:
-**RequestMethod:** GET,
+**RequestMethod:** GET,  
 **Url:**/users/authorized,   
 **Response** authorized user login or "anonymousUser"
 
