@@ -14,7 +14,7 @@ public interface QuizService {
      * @param quiz = new quiz for creation in DB
      * @return created quiz
      */
-    Quiz addQuiz(Quiz quiz);
+    QuizDTOInterface addQuiz(Quiz quiz);
 
     /**
      * method for receiving all quizs

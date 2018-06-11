@@ -28,8 +28,8 @@ public class QuizServiceImpl implements QuizService {
     private GroupDao groupDao;
 
     @Override
-    public Quiz addQuiz(Quiz quiz) {
-        return quizDao.create(quiz);
+    public QuizDTOInterface addQuiz(Quiz quiz) {
+        return quizDTO.getQuiz(quizDao.create(quiz));
     }
 
     @Override
