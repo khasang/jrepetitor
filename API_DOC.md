@@ -3,10 +3,10 @@
 ## Содержание:
  
 * [/USERS](#authorized)
-* [User json Example](#USER json example)
-* [Profile json example](#Profile json example)
-* [Creation Profile Status Response JSON](#Creation Profile Status Response JSON)
-* [Creation User Status Response JSON](#Creation User Status Response JSON)
+* [/User json Example](#USER json example)
+* [/Profile json example](#Profile json example)
+* [/Creation Profile Status Response JSON](#Creation Profile Status Response JSON)
+* [/Creation User Status Response JSON](#Creation User Status Response JSON)
 * [/add](#/add)
 * [/all](#/all)    
 ## /users ##
