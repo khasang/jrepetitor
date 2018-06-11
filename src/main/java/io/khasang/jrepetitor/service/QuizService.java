@@ -37,7 +37,7 @@ public interface QuizService {
      * @param id = quiz's id for delete
      * @return removed quiz
      */
-    Quiz deleteQuiz(long id);
+    QuizDTOInterface deleteQuiz(long id);
 
     /**
      * method for receiving preview all quizzes

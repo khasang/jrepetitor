@@ -2,6 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
+import io.khasang.jrepetitor.dto.impl.QuizDTO;
 import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.model.QuizByGroupIdRequestWrapper;
 import io.khasang.jrepetitor.service.QuizService;
@@ -37,7 +38,7 @@ public class QuizController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Quiz deleteQuiz(@RequestParam(value = "id") String id) {
+    public QuizDTOInterface deleteQuiz(@RequestParam(value = "id") String id) {
         return quizService.deleteQuiz(Long.parseLong(id));
     }
 
