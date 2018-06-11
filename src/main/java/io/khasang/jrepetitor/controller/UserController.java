@@ -42,7 +42,6 @@ public class UserController {
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public ResponseEntity<UserDTOInterface> getUserById(@PathVariable(value = "id") String id) {
-        // exception
         UserDTOInterface userDTO = userService.getUserById(Long.parseLong(id));
         if (userDTO == null) {
             return new ResponseEntity<>(userDTO, HttpStatus.NOT_FOUND);
