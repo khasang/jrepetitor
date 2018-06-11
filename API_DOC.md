@@ -15,7 +15,7 @@
   * [/create](#create) 
   * [/authorized](#authorized) 
 * [/quiz](#quiz)    
-  * [Quiz JSON example](quiz_json_example)   
+  * [Quiz JSON example](#quiz_json_example)   
   * [/add](#add_quiz)    
   * [/all](#quiz_all)  
   * [/get/{id}](#quiz_get)  
