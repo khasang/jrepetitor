@@ -1,8 +1,8 @@
 # Документация к API JRepetitor 
 
-##/users
+## /users
 
-###USER json example
+### USER json example
 ```json
 {
     "name": "user_name",
@@ -19,7 +19,7 @@
 }
 ```
 
-###Profile json example
+### Profile json example
 ```json
 {
     "name": "user_name",
@@ -42,7 +42,7 @@
 **"emailExist":true** - если email уже используется,  
 **"phoneExist": false** - если телефоный номер уже используется.
 
-###Creation User Status Response JSON
+### Creation User Status Response JSON
 
 ```json
 {
@@ -57,11 +57,11 @@
 **"loginExist": true** - если пользователь с таким login существует  
 **"phoneExist": true** - если пользователь с таким телефоном существует  
 
-###/add
-#####Описание:
+### /add
+##### Описание:
 Добавить пользвователя.    
 Возвращает добавленного пользователя.
-#####Параметры:  
+##### Параметры:  
 **Content-type:** application-json  
 **RequestMethod:** POST  
 **Url:** /users/add   
@@ -69,67 +69,67 @@
 **Body:** USER json  
 **Response:** User json  
 
-###/all  
-#####Описание:
+### /all  
+##### Описание:
 Добавить пользвователя.  
 Возвращает все записи которые есть в базе    
-#####Параметры: 
+##### Параметры: 
 **RequestMethod:** GET  
 **Url:** /users/all  
 **Response:** USER json array  
 
-###/get/{id}
-#####Описание:
+### /get/{id}
+##### Описание:
 Возвращает пользователя c запрошенным id  
-#####Параметры:
+##### Параметры:
 **RequestMethod:**  GET  
 **Url:**  /users/get/{id},    
 **id:**  Request Param user id,  
 **Response:**  User json , HTTP 200 - OK,    
 **Если пользователь не найден:** - HTTP 404 - NOT_FOUND , 
 
-###/delete
-#####Описание:
+### /delete
+##### Описание:
 Удаление пользователя по заданному id,  
-#####Параметры:
+##### Параметры:
 **Headers:** Content-type - application-json, 
 **RequestMethod:** DELETE,  
 **Url:** /users/delete,  
 **Response:**  User json , HTTP 200 - OK,  
 **Если пользователь не найден:**  HTTP 404 - NOT_FOUND  
 
-###/profile  
-#####Описание:
+### /profile  
+##### Описание:
 Возвращает Profile JSON авторизованного пользователя.  
-#####Параметры:
+##### Параметры:
 **RequestMethod:** GET,   
 **Url:** /users/profile,  
 **Response:** Profile JSON, HTTP 200 - OK  
 **Если пользователь не авторизован:** HTTP 401 UNAUTHORIZED
-###Описание:
+### Описание:
 Сохраняет Profile JSON в профиль авторизованного пользователя.  
-###Параметры:
+### Параметры:
 **RequestMethod:** POST,  
 **Headers:** Content-type - application-json,  
 **Url:** /users/profile,  
 **Response:** Creation Profile Status Response JSON,  
 **Если пользователь не авторизован:** HTTP 401 UNAUTHORIZED  
 
-###/create
-#####Описание:
+### /create
+##### Описание:
 Создает пользователя с полями из User JSON  
 Возвращает USER CREATION STATUS JSON
-#####Параметры:
+##### Параметры:
 **RequestMethod:** POST,  
 **Headers:** Content-type - application-json,  
 **Url:** /users/create,  
 **Response:** USER CREATION STATUS JSON, HTTP 200 - OK,
 
-###/authorized
-#####Описание:
+### /authorized
+##### Описание:
 Возвращает login авторизованного пользователя.  
 Если пользователь не авторизован возвращает anonymousUser
-#####Параметры:
+##### Параметры:
 **RequestMethod:** GET,
 **Url:**/users/authorized,   
 **Response** authorized user login or "anonymousUser"
