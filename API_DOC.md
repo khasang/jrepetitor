@@ -58,10 +58,10 @@
 **"phoneExist": true** - если пользователь с таким телефоном существует  
 
 ### /add
-##### Описание:
+#### Описание:
 Добавить пользвователя.    
 Возвращает добавленного пользователя.
-##### Параметры:  
+#### Параметры:  
 **Content-type:** application-json  
 **RequestMethod:** POST  
 **Url:** /users/add   
@@ -70,18 +70,18 @@
 **Response:** User json  
 
 ### /all  
-##### Описание:
+#### Описание:
 Добавить пользвователя.  
 Возвращает все записи которые есть в базе    
-##### Параметры: 
+#### Параметры: 
 **RequestMethod:** GET  
 **Url:** /users/all  
 **Response:** USER json array  
 
 ### /get/{id}
-##### Описание:
+#### Описание:
 Возвращает пользователя c запрошенным id  
-##### Параметры:
+#### Параметры:
 **RequestMethod:**  GET  
 **Url:**  /users/get/{id},    
 **id:**  Request Param user id,  
@@ -89,9 +89,9 @@
 **Если пользователь не найден:** - HTTP 404 - NOT_FOUND , 
 
 ### /delete
-##### Описание:
+#### Описание:
 Удаление пользователя по заданному id,  
-##### Параметры:
+#### Параметры:
 **Headers:** Content-type - application-json, 
 **RequestMethod:** DELETE,  
 **Url:** /users/delete,  
@@ -99,9 +99,9 @@
 **Если пользователь не найден:**  HTTP 404 - NOT_FOUND  
 
 ### /profile  
-##### Описание:
+#### Описание:
 Возвращает Profile JSON авторизованного пользователя.  
-##### Параметры:
+#### Параметры:
 **RequestMethod:** GET,   
 **Url:** /users/profile,  
 **Response:** Profile JSON, HTTP 200 - OK  
@@ -116,20 +116,20 @@
 **Если пользователь не авторизован:** HTTP 401 UNAUTHORIZED  
 
 ### /create
-##### Описание:
+#### Описание:
 Создает пользователя с полями из User JSON  
 Возвращает USER CREATION STATUS JSON
-##### Параметры:
+#### Параметры:
 **RequestMethod:** POST,  
 **Headers:** Content-type - application-json,  
 **Url:** /users/create,  
 **Response:** USER CREATION STATUS JSON, HTTP 200 - OK,
 
 ### /authorized
-##### Описание:
+#### Описание:
 Возвращает login авторизованного пользователя.  
 Если пользователь не авторизован возвращает anonymousUser
-##### Параметры:
+#### Параметры:
 **RequestMethod:** GET,
 **Url:**/users/authorized,   
 **Response** authorized user login or "anonymousUser"
