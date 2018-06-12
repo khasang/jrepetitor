@@ -17,7 +17,7 @@
 * [/quiz](#quiz)    
   * [Quiz JSON example](#quiz_json_example)     
   * [Quiz Preview JSON exmple](#quiz_preview_json_example)  
-  * [Add quiz by group id wrapper JSON](add_quiz_by_group_id_wrapper)
+  * [Add quiz by group id wrapper JSON](#add_quiz_by_group_id_wrapper)
   * [/add](#add_quiz)    
   * [/all](#quiz_all)  
   * [/get/{id}](#quiz_get)  
@@ -33,7 +33,15 @@
   * [/get/{id}](#get_question_by_id)  
   * [/delete](#delete_question_by_id)  
   * [/add_by_quiz_id](#add_question_by_quiz_id)
-      
+* [/item](#item)
+  * [Item JSON Example](#item_json_example)    
+  * [Add Item By question Id JSON wrapper](#add_item_by_question_id_json_example)    
+  * [/add](#add_item)  
+  * [/all](#all_item)
+  * [/get/{id}](#get_by_id_item)
+  * [/delete](#delete_item)  
+  * [/add_by_question_id](#add_by_question_id_item)            
+ 
 ## /users <a name="/users"></a> ##
 API для работы с пользователями JRepetitor
 
@@ -362,3 +370,38 @@ API для работы с тестами(quiz), добавление, выво�
 **Request Data:**[Add question by quiz id wrapper JSON](#add_question_by_quiz_id_wrapper)  
 **Response:**  [Question json](#question_json_example) , HTTP 200 - OK,    
 **Если quiz c id не найден:** - HTTP 404 - NOT_FOUND 
+
+## /item <a name="item"></a> ##
+### Item JSON Example  <a name="item_json_example"></a> ###
+```json
+{
+    "id": 1,
+    "content": "answer1 question1 correct",
+    "correct": 1,
+    "question": {}
+}
+```
+**"id"** - id ответа(item)  
+**"content"** - текст ответа  
+**"correct"** - 1 если правильный, 0 - неправильный  
+**"question"** - [Question JSON](#question_json_example)  
+
+### Add Item By question Id JSON wrapper <a name="add_item_by_question_id_json_example"></a> ###
+```json
+{
+    "id":"1",
+    "item":{
+        "content":"answer1 question1",
+        "correct":"0"
+    }
+}
+```
+**"id"** - id вопроса  
+**"content"** - текст ответа  
+**"correct"** - 1 если правильный, 0 - неправильный
+
+### /add <a name="add_item"></a> ###
+### /all <a name="all_item"></a> ###
+### /get/{id} <a name="/get_by_id_item"></a> ###
+### /delete <a name="delete_item"></a> ###
+### /add_by_question_id <a name="add_by_question_id_item"></a> ###
