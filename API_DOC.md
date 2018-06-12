@@ -24,8 +24,16 @@
   * [/delete](#quiz_delete)  
   * [/preview/all](#quiz_preview_all)  
   * [/preview/get/{id}](#quiz_preview_by_id)  
-  * [/add_by_group_id](#quiz_add_by_group_id)       
-
+  * [/add_by_group_id](#quiz_add_by_group_id)     
+* [/question](#question)
+  * [Question JSON Example](#question_json_example)
+  * [Add Question By Quiz ID wrapper JSON Example](#add_question_by_quiz_id_wrapper)    
+  * [/add](#add_question)  
+  * [/all](#get_all_questions) 
+  * [/get/{id}](#get_question_by_id)  
+  * [/delete](#delete_question_by_id)  
+  * [/add_by_quiz_id](#add_question_by_quiz_id)
+      
 ## /users <a name="/users"></a> ##
 API для работы с пользователями JRepetitor
 
@@ -196,12 +204,16 @@ API для работы с тестами(quiz), добавление, выво�
 ###  Add quiz by group id wrapper JSON <a name="add_quiz_by_group_id_wrapper"></a> ###
 ```json
 {
-  "id": 1,
-  "quiz": {}
+    "id": 1,
+    "quiz": {
+      "name:":"name_1", 
+      "level:":"1"
+    }
 }  
 ```
 **"id"** - group id  
-**"quiz"** - [Quiz JSON](#quiz_json_example)
+**"name"** - quiz name  
+**"level"** - quiz level
 ### /add <a name="add_quiz"></a> 
 #### Описание: ####
 Добавление quiz'a
@@ -271,7 +283,54 @@ API для работы с тестами(quiz), добавление, выво�
 **Response:**  Quiz preview json , HTTP 200 - OK,    
 **Если quiz c id не найден:** - HTTP 404 - NOT_FOUND 
  
+## /question <a name="question"></a> ##
 
-   
-    
-   
+### Question JSON Example <a name="question_json_example"></a> ###   
+```json
+{
+    "id": 1,
+    "content": "text_question_1",
+    "type": "Checkbox",
+    "items": [],
+    "quiz": {},
+    "explanation": "explanation_question_1"
+}
+```
+**"id"** - id вопроса  
+**"content"** - содержание вопроса  
+**"type"** - "Checkbox" - мультивыбор или "Radio" - 1 вариант   
+**"items"** -  Массив [Item JSON](#item_json_example)   
+**"quiz"**  - [Quiz JSON](#quiz_json_example)  
+**"explanation:"** - объяснение вопроса
+ 
+### Add Question By Quiz ID wrapper JSON Example <a name="add_question_by_quiz_id_wrapper"></a> ###
+```json
+{
+    "id":"1",
+    "question": {
+        "content":"text_question_1",
+        "type":"Checkbox",
+        "explanation":"explanation_question_1"
+    }
+}
+```   
+**"id"** - id quiz'a в который добавляем вопрос  
+**"content"** - содержание вопроса  
+**"type"** - "Checkbox" - мультивыбор или "Radio" - 1 вариант  
+**"explanation"** - объяснение вопроса
+
+###"/add" <a name="add_question"></a> ###
+#### Описание: ####
+#### Параметры: ####
+###"/all <a name="get_all_questions"></a> ###
+#### Описание: ####
+#### Параметры: ####
+###"/get/{id}" <a name="get_question_by_id"></a> ###
+#### Описание: ####
+#### Параметры: ####
+###"/delete" <a name="delete_question_by_id"></a>  ###
+#### Описание: ####
+#### Параметры: ####
+###"/add_by_quiz_id" <a name="add_question_by_quiz_id"></a> ###
+#### Описание: ####
+#### Параметры: ####
