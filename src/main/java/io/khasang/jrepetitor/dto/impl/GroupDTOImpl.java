@@ -56,7 +56,6 @@ public class GroupDTOImpl implements GroupDTOInterface {
 
     public List<GroupDTOInterface> getGroupDTOList(List<Group> list) {
         List<GroupDTOInterface> groupDTOList = new ArrayList<>();
-
         for (Group group : list) {
             GroupDTOImpl groupDTOImpl = new GroupDTOImpl();
             groupDTOImpl.setId(group.getId());
