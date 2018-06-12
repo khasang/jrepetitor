@@ -25,8 +25,8 @@ public class ItemServiceImpl implements ItemService {
     private QuestionDao questionDao;
 
     @Override
-    public Item addItem(Item item) {
-        return itemDao.create(item);
+    public ItemDTOInterface addItem(Item item) {
+        return itemDTO.getItemDTO(itemDao.create(item));
     }
 
     @Override

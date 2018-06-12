@@ -18,29 +18,25 @@ public class ItemController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
-    public Item addItem(@RequestBody Item item) {
-
+    public ItemDTOInterface addItem(@RequestBody Item item) {
         return itemService.addItem(item);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<ItemDTOInterface> getAllItems() {
-
         return itemService.getAllItems();
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public ItemDTOInterface getItemById(@PathVariable(value = "id") String id) {
-        // exception
         return itemService.getItemById(Long.parseLong(id));
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
     public ItemDTOInterface deleteItem(@RequestParam(value = "id") String id) {
-
         return itemService.deleteItem(Long.parseLong(id));
     }
 

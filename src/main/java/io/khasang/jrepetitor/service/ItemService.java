@@ -13,7 +13,7 @@ public interface ItemService {
      * @param Item = new Item for creation in DB
      * @return created Item
      */
-    Item addItem(Item Item);
+    ItemDTOInterface addItem(Item Item);
 
     /**
      * method for receiving all Items
