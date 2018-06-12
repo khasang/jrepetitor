@@ -5,6 +5,8 @@ import io.khasang.jrepetitor.dto.QuizTryDTOInterface;
 import io.khasang.jrepetitor.model.UserTryWrapper;
 import io.khasang.jrepetitor.service.QuizTryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,7 @@ public class UserTryController {
     public QuizTryDTOInterface addQuizTry(@RequestBody UserTryWrapper userTryWrapper) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
-         return quizTryService.createTry(userTryWrapper, currentPrincipalName);
+        return quizTryService.createTry(userTryWrapper, currentPrincipalName);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
@@ -34,13 +36,25 @@ public class UserTryController {
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public QuizTryDTOInterface getById(@PathVariable(value = "id") String id) {
-        return quizTryService.getById(Long.parseLong(id));
+    public ResponseEntity<QuizTryDTOInterface> getById(@PathVariable(value = "id") String id) {
+        QuizTryDTOInterface quizTryDTO = quizTryService.getById(Long.parseLong(id));
+        if (quizTryDTO == null) {
+            return new ResponseEntity<>(quizTryDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(quizTryDTO, HttpStatus.OK);
+        }
+
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public QuizTryDTOInterface deleteById(@RequestParam(value = "id") String id) {
-        return quizTryService.deleteById(Long.parseLong(id));
+    public ResponseEntity<QuizTryDTOInterface> deleteById(@RequestParam(value = "id") String id) {
+        QuizTryDTOInterface quizTryDTO = quizTryService.deleteById(Long.parseLong(id));
+        if (quizTryDTO == null) {
+            return new ResponseEntity<>(quizTryDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(quizTryDTO, HttpStatus.OK);
+        }
     }
+
 }
