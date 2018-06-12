@@ -653,7 +653,7 @@ API для работы с тестами(quiz), добавление, выво�
 }
 ```
 
-###  Try Quiz JSON Example  for Quiz Example <a name="try_quiz_example"> ###
+###  Try Quiz JSON wrapper Example  for Quiz Example <a name="try_quiz_example"> ###
 Пример попытки решения [quiz'a](#full_quiz_example).
 ```json
 {
@@ -697,15 +697,391 @@ API для работы с тестами(quiz), добавление, выво�
 Id quiz'a, question id, selected item id - должны соответствовать id которые есть в quiz,   
 проверка на соответствие произваодится на стороне сервера.  
 
+### Try Quiz JSON example <a name="try_quiz_responce_example">  ###
+Для каждого вопроса создается Json Содержащий выбранные ответы и маркер "answerIsCorrect", показывающий правильность   
+ответа( 1- правильно , 0 - нет).
+````json
+{
+    "id": 1,
+    "user": {
+        "id": 1,
+        "name": "user_name",
+        "login": "user",
+        "email": "user_email"
+    },
+    "quiz": {
+        "id": 1,
+        "name": "name_1",
+        "questions": [
+            {
+                "id": 1,
+                "content": "text_question_1",
+                "type": "Checkbox",
+                "items": [
+                    {
+                        "id": 1,
+                        "content": "answer1 question1 correct",
+                        "correct": 1,
+                        "question": null
+                    },
+                    {
+                        "id": 2,
+                        "content": "answer2 question1",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 3,
+                        "content": "answer3 question1",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 4,
+                        "content": "answer4 question1",
+                        "correct": 0,
+                        "question": null
+                    }
+                ],
+                "quiz": null,
+                "explanation": "explanation_question_1"
+            },
+            {
+                "id": 2,
+                "content": "text_question_2",
+                "type": "Checkbox",
+                "items": [
+                    {
+                        "id": 5,
+                        "content": "answer1 question2 correct",
+                        "correct": 1,
+                        "question": null
+                    },
+                    {
+                        "id": 6,
+                        "content": "answer2 question2",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 7,
+                        "content": "answer3 question2",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 8,
+                        "content": "answer4 question2",
+                        "correct": 0,
+                        "question": null
+                    }
+                ],
+                "quiz": null,
+                "explanation": "explanation_question_2"
+            },
+            {
+                "id": 3,
+                "content": "text_question_3",
+                "type": "Checkbox",
+                "items": [
+                    {
+                        "id": 9,
+                        "content": "answer1 question3 correct",
+                        "correct": 1,
+                        "question": null
+                    },
+                    {
+                        "id": 10,
+                        "content": "answer2 question3",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 11,
+                        "content": "answer3 question3",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 12,
+                        "content": "answer4 question3",
+                        "correct": 0,
+                        "question": null
+                    }
+                ],
+                "quiz": null,
+                "explanation": "explanation_question_3"
+            },
+            {
+                "id": 4,
+                "content": "text_question_4",
+                "type": "Checkbox",
+                "items": [
+                    {
+                        "id": 13,
+                        "content": "answer1 question4 correct",
+                        "correct": 1,
+                        "question": null
+                    },
+                    {
+                        "id": 14,
+                        "content": "answer2 question4",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 15,
+                        "content": "answer3 question4",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 16,
+                        "content": "answer3 question4",
+                        "correct": 0,
+                        "question": null
+                    }
+                ],
+                "quiz": null,
+                "explanation": "explanation_question_4"
+            }
+        ],
+        "group": {
+            "id": 1,
+            "quizes": [],
+            "name": "group_name_1"
+        },
+        "level": 1
+    },
+    "tryItemDTOList": [
+        {
+            "id": 1,
+            "question": {
+                "id": 1,
+                "content": "text_question_1",
+                "type": "Checkbox",
+                "items": [
+                    {
+                        "id": 1,
+                        "content": "answer1 question1 correct",
+                        "correct": 1,
+                        "question": null
+                    },
+                    {
+                        "id": 2,
+                        "content": "answer2 question1",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 3,
+                        "content": "answer3 question1",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 4,
+                        "content": "answer4 question1",
+                        "correct": 0,
+                        "question": null
+                    }
+                ],
+                "quiz": null,
+                "explanation": "explanation_question_1"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "content": "answer1 question1 correct",
+                    "correct": 1,
+                    "question": null
+                }
+            ],
+            "answerIsCorrect": 1
+        },
+        {
+            "id": 2,
+            "question": {
+                "id": 2,
+                "content": "text_question_2",
+                "type": "Checkbox",
+                "items": [
+                    {
+                        "id": 5,
+                        "content": "answer1 question2 correct",
+                        "correct": 1,
+                        "question": null
+                    },
+                    {
+                        "id": 6,
+                        "content": "answer2 question2",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 7,
+                        "content": "answer3 question2",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 8,
+                        "content": "answer4 question2",
+                        "correct": 0,
+                        "question": null
+                    }
+                ],
+                "quiz": null,
+                "explanation": "explanation_question_2"
+            },
+            "items": [
+                {
+                    "id": 5,
+                    "content": "answer1 question2 correct",
+                    "correct": 1,
+                    "question": null
+                }
+            ],
+            "answerIsCorrect": 1
+        },
+        {
+            "id": 3,
+            "question": {
+                "id": 3,
+                "content": "text_question_3",
+                "type": "Checkbox",
+                "items": [
+                    {
+                        "id": 9,
+                        "content": "answer1 question3 correct",
+                        "correct": 1,
+                        "question": null
+                    },
+                    {
+                        "id": 10,
+                        "content": "answer2 question3",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 11,
+                        "content": "answer3 question3",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 12,
+                        "content": "answer4 question3",
+                        "correct": 0,
+                        "question": null
+                    }
+                ],
+                "quiz": null,
+                "explanation": "explanation_question_3"
+            },
+            "items": [
+                {
+                    "id": 9,
+                    "content": "answer1 question3 correct",
+                    "correct": 1,
+                    "question": null
+                }
+            ],
+            "answerIsCorrect": 1
+        },
+        {
+            "id": 4,
+            "question": {
+                "id": 4,
+                "content": "text_question_4",
+                "type": "Checkbox",
+                "items": [
+                    {
+                        "id": 13,
+                        "content": "answer1 question4 correct",
+                        "correct": 1,
+                        "question": null
+                    },
+                    {
+                        "id": 14,
+                        "content": "answer2 question4",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 15,
+                        "content": "answer3 question4",
+                        "correct": 0,
+                        "question": null
+                    },
+                    {
+                        "id": 16,
+                        "content": "answer3 question4",
+                        "correct": 0,
+                        "question": null
+                    }
+                ],
+                "quiz": null,
+                "explanation": "explanation_question_4"
+            },
+            "items": [
+                {
+                    "id": 13,
+                    "content": "answer1 question4 correct",
+                    "correct": 1,
+                    "question": null
+                }
+            ],
+            "answerIsCorrect": 1
+        }
+    ],
+    "timestamp": 1528819340585,
+    "questionsCount": 4,
+    "rightAnswerCount": 4,
+    "incorrectAnswerCount": 0
+}
+````
+**"timestamp"** - Время и дата в формате unix time 
+**"questionsCount"** - Число вопросов
+**"rightAnswerCount"**  - Число правильных ответов
+**"incorrectAnswerCount":** - Число не правильных ответов
+Остальные поля аналогичны описанным ранее
+
 ### /add <a name="add_try_quiz"> ###
 #### Описание: ####
+Добавляет Quiz Try.
+Доступен только авторизированному пользователю.
 #### Параметры: ####
+**Headers:** Content-type - application-json, 
+**RequestMethod:** POST
+**Url:** /quiz_try/add
+**Request Data:**[Try Quiz JSON wrapper](#try_quiz_example)
+**Response Data:**[Try Quiz JSON](#try_quiz_responce_example)
+
 ### /all <a name="all_try_quiz"> ###
 #### Описание: ####
+ Возвращет все Quiz Try которые есть в базе.
 #### Параметры: ####
+**RequestMethod:** POST
+**Url:** /quiz_try/add
+**Response Data:** массив [Try Quiz JSON](#try_quiz_responce_example)
+
 ### /get/{id} <a name="get_by_id_try_quiz"> ###
 #### Описание: ####
+Возвращает Quiz Try по id, Если такого нет 404
 #### Параметры: ####
+*RequestMethod:**  GET,  
+**Url:**  /quiz_try/get/{id},    
+**id:**  Request Param question id,  
+**Response:**  [Try Quiz JSON](#try_quiz_responce_example) , HTTP 200 - OK,    
+**Если Quiz Try c id не найден:** - HTTP 404 - NOT_FOUND 
+
 ### /delete <a name="delete_by_id_try_quiz"> ###
 #### Описание: ####
+Удаляет Quiz Try по заданному id , если такого нет 404
 #### Параметры: ####
+**RequestMethod:** DELETE,  
+**RequestParam:** id,  
+**Url:** /quiz_try/delete,  
+**Response:**  [Try Quiz JSON](#try_quiz_responce_example)) , HTTP 200 - OK,  
+**Если Quiz Try c id не найден:**  HTTP 404 - NOT_FOUND 
