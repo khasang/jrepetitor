@@ -1045,7 +1045,7 @@ Id quiz'a, question id, selected item id - должны соответствов
 **"questionsCount"** - Число вопросов  
 **"rightAnswerCount"**  - Число правильных ответов  
 **"incorrectAnswerCount"** - Число не правильных ответов  
-**"answerIsCorrect"** - 1 если ответ правльный, 0 - если нет
+**"answerIsCorrect"** - 1 если ответ правльный, 0 - если нет  
 Остальные поля аналогичны описанным ранее
 
 ### /add <a name="add_try_quiz"> ###
