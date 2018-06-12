@@ -277,7 +277,6 @@ API для работы с тестами(quiz), добавление, выво�
 #### Параметры: ####
 **Headers:** Content-type - application-json, 
 **RequestMethod:** POST,  
-**Request Body** add quiz by id wrapper Json  
 **Url:**  /quiz/preview/get/{id},    
 **Request Data:**[Add quiz by group id wrapper JSON](#add_quiz_by_group_id_wrapper)  
 **Response:**  Quiz preview json , HTTP 200 - OK,    
@@ -321,16 +320,45 @@ API для работы с тестами(quiz), добавление, выво�
 
 ### /add <a name="add_question"></a> ###
 #### Описание: ####
+Добавить вопрос
+Возвращает созданый вопрос 
 #### Параметры: ####
+**Headers:** Content-type - application-json, 
+**RequestMethod:** POST,  
+**Url:**  /question/add,    
+**Request Data:** [Question JSON](#question_json_example)  
+**Response:**  created [Question JSON](#question_json_example) , HTTP 200 - OK,    
 ### /all <a name="get_all_questions"></a> ###
 #### Описание: ####
+Возвращает все вопросы которые есть в базе
 #### Параметры: ####
+**RequestMethod:** GET,  
+**Url:**  /question/all,    
+**Response:**  all [Question JSON](#question_json_example) in base , HTTP 200 - OK,
 ### /get/{id} <a name="get_question_by_id"></a> ###
 #### Описание: ####
+Возвращает question по заданному id, или 404 если нет в базе
 #### Параметры: ####
+**RequestMethod:**  GET,  
+**Url:**  /question/get/{id},    
+**id:**  Request Param quiz id,  
+**Response:**  [Question json](#question_json_example) , HTTP 200 - OK,    
+**Если question c id не найден:** - HTTP 404 - NOT_FOUND 
 ### /delete <a name="delete_question_by_id"></a>  ###
 #### Описание: ####
 #### Параметры: ####
+**RequestMethod:** DELETE,  
+**RequestParam:** id,  
+**Url:** /question/delete,  
+**Response:**  [Question json](#question_json_example) , HTTP 200 - OK,  
+**Если question c id не найден:**  HTTP 404 - NOT_FOUND 
 ### /add_by_quiz_id <a name="add_question_by_quiz_id"></a> ###
 #### Описание: ####
+Добавляет вопрос в quiz по quiz id
 #### Параметры: ####
+**Headers:** Content-type - application-json, 
+**RequestMethod:** POST,  
+**Url:**  /quiz/preview/get/{id},    
+**Request Data:**[Add question by quiz id wrapper JSON](#add_question_by_quiz_id_wrapper)  
+**Response:**  [Question json](#question_json_example) , HTTP 200 - OK,    
+**Если quiz c id не найден:** - HTTP 404 - NOT_FOUND 
