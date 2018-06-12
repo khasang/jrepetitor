@@ -356,7 +356,7 @@ API для работы с тестами(quiz), добавление, выво�
 #### Описание: ####
 Добавляет вопрос в quiz по quiz id
 #### Параметры: ####
-**Headers:** Content-type - application-json, 
+**Headers:** Content-type - application-json,   
 **RequestMethod:** POST,  
 **Url:**  /quiz/preview/get/{id},    
 **Request Data:**[Add question by quiz id wrapper JSON](#add_question_by_quiz_id_wrapper)  
