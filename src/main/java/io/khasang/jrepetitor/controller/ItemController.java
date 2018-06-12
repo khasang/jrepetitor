@@ -5,6 +5,8 @@ import io.khasang.jrepetitor.entity.Item;
 import io.khasang.jrepetitor.model.ItemByQuestionIdRequestWrapper;
 import io.khasang.jrepetitor.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,19 +32,35 @@ public class ItemController {
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ItemDTOInterface getItemById(@PathVariable(value = "id") String id) {
-        return itemService.getItemById(Long.parseLong(id));
+    public ResponseEntity<ItemDTOInterface> getItemById(@PathVariable(value = "id") String id) {
+        ItemDTOInterface itemDTO = itemService.getItemById(Long.parseLong(id));
+        if (itemDTO == null) {
+            return new ResponseEntity<>(itemDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(itemDTO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ItemDTOInterface deleteItem(@RequestParam(value = "id") String id) {
-        return itemService.deleteItem(Long.parseLong(id));
+    public ResponseEntity<ItemDTOInterface> deleteItem(@RequestParam(value = "id") String id) {
+        ItemDTOInterface itemDTO = itemService.deleteItem(Long.parseLong(id));
+        if (itemDTO == null) {
+            return new ResponseEntity<>(itemDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(itemDTO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/add_by_question_id", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ItemDTOInterface addByQuestionId(@RequestBody ItemByQuestionIdRequestWrapper itemByQuestionIdRequestWrapper) {
-        return itemService.addByQuestionId(itemByQuestionIdRequestWrapper);
+    public ResponseEntity<ItemDTOInterface> addByQuestionId(@RequestBody ItemByQuestionIdRequestWrapper itemByQuestionIdRequestWrapper) {
+        ItemDTOInterface itemDTO = itemService.addByQuestionId(itemByQuestionIdRequestWrapper);
+        if (itemDTO == null) {
+            return new ResponseEntity<>(itemDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(itemDTO, HttpStatus.OK);
+        }
     }
+
 }
