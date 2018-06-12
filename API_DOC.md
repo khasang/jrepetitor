@@ -15,7 +15,9 @@
   * [/create](#create) 
   * [/authorized](#authorized) 
 * [/quiz](#quiz)    
-  * [Quiz JSON example](#quiz_json_example)   
+  * [Quiz JSON example](#quiz_json_example)     
+  * [Quiz Preview JSON exmple](#quiz_preview_json_example)  
+  * [Add quiz by group id wrapper JSON](add_quiz_by_group_id_wrapper)
   * [/add](#add_quiz)    
   * [/all](#quiz_all)  
   * [/get/{id}](#quiz_get)  
@@ -175,24 +177,99 @@ API для работы с тестами(quiz), добавление, выво�
 ````
 **"id"** - id теста  
 **"name"** - название теста  
-**"questions"** - список вопросов Question JSON  
-**"group"** - Group JSON  
+**"questions"** - список вопросов [Question JSON](#question_json_example)  
+**"group"** - [Group JSON](#group_json_example)  
 **"level"** - уровень теста 
 
-### /add <a name="add_quiz"></a> ###
-//to do
+### Quiz Preview JSON example <a name="quiz_preview_json_example"></a> ###
+```json
+{
+  "id": 1,
+  "name": "name_1",
+  "level": 1
+}
+```
+**"id"** - id теста  
+**"name"** - название теста  
+**"level"** - уровень теста 
+
+###  Add quiz by group id wrapper JSON <a name="add_quiz_by_group_id_wrapper"></a> ###
+```json
+{
+  "id": 1,
+  "quiz": {}
+}  
+```
+**"id"** - group id  
+**"quiz"** - [Quiz JSON](#quiz_json_example)
+### /add <a name="add_quiz"></a> 
+#### Описание: ####
+Добавление quiz'a
+Возвращает созданный Quiz JSON  
+#### Параметры: ####
+**Headers:** Content-type - application-json,  
+**RequestMethod:** POST,  
+**Url:** /quiz/add,
+**Response:** [Quiz JSON](#quiz_json_example), HTTP 200 - OK
+
 ### /all <a name="quiz_all"></a> ###
-//to do
+#### Описание: ####
+Выбрать все quiz'ы из бызы на сервере.  
+Возвращает массив Quiz JSON или пустой массив
+#### Параметры: ####
+**RequestMethod:** GET,  
+**Url:** /quiz/all,
+**Response:** [Quiz JSON](#quiz_json_example) array, HTTP 200 - OK
+
 ### /get/{id} <a name="quiz_get"></a> ###
-//to do
+#### Описание: ####
+Возвращает Quiz по заданному  id 
+#### Параметры: ####
+**RequestMethod:**  GET,  
+**Url:**  /quiz/get/{id},    
+**id:**  Request Param quiz id,  
+**Response:**  [Quiz json](#quiz_json_example) , HTTP 200 - OK,    
+**Если quiz c id не найден:** - HTTP 404 - NOT_FOUND 
+
 ### /delete  <a name="quiz_delete"></a> ###
-//to do
+#### Описание: ####
+Удаление quiz'a по заданному id,  
+#### Параметры: ####
+**RequestMethod:** DELETE,  
+**RequestParam:** id,  
+**Url:** /quiz/delete,  
+**Response:**  [Quiz json](#quiz_json_example) , HTTP 200 - OK,  
+**Если quiz id  не найден:**  HTTP 404 - NOT_FOUND 
+
 ### /preview/all <a name="quiz_preview_all"></a> ###
-//to do
+#### Описание: ####
+Возвращает массив [Quiz](#quiz_json_example) preview JSON,  
+#### Параметры: ####
+**RequestMethod:** GET,  
+**Url:** /quiz/preview/all,  
+**Response:** Quiz preview JSON array, HTTP 200 - OK
+
 ### /preview/get/{id} <a name="quiz_preview_by_id"></a> ###
-//to do
+#### Описание: ####
+Возвращает [Quiz preview JSON](#quiz_preview_json_example) по заданному  id 
+#### Параметры: ####
+**RequestMethod:**  GET,  
+**Url:**  /quiz/preview/get/{id},    
+**id:**  Request Param quiz id,  
+**Response:**  [Quiz preview json](#quiz_preview_json_example) , HTTP 200 - OK,    
+**Если quiz c id не найден:** - HTTP 404 - NOT_FOUND 
+
 ### /add_by_group_id <a name="quiz_add_by_group_id"></a> ###
-//to do  
+### Описание: ###
+Добавляет quiz в группу с id 
+#### Параметры: ####
+**Headers:** Content-type - application-json, 
+**RequestMethod:** POST,  
+**Request Body** add quiz by id wrapper Json
+**Url:**  /quiz/preview/get/{id},    
+**Request Data:**[Add quiz by group id wrapper JSON](#add_quiz_by_group_id_wrapper)  
+**Response:**  Quiz preview json , HTTP 200 - OK,    
+**Если quiz c id не найден:** - HTTP 404 - NOT_FOUND 
  
 
    
