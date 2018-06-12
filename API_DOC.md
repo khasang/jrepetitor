@@ -265,7 +265,7 @@ API для работы с тестами(quiz), добавление, выво�
 #### Параметры: ####
 **Headers:** Content-type - application-json, 
 **RequestMethod:** POST,  
-**Request Body** add quiz by id wrapper Json
+**Request Body** add quiz by id wrapper Json  
 **Url:**  /quiz/preview/get/{id},    
 **Request Data:**[Add quiz by group id wrapper JSON](#add_quiz_by_group_id_wrapper)  
 **Response:**  Quiz preview json , HTTP 200 - OK,    

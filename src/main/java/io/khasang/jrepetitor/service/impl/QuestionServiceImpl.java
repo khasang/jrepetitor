@@ -26,8 +26,8 @@ public class QuestionServiceImpl implements QuestionService {
 
 
     @Override
-    public Question addQuestion(Question question) {
-        return questionDao.create(question);
+    public QuestionDTOInterface addQuestion(Question question) {
+        return questionDTO.getQuestionDTO(questionDao.create(question));
     }
 
     @Override

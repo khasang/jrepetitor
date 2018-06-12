@@ -13,7 +13,7 @@ public interface QuestionService {
      * @param Question = new Question for creation in DB
      * @return created Question
      */
-    Question addQuestion(Question Question);
+    QuestionDTOInterface addQuestion(Question Question);
 
     /**
      * method for receiving all Questions

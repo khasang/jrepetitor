@@ -18,7 +18,7 @@ public class QuestionController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Question addQuestion(@RequestBody Question question) {
+    public QuestionDTOInterface addQuestion(@RequestBody Question question) {
         return questionService.addQuestion(question);
     }
 
