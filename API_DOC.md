@@ -41,7 +41,15 @@
   * [/get/{id}](#get_by_id_item)
   * [/delete](#delete_item)  
   * [/add_by_question_id](#add_by_question_id_item)            
- 
+* [/try_quiz](#try_quiz)
+  * [User Try wrapper JSON](#user_try_wrapper_example)  
+  * [Question Answer wrapper](#question_answer_wrapper_example)  
+  * [Selected Item wrapper](#question_answer_wrapper_example)  
+  * [Selected Item wrapper](#selected_item_wrapper_example)
+  * [Quiz Example](#full_quiz_example)  
+  * [Try Quiz JSON Example  for Quiz Example](#try_quiz_example)
+
+
 ## /users <a name="/users"></a> ##
 API для работы с пользователями JRepetitor
 
@@ -336,6 +344,7 @@ API для работы с тестами(quiz), добавление, выво�
 **Url:**  /question/add,    
 **Request Data:** [Question JSON](#question_json_example)  
 **Response:**  created [Question JSON](#question_json_example) , HTTP 200 - OK,    
+
 ### /all <a name="get_all_questions"></a> ###
 #### Описание: ####
 Возвращает все вопросы которые есть в базе
@@ -343,6 +352,7 @@ API для работы с тестами(quiz), добавление, выво�
 **RequestMethod:** GET,  
 **Url:**  /question/all,    
 **Response:**  all [Question JSON](#question_json_example) in base , HTTP 200 - OK,
+
 ### /get/{id} <a name="get_question_by_id"></a> ###
 #### Описание: ####
 Возвращает question по заданному id, или 404 если нет в базе
@@ -352,6 +362,7 @@ API для работы с тестами(quiz), добавление, выво�
 **id:**  Request Param quiz id,  
 **Response:**  [Question json](#question_json_example) , HTTP 200 - OK,    
 **Если question c id не найден:** - HTTP 404 - NOT_FOUND 
+
 ### /delete <a name="delete_question_by_id"></a>  ###
 #### Описание: ####
 Удалить вопрос по заданому id, 404 если такого нет в базе
@@ -361,6 +372,7 @@ API для работы с тестами(quiz), добавление, выво�
 **Url:** /question/delete,  
 **Response:**  [Question json](#question_json_example) , HTTP 200 - OK,  
 **Если question c id не найден:**  HTTP 404 - NOT_FOUND 
+
 ### /add_by_quiz_id <a name="add_question_by_quiz_id"></a> ###
 #### Описание: ####
 Добавляет вопрос в quiz по quiz id
@@ -428,6 +440,7 @@ API для работы с тестами(quiz), добавление, выво�
 **id:**  Request Param question id,  
 **Response:**  [Item JSON](#item_json_example) , HTTP 200 - OK,    
 **Если item c id не найден:** - HTTP 404 - NOT_FOUND 
+
 ### /delete <a name="delete_item"></a> ###
 #### Описание: ####
 Удаляет item по заданному id 
@@ -437,6 +450,7 @@ API для работы с тестами(quiz), добавление, выво�
 **Url:** /item/delete,  
 **Response:**  [Item JSON](#item_json_example) , HTTP 200 - OK,  
 **Если item c id не найден:**  HTTP 404 - NOT_FOUND 
+
 ### /add_by_question_id <a name="add_by_question_id_item"></a> ###
 #### Описание: ####
 Добавить ответ(item) в question c заданным id
@@ -447,3 +461,237 @@ API для работы с тестами(quiz), добавление, выво�
 **Request Data:**[Add Item By question Id JSON wrapper](#add_item_by_question_id_json_example)  
 **Response:**  [Item JSON](#item_json_example) , HTTP 200 - OK,    
 **Если question c id не найден:** - HTTP 404 - NOT_FOUND 
+
+## /try_quiz <a name="try_quiz"> ##
+
+### User Try wrapper JSON <a name="user_try_wrapper_example"> ###
+
+```json
+{
+    "quizId": "1",
+    "questionAnswerWrappers": []
+}
+```
+
+**"quizId"** - quiz id для которого предназначена данная попытка решения   
+**"questionAnswerWrappers"** - массив Question Answer wrapper, для каждога вопроса отдельный элемент в массиве.
+
+
+### Question Answer wrapper <a name="question_answer_wrapper_example"> ###
+```json
+{ 
+    "questionId": "1",
+    "selectedItemWrappers": [
+        {
+          "selectedItemId": "1"
+         }
+    ]
+}    
+```
+**"questionId"** - question id для которого предназначем данный ответ.  
+**"selectedItemWrappers"** - массив из Selected Answer wrapper, для каждого вопроса может быть 1 или несколько  
+элементов Selected Answer wrapper.
+
+### Selected Item wrapper <a name="selected_item_wrapper_example"> ###
+```json
+{
+    "selectedItemId": "1"
+}
+```
+**"selectedItemId"** item id - id выбранного ответа.
+
+### Quiz Example <a name="full_quiz_example"> ###
+
+Пример Quiz'а из четырех вопросов, у каждого вопроса по 4 варианта ответа, один из которых правильный.
+```json
+{
+    "id": 1,
+    "name": "name_1",
+    "questions": [
+        {
+            "id": 1,
+            "content": "text_question_1",
+            "type": "Checkbox",
+            "items": [
+                {
+                    "id": 1,
+                    "content": "answer1 question1 correct",
+                    "correct": 1,
+                    "question": null
+                },
+                {
+                    "id": 2,
+                    "content": "answer2 question1",
+                    "correct": 0,
+                    "question": null
+                },
+                {
+                    "id": 3,
+                    "content": "answer3 question1",
+                    "correct": 0,
+                    "question": null
+                },
+                {
+                    "id": 4,
+                    "content": "answer4 question1",
+                    "correct": 0,
+                    "question": null
+                }
+            ],
+            "quiz": null,
+            "explanation": "explanation_question_1"
+        },
+        {
+            "id": 2,
+            "content": "text_question_2",
+            "type": "Checkbox",
+            "items": [
+                {
+                    "id": 5,
+                    "content": "answer1 question2 correct",
+                    "correct": 1,
+                    "question": null
+                },
+                {
+                    "id": 6,
+                    "content": "answer2 question2",
+                    "correct": 0,
+                    "question": null
+                },
+                {
+                    "id": 7,
+                    "content": "answer3 question2",
+                    "correct": 0,
+                    "question": null
+                },
+                {
+                    "id": 8,
+                    "content": "answer4 question2",
+                    "correct": 0,
+                    "question": null
+                }
+            ],
+            "quiz": null,
+            "explanation": "explanation_question_2"
+        },
+        {
+            "id": 3,
+            "content": "text_question_3",
+            "type": "Checkbox",
+            "items": [
+                {
+                    "id": 9,
+                    "content": "answer1 question3 correct",
+                    "correct": 1,
+                    "question": null
+                },
+                {
+                    "id": 10,
+                    "content": "answer2 question3",
+                    "correct": 0,
+                    "question": null
+                },
+                {
+                    "id": 11,
+                    "content": "answer3 question3",
+                    "correct": 0,
+                    "question": null
+                },
+                {
+                    "id": 12,
+                    "content": "answer4 question3",
+                    "correct": 0,
+                    "question": null
+                }
+            ],
+            "quiz": null,
+            "explanation": "explanation_question_3"
+        },
+        {
+            "id": 4,
+            "content": "text_question_4",
+            "type": "Checkbox",
+            "items": [
+                {
+                    "id": 13,
+                    "content": "answer1 question4 correct",
+                    "correct": 1,
+                    "question": null
+                },
+                {
+                    "id": 14,
+                    "content": "answer2 question4",
+                    "correct": 0,
+                    "question": null
+                },
+                {
+                    "id": 15,
+                    "content": "answer3 question4",
+                    "correct": 0,
+                    "question": null
+                },
+                {
+                    "id": 16,
+                    "content": "answer3 question4",
+                    "correct": 0,
+                    "question": null
+                }
+            ],
+            "quiz": null,
+            "explanation": "explanation_question_4"
+        }
+    ],
+    "group": {
+        "id": 1,
+        "quizes": [],
+        "name": "group_name_1"
+    },
+    "level": 1
+}
+```
+
+###  Try Quiz JSON Example  for Quiz Example <a name="try_quiz_example"> ###
+Пример попытки решения [quiz'a](#full_quiz_example).
+```json
+{
+    "quizId": "1",
+    "questionAnswerWrappers": [
+        {
+            "questionId": "1",
+            "selectedItemWrappers": [
+                {
+                    "selectedItemId": "1"
+                }
+            ]
+        },
+        {
+            "questionId": "2",
+            "selectedItemWrappers": [
+                {
+                    "selectedItemId": "5"
+                }
+            ]
+        },
+        {
+            "questionId": "3",
+            "selectedItemWrappers": [
+                {
+                    "selectedItemId": "9"
+                }
+            ]
+        },
+        {
+            "questionId": "4",
+            "selectedItemWrappers": [
+                {
+                    "selectedItemId": "13"
+                }
+            ]
+        }
+    ]
+}
+``` 
+Id quiz'a, question id, selected item id - должны соответствовать id которые есть в quiz,   
+проверка на соответствие произваодится на стороне сервера.  
+
+ 
