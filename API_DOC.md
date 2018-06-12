@@ -1089,5 +1089,15 @@ HTTP 422 - если в JSON ошибка (несоответствие id, не 
 **RequestMethod:** DELETE,  
 **RequestParam:** id,  
 **Url:** /quiz_try/delete,  
-**Response:**  [Try Quiz JSON](#try_quiz_responce_example)) , HTTP 200 - OK,  
+**Response:**  [Try Quiz JSON](#try_quiz_responce_example) , HTTP 200 - OK,  
 **Если Quiz Try c id не найден:**  HTTP 404 - NOT_FOUND 
+
+### /delete <a name="delete_by_id_try_quiz"> ###
+#### Описание: ####
+Выводит Quiz Try авторизированного пользователя , если пользователь  
+не авторизированн - HTTP 401 
+#### Параметры: ####
+**RequestMethod:** GET,  
+**Url:** /quiz_try/get_my_tries,  
+**Response** [Try Quiz JSON](#try_quiz_responce_example) , HTTP 200 - OK,  
+если пользователь не авторизованн - HTTP 401 - UNAUTHORIZED 
