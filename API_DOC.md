@@ -319,18 +319,18 @@ API для работы с тестами(quiz), добавление, выво�
 **"type"** - "Checkbox" - мультивыбор или "Radio" - 1 вариант  
 **"explanation"** - объяснение вопроса
 
-###"/add" <a name="add_question"></a> ###
+### /add <a name="add_question"></a> ###
 #### Описание: ####
 #### Параметры: ####
-###"/all <a name="get_all_questions"></a> ###
+### /all <a name="get_all_questions"></a> ###
 #### Описание: ####
 #### Параметры: ####
-###"/get/{id}" <a name="get_question_by_id"></a> ###
+### /get/{id} <a name="get_question_by_id"></a> ###
 #### Описание: ####
 #### Параметры: ####
-###"/delete" <a name="delete_question_by_id"></a>  ###
+### /delete <a name="delete_question_by_id"></a>  ###
 #### Описание: ####
 #### Параметры: ####
-###"/add_by_quiz_id" <a name="add_question_by_quiz_id"></a> ###
+### /add_by_quiz_id <a name="add_question_by_quiz_id"></a> ###
 #### Описание: ####
 #### Параметры: ####
