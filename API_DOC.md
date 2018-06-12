@@ -1050,14 +1050,19 @@ Id quiz'a, question id, selected item id - должны соответствов
 
 ### /add <a name="add_try_quiz"> ###
 #### Описание: ####
-Добавляет Quiz Try.
-Доступен только авторизированному пользователю.
+Добавляет Quiz Try.  
+Если в запросе указанны некорректные id 
+вернет HTTP 422 - Unprocessable Entity.    
+Доступен только авторизированному пользователю.  
+Если перейти без авторизации вернет HTTP 401 - UNAUTHORIZED
 #### Параметры: ####
 **Headers:** Content-type - application-json,   
 **RequestMethod:**  POST  
 **Url:** /quiz_try/add  
 **Request Data:** [Try Quiz JSON wrapper](#try_quiz_example)  
 **Response Data:** [Try Quiz JSON](#try_quiz_responce_example)  
+HTTP 401 - если не авторизован  
+HTTP 422 - если в JSON ошибка (несоответствие id, не найден quiz c заданным id) 
 
 ### /all <a name="all_try_quiz"> ###
 #### Описание: ####
