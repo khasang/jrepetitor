@@ -103,6 +103,13 @@ public class QuizTryServiceImpl implements QuizTryService {
         return quizTryDTO.getQuizTryDTO(deletedTry);
     }
 
+    @Override
+    public List<QuizTryDTOInterface> getMyTries(String login) {
+        User user = userDao.getUserByLogin(login);
+        return quizTryDTO.getQuizTryDTOList(user.getUserTries());
+
+    }
+
     private Boolean isAnswersListCorrect(List<Question> questions, List<QuestionAnswerWrapper> answers) {
         if (questions.size() != answers.size()) {
             return false;
@@ -168,5 +175,6 @@ public class QuizTryServiceImpl implements QuizTryService {
         }
         return true;
     }
+
 
 }

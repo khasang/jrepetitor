@@ -14,4 +14,7 @@ public interface QuizTryService {
     QuizTryDTOInterface getById(Long Id);
 
     QuizTryDTOInterface deleteById(long l);
+
+    List<QuizTryDTOInterface> getMyTries(String login);
+
 }

@@ -22,10 +22,18 @@ public class UserTryController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public QuizTryDTOInterface addQuizTry(@RequestBody UserTryWrapper userTryWrapper) {
+    public ResponseEntity<QuizTryDTOInterface> addQuizTry(@RequestBody UserTryWrapper userTryWrapper) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
-        return quizTryService.createTry(userTryWrapper, currentPrincipalName);
+        if (currentPrincipalName.equals("anonymousUser")) {
+            return new ResponseEntity<>((QuizTryDTOInterface) null, HttpStatus.UNAUTHORIZED);
+        }
+        QuizTryDTOInterface quizTryDTO = quizTryService.createTry(userTryWrapper, currentPrincipalName);
+        if (quizTryDTO == null) {
+            return new ResponseEntity<>(quizTryDTO, HttpStatus.UNPROCESSABLE_ENTITY);
+        } else {
+            return new ResponseEntity<>(quizTryDTO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
@@ -57,4 +65,15 @@ public class UserTryController {
         }
     }
 
+    @RequestMapping(value = "/get_my_tries", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public ResponseEntity<List<QuizTryDTOInterface>> getByUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        if (currentPrincipalName.equals("anonymousUser")) {
+            return new ResponseEntity<>((List<QuizTryDTOInterface>) null, HttpStatus.UNAUTHORIZED);
+        }
+        List<QuizTryDTOInterface> quizTryDTOs = quizTryService.getMyTries(currentPrincipalName);
+        return new ResponseEntity<>(quizTryDTOs, HttpStatus.OK);
+    }
 }
