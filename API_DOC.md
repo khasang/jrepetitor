@@ -1053,18 +1053,18 @@ Id quiz'a, question id, selected item id - должны соответствов
 Добавляет Quiz Try.
 Доступен только авторизированному пользователю.
 #### Параметры: ####
-**Headers:** Content-type - application-json, 
-**RequestMethod:** POST
-**Url:** /quiz_try/add
-**Request Data:**[Try Quiz JSON wrapper](#try_quiz_example)
-**Response Data:**[Try Quiz JSON](#try_quiz_responce_example)
+**Headers:** Content-type - application-json,   
+**RequestMethod:**  POST  
+**Url:** /quiz_try/add  
+**Request Data:** [Try Quiz JSON wrapper](#try_quiz_example)  
+**Response Data:** [Try Quiz JSON](#try_quiz_responce_example)  
 
 ### /all <a name="all_try_quiz"> ###
 #### Описание: ####
  Возвращет все Quiz Try которые есть в базе.
 #### Параметры: ####
-**RequestMethod:** POST
-**Url:** /quiz_try/add
+**RequestMethod:** POST  
+**Url:** /quiz_try/add  
 **Response Data:** массив [Try Quiz JSON](#try_quiz_responce_example)
 
 ### /get/{id} <a name="get_by_id_try_quiz"> ###
