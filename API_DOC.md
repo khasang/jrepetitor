@@ -48,8 +48,11 @@
   * [Selected Item wrapper](#selected_item_wrapper_example)
   * [Quiz Example](#full_quiz_example)  
   * [Try Quiz JSON Example  for Quiz Example](#try_quiz_example)
-
-
+  * [/add](#add_try_quiz)  
+  * [/all](#all_try_quiz)  
+  * [/get/{id}](#get_by_id_try_quiz)  
+  * [/delete](#delete_by_id_try_quiz)  
+        
 ## /users <a name="/users"></a> ##
 API для работы с пользователями JRepetitor
 
@@ -694,4 +697,15 @@ API для работы с тестами(quiz), добавление, выво�
 Id quiz'a, question id, selected item id - должны соответствовать id которые есть в quiz,   
 проверка на соответствие произваодится на стороне сервера.  
 
- 
+### /add <a name="add_try_quiz"> ###
+#### Описание: ####
+#### Параметры: ####
+### /all <a name="all_try_quiz"> ###
+#### Описание: ####
+#### Параметры: ####
+### /get/{id} <a name="get_by_id_try_quiz"> ###
+#### Описание: ####
+#### Параметры: ####
+### /delete <a name="delete_by_id_try_quiz"> ###
+#### Описание: ####
+#### Параметры: ####
