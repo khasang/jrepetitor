@@ -354,6 +354,7 @@ API для работы с тестами(quiz), добавление, выво�
 **Если question c id не найден:** - HTTP 404 - NOT_FOUND 
 ### /delete <a name="delete_question_by_id"></a>  ###
 #### Описание: ####
+Удалить вопрос по заданому id, 404 если такого нет в базе
 #### Параметры: ####
 **RequestMethod:** DELETE,  
 **RequestParam:** id,  
@@ -401,7 +402,48 @@ API для работы с тестами(quiz), добавление, выво�
 **"correct"** - 1 если правильный, 0 - неправильный
 
 ### /add <a name="add_item"></a> ###
+#### Описание: ####
+Добавляет ответ.
+#### Параметры: ####
+**Headers:** Content-type - application-json, 
+**RequestMethod:** POST,  
+**Url:**  /item/add,    
+**Request Data:** [Item JSON](#item_json_example)  
+**Response:**  created [Item JSON](#item_json_example) , HTTP 200 - OK,    
+
 ### /all <a name="all_item"></a> ###
+#### Описание: ####
+Выводит все ответы которые есть в базе.
+#### Параметры: ####
+*RequestMethod:** GET,  
+**Url:**  /item/all,    
+**Response:**  all [Item JSON](#item_json_example) in base , HTTP 200 - OK,
+
 ### /get/{id} <a name="/get_by_id_item"></a> ###
+#### Описание: ####
+Выводит ответ по заданному id, 404 если нет такого в базе.
+#### Параметры: ####
+**RequestMethod:**  GET,  
+**Url:**  /item/get/{id},    
+**id:**  Request Param question id,  
+**Response:**  [Item JSON](#item_json_example) , HTTP 200 - OK,    
+**Если item c id не найден:** - HTTP 404 - NOT_FOUND 
 ### /delete <a name="delete_item"></a> ###
+#### Описание: ####
+Удаляет item по заданному id 
+#### Параметры: ####
+**RequestMethod:** DELETE,  
+**RequestParam:** id,  
+**Url:** /item/delete,  
+**Response:**  [Item JSON](#item_json_example) , HTTP 200 - OK,  
+**Если item c id не найден:**  HTTP 404 - NOT_FOUND 
 ### /add_by_question_id <a name="add_by_question_id_item"></a> ###
+#### Описание: ####
+Добавить ответ(item) в question c заданным id
+#### Параметры: ####
+**Headers:** Content-type - application-json,   
+**RequestMethod:** POST,  
+**Url:**  /question/add_by_question_id},    
+**Request Data:**[Add Item By question Id JSON wrapper](#add_item_by_question_id_json_example)  
+**Response:**  [Item JSON](#item_json_example) , HTTP 200 - OK,    
+**Если question c id не найден:** - HTTP 404 - NOT_FOUND 
