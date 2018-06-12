@@ -61,6 +61,9 @@ public class QuizTryItemDTOImpl implements QuizTryItemDTOInterface {
 
     @Override
     public QuizTryItemDTOInterface getQuizTryItem(QuizTryItem quizTryItem) {
+        if (quizTryItem == null) {
+            return null;
+        }
         QuizTryItemDTOInterface quizTryItemDTO = new QuizTryItemDTOImpl();
         quizTryItemDTO.setId(quizTryItem.getId());
         quizTryItemDTO.setQuestion(new QuestionDTOImpl().getQuestionDTO(quizTryItem.getQuestion()));

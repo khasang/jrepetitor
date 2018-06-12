@@ -109,6 +109,9 @@ public class QuizTryDTOImpl implements QuizTryDTOInterface {
 
     @Override
     public QuizTryDTOInterface getQuizTryDTO(QuizTry quizTry) {
+        if (quizTry == null) {
+            return null;
+        }
         QuizTryDTOInterface quizTryDTO = new QuizTryDTOImpl();
         quizTryDTO.setId(quizTry.getId());
         new QuizDTOImpl().getQuiz(quizTry.getQuiz());
