@@ -5,6 +5,8 @@ import io.khasang.jrepetitor.entity.Question;
 import io.khasang.jrepetitor.model.QuestionByQuizIdRequestWrapper;
 import io.khasang.jrepetitor.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,20 +32,35 @@ public class QuestionController {
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public QuestionDTOInterface getQuestionById(@PathVariable(value = "id") String id) {
-        return questionService.getQuestionById(Long.parseLong(id));
+    public ResponseEntity<QuestionDTOInterface> getQuestionById(@PathVariable(value = "id") String id) {
+        QuestionDTOInterface questionDTO = questionService.getQuestionById(Long.parseLong(id));
+        if (questionDTO == null) {
+            return new ResponseEntity<>(questionDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(questionDTO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public QuestionDTOInterface deleteQuestion(@RequestParam(value = "id") String id) {
-        return questionService.deleteQuestion(Long.parseLong(id));
+    public ResponseEntity<QuestionDTOInterface> deleteQuestion(@RequestParam(value = "id") String id) {
+        QuestionDTOInterface questionDTO = questionService.deleteQuestion(Long.parseLong(id));
+        if (questionDTO == null) {
+            return new ResponseEntity<>(questionDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(questionDTO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/add_by_quiz_id", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public QuestionDTOInterface addQuestionByQuizID(@RequestBody QuestionByQuizIdRequestWrapper question) {
-        return questionService.addQuestionByQuizId(question);
+    public ResponseEntity<QuestionDTOInterface> addQuestionByQuizID(@RequestBody QuestionByQuizIdRequestWrapper question) {
+        QuestionDTOInterface questionDTO = questionService.addQuestionByQuizId(question);
+        if (questionDTO == null) {
+            return new ResponseEntity<>(questionDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(questionDTO, HttpStatus.OK);
+        }
     }
 
 }
