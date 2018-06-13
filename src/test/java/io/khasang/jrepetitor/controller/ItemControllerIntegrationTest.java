@@ -4,6 +4,8 @@ import io.khasang.jrepetitor.entity.Item;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -56,16 +58,18 @@ public class ItemControllerIntegrationTest {
         Item deletedItem = responseEntity.getBody();
         assertNotNull(deletedItem);
 
-        ResponseEntity<Item> responseForDeleteItem = restTemplate.exchange(
-                ROOT + GET_BY_ID + "/{id}",
-                HttpMethod.GET,
-                null,
-                Item.class,
-                deletedItem.getId()
-        );
-
-        assertEquals(200, responseForDeleteItem.getStatusCodeValue());
-        assertNull(responseForDeleteItem.getBody());
+        ResponseEntity<Item> responseForDeleteItem = null;
+        try {
+            responseForDeleteItem = restTemplate.exchange(
+                    ROOT + GET_BY_ID + "/{id}",
+                    HttpMethod.GET,
+                    null,
+                    Item.class,
+                    deletedItem.getId()
+            );
+        } catch (HttpClientErrorException e) {
+            assertEquals(e.getMessage(), "404 null");
+        }
     }
 
     @Test
