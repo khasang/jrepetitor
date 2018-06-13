@@ -52,7 +52,7 @@
   * [/all](#all_try_quiz)  
   * [/get/{id}](#get_by_id_try_quiz)  
   * [/delete](#delete_by_id_try_quiz)  
-        
+  * [get_my_tries](#get_my_tries)      
 ## /users <a name="/users"></a> ##
 API для работы с пользователями JRepetitor
 
@@ -1092,7 +1092,7 @@ HTTP 422 - если в JSON ошибка (несоответствие id, не 
 **Response:**  [Try Quiz JSON](#try_quiz_responce_example) , HTTP 200 - OK,  
 **Если Quiz Try c id не найден:**  HTTP 404 - NOT_FOUND 
 
-### /delete <a name="delete_by_id_try_quiz"> ###
+### /get_my_tries <a name="get_my_tries"> ###
 #### Описание: ####
 Выводит Quiz Try авторизированного пользователя , если пользователь  
 не авторизированн - HTTP 401 
