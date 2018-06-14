@@ -44,7 +44,12 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public QuizDTOInterface deleteQuiz(long id) {
-        return quizDTO.getQuiz(quizDao.delete(quizDao.getById(id)));
+        Quiz quiz = quizDao.getById(id);
+        if (quiz == null) {
+            return null;
+        } else {
+            return quizDTO.getQuiz(quizDao.delete(quiz));
+        }
     }
 
     @Override
