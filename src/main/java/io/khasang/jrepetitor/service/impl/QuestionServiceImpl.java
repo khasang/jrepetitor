@@ -9,6 +9,7 @@ import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.model.QuestionByQuizIdRequestWrapper;
 import io.khasang.jrepetitor.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,8 +43,13 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionDTOInterface deleteQuestion(long id) {
-        Question deletedQuestion = questionDao.delete(questionDao.getById(id));
-        return new QuestionDTOImpl().getQuestionDTO(deletedQuestion);
+        Question question = questionDao.getById(id);
+        if (question == null) {
+            return null;
+        } else {
+            Question deletedQuestion = questionDao.delete(questionDao.getById(id));
+            return new QuestionDTOImpl().getQuestionDTO(deletedQuestion);
+        }
     }
 
     @Override
