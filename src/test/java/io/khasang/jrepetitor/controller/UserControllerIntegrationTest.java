@@ -9,6 +9,8 @@ import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import static io.khasang.jrepetitor.util.TestUtils.*;
+
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -32,7 +34,15 @@ public class UserControllerIntegrationTest {
 
     @Test
     public void addUserAndCheck() {
-        User user = createUser("test", "test", "test", "test", "test", "test@domain.zone", "1234567890");
+        User user = createUser("test",
+                "test",
+                "test",
+                "test",
+                "test",
+                "test@domain.zone",
+                "1234567890",
+                ROOT,
+                ADD);
 
         RestTemplate template = new RestTemplate();
 
@@ -55,7 +65,15 @@ public class UserControllerIntegrationTest {
 
     @Test()
     public void deleteUser() {
-        User user = createUser("test", "test", "test", "test", "test", "test@domain.zone", "1234567890");
+        User user = createUser("test",
+                "test",
+                "test",
+                "test",
+                "test",
+                "test@domain.zone",
+                "1234567890",
+                ROOT,
+                ADD);
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<User> responseEntity = restTemplate.exchange(
@@ -108,8 +126,24 @@ public class UserControllerIntegrationTest {
 
     @Test
     public void getAllUsers() {
-        User firstUser = createUser("test1", "test", "test", "test", "test", "test1@domain.zone", "12345678901");
-        User secondUser = createUser("test2", "test", "test", "test", "test", "test2@domain.zone", "12345678902");
+        User firstUser = createUser("test1",
+                "test",
+                "test",
+                "test",
+                "test",
+                "test1@domain.zone",
+                "12345678901",
+                ROOT,
+                ADD);
+        User secondUser = createUser("test2",
+                "test",
+                "test",
+                "test",
+                "test",
+                "test2@domain.zone",
+                "12345678902",
+                ROOT,
+                ADD);
 
         List<User> list = returnAllUsers();
 
@@ -240,49 +274,6 @@ public class UserControllerIntegrationTest {
         );
 
         return responseEntity.getBody();
-    }
-
-    private User createUser(String login, String name, String pass, String middlename, String surname, String email,
-                            String phoneNumber) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-
-        User user = prefillUser(login, name, pass, middlename, surname, email, phoneNumber);
-
-        HttpEntity entity = new HttpEntity(user, headers);
-
-        RestTemplate template = new RestTemplate();
-
-        User receivedUser = template.exchange(
-                ROOT + ADD,
-                HttpMethod.POST,
-                entity,
-                User.class
-        ).getBody();
-
-        assertNotNull(receivedUser.getName());
-        assertEquals(user.getName(), receivedUser.getName());
-
-        return receivedUser;
-    }
-
-    private User prefillUser(String login, String name, String pass, String middlename, String surname, String email,
-                             String phoneNumber) {
-        User user = new User();
-        user.setLogin(login);
-        user.setName(name);
-        user.setPassword(pass);
-        user.setRoleName("ROLE_USER");
-
-        Profile profile = new Profile();
-        profile.setName(name);
-        profile.setMiddlename(middlename);
-        profile.setSurname(surname);
-        profile.setEmail(email);
-        profile.setPhoneNumber(phoneNumber);
-
-        user.setProfile(profile);
-        return user;
     }
 
     private List<User> returnAllUsers() {
