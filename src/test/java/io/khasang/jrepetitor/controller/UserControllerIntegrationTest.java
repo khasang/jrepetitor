@@ -41,6 +41,7 @@ public class UserControllerIntegrationTest {
                 "test",
                 "test@domain.zone",
                 "1234567890",
+                "ROLE_USER",
                 ROOT,
                 ADD);
 
@@ -72,6 +73,7 @@ public class UserControllerIntegrationTest {
                 "test",
                 "test@domain.zone",
                 "1234567890",
+                "ROLE_USER",
                 ROOT,
                 ADD);
 
@@ -133,6 +135,7 @@ public class UserControllerIntegrationTest {
                 "test",
                 "test1@domain.zone",
                 "12345678901",
+                "ROLE_USER",
                 ROOT,
                 ADD);
         User secondUser = createUser("test2",
@@ -142,6 +145,7 @@ public class UserControllerIntegrationTest {
                 "test",
                 "test2@domain.zone",
                 "12345678902",
+                "ROLE_USER",
                 ROOT,
                 ADD);
 
@@ -159,8 +163,14 @@ public class UserControllerIntegrationTest {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
-        User user = prefillUser("test1", "test", "test",
-                "test", "test", "test1@domain.zone", "12345678901");
+        User user = prefillUser("test1",
+                "test",
+                "test",
+                "test",
+                "test",
+                "test1@domain.zone",
+                "12345678901",
+                "ROLE_USER");
 
         HttpEntity entity = new HttpEntity(user, headers);
 
