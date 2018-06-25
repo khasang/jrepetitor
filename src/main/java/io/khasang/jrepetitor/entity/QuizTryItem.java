@@ -21,7 +21,7 @@ public class QuizTryItem {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private QuizTry quizTry;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "tryItems")
     private List<Item> selectedItems;
 
     private byte answerIsCorrect;

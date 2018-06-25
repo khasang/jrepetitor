@@ -2,6 +2,7 @@ package io.khasang.jrepetitor.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * One of Answer variants
@@ -25,6 +26,9 @@ public class Item implements Serializable {
      * 1 - Correct, 0 - incorrect
      */
     private byte correct;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<QuizTryItem> tryItems;
 
     @ManyToOne
     private Question question;
