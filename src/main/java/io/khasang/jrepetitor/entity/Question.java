@@ -32,7 +32,10 @@ public class Question implements Serializable {
     private String type;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Item> items = new ArrayList<Item>(); //ответ
+    private List<Item> items = new ArrayList<>(); //ответ
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<QuizTryItem> quizTryItems;
 
     @ManyToOne
     private Quiz quiz;
