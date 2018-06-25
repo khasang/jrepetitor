@@ -15,7 +15,7 @@ import java.util.List;
 public class Quiz implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quiz_generator")
-    @SequenceGenerator(name="quiz_generator", sequenceName = "quiz_seq", allocationSize=50)
+    @SequenceGenerator(name = "quiz_generator", sequenceName = "quiz_seq", allocationSize = 50)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
@@ -26,6 +26,9 @@ public class Quiz implements Serializable {
 
     @ManyToOne
     private Group group;
+
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<QuizTry> quizTries;
 
     private byte level; // question level
 
