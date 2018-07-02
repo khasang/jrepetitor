@@ -2,8 +2,6 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
-import io.khasang.jrepetitor.dto.impl.QuizDTO;
-import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.model.QuizByGroupIdRequestWrapper;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +18,21 @@ public class QuizController {
     @Autowired
     private QuizService quizService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public QuizDTOInterface addQuiz(@RequestBody Quiz quiz) {
-        return quizService.addQuiz(quiz);
+    public ResponseEntity<QuizDTOInterface> addQuizByGroupId(@RequestBody QuizByGroupIdRequestWrapper quizByGroupIdRequestWrapper) {
+        QuizDTOInterface quizDTO = quizService.createQuizByGroupID(quizByGroupIdRequestWrapper);
+        if (quizDTO == null) {
+            return new ResponseEntity<>(quizDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(quizDTO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public List<QuizDTOInterface> getAllQuizzes() {
-        return quizService.getAllQuizs();
+        return quizService.getAllQuizzes();
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
@@ -71,14 +74,5 @@ public class QuizController {
         }
     }
 
-    @RequestMapping(value = "/add_by_group_id", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    @ResponseBody
-    public ResponseEntity<QuizDTOInterface> addQuizByGroupId(@RequestBody QuizByGroupIdRequestWrapper quizByGroupIdRequestWrapper) {
-        QuizDTOInterface quizDTO = quizService.createQuizByGroupID(quizByGroupIdRequestWrapper);
-        if (quizDTO == null) {
-            return new ResponseEntity<>(quizDTO, HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>(quizDTO, HttpStatus.OK);
-        }
-    }
+
 }
