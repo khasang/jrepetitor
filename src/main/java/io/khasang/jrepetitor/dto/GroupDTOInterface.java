@@ -9,9 +9,9 @@ public interface GroupDTOInterface {
 
     void setId(Long id);
 
-    List<QuizDTOInterface> getQuizes();
+    List<QuizPreviewDTOInterface> getQuizzes();
 
-    void setQuizes(List<QuizDTOInterface> quizes);
+    void setQuizzes(List<QuizPreviewDTOInterface> quizzes);
 
     String getName();
 
@@ -20,4 +20,6 @@ public interface GroupDTOInterface {
     GroupDTOInterface getGroupDTO(Group group);
 
     List<GroupDTOInterface> getGroupDTOList(List<Group> list);
+
+    Group getGroup(GroupDTOInterface group);
 }
