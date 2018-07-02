@@ -21,7 +21,7 @@ public interface QuizService {
      *
      * @return all quizs
      */
-    List<QuizDTOInterface> getAllQuizs();
+    List<QuizDTOInterface> getAllQuizzes();
 
     /**
      * method for receive specify quiz by id
