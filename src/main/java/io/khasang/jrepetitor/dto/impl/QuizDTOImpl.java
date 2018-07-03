@@ -1,9 +1,11 @@
 package io.khasang.jrepetitor.dto.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.khasang.jrepetitor.dto.GroupDTOInterface;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.entity.Quiz;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,6 +13,16 @@ import java.util.List;
 
 @Component
 public class QuizDTOImpl implements QuizDTOInterface {
+
+
+    @JsonIgnore
+    @Autowired
+    private GroupDTOImpl groupDTO;
+
+    @JsonIgnore
+    @Autowired
+    private QuestionDTOImpl questionDTO;
+
     private Long id;
 
     private String name;
@@ -99,8 +111,9 @@ public class QuizDTOImpl implements QuizDTOInterface {
         quizDTOImpl.setId(quiz.getId());
         quizDTOImpl.setName(quiz.getName());
         quizDTOImpl.setLevel(quiz.getLevel());
-        quizDTOImpl.setGroup(new GroupDTOImpl().getGroupDTO(quiz.getGroup()));
-        quizDTOImpl.setQuestions(new QuestionDTO().getQuestionDTOList(quiz.getQuestions()));
+        quizDTOImpl.setGroup(groupDTO.getGroupDTO(quiz.getGroup()));
+        quizDTOImpl.setQuestions(questionDTO.getQuestionDTOList(quiz.getQuestions()));
         return quizDTOImpl;
     }
+
 }

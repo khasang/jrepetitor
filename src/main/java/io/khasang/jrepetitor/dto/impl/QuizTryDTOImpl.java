@@ -1,7 +1,9 @@
 package io.khasang.jrepetitor.dto.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.khasang.jrepetitor.dto.*;
 import io.khasang.jrepetitor.entity.QuizTry;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,13 +12,26 @@ import java.util.List;
 
 @Component
 public class QuizTryDTOImpl implements QuizTryDTOInterface {
+
+    @JsonIgnore
+    @Autowired
+    private QuizPreviewDTOImpl quizPreviewDTO;
+
+    @JsonIgnore
+    @Autowired
+    private UserPreviewDTOImpl userPreviewDTO;
+
+    @JsonIgnore
+    @Autowired
+    private QuizTryItemDTOImpl quizTryItemDTO;
+
     private Long id;
 
     private UserDTOInterface user;
 
-    private QuizDTOInterface quiz;
+    private QuizPreviewDTOInterface quiz;
 
-    private List<QuizTryItemDTOInterface> tryItemDTOList;
+    private List<QuizTryItemDTOInterface> tryItemList;
 
     private Date timestamp;
 
@@ -48,23 +63,23 @@ public class QuizTryDTOImpl implements QuizTryDTOInterface {
     }
 
     @Override
-    public QuizDTOInterface getQuiz() {
+    public QuizPreviewDTOInterface getQuiz() {
         return quiz;
     }
 
     @Override
-    public void setQuiz(QuizDTOInterface quiz) {
+    public void setQuiz(QuizPreviewDTOInterface quiz) {
         this.quiz = quiz;
     }
 
     @Override
     public List<QuizTryItemDTOInterface> getTryItemDTOList() {
-        return tryItemDTOList;
+        return tryItemList;
     }
 
     @Override
     public void setTryItemDTOList(List<QuizTryItemDTOInterface> tryItemDTOList) {
-        this.tryItemDTOList = tryItemDTOList;
+        this.tryItemList = tryItemDTOList;
     }
 
     @Override
@@ -114,14 +129,13 @@ public class QuizTryDTOImpl implements QuizTryDTOInterface {
         }
         QuizTryDTOInterface quizTryDTO = new QuizTryDTOImpl();
         quizTryDTO.setId(quizTry.getId());
-        new QuizDTOImpl().getQuiz(quizTry.getQuiz());
-        quizTryDTO.setQuiz(new QuizDTOImpl().getQuiz(quizTry.getQuiz()));
-        quizTryDTO.setUser(new UserPreviewDTOImpl().getUserDTO(quizTry.getUser()));
+        quizTryDTO.setQuiz(quizPreviewDTO.getPreviewDTO(quizTry.getQuiz()));
+        quizTryDTO.setUser(userPreviewDTO.getUserDTO(quizTry.getUser()));
         quizTryDTO.setTimestamp(quizTry.getTimestamp());
         quizTryDTO.setQuestionsCount(quizTry.getQuestionsCount());
         quizTryDTO.setIncorrectAnswerCount(quizTry.getIncorrectAnswerCount());
         quizTryDTO.setRightAnswerCount(quizTry.getRightAnswerCount());
-        quizTryDTO.setTryItemDTOList(new QuizTryItemDTOImpl().getQuizTryItems(quizTry.getTryItems()));
+        quizTryDTO.setTryItemDTOList(quizTryItemDTO.getQuizTryItems(quizTry.getTryItems()));
         return quizTryDTO;
     }
 
