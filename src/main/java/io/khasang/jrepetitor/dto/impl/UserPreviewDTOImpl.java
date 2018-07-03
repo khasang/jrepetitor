@@ -2,11 +2,12 @@ package io.khasang.jrepetitor.dto.impl;
 
 import io.khasang.jrepetitor.dto.UserDTOInterface;
 import io.khasang.jrepetitor.entity.User;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
 public class UserPreviewDTOImpl implements UserDTOInterface {
     private Long id;
     private String name;
@@ -41,7 +42,6 @@ public class UserPreviewDTOImpl implements UserDTOInterface {
 
     public long getId() {
         return id;
-
     }
 
     public void setId(long id) {
