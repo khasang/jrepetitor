@@ -18,13 +18,9 @@ public interface QuestionDTOInterface {
 
     void setType(String type);
 
-    List<ItemDTOInterface> getItems();
+    List<ItemPreviewDTOInterface> getItems();
 
-    void setItems(List<ItemDTOInterface> items);
-
-    QuizDTOInterface getQuiz();
-
-    void setQuiz(QuizDTOInterface quiz);
+    void setItems(List<ItemPreviewDTOInterface> items);
 
     String getExplanation();
 

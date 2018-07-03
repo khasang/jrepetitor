@@ -1,16 +1,22 @@
 package io.khasang.jrepetitor.dto.impl;
 
-import io.khasang.jrepetitor.dto.ItemDTOInterface;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.khasang.jrepetitor.dto.ItemPreviewDTOInterface;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
-import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.entity.Question;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Component
 public class QuestionDTOImpl implements QuestionDTOInterface {
+
+    @JsonIgnore
+    @Autowired
+    protected ItemPreviewDTOimpl itemPreviewDTO;
 
     private Long id;
 
@@ -26,14 +32,15 @@ public class QuestionDTOImpl implements QuestionDTOInterface {
     /**
      * Answer variants
      */
-    private List<ItemDTOInterface> items = new ArrayList<>();
-
-    private QuizDTOInterface quiz;
+    private List<ItemPreviewDTOInterface> items = new ArrayList<>();
 
     /**
      *
      */
     private String explanation;
+
+    public QuestionDTOImpl() {
+    }
 
     @Override
     public Long getId() {
@@ -66,23 +73,13 @@ public class QuestionDTOImpl implements QuestionDTOInterface {
     }
 
     @Override
-    public List<ItemDTOInterface> getItems() {
+    public List<ItemPreviewDTOInterface> getItems() {
         return items;
     }
 
     @Override
-    public void setItems(List<ItemDTOInterface> items) {
+    public void setItems(List<ItemPreviewDTOInterface> items) {
         this.items = items;
-    }
-
-    @Override
-    public QuizDTOInterface getQuiz() {
-        return quiz;
-    }
-
-    @Override
-    public void setQuiz(QuizDTOInterface quiz) {
-        this.quiz = quiz;
     }
 
     @Override
@@ -116,8 +113,9 @@ public class QuestionDTOImpl implements QuestionDTOInterface {
         questionDTO.setId(question.getId());
         questionDTO.setContent(question.getContent());
         questionDTO.setType(question.getType());
-        questionDTO.setItems(new ItemDTOImpl().getItemDTOList(question.getItems()));
+        questionDTO.setItems(itemPreviewDTO.getItemDTOList(question.getItems()));
         questionDTO.setExplanation(question.getExplanation());
         return questionDTO;
     }
+
 }
