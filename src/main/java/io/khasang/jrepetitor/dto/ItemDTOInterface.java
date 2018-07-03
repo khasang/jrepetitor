@@ -1,7 +1,6 @@
 package io.khasang.jrepetitor.dto;
 
 import io.khasang.jrepetitor.entity.Item;
-import io.khasang.jrepetitor.entity.Question;
 
 import java.util.List;
 
@@ -19,12 +18,16 @@ public interface ItemDTOInterface {
 
     void setCorrect(byte correct);
 
-    Question getQuestion();
-
-    void setQuestion(Question question);
-
     List<ItemDTOInterface> getItemDTOList(List<Item> list);
 
     ItemDTOInterface getItemDTO(Item item);
+
+    Item getItem(ItemDTOInterface itemDTOInterface);
+
+    List<Item> getItems(List<ItemDTOInterface> itemDTOInterfaces);
+
+    QuestionPreviewDTOInterface getQuestion();
+
+    void setQuestion(QuestionPreviewDTOInterface question);
 
 }

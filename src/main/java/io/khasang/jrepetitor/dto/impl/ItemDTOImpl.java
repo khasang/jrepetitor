@@ -1,8 +1,10 @@
 package io.khasang.jrepetitor.dto.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.khasang.jrepetitor.dto.ItemDTOInterface;
+import io.khasang.jrepetitor.dto.QuestionPreviewDTOInterface;
 import io.khasang.jrepetitor.entity.Item;
-import io.khasang.jrepetitor.entity.Question;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,6 +12,11 @@ import java.util.List;
 
 @Component
 public class ItemDTOImpl implements ItemDTOInterface {
+
+    @JsonIgnore
+    @Autowired
+    protected QuestionPreviewDTOImpl questionPreviewDTO;
+
     private Long id;
 
     /**
@@ -22,16 +29,10 @@ public class ItemDTOImpl implements ItemDTOInterface {
      */
     private byte correct;
 
-    private Question question;
+    private QuestionPreviewDTOInterface question;
 
     ItemDTOImpl() {
 
-    }
-
-    private ItemDTOImpl(Item item) {
-        id = item.getId();
-        content = item.getContent();
-        correct = item.getCorrect();
     }
 
     @Override
@@ -65,12 +66,12 @@ public class ItemDTOImpl implements ItemDTOInterface {
     }
 
     @Override
-    public Question getQuestion() {
+    public QuestionPreviewDTOInterface getQuestion() {
         return question;
     }
 
     @Override
-    public void setQuestion(Question question) {
+    public void setQuestion(QuestionPreviewDTOInterface question) {
         this.question = question;
     }
 
@@ -79,7 +80,12 @@ public class ItemDTOImpl implements ItemDTOInterface {
         if (item == null) {
             return null;
         }
-        return new ItemDTOImpl(item);
+        ItemDTOImpl itemDTO = new ItemDTOImpl();
+        itemDTO.setId(item.getId());
+        itemDTO.setContent(item.getContent());
+        itemDTO.setCorrect(item.getCorrect());
+        itemDTO.setQuestion(questionPreviewDTO.getQuestion(item.getQuestion()));
+        return itemDTO;
     }
 
     @Override
@@ -95,5 +101,25 @@ public class ItemDTOImpl implements ItemDTOInterface {
             itemDTOList.add(itemDTO);
         }
         return itemDTOList;
+    }
+
+    public Item getItem(ItemDTOInterface itemDTOInterface) {
+        Item item = new Item();
+        item.setId(itemDTOInterface.getId());
+        item.setContent(itemDTOInterface.getContent());
+        item.setCorrect(itemDTOInterface.getCorrect());
+        return item;
+    }
+
+    public List<Item> getItems(List<ItemDTOInterface> itemDTOInterfaces) {
+        List<Item> items = new ArrayList<>();
+        if (itemDTOInterfaces.isEmpty()) {
+            return items;
+        }
+
+        for (ItemDTOInterface itemDTOInterface : itemDTOInterfaces) {
+            items.add(getItem(itemDTOInterface));
+        }
+        return items;
     }
 }
