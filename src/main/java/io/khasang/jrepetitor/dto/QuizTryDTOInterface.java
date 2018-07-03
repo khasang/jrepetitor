@@ -14,9 +14,9 @@ public interface QuizTryDTOInterface {
 
     void setUser(UserDTOInterface user);
 
-    QuizDTOInterface getQuiz();
+    QuizPreviewDTOInterface getQuiz();
 
-    void setQuiz(QuizDTOInterface quiz);
+    void setQuiz(QuizPreviewDTOInterface quiz);
 
     List<QuizTryItemDTOInterface> getTryItemDTOList();
 

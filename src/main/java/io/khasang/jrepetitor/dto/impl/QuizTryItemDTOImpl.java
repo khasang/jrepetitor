@@ -1,9 +1,11 @@
 package io.khasang.jrepetitor.dto.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.khasang.jrepetitor.dto.ItemDTOInterface;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.dto.QuizTryItemDTOInterface;
 import io.khasang.jrepetitor.entity.QuizTryItem;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,6 +13,15 @@ import java.util.List;
 
 @Component
 public class QuizTryItemDTOImpl implements QuizTryItemDTOInterface {
+
+    @JsonIgnore
+    @Autowired
+    private QuestionDTOImpl questionDTO;
+
+    @JsonIgnore
+    @Autowired
+    private ItemDTOImpl itemDTO;
+
     private Long id;
 
     private QuestionDTOInterface question;
@@ -66,8 +77,8 @@ public class QuizTryItemDTOImpl implements QuizTryItemDTOInterface {
         }
         QuizTryItemDTOInterface quizTryItemDTO = new QuizTryItemDTOImpl();
         quizTryItemDTO.setId(quizTryItem.getId());
-        quizTryItemDTO.setQuestion(new QuestionDTOImpl().getQuestionDTO(quizTryItem.getQuestion()));
-        quizTryItemDTO.setItems(new ItemDTOImpl().getItemDTOList(quizTryItem.getSelectedItems()));
+        quizTryItemDTO.setQuestion(questionDTO.getQuestionDTO(quizTryItem.getQuestion()));
+        quizTryItemDTO.setItems(itemDTO.getItemDTOList(quizTryItem.getSelectedItems()));
         quizTryItemDTO.setAnswerIsCorrect(quizTryItem.getAnswerIsCorrect());
         return quizTryItemDTO;
     }
