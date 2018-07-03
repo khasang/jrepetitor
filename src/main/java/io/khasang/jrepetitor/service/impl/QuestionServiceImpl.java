@@ -38,7 +38,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionDTOInterface getQuestionById(long id) {
-        return new QuestionDTOImpl().getQuestionDTO(questionDao.getById(id));
+        return questionDTO.getQuestionDTO(questionDao.getById(id));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class QuestionServiceImpl implements QuestionService {
             return null;
         } else {
             Question deletedQuestion = questionDao.delete(questionDao.getById(id));
-            return new QuestionDTOImpl().getQuestionDTO(deletedQuestion);
+            return questionDTO.getQuestionDTO(deletedQuestion);
         }
     }
 
