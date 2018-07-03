@@ -1,7 +1,7 @@
 package io.khasang.jrepetitor.dto.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.khasang.jrepetitor.dto.ItemDTOInterface;
+import io.khasang.jrepetitor.dto.ItemPreviewDTOInterface;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.dto.QuizTryItemDTOInterface;
 import io.khasang.jrepetitor.entity.QuizTryItem;
@@ -20,13 +20,13 @@ public class QuizTryItemDTOImpl implements QuizTryItemDTOInterface {
 
     @JsonIgnore
     @Autowired
-    private ItemDTOImpl itemDTO;
+    private ItemPreviewDTOimpl itemDTO;
 
     private Long id;
 
     private QuestionDTOInterface question;
 
-    private List<ItemDTOInterface> items;
+    private List<ItemPreviewDTOInterface> items;
 
     private byte answerIsCorrect;
 
@@ -51,12 +51,12 @@ public class QuizTryItemDTOImpl implements QuizTryItemDTOInterface {
     }
 
     @Override
-    public List<ItemDTOInterface> getItems() {
+    public List<ItemPreviewDTOInterface> getItems() {
         return items;
     }
 
     @Override
-    public void setItems(List<ItemDTOInterface> items) {
+    public void setItems(List<ItemPreviewDTOInterface> items) {
         this.items = items;
     }
 

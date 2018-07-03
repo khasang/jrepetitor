@@ -17,9 +17,9 @@ public interface QuizTryItemDTOInterface {
 
     void setQuestion(QuestionDTOInterface question);
 
-    List<ItemDTOInterface> getItems();
+    List<ItemPreviewDTOInterface> getItems();
 
-    void setItems(List<ItemDTOInterface> items);
+    void setItems(List<ItemPreviewDTOInterface> items);
 
     QuizTryItemDTOInterface getQuizTryItem(QuizTryItem quizTryItem);
 
