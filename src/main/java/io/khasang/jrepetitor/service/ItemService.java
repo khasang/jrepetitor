@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.service;
 
 import io.khasang.jrepetitor.dto.ItemDTOInterface;
 import io.khasang.jrepetitor.entity.Item;
-import io.khasang.jrepetitor.model.ItemByQuestionIdRequestWrapper;
+import io.khasang.jrepetitor.model.wrappers.ItemByQuestionIdRequestWrapper;
 
 import java.util.List;
 

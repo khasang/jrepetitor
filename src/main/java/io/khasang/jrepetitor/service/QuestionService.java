@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.service;
 
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.entity.Question;
-import io.khasang.jrepetitor.model.QuestionByQuizIdRequestWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuestionByQuizIdRequestWrapper;
 
 import java.util.List;
 

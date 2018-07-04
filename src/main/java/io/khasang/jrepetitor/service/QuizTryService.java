@@ -1,7 +1,7 @@
 package io.khasang.jrepetitor.service;
 
 import io.khasang.jrepetitor.dto.QuizTryDTOInterface;
-import io.khasang.jrepetitor.model.UserTryWrapper;
+import io.khasang.jrepetitor.model.wrappers.UserTryWrapper;
 
 import java.util.List;
 

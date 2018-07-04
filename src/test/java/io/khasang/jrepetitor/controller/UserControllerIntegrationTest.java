@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
-import io.khasang.jrepetitor.model.CreationUserStatusResponseWrapper;
+import io.khasang.jrepetitor.model.wrappers.CreationUserStatusResponseWrapper;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;

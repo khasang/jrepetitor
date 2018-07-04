@@ -4,9 +4,9 @@ import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.entity.QuizTry;
 import io.khasang.jrepetitor.entity.QuizTryItem;
 import io.khasang.jrepetitor.entity.User;
-import io.khasang.jrepetitor.model.QuestionAnswerWrapper;
-import io.khasang.jrepetitor.model.SelectedItemWrapper;
-import io.khasang.jrepetitor.model.UserTryWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuestionAnswerWrapper;
+import io.khasang.jrepetitor.model.wrappers.SelectedItemWrapper;
+import io.khasang.jrepetitor.model.wrappers.UserTryWrapper;
 
 import org.junit.Before;
 import org.junit.Test;

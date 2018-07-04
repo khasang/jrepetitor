@@ -8,7 +8,7 @@ import io.khasang.jrepetitor.dto.impl.QuizDTOImpl;
 import io.khasang.jrepetitor.dto.impl.QuizPreviewDTOImpl;
 import io.khasang.jrepetitor.entity.Group;
 import io.khasang.jrepetitor.entity.Quiz;
-import io.khasang.jrepetitor.model.QuizByGroupIdRequestWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuizByGroupIdRequestWrapper;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

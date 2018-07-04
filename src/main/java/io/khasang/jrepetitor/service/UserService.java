@@ -4,8 +4,8 @@ import io.khasang.jrepetitor.dto.UserDTOInterface;
 //import io.khasang.jrepetitor.dto.impl.UserDTO;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
-import io.khasang.jrepetitor.model.CreationProfileStatusResponseWrapper;
-import io.khasang.jrepetitor.model.CreationUserStatusResponseWrapper;
+import io.khasang.jrepetitor.model.wrappers.CreationProfileStatusResponseWrapper;
+import io.khasang.jrepetitor.model.wrappers.CreationUserStatusResponseWrapper;
 
 import java.util.List;
 

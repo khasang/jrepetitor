@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
-import io.khasang.jrepetitor.model.QuizByGroupIdRequestWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuizByGroupIdRequestWrapper;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,7 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.dto.QuizTryDTOInterface;
 
-import io.khasang.jrepetitor.model.UserTryWrapper;
+import io.khasang.jrepetitor.model.wrappers.UserTryWrapper;
 import io.khasang.jrepetitor.service.QuizTryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

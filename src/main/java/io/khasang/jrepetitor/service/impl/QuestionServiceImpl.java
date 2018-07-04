@@ -6,7 +6,7 @@ import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.dto.impl.QuestionDTOImpl;
 import io.khasang.jrepetitor.entity.Question;
 import io.khasang.jrepetitor.entity.Quiz;
-import io.khasang.jrepetitor.model.QuestionByQuizIdRequestWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuestionByQuizIdRequestWrapper;
 import io.khasang.jrepetitor.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

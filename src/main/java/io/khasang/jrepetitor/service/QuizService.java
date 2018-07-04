@@ -3,7 +3,7 @@ package io.khasang.jrepetitor.service;
 import io.khasang.jrepetitor.dto.QuizDTOInterface;
 import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
 import io.khasang.jrepetitor.entity.Quiz;
-import io.khasang.jrepetitor.model.QuizByGroupIdRequestWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuizByGroupIdRequestWrapper;
 
 import java.util.List;
 
