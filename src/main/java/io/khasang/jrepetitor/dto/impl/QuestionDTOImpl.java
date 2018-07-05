@@ -3,6 +3,7 @@ package io.khasang.jrepetitor.dto.impl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.khasang.jrepetitor.dto.ItemPreviewDTOInterface;
 import io.khasang.jrepetitor.dto.QuestionDTOInterface;
+import io.khasang.jrepetitor.dto.QuizPreviewDTOInterface;
 import io.khasang.jrepetitor.entity.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,10 @@ public class QuestionDTOImpl implements QuestionDTOInterface {
     @JsonIgnore
     @Autowired
     protected ItemPreviewDTOimpl itemPreviewDTO;
+
+    @JsonIgnore
+    @Autowired
+    protected QuizPreviewDTOImpl quizPreviewDTO;
 
     private Long id;
 
@@ -38,6 +43,8 @@ public class QuestionDTOImpl implements QuestionDTOInterface {
      *
      */
     private String explanation;
+
+    private QuizPreviewDTOInterface quiz;
 
     public QuestionDTOImpl() {
     }
@@ -93,6 +100,16 @@ public class QuestionDTOImpl implements QuestionDTOInterface {
     }
 
     @Override
+    public QuizPreviewDTOInterface getQuizPreview() {
+        return quiz;
+    }
+
+    @Override
+    public void setQuizPreview(QuizPreviewDTOInterface quizPreview) {
+        this.quiz = quizPreview;
+    }
+
+    @Override
     public List<QuestionDTOInterface> getQuestionDTOList(List<Question> list) {
         List<QuestionDTOInterface> questionDTO = new ArrayList<>();
         if (list.isEmpty()) {
@@ -114,6 +131,7 @@ public class QuestionDTOImpl implements QuestionDTOInterface {
         questionDTO.setContent(question.getContent());
         questionDTO.setType(question.getType());
         questionDTO.setItems(itemPreviewDTO.getItemDTOList(question.getItems()));
+        questionDTO.setQuizPreview(quizPreviewDTO.getPreviewDTO(question.getQuiz()));
         questionDTO.setExplanation(question.getExplanation());
         return questionDTO;
     }
