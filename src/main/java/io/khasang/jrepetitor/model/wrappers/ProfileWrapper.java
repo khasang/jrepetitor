@@ -1,5 +1,7 @@
 package io.khasang.jrepetitor.model.wrappers;
 
+import io.khasang.jrepetitor.entity.Profile;
+
 public class ProfileWrapper {
     private String name;
     private String middleName;
@@ -45,5 +47,15 @@ public class ProfileWrapper {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Profile getProfile() {
+        Profile profile = new Profile();
+        profile.setName(name);
+        profile.setMiddlename(middleName);
+        profile.setSurname(surname);
+        profile.setEmail(email);
+        profile.setPhoneNumber(phoneNumber);
+        return profile;
     }
 }

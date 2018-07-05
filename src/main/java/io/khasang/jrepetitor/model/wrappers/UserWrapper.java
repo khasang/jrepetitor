@@ -1,11 +1,12 @@
 package io.khasang.jrepetitor.model.wrappers;
 
+import io.khasang.jrepetitor.entity.User;
+
 public class UserWrapper {
 
     private String name;
     private String login;
     private String password;
-    private String roleName;
     private ProfileWrapper profile;
 
     public String getName() {
@@ -32,19 +33,24 @@ public class UserWrapper {
         this.password = password;
     }
 
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
     public ProfileWrapper getProfile() {
         return profile;
     }
 
     public void setProfile(ProfileWrapper profile) {
         this.profile = profile;
+    }
+
+    public User getUser() {
+        User user = new User();
+        user.setName(name);
+        user.setLogin(login);
+        user.setPassword(password);
+        if (profile != null) {
+            user.setProfile(profile.getProfile());
+        } else {
+            user.setProfile(null);
+        }
+        return user;
     }
 }
