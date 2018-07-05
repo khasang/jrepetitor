@@ -1,17 +1,15 @@
 package io.khasang.jrepetitor.model.wrappers;
 
-import io.khasang.jrepetitor.entity.Item;
-
 public class ItemByQuestionIdRequestWrapper {
     private Long Id;
 
-    private Item item;
+    private ItemWrapper item;
 
-    public Item getItem() {
+    public ItemWrapper getItem() {
         return item;
     }
 
-    public void setItem(Item item) {
+    public void setItem(ItemWrapper item) {
         this.item = item;
     }
 

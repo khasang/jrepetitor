@@ -1,11 +1,9 @@
 package io.khasang.jrepetitor.model.wrappers;
 
-import io.khasang.jrepetitor.entity.Quiz;
-
 public class QuizByGroupIdRequestWrapper {
     private Long Id;
 
-    private Quiz quiz;
+    private QuizWrapper quiz;
 
     public QuizByGroupIdRequestWrapper() {
     }
@@ -18,11 +16,11 @@ public class QuizByGroupIdRequestWrapper {
         Id = id;
     }
 
-    public Quiz getQuiz() {
+    public QuizWrapper getQuiz() {
         return quiz;
     }
 
-    public void setQuiz(Quiz quiz) {
+    public void setQuiz(QuizWrapper quiz) {
         this.quiz = quiz;
     }
 }

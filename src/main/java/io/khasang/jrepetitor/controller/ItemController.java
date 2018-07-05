@@ -18,10 +18,15 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ItemDTOInterface addItem(@RequestBody Item item) {
-        return itemService.addItem(item);
+    public ResponseEntity<ItemDTOInterface> addByQuestionId(@RequestBody ItemByQuestionIdRequestWrapper itemByQuestionIdRequestWrapper) {
+        ItemDTOInterface itemDTO = itemService.addByQuestionId(itemByQuestionIdRequestWrapper);
+        if (itemDTO == null) {
+            return new ResponseEntity<>(itemDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(itemDTO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
@@ -45,17 +50,6 @@ public class ItemController {
     @ResponseBody
     public ResponseEntity<ItemDTOInterface> deleteItem(@RequestParam(value = "id") String id) {
         ItemDTOInterface itemDTO = itemService.deleteItem(Long.parseLong(id));
-        if (itemDTO == null) {
-            return new ResponseEntity<>(itemDTO, HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>(itemDTO, HttpStatus.OK);
-        }
-    }
-
-    @RequestMapping(value = "/add_by_question_id", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    @ResponseBody
-    public ResponseEntity<ItemDTOInterface> addByQuestionId(@RequestBody ItemByQuestionIdRequestWrapper itemByQuestionIdRequestWrapper) {
-        ItemDTOInterface itemDTO = itemService.addByQuestionId(itemByQuestionIdRequestWrapper);
         if (itemDTO == null) {
             return new ResponseEntity<>(itemDTO, HttpStatus.NOT_FOUND);
         } else {

@@ -9,6 +9,7 @@ import io.khasang.jrepetitor.dto.impl.QuizPreviewDTOImpl;
 import io.khasang.jrepetitor.entity.Group;
 import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.model.wrappers.QuizByGroupIdRequestWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuizWrapper;
 import io.khasang.jrepetitor.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,7 +70,9 @@ public class QuizServiceImpl implements QuizService {
         if (group == null) {
             return null;
         }
-        Quiz quiz = quizDao.create(quizByGroupIdRequestWrapper.getQuiz());
+        QuizWrapper inputQuizWrapper = quizByGroupIdRequestWrapper.getQuiz();
+        Quiz inputQuiz = inputQuizWrapper.getQuiz();
+        Quiz quiz = quizDao.create(inputQuiz);
         group.addQuiz(quiz);
         quiz.setGroup(group);
         quizDao.update(quiz);

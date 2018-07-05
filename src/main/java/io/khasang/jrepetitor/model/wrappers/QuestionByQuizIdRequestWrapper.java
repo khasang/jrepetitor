@@ -1,12 +1,10 @@
 package io.khasang.jrepetitor.model.wrappers;
 
-import io.khasang.jrepetitor.entity.Question;
-
 public class QuestionByQuizIdRequestWrapper {
 
     private Long Id;
 
-    private Question question;
+    private QuestionWrapper question;
 
     public Long getId() {
         return Id;
@@ -16,11 +14,11 @@ public class QuestionByQuizIdRequestWrapper {
         Id = id;
     }
 
-    public Question getQuestion() {
+    public QuestionWrapper getQuestion() {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(QuestionWrapper question) {
         this.question = question;
     }
 }

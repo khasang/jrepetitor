@@ -7,6 +7,7 @@ import io.khasang.jrepetitor.dto.impl.QuestionDTOImpl;
 import io.khasang.jrepetitor.entity.Question;
 import io.khasang.jrepetitor.entity.Quiz;
 import io.khasang.jrepetitor.model.wrappers.QuestionByQuizIdRequestWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuestionWrapper;
 import io.khasang.jrepetitor.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,11 +58,12 @@ public class QuestionServiceImpl implements QuestionService {
         if (quiz == null) {
             return null;
         }
-
-        Question question = questionDao.create(questionByQuizIdRequestWrapper.getQuestion());
-        quiz.addQuestion(question);
+        QuestionWrapper questionWrapper = questionByQuizIdRequestWrapper.getQuestion();
+        Question question = questionWrapper.getQuestion();
+        Question createdQuestion = questionDao.create(question);
+        quiz.addQuestion(createdQuestion);
         quizDao.update(quiz);
-        question.setQuiz(quiz);
+        createdQuestion.setQuiz(quiz);
         questionDao.updateQuestion(question);
         return questionDTO.getQuestionDTO(question);
     }

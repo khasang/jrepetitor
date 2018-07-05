@@ -20,8 +20,13 @@ public class QuestionController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public QuestionDTOInterface addQuestion(@RequestBody Question question) {
-        return questionService.addQuestion(question);
+    public ResponseEntity<QuestionDTOInterface> addQuestionByQuizID(@RequestBody QuestionByQuizIdRequestWrapper question) {
+        QuestionDTOInterface questionDTO = questionService.addQuestionByQuizId(question);
+        if (questionDTO == null) {
+            return new ResponseEntity<>(questionDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(questionDTO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
@@ -51,16 +56,4 @@ public class QuestionController {
             return new ResponseEntity<>(questionDTO, HttpStatus.OK);
         }
     }
-
-    @RequestMapping(value = "/add_by_quiz_id", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    @ResponseBody
-    public ResponseEntity<QuestionDTOInterface> addQuestionByQuizID(@RequestBody QuestionByQuizIdRequestWrapper question) {
-        QuestionDTOInterface questionDTO = questionService.addQuestionByQuizId(question);
-        if (questionDTO == null) {
-            return new ResponseEntity<>(questionDTO, HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity<>(questionDTO, HttpStatus.OK);
-        }
-    }
-
 }
