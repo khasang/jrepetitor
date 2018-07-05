@@ -6,9 +6,8 @@ import io.khasang.jrepetitor.dto.impl.ProfileDTOImpl;
 import io.khasang.jrepetitor.dto.impl.UserDTOImpl;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
+import io.khasang.jrepetitor.model.wrappers.*;
 import io.khasang.jrepetitor.service.UserService;
-import io.khasang.jrepetitor.model.wrappers.CreationProfileStatusResponseWrapper;
-import io.khasang.jrepetitor.model.wrappers.CreationUserStatusResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +27,7 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public User addUser(@RequestBody User user) {
+    public User addUser(@RequestBody UserWrapperWithPresetRole user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userService.addUser(user);
     }
@@ -77,7 +76,7 @@ public class UserController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ResponseEntity<CreationProfileStatusResponseWrapper> setProfile(@RequestBody Profile profile) {
+    public ResponseEntity<CreationProfileStatusResponseWrapper> setProfile(@RequestBody ProfileWrapper profile) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         if (currentPrincipalName.equals("anonymousUser")) {
@@ -90,7 +89,7 @@ public class UserController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public ResponseEntity<CreationUserStatusResponseWrapper> createUser(@RequestBody User user) {
+    public ResponseEntity<CreationUserStatusResponseWrapper> createUser(@RequestBody UserWrapper user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         CreationUserStatusResponseWrapper creationUserStatusResponseWrapper = userService.createUser(user);
         return ResponseEntity.ok(creationUserStatusResponseWrapper);

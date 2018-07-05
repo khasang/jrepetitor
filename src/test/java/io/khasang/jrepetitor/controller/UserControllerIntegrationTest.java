@@ -2,6 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
+import io.khasang.jrepetitor.model.wrappers.CreationProfileStatusResponseWrapper;
 import io.khasang.jrepetitor.model.wrappers.CreationUserStatusResponseWrapper;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
@@ -125,7 +126,6 @@ public class UserControllerIntegrationTest {
         }
     }
 
-
     @Test
     public void getAllUsers() {
         User firstUser = createUser("test1",
@@ -220,10 +220,8 @@ public class UserControllerIntegrationTest {
 
     }
 
-
-    //correct only if user not authorized
     @Test
-    public void authorized() {
+    public void authorizedAnonymousTest() {
         RestTemplate template = new RestTemplate();
         ResponseEntity<String> responseEntity = template.exchange(
                 ROOT + AUTHORIZED,
@@ -235,9 +233,39 @@ public class UserControllerIntegrationTest {
         assertEquals(responseEntity.getBody(), "anonymousUser");
     }
 
-    //correct only if user not authorized
     @Test
-    public void getProfile() {
+    public void authorizedUserTest() {
+        User user = createUser("test",
+                "test",
+                "test",
+                "test",
+                "test",
+                "test@domain.zone",
+                "1234567890",
+                "ROLE_USER",
+                ROOT,
+                ADD);
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        String sessionId = formAuth("test", "test");
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("Cookie", "JSESSIONID=" + sessionId);
+        HttpEntity requestEntity = new HttpEntity(String.class, requestHeaders);
+        ResponseEntity responseEntity = restTemplate.exchange(
+                ROOT + AUTHORIZED,
+                HttpMethod.GET,
+                requestEntity,
+                String.class
+        );
+
+        assertEquals(responseEntity.getStatusCodeValue(), 200);
+        assertEquals(user.getName(), (String) responseEntity.getBody());
+        deleteFromDB(user);
+    }
+
+    @Test
+    public void getProfileUnauthorized() {
         try {
             RestTemplate template = new RestTemplate();
             ResponseEntity<Profile> responseForGetUser = template.exchange(
@@ -251,9 +279,45 @@ public class UserControllerIntegrationTest {
         }
     }
 
-    //correct only if user not authorized
     @Test
-    public void setProfile() {
+    public void getProfileAuthorized() {
+        User user = createUser("test",
+                "test",
+                "test",
+                "test",
+                "test",
+                "test@domain.zone",
+                "1234567890",
+                "ROLE_USER",
+                ROOT,
+                ADD);
+
+        RestTemplate restTemplate = new RestTemplate();
+        String sessionId = formAuth("test", "test");
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("Cookie", "JSESSIONID=" + sessionId);
+        HttpEntity requestEntity = new HttpEntity(requestHeaders);
+
+        ResponseEntity<Profile> responseForGetUser = restTemplate.exchange(
+                ROOT + PROFILE,
+                HttpMethod.GET,
+                requestEntity,
+                Profile.class
+        );
+
+        Profile returnedProfile = responseForGetUser.getBody();
+        Profile existProfile = user.getProfile();
+        assertEquals(responseForGetUser.getStatusCodeValue(), 200);
+        assertEquals(returnedProfile.getEmail(), existProfile.getEmail());
+        assertEquals(returnedProfile.getPhoneNumber(), existProfile.getPhoneNumber());
+        assertEquals(returnedProfile.getName(), existProfile.getName());
+        assertEquals(returnedProfile.getSurname(), existProfile.getSurname());
+        assertEquals(returnedProfile.getMiddlename(), existProfile.getMiddlename());
+        deleteFromDB(user);
+    }
+
+    @Test
+    public void setProfileUserUnauthorized() {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
@@ -271,6 +335,46 @@ public class UserControllerIntegrationTest {
         } catch (HttpClientErrorException e) {
             assertEquals(e.getMessage(), "401 null");
         }
+    }
+
+    @Test
+    public void setProfileUserAuthorized() {
+        User user = createUser("test",
+                "test",
+                "test",
+                "test",
+                "test",
+                "test@domain.zone",
+                "1234567890",
+                "ROLE_USER",
+                ROOT,
+                ADD);
+
+        Profile newProfile = new Profile();
+        newProfile.setName("changed_name");
+        newProfile.setSurname("changed_surname");
+        newProfile.setMiddlename("changed_middle_name");
+        newProfile.setPhoneNumber("changed_phone");
+        newProfile.setEmail("changed_email");
+
+        RestTemplate restTemplate = new RestTemplate();
+        String sessionId = formAuth("test", "test");
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("Cookie", "JSESSIONID=" + sessionId);
+        HttpEntity requestEntity = new HttpEntity(newProfile, requestHeaders);
+
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<CreationProfileStatusResponseWrapper> responseEntity = template.exchange(
+                ROOT + PROFILE,
+                HttpMethod.POST,
+                requestEntity,
+                CreationProfileStatusResponseWrapper.class
+        );
+
+        assertEquals(responseEntity.getBody().getPhoneExist(), false);
+        assertEquals(responseEntity.getBody().getEmailExist(), false);
+        assertEquals(responseEntity.getStatusCodeValue(), 200);
+        deleteFromDB(user);
     }
 
     private User deleteFromDB(User user) {
@@ -300,5 +404,4 @@ public class UserControllerIntegrationTest {
         List<User> list = responseEntity.getBody();
         return list;
     }
-
 }

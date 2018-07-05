@@ -6,9 +6,8 @@ import io.khasang.jrepetitor.dto.UserDTOInterface;
 import io.khasang.jrepetitor.dto.impl.UserDTOImpl;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
+import io.khasang.jrepetitor.model.wrappers.*;
 import io.khasang.jrepetitor.service.UserService;
-import io.khasang.jrepetitor.model.wrappers.CreationProfileStatusResponseWrapper;
-import io.khasang.jrepetitor.model.wrappers.CreationUserStatusResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +27,9 @@ public class UserServiceImpl implements UserService {
     private ProfileDao profileDao;
 
     @Override
-    public User addUser(User user) {
-        return userDao.create(user);
+    public User addUser(UserWrapperWithPresetRole user) {
+        User createdUser = user.getUser();
+        return userDao.create(createdUser);
     }
 
     @Override
@@ -63,20 +63,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public CreationUserStatusResponseWrapper createUser(User user) {
+    public CreationUserStatusResponseWrapper createUser(UserWrapper user) {
+        User createdUser = user.getUser();
+        createdUser.setRoleName("ROLE_USER");
         CreationUserStatusResponseWrapper creationUserStatusResponseWrapper = new CreationUserStatusResponseWrapper();
         creationUserStatusResponseWrapper.setEmailExist(checkEmailExist(user.getProfile().getEmail()));
         creationUserStatusResponseWrapper.setLoginExist(checkLogin(user.getLogin()));
         creationUserStatusResponseWrapper.setPhoneExist(checkPhoneExist(user.getProfile().getPhoneNumber()));
         if (creationUserStatusResponseWrapper.isOk()) {
-            addUser(user);
+            userDao.create(createdUser);
             return creationUserStatusResponseWrapper;
         }
         return creationUserStatusResponseWrapper;
     }
 
     @Override
-    public CreationProfileStatusResponseWrapper updateProfile(String userName, Profile profile) {
+    public CreationProfileStatusResponseWrapper updateProfile(String userName, ProfileWrapper profile) {
         User user = userDao.getUserByLogin(userName);
         CreationProfileStatusResponseWrapper creationProfileStatusResponseWrapper = new CreationProfileStatusResponseWrapper();
         creationProfileStatusResponseWrapper.setEmailExist(checkEmailExist(profile.getEmail()));
@@ -85,7 +87,7 @@ public class UserServiceImpl implements UserService {
             Profile updatedProfile = user.getProfile();
             updatedProfile.setName(profile.getName());
             updatedProfile.setSurname(profile.getSurname());
-            updatedProfile.setMiddlename(profile.getMiddlename());
+            updatedProfile.setMiddlename(profile.getMiddleName());
             updatedProfile.setPhoneNumber(profile.getPhoneNumber());
             updatedProfile.setEmail(profile.getEmail());
             userDao.updateUser(user);

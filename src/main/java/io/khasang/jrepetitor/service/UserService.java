@@ -4,8 +4,7 @@ import io.khasang.jrepetitor.dto.UserDTOInterface;
 //import io.khasang.jrepetitor.dto.impl.UserDTO;
 import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
-import io.khasang.jrepetitor.model.wrappers.CreationProfileStatusResponseWrapper;
-import io.khasang.jrepetitor.model.wrappers.CreationUserStatusResponseWrapper;
+import io.khasang.jrepetitor.model.wrappers.*;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public interface UserService {
      * @param user = new user for creation in DB
      * @return created cat
      */
-    User addUser(User user);
+    User addUser(UserWrapperWithPresetRole user);
 
     /**
      * method for receiving all users
@@ -63,7 +62,7 @@ public interface UserService {
      * @param user = User  for update
      * @return operation state class
      */
-    CreationUserStatusResponseWrapper createUser(User user);
+    CreationUserStatusResponseWrapper createUser(UserWrapper user);
 
     /**
      * method for update user
@@ -72,7 +71,7 @@ public interface UserService {
      * @param profile  = new profile state
      * @return operations state class
      */
-    CreationProfileStatusResponseWrapper updateProfile(String userName, Profile profile);
+    CreationProfileStatusResponseWrapper updateProfile(String userName, ProfileWrapper profile);
 
     /**
      * method for check phone existing
