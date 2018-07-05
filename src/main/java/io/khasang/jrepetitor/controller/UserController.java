@@ -27,7 +27,7 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public User addUser(@RequestBody UserWrapperWithPresetRole user) {
+    public UserDTOInterface addUser(@RequestBody UserWrapperWithPresetRole user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userService.addUser(user);
     }

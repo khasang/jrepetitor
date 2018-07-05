@@ -1,8 +1,6 @@
 package io.khasang.jrepetitor.service;
 
 import io.khasang.jrepetitor.dto.UserDTOInterface;
-//import io.khasang.jrepetitor.dto.impl.UserDTO;
-import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.model.wrappers.*;
 
@@ -15,7 +13,7 @@ public interface UserService {
      * @param user = new user for creation in DB
      * @return created cat
      */
-    User addUser(UserWrapperWithPresetRole user);
+    UserDTOInterface addUser(UserWrapperWithPresetRole user);
 
     /**
      * method for receiving all users

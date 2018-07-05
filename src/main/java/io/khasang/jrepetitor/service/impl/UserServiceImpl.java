@@ -9,6 +9,7 @@ import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.model.wrappers.*;
 import io.khasang.jrepetitor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,9 +28,9 @@ public class UserServiceImpl implements UserService {
     private ProfileDao profileDao;
 
     @Override
-    public User addUser(UserWrapperWithPresetRole user) {
+    public UserDTOInterface addUser(UserWrapperWithPresetRole user) {
         User createdUser = user.getUser();
-        return userDao.create(createdUser);
+        return userDTO.getUserDTO(userDao.create(createdUser));
     }
 
     @Override
