@@ -2,6 +2,7 @@ package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.dto.GroupDTOInterface;
 import io.khasang.jrepetitor.entity.Group;
+import io.khasang.jrepetitor.model.wrappers.GroupWrapper;
 import io.khasang.jrepetitor.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ public class GroupController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
     @ResponseBody
-    public Group addGroup(@RequestBody Group group) {
+    public Group addGroup(@RequestBody GroupWrapper group) {
         return groupService.addGroup(group);
     }
 

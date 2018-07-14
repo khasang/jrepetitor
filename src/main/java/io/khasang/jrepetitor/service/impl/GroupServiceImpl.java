@@ -4,6 +4,7 @@ import io.khasang.jrepetitor.dao.GroupDao;
 import io.khasang.jrepetitor.dto.GroupDTOInterface;
 import io.khasang.jrepetitor.dto.impl.GroupDTOImpl;
 import io.khasang.jrepetitor.entity.Group;
+import io.khasang.jrepetitor.model.wrappers.GroupWrapper;
 import io.khasang.jrepetitor.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,10 @@ public class GroupServiceImpl implements GroupService {
     private GroupDTOImpl groupDTO;
 
     @Override
-    public Group addGroup(Group group) {
-        return groupDao.create(group);
+    public Group addGroup(GroupWrapper group) {
+        Group createdGroup = new Group();
+        createdGroup.setName(group.getName());
+        return groupDao.create(createdGroup);
     }
 
     @Override
