@@ -4,18 +4,20 @@ import io.khasang.jrepetitor.entity.Profile;
 import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.model.wrappers.CreationProfileStatusResponseWrapper;
 import io.khasang.jrepetitor.model.wrappers.CreationUserStatusResponseWrapper;
+import io.khasang.jrepetitor.model.wrappers.ProfileWrapper;
+import io.khasang.jrepetitor.model.wrappers.UserWrapperWithPresetRole;
+import io.khasang.jrepetitor.util.TestUtils;
 import org.junit.Test;
+
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import static io.khasang.jrepetitor.util.TestUtils.*;
-
 import java.util.List;
 
 import static org.junit.Assert.*;
-
+import static io.khasang.jrepetitor.util.TestUtils.*;
 
 public class UserControllerIntegrationTest {
     private static final String ROOT = "http://localhost:8080/users";
@@ -35,7 +37,7 @@ public class UserControllerIntegrationTest {
 
     @Test
     public void addUserAndCheck() {
-        User user = createUser("test",
+        User user = TestUtils.createUser("test",
                 "test",
                 "test",
                 "test",
@@ -56,18 +58,30 @@ public class UserControllerIntegrationTest {
                 user.getId()
         );
 
-        assertEquals("OK", responseEntity.getStatusCode().getReasonPhrase());
+        assertEquals(responseEntity.getStatusCodeValue(), 200);
 
         User receivedUser = responseEntity.getBody();
-        assertNotNull(receivedUser);
-        if (receivedUser != null) {
-            deleteFromDB(receivedUser);
-        }
+        Profile profile = user.getProfile();
+        Profile receivedProfile = receivedUser.getProfile();
+
+
+        assertEquals(user.getId(), receivedUser.getId());
+        assertEquals(user.getName(), receivedUser.getName());
+        assertEquals(user.getLogin(), receivedUser.getLogin());
+        assertEquals(user.getRoleName(), receivedUser.getRoleName());
+        assertEquals(profile.getId(), receivedProfile.getId());
+        assertEquals(profile.getName(), receivedProfile.getName());
+        assertEquals(profile.getSurname(), receivedProfile.getSurname());
+        assertEquals(profile.getMiddleName(), receivedProfile.getMiddleName());
+        assertEquals(profile.getPhoneNumber(), receivedProfile.getPhoneNumber());
+        assertEquals(profile.getEmail(), receivedProfile.getEmail());
+
+        deleteFromDB(receivedUser);
     }
 
-    @Test()
+    @Test
     public void deleteUser() {
-        User user = createUser("test",
+        User user = TestUtils.createUser("test",
                 "test",
                 "test",
                 "test",
@@ -90,11 +104,23 @@ public class UserControllerIntegrationTest {
         assertEquals(200, responseEntity.getStatusCodeValue());
 
         User deletedUser = responseEntity.getBody();
-        assertNotNull(deletedUser);
+        Profile deletedUserProfile = deletedUser.getProfile();
+        Profile profile = user.getProfile();
+
+
+        assertEquals(user.getId(), deletedUser.getId());
+        assertEquals(user.getName(), deletedUser.getName());
+        assertEquals(user.getLogin(), deletedUser.getLogin());
+        assertEquals(user.getRoleName(), deletedUser.getRoleName());
+        assertEquals(profile.getId(), deletedUserProfile.getId());
+        assertEquals(profile.getName(), deletedUserProfile.getName());
+        assertEquals(profile.getSurname(), deletedUserProfile.getSurname());
+        assertEquals(profile.getMiddleName(), deletedUserProfile.getMiddleName());
+        assertEquals(profile.getPhoneNumber(), deletedUserProfile.getPhoneNumber());
+        assertEquals(profile.getEmail(), deletedUserProfile.getEmail());
     }
 
-
-    @Test()
+    @Test
     public void deleteNotExistingUser() {
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -110,7 +136,7 @@ public class UserControllerIntegrationTest {
         }
     }
 
-    @Test()
+    @Test
     public void getByIdNotExistingUser() {
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -150,9 +176,35 @@ public class UserControllerIntegrationTest {
                 ADD);
 
         List<User> list = returnAllUsers();
+        User receivedUser1 = list.get(0);
+        Profile firstUserProfile = firstUser.getProfile();
+        Profile receivedUser1Profile = receivedUser1.getProfile();
 
-        assertNotNull(list.get(0));
-        assertNotNull(list.get(1));
+        assertEquals(firstUser.getId(), receivedUser1.getId());
+        assertEquals(firstUser.getName(), receivedUser1.getName());
+        assertEquals(firstUser.getLogin(), receivedUser1.getLogin());
+        assertEquals(firstUser.getRoleName(), receivedUser1.getRoleName());
+        assertEquals(firstUserProfile.getId(), receivedUser1Profile.getId());
+        assertEquals(firstUserProfile.getName(), receivedUser1Profile.getName());
+        assertEquals(firstUserProfile.getSurname(), receivedUser1Profile.getSurname());
+        assertEquals(firstUserProfile.getMiddleName(), receivedUser1Profile.getMiddleName());
+        assertEquals(firstUserProfile.getPhoneNumber(), receivedUser1Profile.getPhoneNumber());
+        assertEquals(firstUserProfile.getEmail(), receivedUser1Profile.getEmail());
+
+        User receivedUser2 = list.get(1);
+        Profile secondUserProfile = secondUser.getProfile();
+        Profile receivedUser2Profile = receivedUser2.getProfile();
+
+        assertEquals(secondUser.getId(), receivedUser2.getId());
+        assertEquals(secondUser.getName(), receivedUser2.getName());
+        assertEquals(secondUser.getLogin(), receivedUser2.getLogin());
+        assertEquals(secondUser.getRoleName(), receivedUser2.getRoleName());
+        assertEquals(secondUserProfile.getId(), receivedUser2Profile.getId());
+        assertEquals(secondUserProfile.getName(), receivedUser2Profile.getName());
+        assertEquals(secondUserProfile.getSurname(), receivedUser2Profile.getSurname());
+        assertEquals(secondUserProfile.getMiddleName(), receivedUser2Profile.getMiddleName());
+        assertEquals(secondUserProfile.getPhoneNumber(), receivedUser2Profile.getPhoneNumber());
+        assertEquals(secondUserProfile.getEmail(), receivedUser2Profile.getEmail());
 
         deleteFromDB(firstUser);
         deleteFromDB(secondUser);
@@ -161,18 +213,20 @@ public class UserControllerIntegrationTest {
     @Test
     public void createUserTest() {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        UserWrapperWithPresetRole userWrapper = new UserWrapperWithPresetRole();
+        ProfileWrapper profileWrapper = new ProfileWrapper();
+        userWrapper.setName("user");
+        userWrapper.setLogin("user");
+        userWrapper.setPassword("user_pass");
+        userWrapper.setRoleName("ROLE_USER");
+        profileWrapper.setEmail("user_email");
+        profileWrapper.setMiddleName("middle_name");
+        profileWrapper.setName("user");
+        profileWrapper.setPhoneNumber("phone_number");
+        profileWrapper.setSurname("user_surname");
+        userWrapper.setProfile(profileWrapper);
 
-        User user = prefillUser("test1",
-                "test",
-                "test",
-                "test",
-                "test",
-                "test1@domain.zone",
-                "12345678901",
-                "ROLE_USER");
-
-        HttpEntity entity = new HttpEntity(user, headers);
+        HttpEntity entity = new HttpEntity(userWrapper, headers);
 
         RestTemplate template = new RestTemplate();
 
@@ -206,9 +260,9 @@ public class UserControllerIntegrationTest {
         //remove test user from db
         User searchedUser = null;
         for (User currentUser : users) {
-            if (currentUser.getLogin().equals(user.getLogin()) &&
-                    currentUser.getProfile().getPhoneNumber().equals(user.getProfile().getPhoneNumber()) &&
-                    currentUser.getProfile().getEmail().equals(user.getProfile().getEmail())) {
+            if (currentUser.getLogin().equals(userWrapper.getLogin()) &&
+                    currentUser.getProfile().getPhoneNumber().equals(userWrapper.getProfile().getPhoneNumber()) &&
+                    currentUser.getProfile().getEmail().equals(userWrapper.getProfile().getEmail())) {
                 searchedUser = currentUser;
             }
         }
@@ -312,7 +366,7 @@ public class UserControllerIntegrationTest {
         assertEquals(returnedProfile.getPhoneNumber(), existProfile.getPhoneNumber());
         assertEquals(returnedProfile.getName(), existProfile.getName());
         assertEquals(returnedProfile.getSurname(), existProfile.getSurname());
-        assertEquals(returnedProfile.getMiddlename(), existProfile.getMiddlename());
+        assertEquals(returnedProfile.getMiddleName(), existProfile.getMiddleName());
         deleteFromDB(user);
     }
 
@@ -353,7 +407,7 @@ public class UserControllerIntegrationTest {
         Profile newProfile = new Profile();
         newProfile.setName("changed_name");
         newProfile.setSurname("changed_surname");
-        newProfile.setMiddlename("changed_middle_name");
+        newProfile.setMiddleName("changed_middle_name");
         newProfile.setPhoneNumber("changed_phone");
         newProfile.setEmail("changed_email");
 
