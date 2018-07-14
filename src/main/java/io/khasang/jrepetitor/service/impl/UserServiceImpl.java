@@ -9,7 +9,6 @@ import io.khasang.jrepetitor.entity.User;
 import io.khasang.jrepetitor.model.wrappers.*;
 import io.khasang.jrepetitor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -88,7 +87,7 @@ public class UserServiceImpl implements UserService {
             Profile updatedProfile = user.getProfile();
             updatedProfile.setName(profile.getName());
             updatedProfile.setSurname(profile.getSurname());
-            updatedProfile.setMiddlename(profile.getMiddleName());
+            updatedProfile.setMiddleName(profile.getMiddleName());
             updatedProfile.setPhoneNumber(profile.getPhoneNumber());
             updatedProfile.setEmail(profile.getEmail());
             userDao.updateUser(user);
