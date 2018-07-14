@@ -8,7 +8,7 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String middlename;
+    private String middleName;
     private String surname;
     @Column(unique = true)
     private String email;
@@ -42,12 +42,12 @@ public class Profile {
         this.name = name;
     }
 
-    public String getMiddlename() {
-        return middlename;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getSurname() {

@@ -52,7 +52,7 @@ public class ProfileWrapper {
     public Profile getProfile() {
         Profile profile = new Profile();
         profile.setName(name);
-        profile.setMiddlename(middleName);
+        profile.setMiddleName(middleName);
         profile.setSurname(surname);
         profile.setEmail(email);
         profile.setPhoneNumber(phoneNumber);

@@ -3,20 +3,20 @@ package io.khasang.jrepetitor.model.wrappers;
 import io.khasang.jrepetitor.entity.User;
 
 public class UserWrapperWithPresetRole extends UserWrapper {
-    String role;
+    String roleName;
 
-    public String getRole() {
-        return role;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override
     public User getUser() {
         User user = super.getUser();
-        user.setRoleName(role);
+        user.setRoleName(roleName);
         return user;
     }
 }

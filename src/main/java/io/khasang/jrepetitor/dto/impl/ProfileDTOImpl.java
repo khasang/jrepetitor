@@ -19,7 +19,7 @@ public class ProfileDTOImpl implements ProfileDTOInterface {
     private ProfileDTOImpl(Profile profile) {
         id = profile.getId();
         name = profile.getName();
-        middlename = profile.getMiddlename();
+        middlename = profile.getMiddleName();
         surname = profile.getSurname();
         email = profile.getEmail();
         phoneNumber = profile.getPhoneNumber();

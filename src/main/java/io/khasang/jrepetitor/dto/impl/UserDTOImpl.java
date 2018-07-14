@@ -32,7 +32,7 @@ public class UserDTOImpl implements UserDTOInterface {
             ProfileDTOImpl profile = new ProfileDTOImpl();
             profile.setId(inputUser.getProfile().getId());
             profile.setName(inputUser.getProfile().getName());
-            profile.setMiddlename(inputUser.getProfile().getMiddlename());
+            profile.setMiddlename(inputUser.getProfile().getMiddleName());
             profile.setSurname(inputUser.getProfile().getSurname());
             profile.setEmail(inputUser.getProfile().getEmail());
             profile.setPhoneNumber(inputUser.getProfile().getPhoneNumber());
@@ -58,7 +58,7 @@ public class UserDTOImpl implements UserDTOInterface {
 
         profile.setId(user.getProfile().getId());
         profile.setName(user.getProfile().getName());
-        profile.setMiddlename(user.getProfile().getMiddlename());
+        profile.setMiddlename(user.getProfile().getMiddleName());
         profile.setSurname(user.getProfile().getSurname());
         profile.setEmail(user.getProfile().getEmail());
         profile.setPhoneNumber(user.getProfile().getPhoneNumber());
