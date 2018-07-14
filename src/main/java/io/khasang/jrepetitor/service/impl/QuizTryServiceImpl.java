@@ -75,6 +75,7 @@ public class QuizTryServiceImpl implements QuizTryService {
                 quizTryItem.addSelectedItem(itemsMap.get(selectedItem.getSelectedItemId()));
             }
             quizTry.addQuizTryItem(quizTryItem);
+            quizTryItem.setQuizTry(quizTry);
         }
         Date date = new Date();
         quizTry.setTimestamp(date);
