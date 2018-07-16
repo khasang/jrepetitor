@@ -15,6 +15,12 @@
   * [/profile](#profile)
   * [/create](#create) 
   * [/authorized](#authorized) 
+* [/group](#group)
+  * [Group JSON example](#group_json)
+  * [/add](#add_group)
+  * [/all](#all_group)
+  * [/get/{id}](#group_get_by_id)
+  * [/delete](#delete_group) 
 * [/quiz](#quiz)    
   * [Quiz JSON example](#quiz_json_example)     
   * [Quiz Preview JSON exmple](#quiz_preview_json_example)  
@@ -210,6 +216,12 @@ API для работы с пользователями JRepetitor
 **Url:**/users/authorized,   
 **Response** authorized user login or "anonymousUser"
 
+## /group <a name="group"></a> ## 
+### Group JSON Example <a name="group_json"></a> ###
+### /add <a name="add_group"></a> ###
+### /all <a name="all_group"></a> ###
+### /get/{id} <a name="group_get_by_id"></a> ###
+### /delete <a name = "delete_group"></a> ###
 ## /quiz <a name="quiz"></a> ## 
 API для работы с тестами(quiz), добавление, вывод всех quiz в базе,  
 удаление, выборка по id, вывод превью теста (без вывыода вопросов),  
