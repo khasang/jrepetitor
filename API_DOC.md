@@ -17,6 +17,7 @@
   * [/authorized](#authorized) 
 * [/group](#group)
   * [Group JSON example](#group_json)
+  * [Group response JSON example](#group_response_json)
   * [/add](#add_group)
   * [/all](#all_group)
   * [/get/{id}](#group_get_by_id)
@@ -151,7 +152,6 @@ API для работы с пользователями JRepetitor
 
 ### /all <a name="all"></a> ### 
 #### Описание: ####
-Добавить пользвователя.  
 Возвращает все записи которые есть в базе    
 #### Параметры: #### 
 **RequestMethod:** GET,  
@@ -217,11 +217,76 @@ API для работы с пользователями JRepetitor
 **Response** authorized user login or "anonymousUser"
 
 ## /group <a name="group"></a> ## 
+
 ### Group JSON Example <a name="group_json"></a> ###
+
+```json
+{
+    "name": "group_name",
+}
+```
+
+**"name"** - название группы 
+
+### Group response JSON Example <a name="group_response_json"></a> ###
+```json
+{
+    "id": 1,
+    "quizzes": [
+        {
+            "id": 1,
+            "name": "name_1",
+            "level": 1
+        }
+    ],
+    "name": "group_name_1"
+}
+```
+
+**"id"** - id группы  
+**"quizzes"** - массив [quiz preview](#quiz_preview_json_example)   
+**"name"** - название группы     
+
 ### /add <a name="add_group"></a> ###
+#### Описание: ####
+Добавление группы
+Возвращает созданный [Grop JSON](#group_response_json) 
+#### Параметры: ####
+**Headers:** Content-type - application-json,  
+**RequestMethod:** POST,  
+**Url:** /group/add  
+**Request Body** [Group JSON](#group_json)  
+**Response:** [Grop JSON](#group_response_json), HTTP 200 - OK
+
 ### /all <a name="all_group"></a> ###
+#### Описание: ####
+Выводит все группы, которые есть в базе
+#### Параметры: #### 
+**RequestMethod:** GET,  
+**Url:** /group/all,  
+**Response:** [Group JSON](#group_response_json) json array  
+
 ### /get/{id} <a name="group_get_by_id"></a> ###
+#### Описание: ####
+Возвращает группу по заданному id
+#### Параметры: ####
+**RequestMethod:**  GET,  
+**Url:**  /group/get/{id},    
+**id:**  Path variable group id,  
+**Response:**  [Group json](#group_response_json) , HTTP 200 - OK,    
+**Если group c id не найден:** - HTTP 404 - NOT_FOUND 
+
 ### /delete <a name = "delete_group"></a> ###
+#### Описание: ####
+Удаление группы по заданному id,  
+#### Параметры: ####
+**RequestMethod:** DELETE,  
+**RequestParam:** id,  
+**Url:** /group/delete,  
+**Response:**  [Group json](#group_response_json) , HTTP 200 - OK,  
+**Если group id не найден:**  HTTP 404 - NOT_FOUND 
+
+
 ## /quiz <a name="quiz"></a> ## 
 API для работы с тестами(quiz), добавление, вывод всех quiz в базе,  
 удаление, выборка по id, вывод превью теста (без вывыода вопросов),  
