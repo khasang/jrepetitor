@@ -3,7 +3,8 @@
 ## Содержание:
  
 * [/users](#users)
-  * [User json Example](#user_json)
+  * [USER json example with Preset ROLE_NAME](#user_json_role_preset)
+  * [USER json example](#user_json)
   * [Profile json example](#profile_json)
   * [Creation Profile Status Response JSON](#profile_creation_json)
   * [Creation User Status Response JSON](#user_creationd_json)
@@ -58,16 +59,15 @@
 ## /users <a name="/users"></a> ##
 API для работы с пользователями JRepetitor
 
-### USER json example <a name="user_json"></a> ###
+### USER json example <a name="user_json_role_preset"></a> ###
 ```json
 {
     "name": "user_name",
     "login": "user",
-    "password": "user",
-    "roleName": "ROLE_USER",
+    "password": "user_password",
     "profile": {
 	"name": "user_name",
-        "middlename": "user_middlename",
+        "middleName": "user_middle_name",
         "surname": "user_surname",
         "email": "user_email",
         "phoneNumber": "user_phone_number"
@@ -75,11 +75,29 @@ API для работы с пользователями JRepetitor
 }
 ```
 
+### USER json with Preset ROLE_NAME example <a name="user_json"></a> ###
+```json
+{
+    "name": "user_name",
+    "login": "user",
+    "password": "user_password",
+    "roleName": "ROLE_USER",
+    "profile": {
+	"name": "user_name",
+        "middleName": "user_middle_name",
+        "surname": "user_surname",
+        "email": "user_email",
+        "phoneNumber": "user_phone_number"
+    }
+}
+```
+
+
 ### Profile json example <a name="profile_json"></a> ###
 ```json
 {
     "name": "user_name",
-    "middlename": "user_middlename",
+    "middlename": "user_middle_name",
     "surname": "user_surname",
     "email": "user_email",
     "phoneNumber": "user_phone_number"
@@ -122,8 +140,8 @@ API для работы с пользователями JRepetitor
 **RequestMethod:** POST,  
 **Url:** /users/add,   
 **Content-type:** application-json,  
-**Body:** USER json,  
-**Response:** User json  
+**Request Body:** [User with preset ROLE_NAME](#user_json_role_preset)  
+**Response:** [User with preset ROLE_NAME](#user_json_role_preset)
 
 ### /all <a name="all"></a> ### 
 #### Описание: ####
@@ -132,7 +150,7 @@ API для работы с пользователями JRepetitor
 #### Параметры: #### 
 **RequestMethod:** GET,  
 **Url:** /users/all,  
-**Response:** USER json array  
+**Response:** [User with preset ROLE_NAME](#user_json_role_preset) json array  
 
 ### /get/{id} <a name="#getbyid"></a> ###
 #### Описание: ####
@@ -141,7 +159,7 @@ API для работы с пользователями JRepetitor
 **RequestMethod:**  GET,  
 **Url:**  /users/get/{id},    
 **id:**  Request Param user id,  
-**Response:**  User json , HTTP 200 - OK,    
+**Response:**  [User with preset ROLE_NAME](#user_json_role_preset) json, HTTP 200 - OK,    
 **Если пользователь не найден:** - HTTP 404 - NOT_FOUND 
 
 ### /delete <a name="#delete"></a> ###
@@ -151,16 +169,16 @@ API для работы с пользователями JRepetitor
 **Headers:** Content-type - application-json, 
 **RequestMethod:** DELETE,  
 **Url:** /users/delete,  
-**Response:**  User json , HTTP 200 - OK,  
+**Response:**  [User with preset ROLE_NAME](#user_json_role_preset), HTTP 200 - OK,  
 **Если пользователь не найден:**  HTTP 404 - NOT_FOUND  
 
 ### /profile <a name="#profile"></a> ###
 #### Описание: ####
-Возвращает Profile JSON авторизованного пользователя.  
+Возвращает Profile JSON авторизованного пользователя. 
 #### Параметры: ####
 **RequestMethod:** GET,   
 **Url:** /users/profile,  
-**Response:** Profile JSON, HTTP 200 - OK,  
+**Response:** [Profile JSON](#profile_json), HTTP 200 - OK,  
 **Если пользователь не авторизован:** HTTP 401 UNAUTHORIZED
 ### Описание: ###
 Сохраняет Profile JSON в профиль авторизованного пользователя.  
@@ -168,7 +186,8 @@ API для работы с пользователями JRepetitor
 **RequestMethod:** POST,  
 **Headers:** Content-type - application-json,  
 **Url:** /users/profile,  
-**Response:** Creation Profile Status Response JSON,  
+**Request Body** [Profile JSON](#profile_json)  
+**Response:** [Creation Profile Status Response JSON](#profile_creation_json),  
 **Если пользователь не авторизован:** HTTP 401 UNAUTHORIZED  
 
 ### /create <a name="#create"></a> ###
@@ -179,7 +198,8 @@ API для работы с пользователями JRepetitor
 **RequestMethod:** POST,  
 **Headers:** Content-type - application-json,  
 **Url:** /users/create,  
-**Response:** USER CREATION STATUS JSON, HTTP 200 - OK
+**Request Body** [USER JSON](#user_json_role)  
+**Response:** [USER CREATION STATUS JSON](#user_creation_json), HTTP 200 - OK
 
 ### /authorized <a name="authorized"></a> ### 
 #### Описание: ####
