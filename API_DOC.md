@@ -7,7 +7,7 @@
   * [USER json example](#user_json)
   * [Profile json example](#profile_json)
   * [Creation Profile Status Response JSON](#profile_creation_json)
-  * [Creation User Status Response JSON](#user_creationd_json)
+  * [Creation User Status Response JSON](#user_creation_json)
   * [/add](#add)
   * [/all](#all)    
   * [/get/{id}](#getbyid)
@@ -116,7 +116,7 @@ API для работы с пользователями JRepetitor
 **"emailExist":true** - если email уже используется,  
 **"phoneExist": false** - если телефоный номер уже используется.
 
-### Creation User Status Response JSON <a name="user_creationd_json"></a> ###
+### Creation User Status Response JSON <a name="user_creation_json"></a> ###
 
 ```json
 {
@@ -198,7 +198,7 @@ API для работы с пользователями JRepetitor
 **RequestMethod:** POST,  
 **Headers:** Content-type - application-json,  
 **Url:** /users/create,  
-**Request Body** [USER JSON](#user_json_role)  
+**Request Body** [USER JSON](#user_json)  
 **Response:** [USER CREATION STATUS JSON](#user_creation_json), HTTP 200 - OK
 
 ### /authorized <a name="authorized"></a> ### 
