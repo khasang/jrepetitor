@@ -152,7 +152,7 @@ API для работы с пользователями JRepetitor
 **Url:** /users/all,  
 **Response:** [User with preset ROLE_NAME](#user_json_role_preset) json array  
 
-### /get/{id} <a name="#getbyid"></a> ###
+### /get/{id} <a name="getbyid"></a> ###
 #### Описание: ####
 Возвращает пользователя c запрошенным id  
 #### Параметры: ####
@@ -162,7 +162,7 @@ API для работы с пользователями JRepetitor
 **Response:**  [User with preset ROLE_NAME](#user_json_role_preset) json, HTTP 200 - OK,    
 **Если пользователь не найден:** - HTTP 404 - NOT_FOUND 
 
-### /delete <a name="#delete"></a> ###
+### /delete <a name="delete"></a> ###
 #### Описание: ####
 Удаление пользователя по заданному id,  
 #### Параметры: ####
@@ -172,7 +172,7 @@ API для работы с пользователями JRepetitor
 **Response:**  [User with preset ROLE_NAME](#user_json_role_preset), HTTP 200 - OK,  
 **Если пользователь не найден:**  HTTP 404 - NOT_FOUND  
 
-### /profile <a name="#profile"></a> ###
+### /profile <a name="profile"></a> ###
 #### Описание: ####
 Возвращает Profile JSON авторизованного пользователя. 
 #### Параметры: ####
@@ -190,7 +190,7 @@ API для работы с пользователями JRepetitor
 **Response:** [Creation Profile Status Response JSON](#profile_creation_json),  
 **Если пользователь не авторизован:** HTTP 401 UNAUTHORIZED  
 
-### /create <a name="#create"></a> ###
+### /create <a name="create"></a> ###
 #### Описание: ####
 Создает пользователя с полями из User JSON  
 Возвращает USER CREATION STATUS JSON
