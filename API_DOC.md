@@ -36,6 +36,7 @@
 * [/question](#question)
   * [Question JSON Example](#question_json_example)
   * [Add Question By Quiz ID wrapper JSON Example](#add_question_by_quiz_id_wrapper)    
+  * [Question preview Example]() 
   * [/add](#add_question)  
   * [/all](#get_all_questions) 
   * [/get/{id}](#get_question_by_id)  
@@ -334,12 +335,13 @@ API для работы с тестами(quiz), добавление, выво�
 **"level"** - quiz level
 ### /add <a name="add_quiz"></a> 
 #### Описание: ####
-Добавление quiz'a
+Добавление quiz'a по заданному group id   
 Возвращает созданный Quiz JSON  
 #### Параметры: ####
 **Headers:** Content-type - application-json,  
 **RequestMethod:** POST,  
-**Url:** /quiz/add,
+**Url:** /quiz/add,  
+**Request Data** [Add Quiz by Group id wrapper JSON](#add_quiz_by_group_id_wrapper)   
 **Response:** [Quiz JSON](#quiz_json_example), HTTP 200 - OK
 
 ### /all <a name="quiz_all"></a> ###
@@ -389,18 +391,9 @@ API для работы с тестами(quiz), добавление, выво�
 **Response:**  [Quiz preview json](#quiz_preview_json_example) , HTTP 200 - OK,    
 **Если quiz c id не найден:** - HTTP 404 - NOT_FOUND 
 
-### /add_by_group_id <a name="quiz_add_by_group_id"></a> ###
-### Описание: ###
-Добавляет quiz в группу с id 
-#### Параметры: ####
-**Headers:** Content-type - application-json, 
-**RequestMethod:** POST,  
-**Url:**  /quiz/preview/get/{id},    
-**Request Data:**[Add quiz by group id wrapper JSON](#add_quiz_by_group_id_wrapper)  
-**Response:**  Quiz preview json , HTTP 200 - OK,    
-**Если quiz c id не найден:** - HTTP 404 - NOT_FOUND 
+ ## /question <a name="question"></a> ##
  
-## /question <a name="question"></a> ##
+ API для работы с вопросами.  
 
 ### Question JSON Example <a name="question_json_example"></a> ###   
 ```json
@@ -438,13 +431,13 @@ API для работы с тестами(quiz), добавление, выво�
 
 ### /add <a name="add_question"></a> ###
 #### Описание: ####
-Добавить вопрос
+Добавить вопрос в question по quiz id  
 Возвращает созданый вопрос 
 #### Параметры: ####
 **Headers:** Content-type - application-json, 
 **RequestMethod:** POST,  
 **Url:**  /question/add,    
-**Request Data:** [Question JSON](#question_json_example)  
+**Request Data:**[Add question by quiz id wrapper JSON](#add_question_by_quiz_id_wrapper)   
 **Response:**  created [Question JSON](#question_json_example) , HTTP 200 - OK,    
 
 ### /all <a name="get_all_questions"></a> ###
@@ -475,18 +468,8 @@ API для работы с тестами(quiz), добавление, выво�
 **Response:**  [Question json](#question_json_example) , HTTP 200 - OK,  
 **Если question c id не найден:**  HTTP 404 - NOT_FOUND 
 
-### /add_by_quiz_id <a name="add_question_by_quiz_id"></a> ###
-#### Описание: ####
-Добавляет вопрос в quiz по quiz id
-#### Параметры: ####
-**Headers:** Content-type - application-json,   
-**RequestMethod:** POST,  
-**Url:**  /quiz/preview/get/{id},    
-**Request Data:**[Add question by quiz id wrapper JSON](#add_question_by_quiz_id_wrapper)  
-**Response:**  [Question json](#question_json_example) , HTTP 200 - OK,    
-**Если quiz c id не найден:** - HTTP 404 - NOT_FOUND 
-
 ## /item <a name="item"></a> ##
+API для работы c ответами на вопросы.  
 ### Item JSON Example  <a name="item_json_example"></a> ###
 ```json
 {
@@ -517,13 +500,14 @@ API для работы с тестами(quiz), добавление, выво�
 
 ### /add <a name="add_item"></a> ###
 #### Описание: ####
-Добавляет ответ.
+Добавить ответ(item) в question c заданным id
 #### Параметры: ####
-**Headers:** Content-type - application-json, 
+**Headers:** Content-type - application-json,   
 **RequestMethod:** POST,  
-**Url:**  /item/add,    
-**Request Data:** [Item JSON](#item_json_example)  
-**Response:**  created [Item JSON](#item_json_example) , HTTP 200 - OK,    
+**Url:**  /question/add_by_question_id},    
+**Request Data:**[Add Item By question Id JSON wrapper](#add_item_by_question_id_json_example)  
+**Response:**  [Item JSON](#item_json_example) , HTTP 200 - OK,    
+**Если question c id не найден:** - HTTP 404 - NOT_FOUND 
 
 ### /all <a name="all_item"></a> ###
 #### Описание: ####
@@ -552,17 +536,6 @@ API для работы с тестами(quiz), добавление, выво�
 **Url:** /item/delete,  
 **Response:**  [Item JSON](#item_json_example) , HTTP 200 - OK,  
 **Если item c id не найден:**  HTTP 404 - NOT_FOUND 
-
-### /add_by_question_id <a name="add_by_question_id_item"></a> ###
-#### Описание: ####
-Добавить ответ(item) в question c заданным id
-#### Параметры: ####
-**Headers:** Content-type - application-json,   
-**RequestMethod:** POST,  
-**Url:**  /question/add_by_question_id},    
-**Request Data:**[Add Item By question Id JSON wrapper](#add_item_by_question_id_json_example)  
-**Response:**  [Item JSON](#item_json_example) , HTTP 200 - OK,    
-**Если question c id не найден:** - HTTP 404 - NOT_FOUND 
 
 ## /try_quiz <a name="try_quiz"> ##
 
