@@ -52,7 +52,7 @@
 * [/try_quiz](#try_quiz)
   * [User Try wrapper JSON](#user_try_wrapper_example)  
   * [Question Answer wrapper](#question_answer_wrapper_example)  
-  * [Selected Item wrapper](#question_answer_wrapper_example)  
+  * [Selected Question wrapper](#question_answer_wrapper_example)  
   * [Selected Item wrapper](#selected_item_wrapper_example)
   * [Quiz Example](#full_quiz_example)  
   * [Try Quiz JSON Example  for Quiz Example](#try_quiz_example)
