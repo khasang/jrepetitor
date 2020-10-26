@@ -44,7 +44,7 @@ public class AppConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         JdbcDaoImpl jdbcDao = new JdbcDaoImpl();
         jdbcDao.setDataSource(dataSource());
         jdbcDao.setUsersByUsernameQuery(environment.getRequiredProperty("usersByQuery"));
@@ -53,19 +53,19 @@ public class AppConfig {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(){
-       JdbcTemplate jdbcTemplate = new JdbcTemplate();
-       jdbcTemplate.setDataSource(dataSource());
-       return jdbcTemplate;
+    public JdbcTemplate jdbcTemplate() {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(dataSource());
+        return jdbcTemplate;
     }
 
     @Bean
-    public CreateTable createTable(){
+    public CreateTable createTable() {
         return new CreateTable(jdbcTemplate());
     }
 
     @Bean
-    public CatDao catDao(){
+    public CatDao catDao() {
         return new CatDaoImpl(Cat.class);
     }
 
@@ -75,37 +75,52 @@ public class AppConfig {
     }
 
     @Bean
-    public UserDao userDao(){return new UserDaoImpl(User.class);
+    public UserDao userDao() {
+        return new UserDaoImpl(User.class);
     }
 
     @Bean
     public ProfileDao profileDao() {
         return new ProfileDaoImpl(Profile.class);
     }
+
     @Bean
-    public GroupDao groupDao(){
+    public GroupDao groupDao() {
         return new GroupDaoImpl(Group.class);
     }
+
     @Bean
-    public QuizDao quizDao(){
+    public QuizDao quizDao() {
         return new QuizDaoImpl(Quiz.class);
     }
+
     @Bean
-    public QuestionDao questionDao(){
+    public QuestionDao questionDao() {
         return new QuestionDaoImpl(Question.class);
     }
+
     @Bean
-    public ItemDao itemDao(){
+    public ItemDao itemDao() {
         return new ItemDaoImpl(Item.class);
     }
+
     @Bean
-    public ItemRightAnsDao itemRightAnsDao(){
+    public ItemRightAnsDao itemRightAnsDao() {
         return new ItemRightAnsDaoImpl(ItemRightAns.class);
     }
+
     @Bean
-    public RightAnsDao rightAnsDao(){
+    public RightAnsDao rightAnsDao() {
         return new RightAnsDaoImpl(RightAns.class);
     }
 
+    @Bean
+    public QuizTryDao quizTryDao() {
+        return new QuizTryDaoImpl(QuizTry.class);
+    }
 
+    @Bean
+    public QuizTryItemDao quizTryItemDao() {
+        return new QuizTryItemDaoImpl(QuizTryItem.class);
+    }
 }

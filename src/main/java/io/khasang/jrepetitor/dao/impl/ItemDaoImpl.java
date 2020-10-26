@@ -7,4 +7,10 @@ public class ItemDaoImpl extends BasicDaoImpl<Item> implements ItemDao {
     public ItemDaoImpl(Class<Item> entityClass) {
         super(entityClass);
     }
+
+    @Override
+    public Item update(Item item) {
+        super.getSessionFactory().update(item);
+        return item;
+    }
 }

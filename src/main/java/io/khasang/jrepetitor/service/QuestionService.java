@@ -1,7 +1,8 @@
 package io.khasang.jrepetitor.service;
 
-import io.khasang.jrepetitor.dto.QuestionDTO;
+import io.khasang.jrepetitor.dto.QuestionDTOInterface;
 import io.khasang.jrepetitor.entity.Question;
+import io.khasang.jrepetitor.model.wrappers.QuestionByQuizIdRequestWrapper;
 
 import java.util.List;
 
@@ -12,14 +13,14 @@ public interface QuestionService {
      * @param Question = new Question for creation in DB
      * @return created Question
      */
-    Question addQuestion(Question Question);
+    QuestionDTOInterface addQuestion(Question Question);
 
     /**
      * method for receiving all Questions
      *
      * @return all Questions
      */
-    List<QuestionDTO> getAllQuestions();
+    List<QuestionDTOInterface> getAllQuestions();
 
     /**
      * method for receive specify Question by id
@@ -27,7 +28,7 @@ public interface QuestionService {
      * @param id = uniq Question id
      * @return specify Question by id
      */
-    Question getQuestionById(long id);
+    QuestionDTOInterface getQuestionById(long id);
 
     /**
      * method for Question delete
@@ -35,5 +36,14 @@ public interface QuestionService {
      * @param id = Question's id for delete
      * @return removed Question
      */
-    Question deleteQuestion(long id);
+    QuestionDTOInterface deleteQuestion(long id);
+
+
+    /**
+     * add question to quiz id
+     *
+     * @param questionByQuizIdRequestWrapper
+     * @return created Question
+     */
+    QuestionDTOInterface addQuestionByQuizId(QuestionByQuizIdRequestWrapper questionByQuizIdRequestWrapper);
 }

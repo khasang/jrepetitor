@@ -3,7 +3,7 @@ package io.khasang.jrepetitor.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 public class Users {
     @Id
     long id;

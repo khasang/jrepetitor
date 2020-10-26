@@ -1,9 +1,12 @@
 package io.khasang.jrepetitor.controller;
 
-import io.khasang.jrepetitor.dto.ItemDTO;
+import io.khasang.jrepetitor.dto.ItemDTOInterface;
 import io.khasang.jrepetitor.entity.Item;
+import io.khasang.jrepetitor.model.wrappers.ItemByQuestionIdRequestWrapper;
 import io.khasang.jrepetitor.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,31 +18,43 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json;charset=utf-8"})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Item addItem(@RequestBody Item item) {
-
-        return itemService.addItem(item);
+    public ResponseEntity<ItemDTOInterface> addByQuestionId(@RequestBody ItemByQuestionIdRequestWrapper itemByQuestionIdRequestWrapper) {
+        ItemDTOInterface itemDTO = itemService.addByQuestionId(itemByQuestionIdRequestWrapper);
+        if (itemDTO == null) {
+            return new ResponseEntity<>(itemDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(itemDTO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public List<ItemDTO> getAllItems() {
-
+    public List<ItemDTOInterface> getAllItems() {
         return itemService.getAllItems();
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Item getItemById(@PathVariable(value = "id") String id) {
-        // exception
-        return itemService.getItemById(Long.parseLong(id));
+    public ResponseEntity<ItemDTOInterface> getItemById(@PathVariable(value = "id") String id) {
+        ItemDTOInterface itemDTO = itemService.getItemById(Long.parseLong(id));
+        if (itemDTO == null) {
+            return new ResponseEntity<>(itemDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(itemDTO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public Item deleteItem(@RequestParam(value = "id") String id) {
-
-        return itemService.deleteItem(Long.parseLong(id));
+    public ResponseEntity<ItemDTOInterface> deleteItem(@RequestParam(value = "id") String id) {
+        ItemDTOInterface itemDTO = itemService.deleteItem(Long.parseLong(id));
+        if (itemDTO == null) {
+            return new ResponseEntity<>(itemDTO, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(itemDTO, HttpStatus.OK);
+        }
     }
+
 }

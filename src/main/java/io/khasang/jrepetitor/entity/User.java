@@ -1,12 +1,13 @@
 package io.khasang.jrepetitor.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
-@Entity(name = "JrepUser")
-public class User {
+@Entity(name = "JR_USER")
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,6 +20,9 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id")
     private Profile profile;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    public List<QuizTry> userTries = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -66,5 +70,13 @@ public class User {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public List<QuizTry> getUserTries() {
+        return userTries;
+    }
+
+    public void setUserTries(List<QuizTry> userTries) {
+        this.userTries = userTries;
     }
 }

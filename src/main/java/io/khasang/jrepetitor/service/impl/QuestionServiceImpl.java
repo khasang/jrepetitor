@@ -1,8 +1,13 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.QuestionDao;
-import io.khasang.jrepetitor.dto.QuestionDTO;
+import io.khasang.jrepetitor.dao.QuizDao;
+import io.khasang.jrepetitor.dto.QuestionDTOInterface;
+import io.khasang.jrepetitor.dto.impl.QuestionDTOImpl;
 import io.khasang.jrepetitor.entity.Question;
+import io.khasang.jrepetitor.entity.Quiz;
+import io.khasang.jrepetitor.model.wrappers.QuestionByQuizIdRequestWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuestionWrapper;
 import io.khasang.jrepetitor.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,25 +20,51 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionDao questionDao;
 
     @Autowired
-    private QuestionDTO questionDTO;
+    private QuestionDTOImpl questionDTO;
+
+    @Autowired
+    private QuizDao quizDao;
+
 
     @Override
-    public Question addQuestion(Question question) {
-        return questionDao.create(question);
+    public QuestionDTOInterface addQuestion(Question question) {
+        return questionDTO.getQuestionDTO(questionDao.create(question));
     }
 
     @Override
-    public List<QuestionDTO> getAllQuestions() {
+    public List<QuestionDTOInterface> getAllQuestions() {
         return questionDTO.getQuestionDTOList(questionDao.getList());
     }
 
     @Override
-    public Question getQuestionById(long id) {
-        return questionDao.getById(id);
+    public QuestionDTOInterface getQuestionById(long id) {
+        return questionDTO.getQuestionDTO(questionDao.getById(id));
     }
 
     @Override
-    public Question deleteQuestion(long id) {
-        return questionDao.delete(getQuestionById(id));
+    public QuestionDTOInterface deleteQuestion(long id) {
+        Question question = questionDao.getById(id);
+        if (question == null) {
+            return null;
+        } else {
+            Question deletedQuestion = questionDao.delete(questionDao.getById(id));
+            return questionDTO.getQuestionDTO(deletedQuestion);
+        }
+    }
+
+    @Override
+    public QuestionDTOInterface addQuestionByQuizId(QuestionByQuizIdRequestWrapper questionByQuizIdRequestWrapper) {
+        Quiz quiz = quizDao.getById(questionByQuizIdRequestWrapper.getId());
+        if (quiz == null) {
+            return null;
+        }
+        QuestionWrapper questionWrapper = questionByQuizIdRequestWrapper.getQuestion();
+        Question question = questionWrapper.getQuestion();
+        Question createdQuestion = questionDao.create(question);
+        quiz.addQuestion(createdQuestion);
+        quizDao.update(quiz);
+        createdQuestion.setQuiz(quiz);
+        questionDao.updateQuestion(question);
+        return questionDTO.getQuestionDTO(question);
     }
 }

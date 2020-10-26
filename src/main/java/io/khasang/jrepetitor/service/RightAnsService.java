@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RightAnsService {
 
-    RightAns addRightAns(RightAns rightAns);
+    RightAns addRightAns(String login, RightAns rightAns);
 
     List<RightAns> getAllRightAns();
 

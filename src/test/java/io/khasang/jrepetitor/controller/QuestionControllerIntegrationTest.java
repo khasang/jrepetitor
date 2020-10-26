@@ -1,14 +1,23 @@
 package io.khasang.jrepetitor.controller;
 
+import io.khasang.jrepetitor.entity.Group;
 import io.khasang.jrepetitor.entity.Question;
+import io.khasang.jrepetitor.entity.Quiz;
+import io.khasang.jrepetitor.model.wrappers.GroupWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuestionByQuizIdRequestWrapper;
+import io.khasang.jrepetitor.model.wrappers.QuizByGroupIdRequestWrapper;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static io.khasang.jrepetitor.util.TestUtils.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class QuestionControllerIntegrationTest {
     private static final String ROOT = "http://localhost:8080/question";
@@ -19,7 +28,19 @@ public class QuestionControllerIntegrationTest {
 
     @Test
     public void addQuestionAndCheck() {
-        Question question = createQuestion();
+        GroupWrapper groupWrapper = prefillGroup("group_name");
+        Group group = createGroup(groupWrapper);
+        QuizByGroupIdRequestWrapper quizByGroupIdRequestWrapper = prefillQuizStructure(
+                group.getId(),
+                "quiz_name",
+                (byte) 1
+        );
+        Quiz quiz = createQuiz(quizByGroupIdRequestWrapper);
+        QuestionByQuizIdRequestWrapper prefilledQuestion = prefillQuestion("Radio",
+                "question_content",
+                "question_explanation",
+                quiz.getId());
+        Question question = createQuestion(prefilledQuestion);
 
         RestTemplate template = new RestTemplate();
         ResponseEntity<Question> responseEntity = template.exchange(
@@ -35,12 +56,25 @@ public class QuestionControllerIntegrationTest {
         Question receivedQuestion = responseEntity.getBody();
         assertNotNull(receivedQuestion);
 
-        deleteFromDB(question);
+        deleteGroupFromDB(group);
     }
 
     @Test
     public void deleteQuestion() {
-        Question question = createQuestion();
+        GroupWrapper groupWrapper = prefillGroup("group_name");
+        Group group = createGroup(groupWrapper);
+        QuizByGroupIdRequestWrapper quizByGroupIdRequestWrapper = prefillQuizStructure(
+                group.getId(),
+                "quiz_name",
+                (byte) 1
+        );
+        Quiz quiz = createQuiz(quizByGroupIdRequestWrapper);
+
+        QuestionByQuizIdRequestWrapper prefilledQuestion = prefillQuestion("Radio",
+                "question_content",
+                "question_explanation",
+                quiz.getId());
+        Question question = createQuestion(prefilledQuestion);
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Question> responseEntity = restTemplate.exchange(
@@ -52,29 +86,48 @@ public class QuestionControllerIntegrationTest {
         );
 
         assertEquals(200, responseEntity.getStatusCodeValue());
-
         Question deletedQuestion = responseEntity.getBody();
-        assertNotNull(deletedQuestion);
+        assertEquals(deletedQuestion.getId(), question.getId());
 
-        ResponseEntity<Question> responseForDeleteQuestion = restTemplate.exchange(
-                ROOT + GET_BY_ID + "/{id}",
-                HttpMethod.GET,
-                null,
-                Question.class,
-                deletedQuestion.getId()
-        );
-
-        assertEquals(200, responseForDeleteQuestion.getStatusCodeValue());
-        assertNull(responseForDeleteQuestion.getBody());
+        try {
+            ResponseEntity<Question> responseForDeleteQuestion = restTemplate.exchange(
+                    ROOT + GET_BY_ID + "/{id}",
+                    HttpMethod.GET,
+                    null,
+                    Question.class,
+                    deletedQuestion.getId()
+            );
+        } catch (HttpClientErrorException e) {
+            assertEquals(e.getMessage(), "404 null");
+        }
+        deleteGroupFromDB(group);
     }
 
     @Test
     public void getAllQuestions() {
-        Question firstQuestion = createQuestion();
-        Question secondQuestion = createQuestion();
+        GroupWrapper groupWrapper = prefillGroup("group_name");
+        Group group = createGroup(groupWrapper);
+        QuizByGroupIdRequestWrapper quizByGroupIdRequestWrapper = prefillQuizStructure(
+                group.getId(),
+                "quiz_name",
+                (byte) 1
+        );
+        Quiz quiz = createQuiz(quizByGroupIdRequestWrapper);
+
+        QuestionByQuizIdRequestWrapper prefilledFirstQuestion = prefillQuestion("Radio",
+                "question_content",
+                "question_explanation",
+                quiz.getId());
+        Question firstQuestion = createQuestion(prefilledFirstQuestion);
+
+
+        QuestionByQuizIdRequestWrapper prefilledSecondQuestion = prefillQuestion("Radio",
+                "question_content",
+                "question_explanation",
+                quiz.getId());
+        Question secondQuestion = createQuestion(prefilledSecondQuestion);
 
         RestTemplate template = new RestTemplate();
-
         ResponseEntity<List<Question>> responseEntity = template.exchange(
                 ROOT + ALL,
                 HttpMethod.GET,
@@ -85,54 +138,11 @@ public class QuestionControllerIntegrationTest {
 
         List<Question> list = responseEntity.getBody();
 
-        assertNotNull(list.get(0));
-        assertNotNull(list.get(1));
+        assertEquals(firstQuestion.getId(), list.get(0).getId());
+        assertEquals(secondQuestion.getId(), list.get(1).getId());
 
-        deleteFromDB(firstQuestion);
-        deleteFromDB(secondQuestion);
-    }
-
-    public Question deleteFromDB(Question question) {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Question> responseEntity = restTemplate.exchange(
-                ROOT + DELETE + "?id=" + "{id}",
-                HttpMethod.DELETE,
-                null,
-                Question.class,
-                question.getId()
-        );
-
-        return responseEntity.getBody();
-    }
-
-    private Question createQuestion() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-
-        Question question = prefillQuestion();
-
-        HttpEntity entity = new HttpEntity(question, headers);
-
-        RestTemplate template = new RestTemplate();
-
-        Question receivedQuestion = template.exchange(
-                ROOT + ADD,
-                HttpMethod.POST,
-                entity,
-                Question.class
-        ).getBody();
-
-        assertNotNull(receivedQuestion.getContent());
-        assertEquals(question.getContent(), receivedQuestion.getContent());
-
-        return receivedQuestion;
-    }
-
-    private Question prefillQuestion() {
-        Question question = new Question();
-        question.setType("RadioGroup");
-        question.setContent("Does list allows duplicates?");
-        question.setExplanation("Yes, it does. Follow link ...");
-        return question;
+        deleteGroupFromDB(group);
     }
 }
+
+

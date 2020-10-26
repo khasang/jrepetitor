@@ -1,6 +1,6 @@
-package io.khasang.jrepetitor.utils;
+package io.khasang.jrepetitor.model.wrappers;
 
-public class CreationProfileStatus {
+public class CreationProfileStatusResponseWrapper {
     private Boolean isPhoneExist;
     private Boolean isEmailExist;
 

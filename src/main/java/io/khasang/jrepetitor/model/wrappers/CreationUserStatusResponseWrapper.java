@@ -1,12 +1,12 @@
-package io.khasang.jrepetitor.utils;
+package io.khasang.jrepetitor.model.wrappers;
 
-public class CreationUserStatus {
+public class CreationUserStatusResponseWrapper {
     private Boolean isLoginExist;
     private Boolean isPhoneExist;
     private Boolean isEmailExist;
 
 
-    public CreationUserStatus() {
+    public CreationUserStatusResponseWrapper() {
     }
 
     public Boolean isOk() {

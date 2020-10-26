@@ -6,26 +6,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *Topics^
- *  Java Code
- *  Srping
- *  Hibernate
- *  Rest Api
- *  Front end
- *  .....
+ * Topics^
+ * Java Code
+ * Srping
+ * Hibernate
+ * Rest Api
+ * Front end
+ * .....
  */
 @Entity
 @Table(name = "JR_GROUP")
-public class Group implements Serializable{
+public class Group implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "group_generator")
+    @SequenceGenerator(name = "group_generator", sequenceName = "group_seq", allocationSize = 50)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Quiz> quizes = new ArrayList<Quiz>();
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Quiz> quizes = new ArrayList<>();
 
     /**
-     *topic name
+     * topic name
      */
     private String name;
 
@@ -51,5 +53,9 @@ public class Group implements Serializable{
 
     public void setQuizes(List<Quiz> quizes) {
         this.quizes = quizes;
+    }
+
+    public void addQuiz(Quiz quiz) {
+        quizes.add(quiz);
     }
 }

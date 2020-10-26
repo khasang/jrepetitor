@@ -1,8 +1,10 @@
 package io.khasang.jrepetitor.service.impl;
 
 import io.khasang.jrepetitor.dao.GroupDao;
-import io.khasang.jrepetitor.dto.GroupDTO;
+import io.khasang.jrepetitor.dto.GroupDTOInterface;
+import io.khasang.jrepetitor.dto.impl.GroupDTOImpl;
 import io.khasang.jrepetitor.entity.Group;
+import io.khasang.jrepetitor.model.wrappers.GroupWrapper;
 import io.khasang.jrepetitor.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,25 +16,36 @@ public class GroupServiceImpl implements GroupService {
     @Autowired
     private GroupDao groupDao;
     @Autowired
-    private GroupDTO groupDTO;
+    private GroupDTOImpl groupDTO;
 
     @Override
-    public Group addGroup(Group group) {
-        return groupDao.create(group);
+    public Group addGroup(GroupWrapper group) {
+        Group createdGroup = new Group();
+        createdGroup.setName(group.getName());
+        return groupDao.create(createdGroup);
     }
 
     @Override
-    public List<GroupDTO> getAllGroups() {
+    public List<GroupDTOInterface> getAllGroups() {
         return groupDTO.getGroupDTOList(groupDao.getList());
     }
 
     @Override
-    public Group getGroupById(long id) {
-        return groupDao.getById(id);
+    public GroupDTOInterface getGroupById(long id) {
+        return groupDTO.getGroupDTO(groupDao.getById(id));
     }
 
     @Override
-    public Group deleteGroup(long id) {
-        return groupDao.delete(getGroupById(id));
+    public GroupDTOInterface deleteGroup(long id) {
+        Group group = groupDao.getById(id);
+        if (group == null) {
+            return null;
+        }
+        Group deletedGroup = groupDao.delete(group);
+        GroupDTOImpl groupDTOImpl = new GroupDTOImpl();
+        groupDTOImpl.setId(deletedGroup.getId());
+        groupDTOImpl.setName(deletedGroup.getName());
+        return groupDTOImpl;
     }
+
 }

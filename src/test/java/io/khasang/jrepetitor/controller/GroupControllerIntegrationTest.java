@@ -1,25 +1,28 @@
 package io.khasang.jrepetitor.controller;
 
 import io.khasang.jrepetitor.entity.Group;
+import io.khasang.jrepetitor.model.wrappers.GroupWrapper;
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static io.khasang.jrepetitor.util.TestUtils.*;
 
 public class GroupControllerIntegrationTest {
     private static final String ROOT = "http://localhost:8080/group";
-    private static final String ADD = "/add";
     private static final String ALL = "/all";
     private static final String GET_BY_ID = "/get";
     private static final String DELETE = "/delete";
 
     @Test
     public void addGroupAndCheck() {
-        Group group = createGroup();
+        GroupWrapper groupWrapper = prefillGroup("group_name");
+        Group group = createGroup(groupWrapper);
 
         RestTemplate template = new RestTemplate();
         ResponseEntity<Group> responseEntity = template.exchange(
@@ -35,12 +38,13 @@ public class GroupControllerIntegrationTest {
         Group receivedGroup = responseEntity.getBody();
         assertNotNull(receivedGroup);
 
-        deleteFromDB(group);
+        deleteGroupFromDB(group);
     }
 
     @Test
     public void deleteGroup() {
-        Group group = createGroup();
+        GroupWrapper groupWrapper = prefillGroup("group_name");
+        Group group = createGroup(groupWrapper);
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Group> responseEntity = restTemplate.exchange(
@@ -70,8 +74,11 @@ public class GroupControllerIntegrationTest {
 
     @Test
     public void getAllGroups() {
-        Group firstGroup = createGroup();
-        Group secondGroup = createGroup();
+        GroupWrapper firstGroupWrapper = prefillGroup("first_group_name");
+        GroupWrapper secondGroupWrapper = prefillGroup("second_group_name");
+
+        Group firstGroup = createGroup(firstGroupWrapper);
+        Group secondGroup = createGroup(secondGroupWrapper);
 
         RestTemplate template = new RestTemplate();
 
@@ -88,11 +95,15 @@ public class GroupControllerIntegrationTest {
         assertNotNull(list.get(0));
         assertNotNull(list.get(1));
 
-        deleteFromDB(firstGroup);
-        deleteFromDB(secondGroup);
+        deleteGroupFromDB(firstGroup);
+        deleteGroupFromDB(secondGroup);
     }
 
-    public Group deleteFromDB(Group group) {
+    @Test
+    public void removeGroup() {
+        GroupWrapper groupWrapper = prefillGroup("group_name");
+        Group group = createGroup(groupWrapper);
+
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Group> responseEntity = restTemplate.exchange(
                 ROOT + DELETE + "?id=" + "{id}",
@@ -101,36 +112,7 @@ public class GroupControllerIntegrationTest {
                 Group.class,
                 group.getId()
         );
-
-        return responseEntity.getBody();
-    }
-
-    private Group createGroup() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-
-        Group group = prefillGroup();
-
-        HttpEntity entity = new HttpEntity(group, headers);
-
-        RestTemplate template = new RestTemplate();
-
-        Group receivedGroup = template.exchange(
-                ROOT + ADD,
-                HttpMethod.POST,
-                entity,
-                Group.class
-        ).getBody();
-
-        assertNotNull(receivedGroup.getName());
-        assertEquals(group.getName(), receivedGroup.getName());
-
-        return receivedGroup;
-    }
-
-    private Group prefillGroup() {
-        Group group = new Group();
-        group.setName("Java Core");
-        return group;
+        assertEquals(200, responseEntity.getStatusCodeValue());
+        assertEquals(group.getId(), responseEntity.getBody().getId());
     }
 }

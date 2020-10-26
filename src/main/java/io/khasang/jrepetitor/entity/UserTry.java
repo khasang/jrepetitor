@@ -7,12 +7,12 @@ import java.util.List;
 
 /**
  * Try
- *  When user takes a test he choose a group and a quiz
- *  Each Try is saved in UserTry
- *  User answers are saved in UserAnswer object
+ * When user takes a test he choose a group and a quiz
+ * Each Try is saved in UserTry
+ * User answers are saved in UserAnswer object
  */
 
-@Entity
+//@Entity
 @Table(name = "JR_USER_TRY")
 public class UserTry {
     @Id
@@ -20,11 +20,11 @@ public class UserTry {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USER_ID_FK"))
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "group_id",
-    foreignKey = @ForeignKey(name = "GROUP_ID_FK"))
+    @JoinColumn(name = "group_id", foreignKey = @ForeignKey(name = "GROUP_ID_FK"))
     private Group group;
 
     @ManyToOne

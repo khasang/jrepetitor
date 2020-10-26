@@ -2,15 +2,18 @@ package io.khasang.jrepetitor.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
- *  One of Answer variants
+ * One of Answer variants
  */
 @Entity
 @Table(name = "JR_ITEM")
-public class Item implements Serializable{
+public class Item implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_generator")
+    @SequenceGenerator(name = "item_generator", sequenceName = "item_seq", allocationSize = 50)
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
     @Column(length = 1000)
@@ -23,6 +26,9 @@ public class Item implements Serializable{
      * 1 - Correct, 0 - incorrect
      */
     private byte correct;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<QuizTryItem> tryItems;
 
     @ManyToOne
     private Question question;

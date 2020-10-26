@@ -1,0 +1,155 @@
+package io.khasang.jrepetitor.dto.impl;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.khasang.jrepetitor.dto.*;
+import io.khasang.jrepetitor.entity.QuizTry;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Component
+public class QuizTryDTOImpl implements QuizTryDTOInterface {
+
+    @JsonIgnore
+    @Autowired
+    private QuizPreviewDTOImpl quizPreviewDTO;
+
+    @JsonIgnore
+    @Autowired
+    private UserPreviewDTOImpl userPreviewDTO;
+
+    @JsonIgnore
+    @Autowired
+    private QuizTryItemDTOImpl quizTryItemDTO;
+
+    private Long id;
+
+    private UserDTOInterface user;
+
+    private QuizPreviewDTOInterface quiz;
+
+    private List<QuizTryItemDTOInterface> tryItemList;
+
+    private Date timestamp;
+
+    private int questionsCount;
+
+    private int rightAnswerCount;
+
+    private int incorrectAnswerCount;
+
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public UserDTOInterface getUser() {
+        return user;
+    }
+
+    @Override
+    public void setUser(UserDTOInterface user) {
+        this.user = user;
+    }
+
+    @Override
+    public QuizPreviewDTOInterface getQuiz() {
+        return quiz;
+    }
+
+    @Override
+    public void setQuiz(QuizPreviewDTOInterface quiz) {
+        this.quiz = quiz;
+    }
+
+    @Override
+    public List<QuizTryItemDTOInterface> getTryItemDTOList() {
+        return tryItemList;
+    }
+
+    @Override
+    public void setTryItemDTOList(List<QuizTryItemDTOInterface> tryItemDTOList) {
+        this.tryItemList = tryItemDTOList;
+    }
+
+    @Override
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    @Override
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Override
+    public int getQuestionsCount() {
+        return questionsCount;
+    }
+
+    @Override
+    public void setQuestionsCount(int questionsCount) {
+        this.questionsCount = questionsCount;
+    }
+
+    @Override
+    public int getRightAnswerCount() {
+        return rightAnswerCount;
+    }
+
+    @Override
+    public void setRightAnswerCount(int rightAnswerCount) {
+        this.rightAnswerCount = rightAnswerCount;
+    }
+
+    @Override
+    public int getIncorrectAnswerCount() {
+        return incorrectAnswerCount;
+    }
+
+    @Override
+    public void setIncorrectAnswerCount(int incorrectAnswerCount) {
+        this.incorrectAnswerCount = incorrectAnswerCount;
+    }
+
+    @Override
+    public QuizTryDTOInterface getQuizTryDTO(QuizTry quizTry) {
+        if (quizTry == null) {
+            return null;
+        }
+        QuizTryDTOInterface quizTryDTO = new QuizTryDTOImpl();
+        quizTryDTO.setId(quizTry.getId());
+        quizTryDTO.setQuiz(quizPreviewDTO.getPreviewDTO(quizTry.getQuiz()));
+        quizTryDTO.setUser(userPreviewDTO.getUserDTO(quizTry.getUser()));
+        quizTryDTO.setTimestamp(quizTry.getTimestamp());
+        quizTryDTO.setQuestionsCount(quizTry.getQuestionsCount());
+        quizTryDTO.setIncorrectAnswerCount(quizTry.getIncorrectAnswerCount());
+        quizTryDTO.setRightAnswerCount(quizTry.getRightAnswerCount());
+        quizTryDTO.setTryItemDTOList(quizTryItemDTO.getQuizTryItems(quizTry.getTryItems()));
+        return quizTryDTO;
+    }
+
+    @Override
+    public List<QuizTryDTOInterface> getQuizTryDTOList(List<QuizTry> quizTries) {
+        List<QuizTryDTOInterface> quizTryDTOS = new ArrayList<>();
+        if (quizTries.isEmpty()) {
+            return quizTryDTOS;
+        }
+        for (QuizTry quizTry : quizTries) {
+            quizTryDTOS.add(getQuizTryDTO(quizTry));
+        }
+        return quizTryDTOS;
+    }
+
+
+}
